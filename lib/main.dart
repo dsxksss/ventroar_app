@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './ventroar_button_bar.dart';
+import './widgets/vent_button.dart';
 
 void main() => runApp(const MyApp());
 
@@ -18,6 +19,12 @@ class MyApp extends StatelessWidget {
           centerTitle: true,
           title: const Text(
             "Vent Roar",
+          ),
+        ),
+        body: SizedBox(
+          child: VTextButton(
+            buttonText: "WeChat",
+            onPressed: () {},
           ),
         ),
         bottomNavigationBar: const VentRoarButtonBar(),
