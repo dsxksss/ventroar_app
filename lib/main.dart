@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './ventroar_button_bar.dart';
 
 void main() => runApp(const MyApp());
 
@@ -11,8 +12,15 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: const Text("ventroar"),
+          backgroundColor: Colors.black,
+          foregroundColor: Colors.white,
+          shadowColor: Colors.white,
+          centerTitle: true,
+          title: const Text(
+            "Vent Roar",
+          ),
         ),
+        bottomNavigationBar: const VentRoarButtonBar(),
       ),
     );
   }
