@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:getwidget/shape/gf_button_shape.dart';
+import 'package:getwidget/shape/gf_icon_button_shape.dart';
 import './ventroar_button_bar.dart';
 import './widgets/vent_button.dart';
 
@@ -22,9 +24,28 @@ class MyApp extends StatelessWidget {
           ),
         ),
         body: SizedBox(
-          child: VTextButton(
-            buttonText: "WeChat",
-            onPressed: () {},
+          height: double.infinity,
+          width: double.infinity,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              VTextButton(
+                buttonText: "WeChat",
+                buttonColor: Colors.green.shade400,
+                onPressed: () {},
+              ),
+              VTextIconButton(
+                onPressed: () {},
+                buttonShape: GFButtonShape.pills,
+                icon: const Icon(Icons.facebook),
+              ),
+              VIconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.settings),
+                buttonShape: GFIconButtonShape.circle,
+              )
+            ],
           ),
         ),
         bottomNavigationBar: const VentRoarButtonBar(),
