@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:getwidget/shape/gf_button_shape.dart';
-import 'package:getwidget/shape/gf_icon_button_shape.dart';
 import './ventroar_button_bar.dart';
-import './widgets/vent_button.dart';
+import './drawer.dart';
+import './home_page.dart';
+import './user_page.dart';
+import './login_page.dart';
 
 void main() => runApp(const MyApp());
 
@@ -14,6 +15,12 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  int _selectedIndex = 0;
+  final List<Widget> _pages = [
+    const HomePage(),
+    const UserPage(),
+    const LoginPage(),
+  ];
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -28,31 +35,31 @@ class _MyAppState extends State<MyApp> {
             "Vent Roar",
           ),
         ),
-        body: SizedBox(
-          height: double.infinity,
-          width: double.infinity,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              VTextButton(
-                buttonText: "WeChat",
-                buttonColor: Colors.green.shade400,
-                onPressed: () {},
-              ),
-              VTextIconButton(
-                onPressed: () {},
-                buttonShape: GFButtonShape.pills,
-                icon: const Icon(Icons.facebook),
-              ),
-              VIconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.settings),
-                buttonShape: GFIconButtonShape.circle,
-              )
+        body: _pages[_selectedIndex],
+        drawer: Builder(builder: (context) {
+          return VDrawer(
+            onTap: [
+              () => {
+                    setState(() {
+                      _selectedIndex = 0;
+                    }),
+                    Navigator.pop(context),
+                  },
+              () => {
+                    setState(() {
+                      _selectedIndex = 1;
+                    }),
+                    Navigator.pop(context),
+                  },
+              () => {
+                    setState(() {
+                      _selectedIndex = 2;
+                    }),
+                    Navigator.pop(context),
+                  },
             ],
-          ),
-        ),
+          );
+        }),
         bottomNavigationBar: const VentRoarButtonBar(),
       ),
     );
