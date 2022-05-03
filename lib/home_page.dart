@@ -20,10 +20,14 @@ class _HomePageState extends State<HomePage> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          VTextButton(
+          VTextIconButton(
             buttonText: "WeChat",
             buttonColor: Colors.green.shade400,
             onPressed: () {},
+            icon: const Icon(
+              Icons.wechat,
+              color: Colors.white,
+            ),
           ),
           VTextIconButton(
             onPressed: () {},

@@ -39,24 +39,24 @@ class _MyAppState extends State<MyApp> {
         drawer: Builder(builder: (context) {
           return VDrawer(
             onTap: [
-              () => {
-                    setState(() {
-                      _selectedIndex = 0;
-                    }),
-                    Navigator.pop(context),
-                  },
-              () => {
-                    setState(() {
-                      _selectedIndex = 1;
-                    }),
-                    Navigator.pop(context),
-                  },
-              () => {
-                    setState(() {
-                      _selectedIndex = 2;
-                    }),
-                    Navigator.pop(context),
-                  },
+              () {
+                setState(() {
+                  _selectedIndex = 0;
+                });
+                Navigator.pop(context);
+              },
+              () {
+                setState(() {
+                  _selectedIndex = 1;
+                });
+                Navigator.pop(context);
+              },
+              () {
+                setState(() {
+                  _selectedIndex = 2;
+                });
+                Navigator.pop(context);
+              },
             ],
           );
         }),

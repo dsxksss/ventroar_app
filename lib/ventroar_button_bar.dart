@@ -45,7 +45,7 @@ class _VentRoarButtonBarState extends State<VentRoarButtonBar> {
               Icons.home_outlined,
               color: Colors.blue,
             ),
-            label: '主页',
+            label: '主 页',
           ),
           NavigationDestination(
             selectedIcon: Icon(
@@ -57,7 +57,7 @@ class _VentRoarButtonBarState extends State<VentRoarButtonBar> {
               Icons.star_border_outlined,
               color: Colors.blue,
             ),
-            label: '心墙',
+            label: '心 墙',
           ),
           NavigationDestination(
             selectedIcon: Icon(
@@ -69,7 +69,7 @@ class _VentRoarButtonBarState extends State<VentRoarButtonBar> {
               Icons.person_outline,
               color: Colors.blue,
             ),
-            label: '我的',
+            label: '我 的',
           ),
         ],
       ),
