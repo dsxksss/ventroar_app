@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:getwidget/shape/gf_icon_button_shape.dart';
+import './functions/vent_alert.dart';
 import './widgets/vent_button.dart';
 
 class HomePage extends StatefulWidget {
@@ -30,15 +31,21 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           VTextIconButton(
-            onPressed: () {},
+            onPressed: () {
+              vAlert(
+                  context, const Text("你好哇，我是标题"), const Text("你可以试着修改我的内容喔"));
+            },
             buttonShape: GFButtonShape.pills,
             icon: const Icon(Icons.facebook),
           ),
           VIconButton(
-            onPressed: () {},
+            onPressed: () {
+              vAlert(context, const Text("你好哇，我是标题"),
+                  const Text("我是这个提醒框里的内容，你可以试着修改我的内容喔"));
+            },
             icon: const Icon(Icons.settings),
             buttonShape: GFIconButtonShape.circle,
-          )
+          ),
         ],
       ),
     );
