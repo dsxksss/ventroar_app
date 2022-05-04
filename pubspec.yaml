@@ -31,6 +31,8 @@ dependencies:
   fluttertoast: ^8.0.7
   #底部导航栏组件
   curved_navigation_bar: ^1.0.1
+  #页面切换组件 (建议) 代码使用: LiquidSwipe(pages:scaffolds)
+  #liquid_swipe: ^2.1.0
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
