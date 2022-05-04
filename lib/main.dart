@@ -24,6 +24,11 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      /// 后续会用到的主题模式切换
+      // themeMode: ThemeMode.light,
+      // theme: _lightTheme,
+      // darkTheme: _lightTheme,
+
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
@@ -35,6 +40,15 @@ class _MyAppState extends State<MyApp> {
             "Vent Roar",
           ),
         ),
+
+        /// PageView是用来制作切换页面的组件
+        /// 类似于制作翻页页面的东西
+        // PageView(
+        //   /// 改变切换模式
+        //   // scrollDirection: Axis.vertical,
+        //   children: [..._pages],
+        //   clipBehavior: Clip.antiAliasWithSaveLayer,
+        // ),
         body: _pages[_selectedIndex],
         drawer: Builder(builder: (context) {
           return VDrawer(
