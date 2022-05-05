@@ -22,7 +22,7 @@ class _VentRoarButtonBarState extends State<VentRoarButtonBar> {
       color: Colors.black,
 
       ///动画曲线
-      animationCurve: Curves.decelerate,
+      // animationCurve: Curves.easeInOut,
       items: const [
         Icon(
           Icons.home,

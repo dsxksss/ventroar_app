@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
@@ -13,6 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int a = 18;
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
@@ -26,29 +28,51 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            a > 0
+                ? Badge(
+                    badgeContent: Text(
+                      a.toString(),
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                    animationType: BadgeAnimationType.slide,
+                    animationDuration: const Duration(milliseconds: 500),
+                    child: VTextIconButton(
+                      buttonText: "WeChat",
+                      buttonColor: Colors.green.shade400,
+                      onPressed: () {
+                        /// 延迟函数  记得在函数前加上async
+                        // await Future.delayed(
+                        //   const Duration(seconds: 1),
+                        // );
+                        setState(() {
+                          a -= 1;
+                        });
+                      },
+                      icon: const Icon(
+                        Icons.wechat,
+                        color: Colors.white,
+                      ),
+                    ),
+                  )
+                : VTextIconButton(
+                    buttonText: "WeChat",
+                    buttonColor: Colors.green.shade400,
+                    onPressed: () {
+                      /// 延迟函数  记得在函数前加上async
+                      // await Future.delayed(
+                      //   const Duration(seconds: 1),
+                      // );
+                      setState(() {
+                        a -= 1;
+                      });
+                    },
+                    icon: const Icon(
+                      Icons.wechat,
+                      color: Colors.white,
+                    ),
+                  ),
             VTextIconButton(
-              buttonText: "WeChat",
-              buttonColor: Colors.green.shade400,
-              onPressed: () {
-                /// 延迟函数  记得在函数前加上async
-                // await Future.delayed(
-                //   const Duration(seconds: 1),
-                // );
-
-                Fluttertoast.showToast(
-                  msg: "消息通知: xxxxx",
-                  textColor: Colors.white,
-                  backgroundColor: Colors.red.shade400,
-                  gravity: ToastGravity.TOP,
-                  fontSize: 20,
-                );
-              },
-              icon: const Icon(
-                Icons.wechat,
-                color: Colors.white,
-              ),
-            ),
-            VTextIconButton(
+              buttonText: "FaceBook",
               onPressed: () {
                 vAlert(context, const Text("你好哇，我是标题"),
                     const Text("你可以试着修改我的内容喔"));
@@ -58,8 +82,13 @@ class _HomePageState extends State<HomePage> {
             ),
             VIconButton(
               onPressed: () {
-                vAlert(context, const Text("你好哇，我是标题"),
-                    const Text("我是这个提醒框里的内容，你可以试着修改我的内容喔"));
+                Fluttertoast.showToast(
+                  msg: "消息通知: xxxxx",
+                  textColor: Colors.white,
+                  backgroundColor: Colors.red.shade400,
+                  gravity: ToastGravity.TOP,
+                  fontSize: 20,
+                );
               },
               icon: const Icon(Icons.settings),
               buttonShape: GFIconButtonShape.circle,
