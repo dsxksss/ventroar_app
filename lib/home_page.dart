@@ -1,10 +1,12 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:getwidget/shape/gf_icon_button_shape.dart';
 import './functions/vent_alert.dart';
 import './widgets/vent_button.dart';
+import './widgets/vent_fbutton.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -71,14 +73,14 @@ class _HomePageState extends State<HomePage> {
                       color: Colors.white,
                     ),
                   ),
-            VTextIconButton(
+            VFTextIconButton(
               buttonText: "FaceBook",
               onPressed: () {
                 vAlert(context, const Text("你好哇，我是标题"),
                     const Text("你可以试着修改我的内容喔"));
               },
               buttonShape: GFButtonShape.pills,
-              icon: const Icon(Icons.facebook),
+              faIcon: const FaIcon(FontAwesomeIcons.facebook),
             ),
             VIconButton(
               onPressed: () {
