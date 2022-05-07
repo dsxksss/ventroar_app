@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -95,6 +96,20 @@ class _HomePageState extends State<HomePage> {
               icon: const Icon(Icons.settings),
               buttonShape: GFIconButtonShape.circle,
             ),
+            DefaultTextStyle(
+              style: const TextStyle(fontSize: 20.0, color: Colors.blue),
+              child: AnimatedTextKit(
+                animatedTexts: [
+                  WavyAnimatedText('Hello World'),
+                  WavyAnimatedText('Look at the waves'),
+                ],
+                isRepeatingAnimation: true,
+                repeatForever: true,
+                onTap: () {
+                  print("Tap Event");
+                },
+              ),
+            )
           ],
         ),
       ),
