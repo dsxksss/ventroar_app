@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:getwidget/shape/gf_icon_button_shape.dart';
-import './widgets/vent_button.dart';
+import './widgets/vent_slidable.dart';
 
 class UserPage extends StatefulWidget {
   const UserPage({Key? key}) : super(key: key);
@@ -18,12 +17,11 @@ class _UserPageState extends State<UserPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          VIconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.settings),
-            buttonShape: GFIconButtonShape.circle,
-          )
+        children: const [
+          VSlidable(),
+          VSlidable(),
+          VSlidable(),
+          VSlidable(),
         ],
       ),
     );

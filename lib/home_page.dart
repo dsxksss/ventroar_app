@@ -105,9 +105,7 @@ class _HomePageState extends State<HomePage> {
                 ],
                 isRepeatingAnimation: true,
                 repeatForever: true,
-                onTap: () {
-                  print("Tap Event");
-                },
+                onTap: () {},
               ),
             )
           ],
