@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:ventroar_app/ventroar_button_bar.dart';
 import './drawer.dart';
@@ -49,7 +50,21 @@ class _MyAppState extends State<MyApp> {
         //   children: [..._pages],
         //   clipBehavior: Clip.antiAliasWithSaveLayer,
         // ),
-        body: _pages[_selectedIndex],
+        body: PageTransitionSwitcher(
+          duration: const Duration(milliseconds: 800),
+          transitionBuilder: (
+            child,
+            animation,
+            secondaryAnimation,
+          ) {
+            return FadeThroughTransition(
+              animation: animation,
+              secondaryAnimation: secondaryAnimation,
+              child: child,
+            );
+          },
+          child: _pages[_selectedIndex],
+        ),
         drawer: Builder(builder: (context) {
           return VDrawer(
             onTap: [
