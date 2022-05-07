@@ -2,7 +2,11 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
 class VentRoarButtonBar extends StatefulWidget {
-  const VentRoarButtonBar({Key? key}) : super(key: key);
+  final int index;
+  final Function onTap;
+
+  const VentRoarButtonBar({Key? key, required this.onTap, required this.index})
+      : super(key: key);
 
   @override
   State<VentRoarButtonBar> createState() => _VentRoarButtonBarState();
@@ -20,6 +24,7 @@ class _VentRoarButtonBarState extends State<VentRoarButtonBar> {
 
       ///背景颜色
       color: Colors.black,
+      index: widget.index,
 
       ///动画曲线
       // animationCurve: Curves.easeInOut,
@@ -40,7 +45,9 @@ class _VentRoarButtonBarState extends State<VentRoarButtonBar> {
           color: Colors.blue,
         ),
       ],
-      onTap: (index) {},
+      onTap: (index) {
+        widget.onTap(index);
+      },
     );
   }
 

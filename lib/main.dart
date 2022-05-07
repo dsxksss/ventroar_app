@@ -74,7 +74,16 @@ class _MyAppState extends State<MyApp> {
             ],
           );
         }),
-        bottomNavigationBar: const VentRoarButtonBar(),
+        bottomNavigationBar: Builder(builder: (context) {
+          return VentRoarButtonBar(
+            index: _selectedIndex,
+            onTap: (index) {
+              setState(() {
+                _selectedIndex = index;
+              });
+            },
+          );
+        }),
       ),
     );
   }

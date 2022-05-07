@@ -31,6 +31,19 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            DefaultTextStyle(
+              style: const TextStyle(
+                  fontSize: 20.0, color: Colors.blue, height: 3),
+              child: AnimatedTextKit(
+                animatedTexts: [
+                  WavyAnimatedText('Hello World'),
+                  WavyAnimatedText('Look at the waves'),
+                ],
+                isRepeatingAnimation: true,
+                repeatForever: true,
+                onTap: () {},
+              ),
+            ),
             a > 0
                 ? Badge(
                     badgeContent: Text(
@@ -96,18 +109,6 @@ class _HomePageState extends State<HomePage> {
               icon: const Icon(Icons.settings),
               buttonShape: GFIconButtonShape.circle,
             ),
-            DefaultTextStyle(
-              style: const TextStyle(fontSize: 20.0, color: Colors.blue),
-              child: AnimatedTextKit(
-                animatedTexts: [
-                  WavyAnimatedText('Hello World'),
-                  WavyAnimatedText('Look at the waves'),
-                ],
-                isRepeatingAnimation: true,
-                repeatForever: true,
-                onTap: () {},
-              ),
-            )
           ],
         ),
       ),
