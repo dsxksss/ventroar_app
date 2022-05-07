@@ -36,7 +36,13 @@ class _LoginPageState extends State<LoginPage> {
             openBuilder: (context, action) {
               //Scaffold顶部会自带一个返回按钮
               return Scaffold(
-                appBar: AppBar(),
+                appBar: AppBar(
+                  backgroundColor: Colors.black,
+                  foregroundColor: Colors.white,
+                  shadowColor: Colors.white,
+                  centerTitle: true,
+                  title: const Text("New HOME Page"),
+                ),
                 body: const HomePage(),
               );
             },
