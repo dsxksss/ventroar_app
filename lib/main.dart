@@ -50,20 +50,23 @@ class _MyAppState extends State<MyApp> {
         //   children: [..._pages],
         //   clipBehavior: Clip.antiAliasWithSaveLayer,
         // ),
-        body: PageTransitionSwitcher(
-          duration: const Duration(milliseconds: 800),
-          transitionBuilder: (
-            child,
-            animation,
-            secondaryAnimation,
-          ) {
-            return FadeThroughTransition(
-              animation: animation,
-              secondaryAnimation: secondaryAnimation,
-              child: child,
-            );
-          },
-          child: _pages[_selectedIndex],
+        ///SafeArea是自动检测屏幕高度，给定正常显示页面的widget
+        body: SafeArea(
+          child: PageTransitionSwitcher(
+            duration: const Duration(milliseconds: 800),
+            transitionBuilder: (
+              child,
+              animation,
+              secondaryAnimation,
+            ) {
+              return FadeThroughTransition(
+                animation: animation,
+                secondaryAnimation: secondaryAnimation,
+                child: child,
+              );
+            },
+            child: _pages[_selectedIndex],
+          ),
         ),
         drawer: Builder(builder: (context) {
           return VDrawer(
