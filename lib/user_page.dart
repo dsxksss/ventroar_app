@@ -23,8 +23,11 @@ class _UserPageState extends State<UserPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const VSlidable(),
-          const VSlidable(),
+          //利用Padding组件来设置与其他组件之间的间距
+          const Padding(
+            padding: EdgeInsets.fromLTRB(0, 80, 0, 80),
+            child: VSlidable(),
+          ),
           const VSlidable(),
           VCheckBoxList(
             isCheck: _value1,
