@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ventroar_app/widgets/vent_checkboxlist.dart';
 import './widgets/vent_slidable.dart';
 
 class UserPage extends StatefulWidget {
@@ -9,6 +11,9 @@ class UserPage extends StatefulWidget {
 }
 
 class _UserPageState extends State<UserPage> {
+  bool _value1 = false;
+  bool _value2 = false;
+  bool _value3 = false;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -17,11 +22,40 @@ class _UserPageState extends State<UserPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: const [
-          VSlidable(),
-          VSlidable(),
-          VSlidable(),
-          VSlidable(),
+        children: [
+          const VSlidable(),
+          const VSlidable(),
+          const VSlidable(),
+          VCheckBoxList(
+            isCheck: _value1,
+            onChanged: (value) {
+              setState(() {
+                _value1 = value!;
+              });
+            },
+            title: const Text("我是一个选择框功能按钮"),
+            secondary: const FaIcon(FontAwesomeIcons.facebook),
+          ),
+          VCheckBoxList(
+            isCheck: _value2,
+            onChanged: (value) {
+              setState(() {
+                _value2 = value!;
+              });
+            },
+            title: const Text("我是一个选择框功能按钮"),
+            secondary: const FaIcon(FontAwesomeIcons.twitter),
+          ),
+          VCheckBoxList(
+            isCheck: _value3,
+            onChanged: (value) {
+              setState(() {
+                _value3 = value!;
+              });
+            },
+            title: const Text("我是一个选择框功能按钮"),
+            secondary: const FaIcon(FontAwesomeIcons.amazon),
+          ),
         ],
       ),
     );
