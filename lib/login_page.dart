@@ -1,5 +1,7 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
+import 'package:getwidget/getwidget.dart';
+import 'package:ventroar_app/widgets/vent_button.dart';
 import './home_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -55,14 +57,18 @@ class _LoginPageState extends State<LoginPage> {
             height: changeAnimated ? 100 : 250,
             curve: Curves.easeInOutQuint,
           ),
-          FloatingActionButton(
-            child: const Text("改变"),
-            onPressed: () {
-              setState(() {
-                changeAnimated = !changeAnimated;
-              });
-            },
-          )
+          VTextIconButton(
+              buttonText: "改变",
+              buttonColor: GFColors.DARK,
+              textColor: Colors.white,
+              buttonShape: GFButtonShape.pills,
+              onPressed: () {
+                setState(() {
+                  changeAnimated = !changeAnimated;
+                });
+              },
+              icon: const Icon(Icons.change_circle_outlined,
+                  color: GFColors.LIGHT))
         ],
       ),
     );
