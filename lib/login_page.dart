@@ -10,6 +10,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  bool changeAnimated = false;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -45,6 +46,21 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 body: const HomePage(),
               );
+            },
+          ),
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 800),
+            color: changeAnimated ? Colors.blue : Colors.greenAccent,
+            width: changeAnimated ? 100 : 200,
+            height: changeAnimated ? 100 : 250,
+            curve: Curves.easeInOutQuint,
+          ),
+          FloatingActionButton(
+            child: const Text("改变"),
+            onPressed: () {
+              setState(() {
+                changeAnimated = !changeAnimated;
+              });
             },
           )
         ],
