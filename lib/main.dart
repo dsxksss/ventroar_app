@@ -60,7 +60,7 @@ class _MyAppState extends State<MyApp> {
           ) {
             return FadeThroughTransition(
               //背景色
-              fillColor: const Color.fromRGBO(41, 47, 63, 1),
+              fillColor: const Color.fromRGBO(29, 35, 42, 1),
               animation: animation,
               secondaryAnimation: secondaryAnimation,
               child: child,
