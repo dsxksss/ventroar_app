@@ -15,18 +15,32 @@ class _VDrawerState extends State<VDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      backgroundColor: const Color.fromRGBO(21, 25, 28, 1),
       child: ListView(children: [
-        const DrawerHeader(child: Text("I am drawer header")),
+        const DrawerHeader(
+            child: Text(
+          "I am drawer header",
+          style: TextStyle(color: Colors.white),
+        )),
         ListTile(
-          title: const Text("Home"),
+          title: const Text(
+            "Home",
+            style: TextStyle(color: Colors.white),
+          ),
           onTap: widget.onTap[0],
         ),
         ListTile(
-          title: const Text("User"),
+          title: const Text(
+            "User",
+            style: TextStyle(color: Colors.white),
+          ),
           onTap: widget.onTap[1],
         ),
         ListTile(
-          title: const Text("Login"),
+          title: const Text(
+            "Login",
+            style: TextStyle(color: Colors.white),
+          ),
           onTap: widget.onTap[2],
         ),
       ]),
