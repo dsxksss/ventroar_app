@@ -72,7 +72,11 @@ class _VSlidableState extends State<VSlidable> {
       ),
 
       /// 当组件没有被拖动时
-      child: const ListTile(title: Text("SlidableList")),
+      child: const ListTile(
+          title: Text(
+        "SlidableList",
+        style: TextStyle(color: Colors.white),
+      )),
     );
   }
 }

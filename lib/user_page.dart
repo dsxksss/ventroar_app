@@ -36,8 +36,14 @@ class _UserPageState extends State<UserPage> {
                 _value1 = value!;
               });
             },
-            title: const Text("我是一个选择框功能按钮"),
-            secondary: const FaIcon(FontAwesomeIcons.facebook),
+            title: const Text(
+              "我是一个选择框功能按钮",
+              style: TextStyle(color: Colors.white),
+            ),
+            secondary: const FaIcon(
+              FontAwesomeIcons.facebook,
+              color: Colors.white,
+            ),
           ),
           VCheckBoxList(
             isCheck: _value2,
@@ -46,8 +52,14 @@ class _UserPageState extends State<UserPage> {
                 _value2 = value!;
               });
             },
-            title: const Text("我是一个选择框功能按钮"),
-            secondary: const FaIcon(FontAwesomeIcons.twitter),
+            title: const Text(
+              "我是一个选择框功能按钮",
+              style: TextStyle(color: Colors.white),
+            ),
+            secondary: const FaIcon(
+              FontAwesomeIcons.twitter,
+              color: Colors.white,
+            ),
           ),
           VCheckBoxList(
             isCheck: _value3,
@@ -56,8 +68,14 @@ class _UserPageState extends State<UserPage> {
                 _value3 = value!;
               });
             },
-            title: const Text("我是一个选择框功能按钮"),
-            secondary: const FaIcon(FontAwesomeIcons.amazon),
+            title: const Text(
+              "我是一个选择框功能按钮",
+              style: TextStyle(color: Colors.white),
+            ),
+            secondary: const FaIcon(
+              FontAwesomeIcons.amazon,
+              color: Colors.white,
+            ),
           ),
         ],
       ),
