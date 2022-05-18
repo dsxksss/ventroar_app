@@ -5,6 +5,7 @@ import './drawer.dart';
 import './home_page.dart';
 import './user_page.dart';
 import './login_page.dart';
+import './colors/vcolors.dart';
 
 void main() => runApp(const MyApp());
 
@@ -33,7 +34,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: const Color.fromRGBO(21, 25, 28, 1),
+          backgroundColor: VColors.vGray100,
           foregroundColor: Colors.white,
           shadowColor: const Color.fromARGB(255, 45, 44, 44),
           centerTitle: true,
@@ -60,7 +61,7 @@ class _MyAppState extends State<MyApp> {
           ) {
             return FadeThroughTransition(
               //背景色
-              fillColor: const Color.fromRGBO(29, 35, 42, 1),
+              fillColor: VColors.vGray90,
               animation: animation,
               secondaryAnimation: secondaryAnimation,
               child: child,
@@ -104,7 +105,7 @@ class _MyAppState extends State<MyApp> {
           );
         }),
         floatingActionButton: FloatingActionButton(
-          backgroundColor: const Color.fromRGBO(44, 52, 58, 1),
+          backgroundColor: VColors.vGray80,
           child: const Icon(Icons.edit),
           onPressed: () {
             setState(() {});
