@@ -33,9 +33,9 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.black,
+          backgroundColor: const Color.fromRGBO(21, 25, 28, 1),
           foregroundColor: Colors.white,
-          shadowColor: Colors.white,
+          shadowColor: const Color.fromARGB(255, 45, 44, 44),
           centerTitle: true,
           title: const Text(
             "Vent Roar",
@@ -51,23 +51,24 @@ class _MyAppState extends State<MyApp> {
         //   clipBehavior: Clip.antiAliasWithSaveLayer,
         // ),
         ///SafeArea是自动检测屏幕高度，给定正常显示页面的widget
-        body: SafeArea(
-          child: PageTransitionSwitcher(
-            duration: const Duration(milliseconds: 800),
-            transitionBuilder: (
-              child,
-              animation,
-              secondaryAnimation,
-            ) {
-              return FadeThroughTransition(
-                animation: animation,
-                secondaryAnimation: secondaryAnimation,
-                child: child,
-              );
-            },
-            child: _pages[_selectedIndex],
-          ),
+        body: PageTransitionSwitcher(
+          duration: const Duration(milliseconds: 800),
+          transitionBuilder: (
+            child,
+            animation,
+            secondaryAnimation,
+          ) {
+            return FadeThroughTransition(
+              //背景色
+              fillColor: const Color.fromRGBO(41, 47, 63, 1),
+              animation: animation,
+              secondaryAnimation: secondaryAnimation,
+              child: child,
+            );
+          },
+          child: _pages[_selectedIndex],
         ),
+
         drawer: Builder(builder: (context) {
           return VDrawer(
             onTap: [
@@ -103,6 +104,7 @@ class _MyAppState extends State<MyApp> {
           );
         }),
         floatingActionButton: FloatingActionButton(
+          backgroundColor: const Color.fromRGBO(44, 52, 58, 1),
           child: const Icon(Icons.edit),
           onPressed: () {
             setState(() {});
