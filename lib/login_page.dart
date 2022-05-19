@@ -1,8 +1,6 @@
-import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:ventroar_app/widgets/vent_button.dart';
-import './home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -22,34 +20,34 @@ class _LoginPageState extends State<LoginPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          OpenContainer(
-            //过度时长
-            transitionDuration: const Duration(seconds: 3),
-            //打开时的过度颜色
-            openColor: Colors.grey,
-            //动画类型
-            transitionType: ContainerTransitionType.fadeThrough,
+          // OpenContainer(
+          //   //过度时长
+          //   transitionDuration: const Duration(seconds: 3),
+          //   //打开时的过度颜色
+          //   openColor: Colors.grey,
+          //   //动画类型
+          //   transitionType: ContainerTransitionType.fadeThrough,
 
-            closedBuilder: (context, action) {
-              return const Text(
-                "Open new HomePage",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-              );
-            },
-            openBuilder: (context, action) {
-              //Scaffold顶部会自带一个返回按钮
-              return Scaffold(
-                appBar: AppBar(
-                  backgroundColor: Colors.black,
-                  foregroundColor: Colors.white,
-                  shadowColor: Colors.white,
-                  centerTitle: true,
-                  title: const Text("New HOME Page"),
-                ),
-                body: const HomePage(),
-              );
-            },
-          ),
+          //   closedBuilder: (context, action) {
+          //     return const Text(
+          //       "Open new HomePage",
+          //       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+          //     );
+          //   },
+          //   openBuilder: (context, action) {
+          //     //Scaffold顶部会自带一个返回按钮
+          //     return Scaffold(
+          //       appBar: AppBar(
+          //         backgroundColor: Colors.black,
+          //         foregroundColor: Colors.white,
+          //         shadowColor: Colors.white,
+          //         centerTitle: true,
+          //         title: const Text("New HOME Page"),
+          //       ),
+          //       body: const HomePage(),
+          //     );
+          //   },
+          // ),
           AnimatedContainer(
             duration: const Duration(milliseconds: 800),
             color: changeAnimated ? Colors.blue : Colors.greenAccent,
@@ -58,17 +56,18 @@ class _LoginPageState extends State<LoginPage> {
             curve: Curves.easeInOutQuint,
           ),
           VTextIconButton(
-              buttonText: "改变",
-              buttonColor: GFColors.DARK,
-              textColor: Colors.white,
-              buttonShape: GFButtonShape.pills,
-              onPressed: () {
-                setState(() {
-                  changeAnimated = !changeAnimated;
-                });
-              },
-              icon: const Icon(Icons.change_circle_outlined,
-                  color: GFColors.LIGHT))
+            buttonText: "改变",
+            buttonColor: Colors.greenAccent,
+            textColor: Colors.black,
+            buttonShape: GFButtonShape.pills,
+            onPressed: () {
+              setState(() {
+                changeAnimated = !changeAnimated;
+              });
+            },
+            icon:
+                const Icon(Icons.change_circle_outlined, color: GFColors.DARK),
+          )
         ],
       ),
     );

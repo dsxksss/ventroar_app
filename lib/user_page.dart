@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ventroar_app/widgets/vent_checkboxlist.dart';
 import './widgets/vent_slidable.dart';
+import './vcolors.dart';
 
 class UserPage extends StatefulWidget {
   const UserPage({Key? key}) : super(key: key);
@@ -38,12 +39,13 @@ class _UserPageState extends State<UserPage> {
             },
             title: const Text(
               "我是一个选择框功能按钮",
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: VColors.vPtext),
             ),
             secondary: const FaIcon(
               FontAwesomeIcons.facebook,
-              color: Colors.white,
+              color: VColors.vPtext,
             ),
+            checkColor: VColors.vPtext,
           ),
           VCheckBoxList(
             isCheck: _value2,
@@ -54,11 +56,11 @@ class _UserPageState extends State<UserPage> {
             },
             title: const Text(
               "我是一个选择框功能按钮",
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: VColors.vPtext),
             ),
             secondary: const FaIcon(
               FontAwesomeIcons.twitter,
-              color: Colors.white,
+              color: VColors.vPtext,
             ),
           ),
           VCheckBoxList(
@@ -70,11 +72,11 @@ class _UserPageState extends State<UserPage> {
             },
             title: const Text(
               "我是一个选择框功能按钮",
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: VColors.vPtext),
             ),
             secondary: const FaIcon(
               FontAwesomeIcons.amazon,
-              color: Colors.white,
+              color: VColors.vPtext,
             ),
           ),
         ],

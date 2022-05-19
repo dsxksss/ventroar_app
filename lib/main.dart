@@ -5,7 +5,7 @@ import './drawer.dart';
 import './home_page.dart';
 import './user_page.dart';
 import './login_page.dart';
-import './colors/vcolors.dart';
+import './vcolors.dart';
 
 void main() => runApp(const MyApp());
 
@@ -30,13 +30,13 @@ class _MyAppState extends State<MyApp> {
       // themeMode: ThemeMode.light,
       // theme: _lightTheme,
       // darkTheme: _lightTheme,
-
+      theme: ThemeData.dark(),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: VColors.vGray100,
-          foregroundColor: Colors.white,
-          shadowColor: const Color.fromARGB(255, 45, 44, 44),
+          foregroundColor: VColors.vPtext,
+          shadowColor: VColors.vShadow,
           centerTitle: true,
           title: const Text(
             "Vent Roar",
@@ -106,7 +106,10 @@ class _MyAppState extends State<MyApp> {
         }),
         floatingActionButton: FloatingActionButton(
           backgroundColor: VColors.vGray80,
-          child: const Icon(Icons.edit),
+          child: const Icon(
+            Icons.edit,
+            color: VColors.vPtext,
+          ),
           onPressed: () {
             setState(() {});
           },

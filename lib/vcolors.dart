@@ -8,5 +8,11 @@ class VColors {
   //次要选项背景色
   static const Color vGray80 = Color.fromRGBO(44, 52, 58, 1);
   //重要文本色
+  static const Color vPtext = Colors.white;
   //次要文本色
+  static const Color vStext = Colors.white60;
+  //shadow阴影色
+  static const Color vShadow = Color.fromARGB(255, 45, 44, 44);
+  //次要按钮等背景色
+  static const Color vPblue = Color.fromRGBO(3, 169, 241, 1);
 }

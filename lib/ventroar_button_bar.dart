@@ -1,5 +1,6 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import './vcolors.dart';
 
 class VentRoarButtonBar extends StatefulWidget {
   final int index;
@@ -17,13 +18,13 @@ class _VentRoarButtonBarState extends State<VentRoarButtonBar> {
   Widget build(BuildContext context) {
     return CurvedNavigationBar(
       ///间隙颜色
-      backgroundColor: const Color.fromRGBO(29, 35, 42, 1),
+      backgroundColor: VColors.vGray90,
 
       //按钮背景颜色
-      buttonBackgroundColor: const Color.fromRGBO(44, 52, 58, 1),
+      buttonBackgroundColor: VColors.vGray80,
 
       ///背景颜色
-      color: const Color.fromRGBO(21, 25, 28, 1),
+      color: VColors.vGray100,
       index: widget.index,
 
       ///动画曲线
@@ -32,17 +33,17 @@ class _VentRoarButtonBarState extends State<VentRoarButtonBar> {
         Icon(
           Icons.home,
           size: 28,
-          color: Colors.white,
+          color: VColors.vPtext,
         ),
         Icon(
           Icons.star_rounded,
           size: 28,
-          color: Colors.white,
+          color: VColors.vPtext,
         ),
         Icon(
           Icons.person,
           size: 28,
-          color: Colors.white,
+          color: VColors.vPtext,
         ),
       ],
       onTap: (index) {
@@ -61,7 +62,7 @@ class _VentRoarButtonBarState extends State<VentRoarButtonBar> {
   //         const TextStyle(
   //           fontSize: 16,
   //           fontWeight: FontWeight.bold,
-  //           color: Colors.white,
+  //           color: VColors.vPtext,
   //         ),
   //       ),
   //     ),

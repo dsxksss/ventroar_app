@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../vcolors.dart';
 
 class VCheckBoxList extends StatefulWidget {
   final Widget title; //列表标题
@@ -13,8 +14,8 @@ class VCheckBoxList extends StatefulWidget {
     required this.onChanged,
     required this.title,
     required this.secondary,
-    this.activeColor = Colors.blue,
-    this.checkColor = Colors.white,
+    this.activeColor = VColors.vPblue,
+    this.checkColor = VColors.vPtext,
   }) : super(key: key);
 
   @override
