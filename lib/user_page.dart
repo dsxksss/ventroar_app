@@ -37,15 +37,16 @@ class _UserPageState extends State<UserPage> {
                 _value1 = value!;
               });
             },
-            title: const Text(
+            title: Text(
               "我是一个选择框功能按钮",
-              style: TextStyle(color: VColors.vPtext),
+              style: TextStyle(color: VColors().vPtext),
             ),
-            secondary: const FaIcon(
+            secondary: FaIcon(
               FontAwesomeIcons.facebook,
-              color: VColors.vPtext,
+              color: VColors().vPtext,
             ),
-            checkColor: VColors.vPtext,
+            checkColor: VColors().vPtext,
+            activeColor: VColors().vPblue,
           ),
           VCheckBoxList(
             isCheck: _value2,
@@ -54,14 +55,16 @@ class _UserPageState extends State<UserPage> {
                 _value2 = value!;
               });
             },
-            title: const Text(
+            title: Text(
               "我是一个选择框功能按钮",
-              style: TextStyle(color: VColors.vPtext),
+              style: TextStyle(color: VColors().vPtext),
             ),
-            secondary: const FaIcon(
+            secondary: FaIcon(
               FontAwesomeIcons.twitter,
-              color: VColors.vPtext,
+              color: VColors().vPtext,
             ),
+            activeColor: VColors().vPblue,
+            checkColor: VColors().vPtext,
           ),
           VCheckBoxList(
             isCheck: _value3,
@@ -70,14 +73,16 @@ class _UserPageState extends State<UserPage> {
                 _value3 = value!;
               });
             },
-            title: const Text(
+            title: Text(
               "我是一个选择框功能按钮",
-              style: TextStyle(color: VColors.vPtext),
+              style: TextStyle(color: VColors().vPtext),
             ),
-            secondary: const FaIcon(
+            secondary: FaIcon(
               FontAwesomeIcons.amazon,
-              color: VColors.vPtext,
+              color: VColors().vPtext,
             ),
+            activeColor: VColors().vPblue,
+            checkColor: VColors().vPtext,
           ),
         ],
       ),

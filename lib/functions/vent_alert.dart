@@ -13,8 +13,8 @@ Future vAlert(BuildContext context, Widget title, Widget content) {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          buttonColor: VColors.vPblue,
-          textColor: VColors.vPtext,
+          buttonColor: VColors().vPblue,
+          textColor: VColors().vPtext,
           buttonType: GFButtonType.solid,
           buttonShape: GFButtonShape.pills,
           buttonText: "明白",
@@ -24,7 +24,7 @@ Future vAlert(BuildContext context, Widget title, Widget content) {
       title: title,
       content: content,
       contentPadding: const EdgeInsets.all(25.0),
-      backgroundColor: VColors.vBg90,
+      backgroundColor: VColors().vBg90,
     ),
   );
 }

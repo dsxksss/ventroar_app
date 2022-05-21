@@ -18,13 +18,13 @@ class _VentRoarButtonBarState extends State<VentRoarButtonBar> {
   Widget build(BuildContext context) {
     return CurvedNavigationBar(
       ///间隙颜色
-      backgroundColor: VColors.vBg90,
+      backgroundColor: VColors().vBg90,
 
       //按钮背景颜色
-      buttonBackgroundColor: VColors.vBg80,
+      buttonBackgroundColor: VColors().vBg80,
 
       ///背景颜色
-      color: VColors.vBg100,
+      color: VColors().vBg100,
       index: widget.index,
 
       ///动画曲线
@@ -33,17 +33,17 @@ class _VentRoarButtonBarState extends State<VentRoarButtonBar> {
         Icon(
           Icons.home,
           size: widget.index == 0 ? 30 : 26,
-          color: widget.index == 0 ? VColors.vPtext : VColors.vStext,
+          color: widget.index == 0 ? VColors().vPtext : VColors().vStext,
         ),
         Icon(
           Icons.star_rounded,
           size: widget.index == 1 ? 30 : 26,
-          color: widget.index == 1 ? VColors.vPtext : VColors.vStext,
+          color: widget.index == 1 ? VColors().vPtext : VColors().vStext,
         ),
         Icon(
           Icons.person,
           size: widget.index == 2 ? 30 : 26,
-          color: widget.index == 2 ? VColors.vPtext : VColors.vStext,
+          color: widget.index == 2 ? VColors().vPtext : VColors().vStext,
         ),
       ],
       onTap: (index) {

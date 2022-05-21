@@ -1,5 +1,6 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ventroar_app/ventroar_button_bar.dart';
 import './drawer.dart';
 import './home_page.dart';
@@ -18,6 +19,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   int _selectedIndex = 0;
+  bool changeToDark = true;
   final List<Widget> _pages = [
     const HomePage(),
     const UserPage(),
@@ -30,13 +32,14 @@ class _MyAppState extends State<MyApp> {
       // themeMode: ThemeMode.light,
       // theme: _lightTheme,
       // darkTheme: _lightTheme,
-      theme: ThemeData.dark(),
+      themeMode: changeToDark ? ThemeMode.dark : ThemeMode.light,
+      theme: changeToDark ? ThemeData.dark() : ThemeData.light(),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: VColors.vBg100,
-          foregroundColor: VColors.vPtext,
-          shadowColor: VColors.vShadow,
+          backgroundColor: VColors().vBg100,
+          foregroundColor: VColors().vPtext,
+          shadowColor: VColors().vShadow,
           centerTitle: true,
           title: const Text(
             "Vent Roar",
@@ -61,7 +64,7 @@ class _MyAppState extends State<MyApp> {
           ) {
             return FadeThroughTransition(
               //背景色
-              fillColor: VColors.vBg90,
+              fillColor: VColors().vBg90,
               animation: animation,
               secondaryAnimation: secondaryAnimation,
               child: child,
@@ -105,13 +108,16 @@ class _MyAppState extends State<MyApp> {
           );
         }),
         floatingActionButton: FloatingActionButton(
-          backgroundColor: VColors.vBg80,
-          child: const Icon(
+          backgroundColor: VColors().vBg80,
+          child: FaIcon(
             Icons.edit,
-            color: VColors.vPtext,
+            color: VColors().vPtext,
           ),
           onPressed: () {
-            setState(() {});
+            setState(() {
+              changeToDark = !changeToDark;
+              VColors().changeDark(changeToDark);
+            });
           },
         ),
       ),
