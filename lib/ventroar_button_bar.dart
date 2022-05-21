@@ -68,7 +68,7 @@ class _VentRoarButtonBarState extends State<VentRoarButtonBar> {
               ),
             ),
             child: NavigationBar(
-              animationDuration: const Duration(seconds: 1),
+              animationDuration: const Duration(milliseconds: 800),
               labelBehavior:
                   NavigationDestinationLabelBehavior.onlyShowSelected,
               height: 76,
