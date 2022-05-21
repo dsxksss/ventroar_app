@@ -5,8 +5,13 @@ import './vcolors.dart';
 class VentRoarButtonBar extends StatefulWidget {
   final int index;
   final Function onTap;
+  final bool changeToDark;
 
-  const VentRoarButtonBar({Key? key, required this.onTap, required this.index})
+  const VentRoarButtonBar(
+      {Key? key,
+      required this.onTap,
+      required this.index,
+      required this.changeToDark})
       : super(key: key);
 
   @override
@@ -16,40 +21,95 @@ class VentRoarButtonBar extends StatefulWidget {
 class _VentRoarButtonBarState extends State<VentRoarButtonBar> {
   @override
   Widget build(BuildContext context) {
-    return CurvedNavigationBar(
-      ///间隙颜色
-      backgroundColor: VColors.vBg90,
+    return widget.changeToDark
+        ? CurvedNavigationBar(
+            ///间隙颜色
+            backgroundColor:
+                widget.changeToDark ? VColors.vBg90 : Colors.white54,
 
-      //按钮背景颜色
-      buttonBackgroundColor: VColors.vBg80,
+            //按钮背景颜色
+            buttonBackgroundColor:
+                widget.changeToDark ? VColors.vBg80 : VColors.vPblue,
 
-      ///背景颜色
-      color: VColors.vBg100,
-      index: widget.index,
+            ///背景颜色
+            color: widget.changeToDark ? VColors.vBg100 : VColors.vPblue,
+            index: widget.index,
 
-      ///动画曲线
-      animationCurve: Curves.easeOutCirc,
-      items: [
-        Icon(
-          Icons.home,
-          size: widget.index == 0 ? 30 : 26,
-          color: widget.index == 0 ? VColors.vPtext : VColors.vStext,
-        ),
-        Icon(
-          Icons.star_rounded,
-          size: widget.index == 1 ? 30 : 26,
-          color: widget.index == 1 ? VColors.vPtext : VColors.vStext,
-        ),
-        Icon(
-          Icons.person,
-          size: widget.index == 2 ? 30 : 26,
-          color: widget.index == 2 ? VColors.vPtext : VColors.vStext,
-        ),
-      ],
-      onTap: (index) {
-        widget.onTap(index);
-      },
-    );
+            ///动画曲线
+            animationCurve: Curves.easeOutCirc,
+            items: [
+              Icon(
+                Icons.home,
+                size: widget.index == 0 ? 30 : 26,
+              ),
+              Icon(
+                Icons.star_rounded,
+                size: widget.index == 1 ? 30 : 26,
+              ),
+              Icon(
+                Icons.person,
+                size: widget.index == 2 ? 30 : 26,
+              ),
+            ],
+            onTap: (index) {
+              widget.onTap(index);
+            },
+          )
+        : NavigationBarTheme(
+            data: NavigationBarThemeData(
+              backgroundColor: Colors.white,
+              indicatorColor:
+                  const Color.fromARGB(255, 180, 186, 190).withOpacity(0.2),
+              labelTextStyle: MaterialStateProperty.all(
+                const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            child: NavigationBar(
+              animationDuration: const Duration(seconds: 1),
+              labelBehavior:
+                  NavigationDestinationLabelBehavior.onlyShowSelected,
+              height: 76,
+              selectedIndex: widget.index,
+              onDestinationSelected: (int index) {
+                widget.onTap(index);
+              },
+              destinations: const [
+                NavigationDestination(
+                  selectedIcon: Icon(
+                    Icons.home,
+                    size: 28,
+                  ),
+                  icon: Icon(
+                    Icons.home_outlined,
+                  ),
+                  label: '主 页',
+                ),
+                NavigationDestination(
+                  selectedIcon: Icon(
+                    Icons.star_rounded,
+                    size: 28,
+                  ),
+                  icon: Icon(
+                    Icons.star_border_outlined,
+                  ),
+                  label: '心 墙',
+                ),
+                NavigationDestination(
+                  selectedIcon: Icon(
+                    Icons.person,
+                    size: 28,
+                  ),
+                  icon: Icon(
+                    Icons.person_outline,
+                  ),
+                  label: '我 的',
+                ),
+              ],
+            ),
+          );
   }
 
   // final int _currentIndex = 0;

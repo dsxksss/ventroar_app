@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:animations/animations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:ventroar_app/ventroar_button_bar.dart';
 import './drawer.dart';
 import './home_page.dart';
@@ -26,18 +27,14 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      /// 后续会用到的主题模式切换
-      // themeMode: ThemeMode.light,
-      // theme: _lightTheme,
-      // darkTheme: _lightTheme,
+      /// 主题模式切换
       themeMode: changeToDark ? ThemeMode.dark : ThemeMode.light,
-      theme: changeToDark ? ThemeData.dark() : ThemeData.light(),
+      theme: _lightTheme(context),
+      darkTheme: _darkTheme(context),
+
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: VColors.vBg100,
-          foregroundColor: VColors.vPtext,
-          shadowColor: VColors.vShadow,
           centerTitle: true,
           title: const Text(
             "Vent Roar",
@@ -54,7 +51,7 @@ class _AppState extends State<App> {
         // ),
         ///SafeArea是自动检测屏幕高度，给定正常显示页面的widget
         body: PageTransitionSwitcher(
-          duration: const Duration(milliseconds: 800),
+          duration: const Duration(milliseconds: 700),
           transitionBuilder: (
             child,
             animation,
@@ -62,7 +59,7 @@ class _AppState extends State<App> {
           ) {
             return FadeThroughTransition(
               //背景色
-              fillColor: VColors.vBg90,
+              fillColor: changeToDark ? VColors.vBg90 : Colors.white54,
               animation: animation,
               secondaryAnimation: secondaryAnimation,
               child: child,
@@ -97,6 +94,7 @@ class _AppState extends State<App> {
         }),
         bottomNavigationBar: Builder(builder: (context) {
           return VentRoarButtonBar(
+            changeToDark: changeToDark,
             index: _selectedIndex,
             onTap: (index) {
               setState(() {
@@ -106,16 +104,57 @@ class _AppState extends State<App> {
           );
         }),
         floatingActionButton: FloatingActionButton(
-          backgroundColor: VColors.vBg80,
           child: FaIcon(
-            Icons.edit,
-            color: VColors.vPtext,
-          ),
+              changeToDark ? FontAwesomeIcons.sun : FontAwesomeIcons.moon),
           onPressed: () {
-            setState(() {});
+            setState(() {
+              changeToDark = !changeToDark;
+            });
           },
         ),
       ),
     );
   }
+}
+
+//夜间模式主题
+ThemeData _darkTheme(BuildContext context) {
+  final base = ThemeData.dark();
+  return base.copyWith(
+    appBarTheme: AppBarTheme(
+      backgroundColor: VColors.vBg100,
+      foregroundColor: VColors.vPtext,
+      shadowColor: VColors.vShadow,
+    ),
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: VColors.vBg80,
+      foregroundColor: Colors.white,
+    ),
+    iconTheme: IconThemeData(
+      color: VColors.vPtext,
+    ),
+    drawerTheme: DrawerThemeData(
+      backgroundColor: VColors.vBg100,
+    ),
+  );
+}
+
+//日间模式主题
+ThemeData _lightTheme(BuildContext context) {
+  final base = ThemeData.light();
+  return base.copyWith(
+    appBarTheme: AppBarTheme(
+      backgroundColor: VColors.vPtext,
+      foregroundColor: VColors.vBg100,
+      shadowColor: VColors.vStext,
+    ),
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      backgroundColor: Color.fromARGB(255, 0, 174, 243),
+      foregroundColor: Colors.white,
+    ),
+    iconTheme: IconThemeData(
+      color: VColors.vPtext,
+    ),
+    shadowColor: Colors.black54,
+  );
 }
