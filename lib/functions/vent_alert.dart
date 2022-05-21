@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import '../widgets/vent_button.dart';
+import '../vcolors.dart';
 
 //Future类型是用来处理一些未来可能发生的触发函数
 Future vAlert(BuildContext context, Widget title, Widget content) {
@@ -12,7 +13,8 @@ Future vAlert(BuildContext context, Widget title, Widget content) {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          buttonColor: Colors.white60,
+          buttonColor: VColors.vPblue,
+          textColor: VColors.vPtext,
           buttonType: GFButtonType.solid,
           buttonShape: GFButtonShape.pills,
           buttonText: "明白",
@@ -22,6 +24,7 @@ Future vAlert(BuildContext context, Widget title, Widget content) {
       title: title,
       content: content,
       contentPadding: const EdgeInsets.all(25.0),
+      backgroundColor: VColors.vGray90,
     ),
   );
 }

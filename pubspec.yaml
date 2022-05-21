@@ -43,6 +43,8 @@ dependencies:
   flutter_slidable: ^1.2.0
   #动画组件包
   animations: ^2.0.2
+  #谷歌字体包
+  google_fonts: ^3.0.0
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2

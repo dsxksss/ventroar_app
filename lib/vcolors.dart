@@ -6,7 +6,7 @@ class VColors {
   //页面背景色
   static const Color vGray90 = Color.fromRGBO(29, 35, 42, 1);
   //次要选项背景色
-  static const Color vGray80 = Color.fromRGBO(44, 52, 58, 1);
+  static const Color vGray80 = Color.fromARGB(255, 57, 66, 73);
   //重要文本色
   static const Color vPtext = Colors.white;
   //次要文本色
