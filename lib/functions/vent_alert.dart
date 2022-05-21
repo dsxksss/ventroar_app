@@ -24,7 +24,7 @@ Future vAlert(BuildContext context, Widget title, Widget content) {
       title: title,
       content: content,
       contentPadding: const EdgeInsets.all(25.0),
-      backgroundColor: VColors.vGray90,
+      backgroundColor: VColors.vBg90,
     ),
   );
 }

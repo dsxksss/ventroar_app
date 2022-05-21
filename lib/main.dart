@@ -34,7 +34,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: VColors.vGray100,
+          backgroundColor: VColors.vBg100,
           foregroundColor: VColors.vPtext,
           shadowColor: VColors.vShadow,
           centerTitle: true,
@@ -61,7 +61,7 @@ class _MyAppState extends State<MyApp> {
           ) {
             return FadeThroughTransition(
               //背景色
-              fillColor: VColors.vGray90,
+              fillColor: VColors.vBg90,
               animation: animation,
               secondaryAnimation: secondaryAnimation,
               child: child,
@@ -105,7 +105,7 @@ class _MyAppState extends State<MyApp> {
           );
         }),
         floatingActionButton: FloatingActionButton(
-          backgroundColor: VColors.vGray80,
+          backgroundColor: VColors.vBg80,
           child: const Icon(
             Icons.edit,
             color: VColors.vPtext,

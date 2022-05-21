@@ -16,7 +16,7 @@ class _VDrawerState extends State<VDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: VColors.vGray100,
+      backgroundColor: VColors.vBg100,
       child: ListView(children: [
         const DrawerHeader(
             child: Text(
