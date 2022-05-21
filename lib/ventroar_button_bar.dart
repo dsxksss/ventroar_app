@@ -67,47 +67,54 @@ class _VentRoarButtonBarState extends State<VentRoarButtonBar> {
                 ),
               ),
             ),
-            child: NavigationBar(
-              animationDuration: const Duration(milliseconds: 800),
-              labelBehavior:
-                  NavigationDestinationLabelBehavior.onlyShowSelected,
-              height: 76,
-              selectedIndex: widget.index,
-              onDestinationSelected: (int index) {
-                widget.onTap(index);
-              },
-              destinations: const [
-                NavigationDestination(
-                  selectedIcon: Icon(
-                    Icons.home,
-                    size: 28,
-                  ),
-                  icon: Icon(
-                    Icons.home_outlined,
-                  ),
-                  label: '主 页',
+            child: Container(
+              decoration: const BoxDecoration(
+                border: Border(
+                  top: BorderSide(color: Colors.black26),
                 ),
-                NavigationDestination(
-                  selectedIcon: Icon(
-                    Icons.star_rounded,
-                    size: 28,
+              ),
+              child: NavigationBar(
+                animationDuration: const Duration(milliseconds: 800),
+                labelBehavior:
+                    NavigationDestinationLabelBehavior.onlyShowSelected,
+                height: 75,
+                selectedIndex: widget.index,
+                onDestinationSelected: (int index) {
+                  widget.onTap(index);
+                },
+                destinations: const [
+                  NavigationDestination(
+                    selectedIcon: Icon(
+                      Icons.home,
+                      size: 28,
+                    ),
+                    icon: Icon(
+                      Icons.home_outlined,
+                    ),
+                    label: '主 页',
                   ),
-                  icon: Icon(
-                    Icons.star_border_outlined,
+                  NavigationDestination(
+                    selectedIcon: Icon(
+                      Icons.star_rounded,
+                      size: 28,
+                    ),
+                    icon: Icon(
+                      Icons.star_border_outlined,
+                    ),
+                    label: '心 墙',
                   ),
-                  label: '心 墙',
-                ),
-                NavigationDestination(
-                  selectedIcon: Icon(
-                    Icons.person,
-                    size: 28,
+                  NavigationDestination(
+                    selectedIcon: Icon(
+                      Icons.person,
+                      size: 28,
+                    ),
+                    icon: Icon(
+                      Icons.person_outline,
+                    ),
+                    label: '我 的',
                   ),
-                  icon: Icon(
-                    Icons.person_outline,
-                  ),
-                  label: '我 的',
-                ),
-              ],
+                ],
+              ),
             ),
           );
   }
