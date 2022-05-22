@@ -19,7 +19,16 @@ class _LoginPageState extends State<LoginPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: const [],
+        children: const [
+          Text(
+            "登录页面",
+            style: TextStyle(fontSize: 30),
+          ),
+          Text(
+            "(制作中)...",
+            style: TextStyle(fontSize: 26),
+          )
+        ],
       ),
     );
   }

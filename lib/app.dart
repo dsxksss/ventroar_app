@@ -5,7 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ventroar_app/ventroar_button_bar.dart';
 import './drawer.dart';
 import './home_page.dart';
-import './user_page.dart';
+import './star_page.dart';
 import './login_page.dart';
 import './vcolors.dart';
 
@@ -21,7 +21,7 @@ class _AppState extends State<App> {
   bool changeToDark = true;
   final List<Widget> _pages = [
     const HomePage(),
-    const UserPage(),
+    const StarPage(),
     const LoginPage(),
   ];
   @override

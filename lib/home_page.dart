@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-// import 'package:badges/badges.dart';
-// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-// import 'package:getwidget/shape/gf_button_shape.dart';
-// import 'package:getwidget/shape/gf_icon_button_shape.dart';
-// import './functions/vent_alert.dart';
-// import './widgets/vent_button.dart';
-// import './widgets/vent_fbutton.dart';
+import './widgets/vent_button.dart';
+import './vcolors.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -19,19 +13,15 @@ class _HomePageState extends State<HomePage> {
   int a = 18;
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(
-      onRefresh: () {
-        return Fluttertoast.showToast(msg: "hi");
-      },
-      child: SizedBox(
-        height: double.infinity,
-        width: double.infinity,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: const [],
+    return ListView(
+      children: [
+        VTextButton(
+          fullButton: false,
+          textColor: VColors.vPtext,
+          buttonColor: VColors.vBg100,
+          onPressed: () {},
         ),
-      ),
+      ],
     );
   }
 }
