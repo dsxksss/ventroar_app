@@ -121,6 +121,7 @@ ThemeData _darkTheme(BuildContext context) {
   final base = ThemeData.dark();
   return base.copyWith(
     appBarTheme: AppBarTheme(
+      titleTextStyle: TextStyle(color: VColors.vPtext, fontSize: 22),
       backgroundColor: VColors.vBg100,
       foregroundColor: VColors.vPtext,
       shadowColor: VColors.vShadow,
@@ -143,13 +144,13 @@ ThemeData _lightTheme(BuildContext context) {
   final base = ThemeData.light();
   return base.copyWith(
     appBarTheme: AppBarTheme(
-      backgroundColor: VColors.vPtext,
+      titleTextStyle: TextStyle(color: VColors.vPtext, fontSize: 22),
+      backgroundColor: VColors.vSblue,
       foregroundColor: VColors.vBg100,
-      shadowColor: VColors.vStext,
     ),
-    floatingActionButtonTheme: const FloatingActionButtonThemeData(
-      backgroundColor: Color.fromARGB(255, 0, 174, 243),
-      foregroundColor: Colors.white,
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: VColors.vSblue,
+      foregroundColor: VColors.vPtext,
     ),
     iconTheme: IconThemeData(
       color: VColors.vPtext,

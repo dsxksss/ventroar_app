@@ -16,5 +16,5 @@ class VColors {
   //  主要按钮等背景色
   static Color vPblue = const Color.fromARGB(255, 56, 128, 255);
   //  次要按钮等背景色
-  static Color vSblue = const Color.fromRGBO(3, 169, 241, 1);
+  static Color vSblue = const Color.fromARGB(255, 0, 174, 243);
 }
