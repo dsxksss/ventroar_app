@@ -75,7 +75,7 @@ class _VentRoarButtonBarState extends State<VentRoarButtonBar> {
               padding: const EdgeInsets.fromLTRB(40, 13, 40, 33),
               tabs: [
                 GButton(
-                  icon: Icons.home,
+                  icon: widget.index == 0 ? Icons.home : Icons.home_outlined,
                   textStyle: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
@@ -85,7 +85,9 @@ class _VentRoarButtonBarState extends State<VentRoarButtonBar> {
                   iconActiveColor: VColors.vBg100,
                 ),
                 GButton(
-                  icon: Icons.star_rounded,
+                  icon: widget.index == 1
+                      ? Icons.star_rounded
+                      : Icons.star_border_outlined,
                   textStyle: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
@@ -95,7 +97,7 @@ class _VentRoarButtonBarState extends State<VentRoarButtonBar> {
                   iconActiveColor: VColors.vBg100,
                 ),
                 GButton(
-                  icon: Icons.person,
+                  icon: widget.index == 2 ? Icons.person : Icons.person_outline,
                   textStyle: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
