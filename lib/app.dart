@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:animations/animations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -38,6 +39,34 @@ class _AppState extends State<App> {
           title: const Text(
             "Vent Roar",
           ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+              child: IconButton(
+                splashColor: const Color.fromARGB(0, 255, 255, 255),
+                icon: Badge(
+                  //提醒圆点
+                  badgeColor: Colors.red,
+                  // padding: const EdgeInsets.fromLTRB(5, 5, 15, 5),
+                  badgeContent: const Text("1",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.white)),
+                  child: FaIcon(
+                    changeToDark
+                        ? FontAwesomeIcons.solidEnvelope
+                        : FontAwesomeIcons.envelope,
+                    size: 20,
+                  ),
+                ),
+                tooltip: '查看消息',
+                onPressed: () {
+                  setState(() {
+                    _selectedIndex = 1;
+                  });
+                },
+              ),
+            ),
+          ],
         ),
 
         //侧边导航栏手势打开宽度
