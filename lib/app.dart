@@ -121,7 +121,8 @@ ThemeData _darkTheme(BuildContext context) {
   final base = ThemeData.dark();
   return base.copyWith(
     appBarTheme: AppBarTheme(
-      titleTextStyle: TextStyle(color: VColors.vPtext, fontSize: 22),
+      titleTextStyle: TextStyle(
+          color: VColors.vPtext, fontSize: 22, fontWeight: FontWeight.bold),
       backgroundColor: VColors.vBg100,
       foregroundColor: VColors.vPtext,
       shadowColor: VColors.vShadow,
@@ -144,7 +145,8 @@ ThemeData _lightTheme(BuildContext context) {
   final base = ThemeData.light();
   return base.copyWith(
     appBarTheme: AppBarTheme(
-      titleTextStyle: TextStyle(color: VColors.vPtext, fontSize: 22),
+      titleTextStyle: TextStyle(
+          color: VColors.vPtext, fontSize: 22, fontWeight: FontWeight.bold),
       backgroundColor: VColors.vSblue,
       foregroundColor: VColors.vBg100,
     ),
