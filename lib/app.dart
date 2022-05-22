@@ -40,6 +40,9 @@ class _AppState extends State<App> {
           ),
         ),
 
+        //侧边导航栏手势打开宽度
+        drawerEdgeDragWidth: 150.0,
+
         /// PageView是用来制作切换页面的组件
         /// 类似于制作翻页页面的东西
         // PageView(
