@@ -146,9 +146,10 @@ ThemeData _lightTheme(BuildContext context) {
   return base.copyWith(
     appBarTheme: AppBarTheme(
       titleTextStyle: TextStyle(
-          color: VColors.vPtext, fontSize: 22, fontWeight: FontWeight.bold),
-      backgroundColor: VColors.vSblue,
+          color: VColors.vBg100, fontSize: 22, fontWeight: FontWeight.bold),
+      backgroundColor: VColors.vPtext,
       foregroundColor: VColors.vBg100,
+      shadowColor: VColors.vStext,
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: VColors.vSblue,
