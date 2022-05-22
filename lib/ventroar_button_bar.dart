@@ -1,5 +1,6 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 import './vcolors.dart';
 
 class VentRoarButtonBar extends StatefulWidget {
@@ -57,66 +58,116 @@ class _VentRoarButtonBarState extends State<VentRoarButtonBar> {
               widget.onTap(index);
             },
           )
-        : NavigationBarTheme(
-            data: NavigationBarThemeData(
-              backgroundColor: Colors.white,
-              indicatorColor:
-                  const Color.fromARGB(255, 180, 186, 190).withOpacity(0.2),
-              labelTextStyle: MaterialStateProperty.all(
-                const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
+        : Container(
+            decoration: const BoxDecoration(
+              border: Border(
+                top: BorderSide(color: Colors.black26),
               ),
             ),
-            child: Container(
-              decoration: const BoxDecoration(
-                border: Border(
-                  top: BorderSide(color: Colors.black26),
+            child: GNav(
+              backgroundColor: VColors.vPtext,
+              iconSize: 27,
+              selectedIndex: widget.index,
+              onTabChange: (int index) {
+                widget.onTap(index);
+              },
+              gap: 4,
+              padding: const EdgeInsets.fromLTRB(40, 13, 40, 33),
+              tabs: [
+                GButton(
+                  icon: Icons.home,
+                  textStyle: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                  text: "主 页",
+                  iconColor: VColors.vBg100,
+                  iconActiveColor: VColors.vBg100,
                 ),
-              ),
-              child: NavigationBar(
-                animationDuration: const Duration(milliseconds: 800),
-                labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
-                selectedIndex: widget.index,
-                height: 40,
-                onDestinationSelected: (int index) {
-                  widget.onTap(index);
-                },
-                destinations: const [
-                  NavigationDestination(
-                    selectedIcon: Icon(
-                      Icons.home,
-                      size: 28,
-                    ),
-                    icon: Icon(
-                      Icons.home_outlined,
-                    ),
-                    label: '主 页',
+                GButton(
+                  icon: Icons.star_rounded,
+                  textStyle: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
                   ),
-                  NavigationDestination(
-                    selectedIcon: Icon(
-                      Icons.star_rounded,
-                      size: 28,
-                    ),
-                    icon: Icon(
-                      Icons.star_border_outlined,
-                    ),
-                    label: '心 墙',
+                  text: "星 墙",
+                  iconColor: VColors.vBg100,
+                  iconActiveColor: VColors.vBg100,
+                ),
+                GButton(
+                  icon: Icons.person,
+                  textStyle: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
                   ),
-                  NavigationDestination(
-                    selectedIcon: Icon(
-                      Icons.person,
-                      size: 28,
-                    ),
-                    icon: Icon(
-                      Icons.person_outline,
-                    ),
-                    label: '我 的',
-                  ),
-                ],
-              ),
+                  text: "个 人",
+                  iconColor: VColors.vBg100,
+                  iconActiveColor: VColors.vBg100,
+                ),
+              ],
             ),
           );
   }
 }
+
+// NavigationBarTheme(
+//             data: NavigationBarThemeData(
+//               backgroundColor: Colors.white,
+//               indicatorColor:
+//                   const Color.fromARGB(255, 180, 186, 190).withOpacity(0.2),
+//               labelTextStyle: MaterialStateProperty.all(
+//                 const TextStyle(
+//                   fontSize: 16,
+//                   fontWeight: FontWeight.bold,
+//                 ),
+//               ),
+//             ),
+//             child: Container(
+//               decoration: const BoxDecoration(
+//                 border: Border(
+//                   top: BorderSide(color: Colors.black26),
+//                 ),
+//               ),
+//               child: NavigationBar(
+//                 animationDuration: const Duration(milliseconds: 800),
+//                 labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
+//                 selectedIndex: widget.index,
+//                 height: 40,
+//                 onDestinationSelected: (int index) {
+//                   widget.onTap(index);
+//                 },
+//                 destinations: const [
+//                   NavigationDestination(
+//                     selectedIcon: Icon(
+//                       Icons.home,
+//                       size: 28,
+//                     ),
+//                     icon: Icon(
+//                       Icons.home_outlined,
+//                     ),
+//                     label: '主 页',
+//                   ),
+//                   NavigationDestination(
+//                     selectedIcon: Icon(
+//                       Icons.star_rounded,
+//                       size: 28,
+//                     ),
+//                     icon: Icon(
+//                       Icons.star_border_outlined,
+//                     ),
+//                     label: '心 墙',
+//                   ),
+//                   NavigationDestination(
+//                     selectedIcon: Icon(
+//                       Icons.person,
+//                       size: 28,
+//                     ),
+//                     icon: Icon(
+//                       Icons.person_outline,
+//                     ),
+//                     label: '我 的',
+//                   ),
+//                 ],
+//               ),
+//             ),
+//           )

@@ -158,6 +158,6 @@ ThemeData _lightTheme(BuildContext context) {
     iconTheme: IconThemeData(
       color: VColors.vPtext,
     ),
-    shadowColor: Colors.black54,
+    bottomAppBarTheme: BottomAppBarTheme(color: VColors.vPtext),
   );
 }
