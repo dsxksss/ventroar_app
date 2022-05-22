@@ -136,8 +136,9 @@ class _AppState extends State<App> {
           );
         }),
         floatingActionButton: FloatingActionButton(
-          child: FaIcon(
-              changeToDark ? FontAwesomeIcons.sun : FontAwesomeIcons.moon),
+          child: FaIcon(changeToDark
+              ? FontAwesomeIcons.cloudSun
+              : FontAwesomeIcons.cloudMoon),
           onPressed: () {
             setState(() {
               changeToDark = !changeToDark;
@@ -161,8 +162,8 @@ ThemeData _darkTheme(BuildContext context) {
       shadowColor: VColors.vShadow,
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: VColors.vBg80,
-      foregroundColor: Colors.white,
+      backgroundColor: const Color.fromARGB(148, 0, 174, 243),
+      foregroundColor: VColors.vPtext,
     ),
     iconTheme: IconThemeData(
       color: VColors.vPtext,
