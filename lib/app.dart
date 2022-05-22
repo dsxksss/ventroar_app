@@ -69,6 +69,7 @@ class _AppState extends State<App> {
 
         drawer: Builder(builder: (context) {
           return VDrawer(
+            index: _selectedIndex,
             onTap: [
               () {
                 setState(() {
