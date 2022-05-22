@@ -15,6 +15,7 @@ class VDrawer extends StatefulWidget {
 }
 
 class _VDrawerState extends State<VDrawer> {
+  double titleTextSize = 20;
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -45,18 +46,21 @@ class _VDrawerState extends State<VDrawer> {
                 ),
               )),
           ListTile(
-            title: const Text(
+            title: Text(
               "Home",
               style: TextStyle(
-                fontSize: 22,
+                fontSize: titleTextSize,
               ),
             ),
-            subtitle: const Text(
-              "回到主页",
-              style: TextStyle(
-                fontSize: 17,
-              ),
-            ),
+
+            //副标题
+            // subtitle: const Text(
+            //   "回到主页",
+            //   style: TextStyle(
+            //     fontSize: 17,
+            //   ),
+            // ),
+
             leading: Icon(widget.index == 0 ? Icons.home : Icons.home_outlined),
             onTap: widget.onTap[0],
             selected: widget.index == 0 ? true : false,
@@ -64,16 +68,10 @@ class _VDrawerState extends State<VDrawer> {
             selectedTileColor: const Color.fromARGB(79, 56, 129, 255),
           ),
           ListTile(
-            title: const Text(
+            title: Text(
               "User",
               style: TextStyle(
-                fontSize: 22,
-              ),
-            ),
-            subtitle: const Text(
-              "星墙页面",
-              style: TextStyle(
-                fontSize: 17,
+                fontSize: titleTextSize,
               ),
             ),
             leading: Icon(widget.index == 1
@@ -85,16 +83,10 @@ class _VDrawerState extends State<VDrawer> {
             selectedTileColor: const Color.fromARGB(79, 56, 129, 255),
           ),
           ListTile(
-            title: const Text(
+            title: Text(
               "Login",
               style: TextStyle(
-                fontSize: 22,
-              ),
-            ),
-            subtitle: const Text(
-              "个人主页",
-              style: TextStyle(
-                fontSize: 17,
+                fontSize: titleTextSize,
               ),
             ),
             leading:
