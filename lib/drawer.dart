@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import './vcolors.dart';
 
 class VDrawer extends StatefulWidget {
   final List<VoidCallback> onTap;

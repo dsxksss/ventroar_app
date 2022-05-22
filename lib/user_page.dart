@@ -23,7 +23,7 @@ class _UserPageState extends State<UserPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: [],
+        children: const [],
       ),
     );
   }
