@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
+import 'package:getwidget/types/gf_button_type.dart';
 import './widgets/vent_fbutton.dart';
 
 class StarPage extends StatefulWidget {
@@ -50,8 +51,11 @@ class _StarPageState extends State<StarPage> {
                           buttonText: e["textData"].toString(),
                           onPressed: () {},
                           buttonShape: GFButtonShape.pills,
+                          buttonType: GFButtonType.outline2x,
+                          buttonColor: Colors.black12,
                           faIcon: const FaIcon(
                             FontAwesomeIcons.message,
+                            color: Colors.black,
                           ),
                         ),
                       )

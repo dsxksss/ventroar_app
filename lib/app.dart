@@ -2,7 +2,7 @@ import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:animations/animations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:ventroar_app/ventroar_button_bar.dart';
+import 'package:ventroar_app/ventroar_bottom_bar.dart';
 import './drawer.dart';
 import './home_page.dart';
 import './star_page.dart';
