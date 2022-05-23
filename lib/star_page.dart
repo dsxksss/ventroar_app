@@ -1,54 +1,71 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:getwidget/shape/gf_button_shape.dart';
+import './widgets/vent_fbutton.dart';
 
 class StarPage extends StatefulWidget {
   const StarPage({Key? key}) : super(key: key);
-
   @override
   State<StarPage> createState() => _StarPageState();
 }
 
 class _StarPageState extends State<StarPage> {
+  List<dynamic> datalist = [];
+
+  Future getData() async {
+    Response response;
+    var dio = Dio();
+    response = await dio.get('https://ventroar.xyz:2546/textDataApi/');
+    setState(() {
+      datalist = response.data;
+    });
+    Fluttertoast.showToast(
+      msg: "刷新屏幕",
+      backgroundColor: Colors.blueAccent,
+      gravity: ToastGravity.BOTTOM,
+      toastLength: Toast.LENGTH_LONG,
+      fontSize: 20,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
       onRefresh: () {
-        return Fluttertoast.showToast(
-          msg: "刷新屏幕",
-          backgroundColor: Colors.blueAccent,
-          gravity: ToastGravity.BOTTOM,
-          toastLength: Toast.LENGTH_LONG,
-          fontSize: 20,
-        );
+        return getData();
       },
-      child: Center(
-        child: SizedBox(
-          height: double.infinity,
-          width: double.infinity,
-          child: ListView(
-            children: [
-              Container(
-                margin: const EdgeInsets.fromLTRB(0, 40, 0, 0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    AnimatedTextKit(
-                      animatedTexts: [
-                        WavyAnimatedText('试试往下滑动屏幕',
-                            textStyle: const TextStyle(fontSize: 20)),
-                      ],
-                      isRepeatingAnimation: true,
-                      repeatForever: true,
-                      onTap: () {},
+      child: ListView(
+        children: [
+          Container(
+            margin: const EdgeInsets.fromLTRB(20, 50, 20, 0),
+            child: datalist.isNotEmpty
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ...datalist.map(
+                        (e) => VFTextIconButton(
+                          fullButton: true,
+                          buttonText: e["textData"].toString(),
+                          onPressed: () {},
+                          buttonShape: GFButtonShape.pills,
+                          faIcon: const FaIcon(
+                            FontAwesomeIcons.message,
+                          ),
+                        ),
+                      )
+                    ],
+                  )
+                : const Text(
+                    "试试往下划动屏幕～",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 20,
                     ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
+                  ),
+          )
+        ],
       ),
     );
   }

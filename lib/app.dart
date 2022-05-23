@@ -18,7 +18,7 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   int _selectedIndex = 0;
-  bool changeToDark = true;
+  bool changeToDark = false;
   final List<Widget> _pages = [
     const HomePage(),
     const StarPage(),
