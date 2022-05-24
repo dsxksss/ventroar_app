@@ -68,7 +68,7 @@ class _StarPageState extends State<StarPage> {
                       fontSize: 20,
                     ),
                   ),
-          )
+          ),
         ],
       ),
     );
