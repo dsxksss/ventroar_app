@@ -47,6 +47,8 @@ dependencies:
   google_fonts: ^3.0.0
   #谷歌动态导航栏
   google_nav_bar: ^5.0.6
+  #状态数据储存包 本项目用来存储一些主题状态信息
+  shared_preferences: ^2.0.15
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
