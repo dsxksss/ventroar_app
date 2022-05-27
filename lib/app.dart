@@ -34,7 +34,14 @@ class _AppState extends State<App> {
 
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: VAppBar(changeToDark: changeToDark),
+        appBar: VAppBar(
+          changeToDark: changeToDark,
+          onPressed: () {
+            setState(() {
+              _selectedIndex = 1;
+            });
+          },
+        ),
 
         //侧边导航栏手势打开宽度
         drawerEdgeDragWidth: 150.0,

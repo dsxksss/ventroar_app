@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class VAppBar extends StatefulWidget implements PreferredSizeWidget {
-  const VAppBar({Key? key, required this.changeToDark}) : super(key: key);
+  const VAppBar({Key? key, required this.changeToDark, required this.onPressed})
+      : super(key: key);
 
+  final VoidCallback onPressed;
   final bool changeToDark;
 
   @override
@@ -43,11 +45,7 @@ class _VAppBarState extends State<VAppBar> {
               ),
             ),
             tooltip: '查看消息',
-            onPressed: () {
-              // setState(() {
-              //   _selectedIndex = 1;
-              // });
-            },
+            onPressed: widget.onPressed,
           ),
         ),
       ],
