@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 class VDrawer extends StatefulWidget {
   final List<VoidCallback> onTap;
   final int index;
-  final String userName = "Dsxk@ventroar.com";
+  final String userName = "zhangxiaokang";
+  final String uesrEmail = "2546650292@qq.com";
   const VDrawer({
     Key? key,
     required this.onTap,
@@ -39,15 +40,31 @@ class _VDrawerState extends State<VDrawer> {
         children: [
           DrawerHeader(
               padding: const EdgeInsets.fromLTRB(20, 40, 10, 10),
-              child: Text(
-                '@${widget.userName}',
-                style: const TextStyle(
-                  fontSize: 25,
-                ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 30),
+                    child: Text(
+                      '@${widget.userName}',
+                      textAlign: TextAlign.left,
+                      style: const TextStyle(
+                        fontSize: 23,
+                      ),
+                    ),
+                  ),
+                  Text(
+                    widget.uesrEmail,
+                    style: const TextStyle(
+                      fontSize: 18,
+                    ),
+                  )
+                ],
               )),
           ListTile(
             title: Text(
-              "Home",
+              "主页",
               style: TextStyle(
                 fontSize: titleTextSize,
               ),
@@ -69,7 +86,7 @@ class _VDrawerState extends State<VDrawer> {
           ),
           ListTile(
             title: Text(
-              "User",
+              "星墙",
               style: TextStyle(
                 fontSize: titleTextSize,
               ),
@@ -84,7 +101,7 @@ class _VDrawerState extends State<VDrawer> {
           ),
           ListTile(
             title: Text(
-              "Login",
+              "个人信息",
               style: TextStyle(
                 fontSize: titleTextSize,
               ),
