@@ -142,6 +142,7 @@ ThemeData _darkTheme(BuildContext context) {
     iconTheme: IconThemeData(
       color: VColors.vPtext,
     ),
+    backgroundColor: VColors.vBg90,
     drawerTheme: DrawerThemeData(
       backgroundColor: VColors.vBg100,
     ),

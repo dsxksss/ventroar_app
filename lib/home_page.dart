@@ -8,25 +8,19 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int a = 18;
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: double.infinity,
+    return Container(
       width: double.infinity,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: const [
-          Text(
-            "主页面",
-            style: TextStyle(fontSize: 30),
-          ),
-          Text(
-            "(制作中)...",
-            style: TextStyle(fontSize: 26),
-          )
-        ],
+      height: double.infinity,
+      padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+      child: SizedBox(
+        width: 45,
+        height: 45,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10),
+          child: Image.asset("images/t2.png"),
+        ),
       ),
     );
   }
