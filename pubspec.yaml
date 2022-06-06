@@ -49,6 +49,8 @@ dependencies:
   google_nav_bar: ^5.0.6
   #状态数据储存包 本项目用来存储一些主题状态信息
   shared_preferences: ^2.0.15
+  #滚动栏显示球体ui
+  smooth_page_indicator: ^1.0.0+2
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
