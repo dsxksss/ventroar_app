@@ -154,6 +154,9 @@ ThemeData _darkTheme(BuildContext context) {
     drawerTheme: DrawerThemeData(
       backgroundColor: VColors.vBg100,
     ),
+    listTileTheme: ListTileThemeData(
+      tileColor: VColors.vBg80,
+    ),
   );
 }
 
@@ -176,5 +179,8 @@ ThemeData _lightTheme(BuildContext context) {
       color: VColors.vPtext,
     ),
     bottomAppBarTheme: BottomAppBarTheme(color: VColors.vPtext),
+    listTileTheme: ListTileThemeData(
+      tileColor: VColors.vStext,
+    ),
   );
 }
