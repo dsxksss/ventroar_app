@@ -101,15 +101,30 @@ class _VDrawerState extends State<VDrawer> {
           ),
           ListTile(
             title: Text(
+              "聊天页面",
+              style: TextStyle(
+                fontSize: titleTextSize,
+              ),
+            ),
+            leading: Icon(widget.index == 2
+                ? Icons.text_snippet_rounded
+                : Icons.text_snippet_outlined),
+            onTap: widget.onTap[2],
+            selected: widget.index == 2 ? true : false,
+            selectedColor: const Color.fromARGB(255, 56, 128, 255),
+            selectedTileColor: const Color.fromARGB(79, 56, 129, 255),
+          ),
+          ListTile(
+            title: Text(
               "个人信息",
               style: TextStyle(
                 fontSize: titleTextSize,
               ),
             ),
             leading:
-                Icon(widget.index == 2 ? Icons.person : Icons.person_outline),
-            onTap: widget.onTap[2],
-            selected: widget.index == 2 ? true : false,
+                Icon(widget.index == 3 ? Icons.person : Icons.person_outline),
+            onTap: widget.onTap[3],
+            selected: widget.index == 3 ? true : false,
             selectedColor: const Color.fromARGB(255, 56, 128, 255),
             selectedTileColor: const Color.fromARGB(79, 56, 129, 255),
           ),

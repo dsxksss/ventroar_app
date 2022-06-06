@@ -5,6 +5,7 @@ import 'package:ventroar_app/ventroar_bottom_bar.dart';
 import './drawer.dart';
 import './pages/home_page.dart';
 import './pages/star_page.dart';
+import './pages/chat_page.dart';
 import './pages/login_page.dart';
 import './vcolors.dart';
 import './vappbar.dart';
@@ -22,6 +23,7 @@ class _AppState extends State<App> {
   final List<Widget> _pages = [
     const HomePage(),
     const StarPage(),
+    const ChatPage(),
     const LoginPage(),
   ];
   @override
@@ -92,6 +94,12 @@ class _AppState extends State<App> {
               () {
                 setState(() {
                   _selectedIndex = 2;
+                });
+                Navigator.pop(context);
+              },
+              () {
+                setState(() {
+                  _selectedIndex = 3;
                 });
                 Navigator.pop(context);
               },

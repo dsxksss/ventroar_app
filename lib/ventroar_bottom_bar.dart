@@ -50,8 +50,12 @@ class _VentRoarButtonBarState extends State<VentRoarButtonBar> {
                 size: widget.index == 1 ? 30 : 26,
               ),
               Icon(
-                Icons.person,
+                Icons.textsms,
                 size: widget.index == 2 ? 30 : 26,
+              ),
+              Icon(
+                Icons.person,
+                size: widget.index == 3 ? 30 : 26,
               ),
             ],
             onTap: (index) {
@@ -72,7 +76,7 @@ class _VentRoarButtonBarState extends State<VentRoarButtonBar> {
                 widget.onTap(index);
               },
               gap: 4,
-              padding: const EdgeInsets.fromLTRB(40, 13, 40, 33),
+              padding: const EdgeInsets.fromLTRB(20, 13, 20, 33),
               tabs: [
                 GButton(
                   icon: widget.index == 0 ? Icons.home : Icons.home_outlined,
@@ -97,7 +101,19 @@ class _VentRoarButtonBarState extends State<VentRoarButtonBar> {
                   iconActiveColor: VColors.vBg100,
                 ),
                 GButton(
-                  icon: widget.index == 2 ? Icons.person : Icons.person_outline,
+                  icon: widget.index == 2
+                      ? Icons.text_snippet_rounded
+                      : Icons.text_snippet_outlined,
+                  textStyle: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                  text: "消 息",
+                  iconColor: VColors.vBg100,
+                  iconActiveColor: VColors.vBg100,
+                ),
+                GButton(
+                  icon: widget.index == 3 ? Icons.person : Icons.person_outline,
                   textStyle: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
