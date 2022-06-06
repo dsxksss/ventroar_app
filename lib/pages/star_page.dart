@@ -4,7 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:getwidget/types/gf_button_type.dart';
-import './widgets/vent_fbutton.dart';
+import '../widgets/vent_fbutton.dart';
 
 class StarPage extends StatefulWidget {
   const StarPage({Key? key}) : super(key: key);

@@ -3,9 +3,9 @@ import 'package:animations/animations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ventroar_app/ventroar_bottom_bar.dart';
 import './drawer.dart';
-import './home_page.dart';
-import './star_page.dart';
-import './login_page.dart';
+import './pages/home_page.dart';
+import './pages/star_page.dart';
+import './pages/login_page.dart';
 import './vcolors.dart';
 import './vappbar.dart';
 
