@@ -24,7 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   #getwidgeUI组件库
-  getwidget: ^2.0.4
+  getwidget: ^3.0.1
   #http请求库
   dio: ^4.0.6
   #toast组件库
