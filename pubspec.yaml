@@ -51,6 +51,8 @@ dependencies:
   shared_preferences: ^2.0.15
   #具有一组内置效果的可定制动画页面指示器。
   smooth_page_indicator: ^1.0.0+2
+  #加载动画组件包
+  loading_animation_widget: ^1.2.0+1
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
