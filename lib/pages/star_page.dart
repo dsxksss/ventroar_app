@@ -3,8 +3,7 @@ import 'dart:math';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:getwidget/components/loader/gf_loader.dart';
-import 'package:getwidget/size/gf_size.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class StarPage extends StatefulWidget {
   const StarPage({Key? key}) : super(key: key);
@@ -38,8 +37,11 @@ class _StarPageState extends State<StarPage> {
   @override
   Widget build(BuildContext context) {
     return userDataList.isEmpty && textDataList.isEmpty
-        ? const GFLoader(
-            size: GFSize.LARGE,
+        ? Center(
+            child: LoadingAnimationWidget.stretchedDots(
+              color: Colors.blue.shade400,
+              size: 60,
+            ),
           )
         : RefreshIndicator(
             onRefresh: () {
