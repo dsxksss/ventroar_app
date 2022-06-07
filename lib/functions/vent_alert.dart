@@ -4,7 +4,11 @@ import '../widgets/vent_button.dart';
 import '../vcolors.dart';
 
 //Future类型是用来处理一些未来可能发生的触发函数
-Future vAlert(BuildContext context, Widget title, Widget content) {
+Future vAlert({
+  required BuildContext context,
+  required Widget title,
+  required Widget content,
+}) {
   return showDialog(
     context: context,
     builder: (context) => AlertDialog(

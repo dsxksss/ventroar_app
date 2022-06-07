@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:ventroar_app/functions/vent_snack.dart';
 
 class StarPage extends StatefulWidget {
   const StarPage({Key? key}) : super(key: key);
@@ -59,6 +60,20 @@ class _StarPageState extends State<StarPage> {
               itemCount: userDataList.length,
               itemBuilder: (context, index) => Card(
                 child: ListTile(
+                  onTap: () => {
+                    vSnackBar(
+                      context: context,
+                      textWidget: Text(
+                        textDataList[Random().nextInt(50)]["name"].toString(),
+                        textAlign: TextAlign.left,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    )
+                  },
                   minLeadingWidth: 10,
                   contentPadding: const EdgeInsets.fromLTRB(10, 0, 15, 0),
                   leading: const CircleAvatar(
