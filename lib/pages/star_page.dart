@@ -14,30 +14,27 @@ class StarPage extends StatefulWidget {
 }
 
 class _StarPageState extends State<StarPage> {
-  List<dynamic> userDataList = [];
-  List<dynamic> textDataList = [];
+  List<dynamic> userList = [];
 
   Future getData() async {
-    Response response1;
-    Response response2;
+    Response response;
     var dio = Dio();
-    response1 = await dio.get('https://ventroar.xyz:2546/userDataApi/');
-    response2 = await dio.get('https://jsonplaceholder.typicode.com/comments/');
+    response = await dio.get('https://jsonplaceholder.typicode.com/users');
+
     setState(() {
-      userDataList = response1.data;
-      textDataList = response2.data;
+      userList = response.data;
     });
   }
 
   @override
   void initState() {
-    super.initState();
     getData();
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return userDataList.isEmpty && textDataList.isEmpty
+    return userList.isEmpty
         ? Center(
             child: LoadingAnimationWidget.stretchedDots(
               color: Colors.blue.shade400,
@@ -57,14 +54,15 @@ class _StarPageState extends State<StarPage> {
             },
             child: ListView.builder(
               padding: const EdgeInsets.fromLTRB(3, 10, 3, 10),
-              itemCount: userDataList.length,
+              itemCount: userList.length,
               itemBuilder: (context, index) => Card(
                 child: ListTile(
                   onTap: () => {
                     vSnackBar(
                       context: context,
                       textWidget: Text(
-                        textDataList[Random().nextInt(50)]["name"].toString(),
+                        userList[Random().nextInt(10)]["company"]["catchPhrase"]
+                            .toString(),
                         textAlign: TextAlign.left,
                         style: const TextStyle(
                           color: Colors.white,
@@ -79,14 +77,17 @@ class _StarPageState extends State<StarPage> {
                   leading: CircleAvatar(
                     radius: 28,
                     foregroundImage: NetworkImage(
-                        "https://api.lorem.space/image/face?hash=$index"),
+                        "https://api.lorem.space/image/face?hash=${Random().nextInt(50)}"),
                   ),
                   title: Text(
-                      "User ${index + 1}: ${userDataList[Random().nextInt(15)]["userName"].toString()}"),
-                  subtitle: textDataList.length <= index
+                    userList[Random().nextInt(10)]["name"].toString(),
+                    style: const TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: userList.length <= index
                       ? const Text("whit......")
                       : Text(
-                          "Eamil: ${textDataList[Random().nextInt(50)]["email"].toString()}"),
+                          "Eamil: ${userList[Random().nextInt(10)]["email"].toString()}"),
                   trailing: const Icon(Icons.arrow_forward),
                 ),
               ),
