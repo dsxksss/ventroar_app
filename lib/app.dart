@@ -155,7 +155,7 @@ ThemeData _darkTheme(BuildContext context) {
       backgroundColor: VColors.vBg100,
     ),
     listTileTheme: ListTileThemeData(
-      tileColor: VColors.vBg80,
+      tileColor: VColors.vBg100,
     ),
   );
 }
