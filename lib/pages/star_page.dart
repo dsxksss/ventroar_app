@@ -76,10 +76,10 @@ class _StarPageState extends State<StarPage> {
                   },
                   minLeadingWidth: 10,
                   contentPadding: const EdgeInsets.fromLTRB(10, 0, 15, 0),
-                  leading: const CircleAvatar(
+                  leading: CircleAvatar(
+                    radius: 28,
                     foregroundImage: NetworkImage(
-                      "https://api.lorem.space/image/face?hash",
-                    ),
+                        "https://api.lorem.space/image/face?hash=$index"),
                   ),
                   title: Text(
                       "User ${index + 1}: ${userDataList[Random().nextInt(15)]["userName"].toString()}"),
