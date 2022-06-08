@@ -1,97 +1,33 @@
-import 'dart:math';
-
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:ventroar_app/functions/vent_snack.dart';
 
-class ChatPage extends StatefulWidget {
-  const ChatPage({Key? key}) : super(key: key);
+class InputPage extends StatefulWidget {
+  final BuildContext context;
+  final String titleText;
+  const InputPage({Key? key, required this.titleText, required this.context})
+      : super(key: key);
 
   @override
-  State<ChatPage> createState() => _ChatPageState();
+  State<InputPage> createState() => _InputPageState();
 }
 
-class _ChatPageState extends State<ChatPage> {
-  List<dynamic> userList = [];
-
-  Future getData() async {
-    Response response;
-    var dio = Dio();
-    response = await dio.get('https://jsonplaceholder.typicode.com/users');
-
-    setState(() {
-      userList = response.data;
-    });
-  }
-
-  @override
-  void initState() {
-    getData();
-    super.initState();
-  }
-
+class _InputPageState extends State<InputPage> {
   @override
   Widget build(BuildContext context) {
-    return userList.isEmpty
-        ? Center(
-            child: LoadingAnimationWidget.stretchedDots(
-              color: Colors.blue.shade400,
-              size: 60,
-            ),
-          )
-        : RefreshIndicator(
-            onRefresh: () {
-              Fluttertoast.showToast(
-                msg: "刷新屏幕",
-                backgroundColor: Colors.blueAccent,
-                gravity: ToastGravity.BOTTOM,
-                toastLength: Toast.LENGTH_LONG,
-                fontSize: 18,
-              );
-              return getData();
-            },
-            child: ListView.builder(
-              padding: const EdgeInsets.fromLTRB(3, 10, 3, 10),
-              itemCount: userList.length,
-              itemBuilder: (context, index) => Card(
-                child: ListTile(
-                  onTap: () => {
-                    vSnackBar(
-                      showTime: const Duration(seconds: 1),
-                      context: context,
-                      textWidget: Text(
-                        userList[index]["company"]["catchPhrase"].toString(),
-                        textAlign: TextAlign.left,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    )
-                  },
-                  minLeadingWidth: 10,
-                  contentPadding: const EdgeInsets.fromLTRB(10, 0, 15, 0),
-                  leading: CircleAvatar(
-                    radius: 28,
-                    foregroundImage: NetworkImage(
-                        "https://api.lorem.space/image/face?hash=${Random().nextInt(50)}"),
-                  ),
-                  title: Text(
-                    userList[Random().nextInt(10)]["name"].toString(),
-                    style: const TextStyle(
-                        fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                  subtitle: userList.length <= index
-                      ? const Text("whit......")
-                      : Text(
-                          "Eamil: ${userList[Random().nextInt(10)]["email"].toString()}"),
-                  trailing: const Icon(Icons.arrow_forward),
-                ),
-              ),
-            ),
-          );
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.titleText),
+      ),
+      body: Container(
+        color: Theme.of(context).backgroundColor,
+        height: double.infinity,
+        width: double.infinity,
+        child: Center(
+          child: Text(
+            widget.titleText,
+            style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+          ),
+        ),
+      ),
+    );
   }
 }

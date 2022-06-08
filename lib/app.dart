@@ -5,7 +5,7 @@ import 'package:ventroar_app/ventroar_bottom_bar.dart';
 import './drawer.dart';
 import './pages/home_page.dart';
 import './pages/star_page.dart';
-import './pages/chat_page.dart';
+import './pages/chatlist_page.dart';
 import './pages/login_page.dart';
 import './vcolors.dart';
 import './vappbar.dart';
@@ -178,6 +178,7 @@ ThemeData _lightTheme(BuildContext context) {
     iconTheme: IconThemeData(
       color: VColors.vPtext,
     ),
+    backgroundColor: VColors.vPtext,
     bottomAppBarTheme: BottomAppBarTheme(color: VColors.vPtext),
     listTileTheme: ListTileThemeData(
       tileColor: VColors.vStext,
