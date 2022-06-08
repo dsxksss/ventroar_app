@@ -40,7 +40,7 @@ class _AppState extends State<App> {
           changeToDark: changeToDark,
           onPressed: () {
             setState(() {
-              _selectedIndex = 1;
+              _selectedIndex = 2;
             });
           },
         ),

@@ -27,7 +27,7 @@ class _VAppBarState extends State<VAppBar> {
       ),
       actions: [
         Padding(
-          padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+          padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
           child: IconButton(
             splashColor: const Color.fromARGB(0, 255, 255, 255),
             icon: Badge(
@@ -37,12 +37,22 @@ class _VAppBarState extends State<VAppBar> {
               badgeContent: const Text("1",
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.white)),
-              child: FaIcon(
-                widget.changeToDark
-                    ? FontAwesomeIcons.solidEnvelope
-                    : FontAwesomeIcons.envelope,
+              child: const FaIcon(
+                FontAwesomeIcons.solidEnvelope,
                 size: 20,
               ),
+            ),
+            tooltip: '查看消息',
+            onPressed: widget.onPressed,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(0, 0, 5, 3),
+          child: IconButton(
+            splashColor: const Color.fromARGB(0, 255, 255, 255),
+            icon: const Icon(
+              FontAwesomeIcons.userPlus,
+              size: 20,
             ),
             tooltip: '查看消息',
             onPressed: widget.onPressed,
