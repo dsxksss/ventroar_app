@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 
 ScaffoldFeatureController<SnackBar, SnackBarClosedReason> vSnackBar({
-  required BuildContext context,
-  //必要的上下文
+  required BuildContext context, //必要的上下文
   //以下是可选参数
   Widget? textWidget, //设置默认content里的Text组件,如果是自定义content可以忽略这个选项
   Widget? content, //设置自定义content
   Color? bgcolor = Colors.blue, //设置背景颜色
   EdgeInsetsGeometry? padding = const EdgeInsets.all(16), //外边距
-  EdgeInsetsGeometry? margin, //内边距
+  EdgeInsetsGeometry? margin, //内边距(如果需要设置外边距，必须得位置方式设置为floating)
   SnackBarBehavior? behavior = SnackBarBehavior.fixed, //设置位置方式(并非设置位置)
 }) {
   return ScaffoldMessenger.of(context).showSnackBar(
