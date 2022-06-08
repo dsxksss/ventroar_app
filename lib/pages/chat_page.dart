@@ -62,8 +62,7 @@ class _ChatPageState extends State<ChatPage> {
                       showTime: const Duration(seconds: 1),
                       context: context,
                       textWidget: Text(
-                        userList[Random().nextInt(10)]["company"]["catchPhrase"]
-                            .toString(),
+                        userList[index]["company"]["catchPhrase"].toString(),
                         textAlign: TextAlign.left,
                         style: const TextStyle(
                           color: Colors.white,
