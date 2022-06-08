@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-ScaffoldFeatureController<SnackBar, SnackBarClosedReason> vSnackBar({
+ScaffoldFeatureController<SnackBar, SnackBarClosedReason>? vSnackBar({
+  required Key key,
   required BuildContext context, //必要的上下文
   //以下是可选参数
   Widget? textWidget, //设置默认content里的Text组件,如果是自定义content可以忽略这个选项
   Widget? content, //设置自定义content
-  Color? bgcolor = Colors.blue, //设置背景颜色
+  Color? bgcolor = Colors.lightBlue, //设置背景颜色
   EdgeInsetsGeometry? padding = const EdgeInsets.all(16), //外边距
   EdgeInsetsGeometry? margin, //内边距(如果需要设置外边距，必须得位置方式设置为floating)
-  SnackBarBehavior? behavior = SnackBarBehavior.fixed, //设置位置方式(并非设置位置)
+  SnackBarBehavior? behavior, //设置位置方式(并非设置位置)
   VoidCallback? onVisible, //在SnackBar显示之后的回调函数
   Duration? showTime, //持续时长
-  Key? key,
 }) {
   //在显示其他snackbar之前，先删除当前snackbar
   ScaffoldMessenger.of(context).removeCurrentSnackBar();
@@ -20,7 +20,7 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> vSnackBar({
   return ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       key: key,
-      onVisible: onVisible,
+      onVisible: onVisible ?? () => {},
       elevation: 3, //景深
       duration: showTime ?? const Duration(seconds: 5),
       shape: const RoundedRectangleBorder(
@@ -32,7 +32,9 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> vSnackBar({
       ),
       margin: margin,
       padding: padding,
-      behavior: behavior,
+      behavior: margin == null || behavior == SnackBarBehavior.fixed
+          ? SnackBarBehavior.fixed
+          : SnackBarBehavior.floating,
       content: content ??
           VSnackContent(
             textWidget: textWidget,
