@@ -59,6 +59,7 @@ class _ChatPageState extends State<ChatPage> {
                 child: ListTile(
                   onTap: () => {
                     vSnackBar(
+                      showTime: const Duration(seconds: 1),
                       context: context,
                       textWidget: Text(
                         userList[Random().nextInt(10)]["company"]["catchPhrase"]
