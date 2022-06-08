@@ -1,5 +1,10 @@
+import 'dart:math';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:ventroar_app/functions/vent_snack.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({Key? key}) : super(key: key);
@@ -9,38 +14,84 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
-  List<dynamic> datalist = [];
+  List<dynamic> userList = [];
 
   Future getData() async {
     Response response;
     var dio = Dio();
-    response = await dio.get('https://ventroar.xyz:2546/textDataApi/');
+    response = await dio.get('https://jsonplaceholder.typicode.com/users');
+
     setState(() {
-      datalist = response.data;
+      userList = response.data;
     });
-    // Fluttertoast.showToast(
-    //   msg: "刷新屏幕",
-    //   backgroundColor: Colors.blueAccent,
-    //   gravity: ToastGravity.BOTTOM,
-    //   toastLength: Toast.LENGTH_LONG,
-    //   fontSize: 20,
-    // );
+  }
+
+  @override
+  void initState() {
+    getData();
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(
-      onRefresh: () {
-        return getData();
-      },
-      child: ListView(
-        children: [
-          Container(
-            margin: const EdgeInsets.fromLTRB(20, 50, 20, 0),
-            child: const Text("聊天页面"),
-          ),
-        ],
-      ),
-    );
+    return userList.isEmpty
+        ? Center(
+            child: LoadingAnimationWidget.stretchedDots(
+              color: Colors.blue.shade400,
+              size: 60,
+            ),
+          )
+        : RefreshIndicator(
+            onRefresh: () {
+              Fluttertoast.showToast(
+                msg: "刷新屏幕",
+                backgroundColor: Colors.blueAccent,
+                gravity: ToastGravity.BOTTOM,
+                toastLength: Toast.LENGTH_LONG,
+                fontSize: 18,
+              );
+              return getData();
+            },
+            child: ListView.builder(
+              padding: const EdgeInsets.fromLTRB(3, 10, 3, 10),
+              itemCount: userList.length,
+              itemBuilder: (context, index) => Card(
+                child: ListTile(
+                  onTap: () => {
+                    vSnackBar(
+                      context: context,
+                      textWidget: Text(
+                        userList[Random().nextInt(10)]["company"]["catchPhrase"]
+                            .toString(),
+                        textAlign: TextAlign.left,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    )
+                  },
+                  minLeadingWidth: 10,
+                  contentPadding: const EdgeInsets.fromLTRB(10, 0, 15, 0),
+                  leading: CircleAvatar(
+                    radius: 28,
+                    foregroundImage: NetworkImage(
+                        "https://api.lorem.space/image/face?hash=${Random().nextInt(50)}"),
+                  ),
+                  title: Text(
+                    userList[Random().nextInt(10)]["name"].toString(),
+                    style: const TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: userList.length <= index
+                      ? const Text("whit......")
+                      : Text(
+                          "Eamil: ${userList[Random().nextInt(10)]["email"].toString()}"),
+                  trailing: const Icon(Icons.arrow_forward),
+                ),
+              ),
+            ),
+          );
   }
 }
