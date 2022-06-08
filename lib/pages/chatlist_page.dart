@@ -4,16 +4,16 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:ventroar_app/pages/chat_page.dart';
+import '../pages/chat_page.dart';
 
-class ChatPage extends StatefulWidget {
-  const ChatPage({Key? key}) : super(key: key);
+class ChatListPage extends StatefulWidget {
+  const ChatListPage({Key? key}) : super(key: key);
 
   @override
-  State<ChatPage> createState() => _ChatPageState();
+  State<ChatListPage> createState() => _ChatListPageState();
 }
 
-class _ChatPageState extends State<ChatPage> {
+class _ChatListPageState extends State<ChatListPage> {
   List<dynamic> userList = [];
 
   Future getData() async {
@@ -60,7 +60,7 @@ class _ChatPageState extends State<ChatPage> {
                   onTap: () => {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => InputPage(
+                        builder: (context) => ChatPage(
                             titleText: userList[index]["name"].toString(),
                             context: context),
                       ),

@@ -29,16 +29,21 @@ class _StarPageState extends State<StarPage> {
 
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(
-      onRefresh: () {
-        return getData();
-      },
-      child: ListView(
-        children: [
-          Container(
-            margin: const EdgeInsets.fromLTRB(20, 50, 20, 0),
-            child: const Text("聊天页面"),
+    return SizedBox(
+      height: double.infinity,
+      width: double.infinity,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: const [
+          Text(
+            "星墙页面",
+            style: TextStyle(fontSize: 30),
           ),
+          Text(
+            "(制作中)...",
+            style: TextStyle(fontSize: 26),
+          )
         ],
       ),
     );

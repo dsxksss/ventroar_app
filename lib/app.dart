@@ -23,7 +23,7 @@ class _AppState extends State<App> {
   final List<Widget> _pages = [
     const HomePage(),
     const StarPage(),
-    const ChatPage(),
+    const ChatListPage(),
     const LoginPage(),
   ];
   @override

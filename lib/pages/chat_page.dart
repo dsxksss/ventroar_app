@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-class InputPage extends StatefulWidget {
+class ChatPage extends StatefulWidget {
   final BuildContext context;
   final String titleText;
-  const InputPage({Key? key, required this.titleText, required this.context})
+  const ChatPage({Key? key, required this.titleText, required this.context})
       : super(key: key);
 
   @override
-  State<InputPage> createState() => _InputPageState();
+  State<ChatPage> createState() => _ChatPageState();
 }
 
-class _InputPageState extends State<InputPage> {
+class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
