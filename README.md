@@ -59,7 +59,7 @@ factory ThemeData({
 
 | pub:package                | versions | TODO                    |
 | -------------------------- | -------- | ----------------------- |
-| [provider]                 | V6.0.3   | flutter官方推荐的状态管理插件      |
+| [provider]                 | ^6.0.3   | flutter官方推荐的状态管理插件      |
 | [getwidget]                | ^3.0.1   | getwidgeUI组件库           |
 | [dio]                      | ^4.0.6   | http请求库                 |
 | [fluttertoast]             | ^8.0.7   | toast组件库                |
