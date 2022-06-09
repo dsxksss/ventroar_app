@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import '../widgets/vent_button.dart';
-import '../vcolors.dart';
+import '../themes/vcolors.dart';
 
 //Future类型是用来处理一些未来可能发生的触发函数
 Future vAlert({
