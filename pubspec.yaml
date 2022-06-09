@@ -23,6 +23,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  #flutter官方推荐的状态管理插件
+  provider: ^6.0.3
   #getwidgeUI组件库
   getwidget: ^3.0.1
   #http请求库
