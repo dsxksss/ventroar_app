@@ -11,7 +11,6 @@ import './pages/home_page.dart';
 import './pages/star_page.dart';
 import './pages/chatlist_page.dart';
 import './pages/login_page.dart';
-import 'themes/vcolors.dart';
 import './vappbar.dart';
 
 class App extends StatefulWidget {
@@ -55,7 +54,6 @@ class _AppState extends State<App> {
           ) {
             return FadeThroughTransition(
               //背景色
-              fillColor: _isDark ? VColors.vBg90 : Colors.white54,
               animation: animation,
               secondaryAnimation: secondaryAnimation,
               child: child,

@@ -2,7 +2,6 @@ import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-
 import 'contexts/global_provider.dart';
 
 class VAppBar extends StatefulWidget implements PreferredSizeWidget {

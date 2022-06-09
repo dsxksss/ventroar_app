@@ -1,9 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:provider/provider.dart';
 import 'contexts/global_provider.dart';
-import 'themes/vcolors.dart';
 
 class VentRoarButtonBar extends StatefulWidget {
   const VentRoarButtonBar({
@@ -20,17 +18,11 @@ class _VentRoarButtonBarState extends State<VentRoarButtonBar> {
     int selectedIndex = Provider.of<PageDataProvider>(context).selectedIndex;
     Function changePageIndex =
         Provider.of<PageDataProvider>(context, listen: false).changePageIndex;
-    return isDark
-        ? DarkAppBar(
-            isDark: isDark,
-            index: selectedIndex,
-            onTap: changePageIndex,
-          )
-        : LightAppBar(
-            isDark: isDark,
-            index: selectedIndex,
-            onTap: changePageIndex,
-          );
+    return DarkAppBar(
+      isDark: isDark,
+      index: selectedIndex,
+      onTap: changePageIndex,
+    );
   }
 }
 
@@ -55,124 +47,47 @@ class _DarkAppBarState extends State<DarkAppBar> {
   Widget build(BuildContext context) {
     return CurvedNavigationBar(
       //导航栏高度
-      height: 75.0,
+      height: 70.0,
       //间隙颜色
-      backgroundColor: widget.isDark ? VColors.vBg90 : Colors.white54,
+      index: widget.index,
+
+      //间隙颜色
+      backgroundColor: Theme.of(context).backgroundColor,
 
       //按钮背景颜色
-      buttonBackgroundColor: widget.isDark ? VColors.vBg80 : VColors.vSblue,
+      buttonBackgroundColor:
+          Theme.of(context).bottomNavigationBarTheme.selectedItemColor!,
 
       //背景颜色
-      color: widget.isDark ? VColors.vBg100 : VColors.vSblue,
-      index: widget.index,
+      color: Theme.of(context).bottomNavigationBarTheme.backgroundColor!,
 
       ///动画曲线
       animationCurve: Curves.easeOutCirc,
       items: [
         Icon(
           Icons.home,
-          size: widget.index == 0 ? 30 : 26,
+          size: widget.index == 0 ? 32 : 26,
+          color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
         ),
         Icon(
           Icons.star_rounded,
-          size: widget.index == 1 ? 30 : 26,
+          size: widget.index == 1 ? 32 : 26,
+          color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
         ),
         Icon(
           Icons.textsms,
-          size: widget.index == 2 ? 30 : 26,
+          size: widget.index == 2 ? 32 : 26,
+          color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
         ),
         Icon(
           Icons.person,
-          size: widget.index == 3 ? 30 : 26,
+          size: widget.index == 3 ? 32 : 26,
+          color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
         ),
       ],
       onTap: (index) {
         widget.onTap(index);
       },
-    );
-  }
-}
-
-class LightAppBar extends StatefulWidget {
-  final int index;
-  final Function onTap;
-  final bool isDark;
-  const LightAppBar(
-      {Key? key,
-      required this.onTap,
-      required this.index,
-      required this.isDark})
-      : super(key: key);
-
-  @override
-  State<LightAppBar> createState() => _LightAppBarState();
-}
-
-class _LightAppBarState extends State<LightAppBar> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        border: Border(
-          top: BorderSide(color: Colors.black26),
-        ),
-      ),
-      child: GNav(
-        backgroundColor: VColors.vPtext,
-        iconSize: 27,
-        selectedIndex: widget.index,
-        onTabChange: (int index) {
-          widget.onTap(index);
-        },
-        gap: 4,
-        padding: const EdgeInsets.fromLTRB(20, 13, 20, 33),
-        tabs: [
-          GButton(
-            icon: widget.index == 0 ? Icons.home : Icons.home_outlined,
-            textStyle: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
-            ),
-            text: "主 页",
-            iconColor: VColors.vBg100,
-            iconActiveColor: VColors.vBg100,
-          ),
-          GButton(
-            icon: widget.index == 1
-                ? Icons.star_rounded
-                : Icons.star_border_outlined,
-            textStyle: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
-            ),
-            text: "星 墙",
-            iconColor: VColors.vBg100,
-            iconActiveColor: VColors.vBg100,
-          ),
-          GButton(
-            icon: widget.index == 2
-                ? Icons.text_snippet_rounded
-                : Icons.text_snippet_outlined,
-            textStyle: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
-            ),
-            text: "消 息",
-            iconColor: VColors.vBg100,
-            iconActiveColor: VColors.vBg100,
-          ),
-          GButton(
-            icon: widget.index == 3 ? Icons.person : Icons.person_outline,
-            textStyle: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
-            ),
-            text: "个 人",
-            iconColor: VColors.vBg100,
-            iconActiveColor: VColors.vBg100,
-          ),
-        ],
-      ),
     );
   }
 }
