@@ -40,7 +40,7 @@ class VLightThemeColors {
   static Map bottomNavColors = {
     "selectedItemColor": const Color.fromARGB(255, 230, 234, 236),
     "unselectedItemColor": VColors.vPtext,
-    "bg": const Color.fromARGB(255, 178, 195, 209),
+    "bg": const Color.fromARGB(255, 220, 231, 236),
   };
 }
 
