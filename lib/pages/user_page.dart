@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-// import 'package:ventroar_app/widgets/vent_checkboxlist.dart';
-// import './widgets/vent_slidable.dart';
-// import './vcolors.dart';
 
 class UserPage extends StatefulWidget {
   const UserPage({Key? key}) : super(key: key);

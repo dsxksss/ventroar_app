@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:animations/animations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:ventroar_app/functions/vent_snack.dart';
-import 'package:ventroar_app/ventroar_bottom_bar.dart';
+import './functions/vent_snack.dart';
+import './ventroar_bottom_bar.dart';
 import './drawer.dart';
 import './pages/home_page.dart';
 import './pages/star_page.dart';
