@@ -1,6 +1,8 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:provider/provider.dart';
+import 'package:ventroar_app/contexts/theme_provider.dart';
 import 'themes/vcolors.dart';
 
 class VentRoarButtonBar extends StatefulWidget {
@@ -21,6 +23,8 @@ class VentRoarButtonBar extends StatefulWidget {
 class _VentRoarButtonBarState extends State<VentRoarButtonBar> {
   @override
   Widget build(BuildContext context) {
+    bool a = Provider.of<ThemeProvider>(context).isDark;
+    print(a);
     return widget.changeToDark
         ? DarkAppBar(
             changeToDark: widget.changeToDark,

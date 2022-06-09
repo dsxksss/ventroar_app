@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:animations/animations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:ventroar_app/contexts/theme_provider.dart';
 import './functions/vent_snack.dart';
 import './ventroar_bottom_bar.dart';
 import './drawer.dart';
@@ -54,117 +56,123 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      /// 主题模式切换
-      themeMode: changeToDark ? ThemeMode.dark : ThemeMode.light,
-      theme: lightTheme(context),
-      darkTheme: darkTheme(context),
-
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: VAppBar(
-          changeToDark: changeToDark,
-          onPressed: () {
-            setState(() {
-              _selectedIndex = 2;
-            });
-          },
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => ThemeProvider(),
         ),
+      ],
+      child: MaterialApp(
+        /// 主题模式切换
+        themeMode: changeToDark ? ThemeMode.dark : ThemeMode.light,
+        theme: lightTheme(context),
+        darkTheme: darkTheme(context),
 
-        //侧边导航栏手势打开宽度
-        drawerEdgeDragWidth: 150.0,
-
-        /// PageView是用来制作切换页面的组件
-        /// 类似于制作翻页页面的东西
-        // PageView(
-        //   /// 改变切换模式
-        //   // scrollDirection: Axis.vertical,
-        //   children: [..._pages],
-        //   clipBehavior: Clip.antiAliasWithSaveLayer,
-        // ),
-        ///SafeArea是自动检测屏幕高度，给定正常显示页面的widget
-        body: PageTransitionSwitcher(
-          duration: const Duration(milliseconds: 700),
-          transitionBuilder: (
-            child,
-            animation,
-            secondaryAnimation,
-          ) {
-            return FadeThroughTransition(
-              //背景色
-              fillColor: changeToDark ? VColors.vBg90 : Colors.white54,
-              animation: animation,
-              secondaryAnimation: secondaryAnimation,
-              child: child,
-            );
-          },
-          child: _pages[_selectedIndex],
-        ),
-
-        drawer: Builder(builder: (context) {
-          return VDrawer(
-            index: _selectedIndex,
-            onTap: [
-              () {
-                setState(() {
-                  _selectedIndex = 0;
-                });
-                Navigator.pop(context);
-              },
-              () {
-                setState(() {
-                  _selectedIndex = 1;
-                });
-                Navigator.pop(context);
-              },
-              () {
-                setState(() {
-                  _selectedIndex = 2;
-                });
-                Navigator.pop(context);
-              },
-              () {
-                setState(() {
-                  _selectedIndex = 3;
-                });
-                Navigator.pop(context);
-              },
-            ],
-          );
-        }),
-        bottomNavigationBar: Builder(builder: (context) {
-          return VentRoarButtonBar(
-            changeToDark: changeToDark,
-            index: _selectedIndex,
-            onTap: (index) {
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(
+          appBar: VAppBar(
+            onPressed: () {
               setState(() {
-                _selectedIndex = index;
+                _selectedIndex = 2;
               });
-              vSnackBar(
-                key: GlobalKey(),
-                context: context,
-                textWidget: Text(
-                  getPageName(index) ?? "页面读取错误",
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),
-                ),
-                showTime: const Duration(seconds: 2),
+            },
+          ),
+
+          //侧边导航栏手势打开宽度
+          drawerEdgeDragWidth: 150.0,
+
+          /// PageView是用来制作切换页面的组件
+          /// 类似于制作翻页页面的东西
+          // PageView(
+          //   /// 改变切换模式
+          //   // scrollDirection: Axis.vertical,
+          //   children: [..._pages],
+          //   clipBehavior: Clip.antiAliasWithSaveLayer,
+          // ),
+          ///SafeArea是自动检测屏幕高度，给定正常显示页面的widget
+          body: PageTransitionSwitcher(
+            duration: const Duration(milliseconds: 700),
+            transitionBuilder: (
+              child,
+              animation,
+              secondaryAnimation,
+            ) {
+              return FadeThroughTransition(
+                //背景色
+                fillColor: changeToDark ? VColors.vBg90 : Colors.white54,
+                animation: animation,
+                secondaryAnimation: secondaryAnimation,
+                child: child,
               );
             },
-          );
-        }),
-        floatingActionButton: FloatingActionButton(
-          child: FaIcon(changeToDark
-              ? FontAwesomeIcons.cloudSun
-              : FontAwesomeIcons.cloudMoon),
-          onPressed: () {
-            setState(() {
-              changeToDark = !changeToDark;
-            });
-          },
+            child: _pages[_selectedIndex],
+          ),
+
+          drawer: Builder(builder: (context) {
+            return VDrawer(
+              index: _selectedIndex,
+              onTap: [
+                () {
+                  setState(() {
+                    _selectedIndex = 0;
+                  });
+                  Navigator.pop(context);
+                },
+                () {
+                  setState(() {
+                    _selectedIndex = 1;
+                  });
+                  Navigator.pop(context);
+                },
+                () {
+                  setState(() {
+                    _selectedIndex = 2;
+                  });
+                  Navigator.pop(context);
+                },
+                () {
+                  setState(() {
+                    _selectedIndex = 3;
+                  });
+                  Navigator.pop(context);
+                },
+              ],
+            );
+          }),
+          bottomNavigationBar: Builder(builder: (context) {
+            return VentRoarButtonBar(
+              changeToDark: changeToDark,
+              index: _selectedIndex,
+              onTap: (index) {
+                setState(() {
+                  _selectedIndex = index;
+                });
+                vSnackBar(
+                  key: GlobalKey(),
+                  context: context,
+                  textWidget: Text(
+                    getPageName(index) ?? "页面读取错误",
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                  ),
+                  showTime: const Duration(seconds: 2),
+                );
+              },
+            );
+          }),
+          floatingActionButton: FloatingActionButton(
+            child: FaIcon(changeToDark
+                ? FontAwesomeIcons.cloudSun
+                : FontAwesomeIcons.cloudMoon),
+            onPressed: () {
+              setState(() {
+                changeToDark = !changeToDark;
+              });
+            },
+          ),
         ),
       ),
     );

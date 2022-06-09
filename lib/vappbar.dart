@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class VAppBar extends StatefulWidget implements PreferredSizeWidget {
-  const VAppBar({Key? key, required this.changeToDark, required this.onPressed})
-      : super(key: key);
+  const VAppBar({Key? key, required this.onPressed}) : super(key: key);
 
   final VoidCallback onPressed;
-  final bool changeToDark;
 
   @override
   State<VAppBar> createState() => _VAppBarState();
