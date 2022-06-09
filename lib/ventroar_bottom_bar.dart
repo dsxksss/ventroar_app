@@ -47,7 +47,7 @@ class _DarkAppBarState extends State<DarkAppBar> {
   Widget build(BuildContext context) {
     return CurvedNavigationBar(
       //导航栏高度
-      height: 70.0,
+      height: 75.0,
       //间隙颜色
       index: widget.index,
 
@@ -66,23 +66,19 @@ class _DarkAppBarState extends State<DarkAppBar> {
       items: [
         Icon(
           Icons.home,
-          size: widget.index == 0 ? 32 : 26,
-          color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
+          size: widget.index == 0 ? 31 : 27,
         ),
         Icon(
           Icons.star_rounded,
-          size: widget.index == 1 ? 32 : 26,
-          color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
+          size: widget.index == 1 ? 31 : 27,
         ),
         Icon(
           Icons.textsms,
-          size: widget.index == 2 ? 32 : 26,
-          color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
+          size: widget.index == 2 ? 31 : 27,
         ),
         Icon(
           Icons.person,
-          size: widget.index == 3 ? 32 : 26,
-          color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
+          size: widget.index == 3 ? 31 : 27,
         ),
       ],
       onTap: (index) {

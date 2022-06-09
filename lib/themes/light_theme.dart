@@ -9,26 +9,27 @@ ThemeData lightTheme(BuildContext context) {
       elevation: 2,
       titleTextStyle: TextStyle(
           color: VColors.vBg100, fontSize: 22, fontWeight: FontWeight.bold),
-      backgroundColor: VColors.vPtext,
-      foregroundColor: VColors.vBg100,
+      backgroundColor: VLightThemeColors.appBarColors["bg"],
+      foregroundColor: VLightThemeColors.appBarColors["foregroundColor"],
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: VColors.vSblue,
       foregroundColor: VColors.vPtext,
     ),
     iconTheme: IconThemeData(
-      color: VColors.vPtext,
+      color: VLightThemeColors.iconColor,
     ),
-    canvasColor: VColors.vStext,
-    backgroundColor: VColors.vStext,
+    canvasColor: VLightThemeColors.pageBG,
+    backgroundColor: VLightThemeColors.pageBG,
     drawerTheme: DrawerThemeData(
-      backgroundColor: VColors.vPtext,
+      backgroundColor: VLightThemeColors.drawerColors["bg"],
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       elevation: 0,
-      selectedItemColor: VColors.vSblue,
-      unselectedItemColor: VColors.vPtext,
-      backgroundColor: VColors.vSblue,
+      selectedItemColor: VLightThemeColors.bottomNavColors["selectedItemColor"],
+      unselectedItemColor:
+          VLightThemeColors.bottomNavColors["unselectedItemColor"],
+      backgroundColor: VLightThemeColors.bottomNavColors["bg"],
       selectedIconTheme: null,
       unselectedIconTheme: null,
       selectedLabelStyle: null,

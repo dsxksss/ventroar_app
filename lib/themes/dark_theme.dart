@@ -9,26 +9,27 @@ ThemeData darkTheme(BuildContext context) {
       elevation: 0,
       titleTextStyle: TextStyle(
           color: VColors.vPtext, fontSize: 22, fontWeight: FontWeight.bold),
-      backgroundColor: VColors.vBg100,
-      foregroundColor: VColors.vPtext,
+      backgroundColor: VDarkThemeColors.appBarColors["bg"],
+      foregroundColor: VDarkThemeColors.appBarColors["foregroundColor"],
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: const Color.fromARGB(148, 0, 174, 243),
       foregroundColor: VColors.vPtext,
     ),
     iconTheme: IconThemeData(
-      color: VColors.vPtext,
+      color: VDarkThemeColors.iconColor,
     ),
-    canvasColor: VColors.vBg90,
-    backgroundColor: VColors.vBg90,
+    canvasColor: VDarkThemeColors.pageBG,
+    backgroundColor: VDarkThemeColors.pageBG,
     drawerTheme: DrawerThemeData(
-      backgroundColor: VColors.vBg100,
+      backgroundColor: VDarkThemeColors.drawerColors["bg"],
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       elevation: 0,
-      selectedItemColor: VColors.vBg80,
-      unselectedItemColor: VColors.vPtext,
-      backgroundColor: VColors.vBg100,
+      selectedItemColor: VDarkThemeColors.bottomNavColors["selectedItemColor"],
+      unselectedItemColor:
+          VDarkThemeColors.bottomNavColors["unselectedItemColor"],
+      backgroundColor: VDarkThemeColors.bottomNavColors["bg"],
       selectedIconTheme: null,
       unselectedIconTheme: null,
       selectedLabelStyle: null,
