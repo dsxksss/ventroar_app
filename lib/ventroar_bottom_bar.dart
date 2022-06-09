@@ -2,19 +2,12 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:provider/provider.dart';
-import 'package:ventroar_app/contexts/theme_provider.dart';
+import 'contexts/global_provider.dart';
 import 'themes/vcolors.dart';
 
 class VentRoarButtonBar extends StatefulWidget {
-  final int index;
-  final Function onTap;
-  final bool changeToDark;
-
   const VentRoarButtonBar({
     Key? key,
-    required this.onTap,
-    required this.index,
-    required this.changeToDark,
   }) : super(key: key);
   @override
   State<VentRoarButtonBar> createState() => _VentRoarButtonBarState();
@@ -23,18 +16,20 @@ class VentRoarButtonBar extends StatefulWidget {
 class _VentRoarButtonBarState extends State<VentRoarButtonBar> {
   @override
   Widget build(BuildContext context) {
-    bool a = Provider.of<ThemeProvider>(context).isDark;
-    print(a);
-    return widget.changeToDark
+    bool isDark = Provider.of<ThemeProvider>(context).isDark;
+    int selectedIndex = Provider.of<PageDataProvider>(context).selectedIndex;
+    Function changePageIndex =
+        Provider.of<PageDataProvider>(context, listen: false).changePageIndex;
+    return isDark
         ? DarkAppBar(
-            changeToDark: widget.changeToDark,
-            index: widget.index,
-            onTap: widget.onTap,
+            isDark: isDark,
+            index: selectedIndex,
+            onTap: changePageIndex,
           )
         : LightAppBar(
-            changeToDark: widget.changeToDark,
-            index: widget.index,
-            onTap: widget.onTap,
+            isDark: isDark,
+            index: selectedIndex,
+            onTap: changePageIndex,
           );
   }
 }
@@ -42,13 +37,13 @@ class _VentRoarButtonBarState extends State<VentRoarButtonBar> {
 class DarkAppBar extends StatefulWidget {
   final int index;
   final Function onTap;
-  final bool changeToDark;
+  final bool isDark;
 
   const DarkAppBar(
       {Key? key,
       required this.onTap,
       required this.index,
-      required this.changeToDark})
+      required this.isDark})
       : super(key: key);
 
   @override
@@ -62,14 +57,13 @@ class _DarkAppBarState extends State<DarkAppBar> {
       //导航栏高度
       height: 75.0,
       //间隙颜色
-      backgroundColor: widget.changeToDark ? VColors.vBg90 : Colors.white54,
+      backgroundColor: widget.isDark ? VColors.vBg90 : Colors.white54,
 
       //按钮背景颜色
-      buttonBackgroundColor:
-          widget.changeToDark ? VColors.vBg80 : VColors.vSblue,
+      buttonBackgroundColor: widget.isDark ? VColors.vBg80 : VColors.vSblue,
 
       //背景颜色
-      color: widget.changeToDark ? VColors.vBg100 : VColors.vSblue,
+      color: widget.isDark ? VColors.vBg100 : VColors.vSblue,
       index: widget.index,
 
       ///动画曲线
@@ -102,12 +96,12 @@ class _DarkAppBarState extends State<DarkAppBar> {
 class LightAppBar extends StatefulWidget {
   final int index;
   final Function onTap;
-  final bool changeToDark;
+  final bool isDark;
   const LightAppBar(
       {Key? key,
       required this.onTap,
       required this.index,
-      required this.changeToDark})
+      required this.isDark})
       : super(key: key);
 
   @override

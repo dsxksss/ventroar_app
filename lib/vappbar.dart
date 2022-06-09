@@ -1,12 +1,12 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
+
+import 'contexts/global_provider.dart';
 
 class VAppBar extends StatefulWidget implements PreferredSizeWidget {
-  const VAppBar({Key? key, required this.onPressed}) : super(key: key);
-
-  final VoidCallback onPressed;
-
+  const VAppBar({Key? key}) : super(key: key);
   @override
   State<VAppBar> createState() => _VAppBarState();
 
@@ -41,7 +41,10 @@ class _VAppBarState extends State<VAppBar> {
               ),
             ),
             tooltip: '查看消息',
-            onPressed: widget.onPressed,
+            onPressed: () {
+              Provider.of<PageDataProvider>(context, listen: false)
+                  .changePageIndex(2);
+            },
           ),
         ),
         Padding(

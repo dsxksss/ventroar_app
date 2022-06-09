@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:ventroar_app/contexts/global_provider.dart';
 
 class VDrawer extends StatefulWidget {
-  final List<VoidCallback> onTap;
-  final int index;
   final String userName = "zhangxiaokang";
   final String uesrEmail = "2546650292@qq.com";
   const VDrawer({
     Key? key,
-    required this.onTap,
-    required this.index,
   }) : super(key: key);
 
   @override
@@ -19,6 +17,10 @@ class _VDrawerState extends State<VDrawer> {
   double titleTextSize = 20;
   @override
   Widget build(BuildContext context) {
+    Function changePageIndex =
+        Provider.of<PageDataProvider>(context, listen: false).changePageIndex;
+    int selectedIndex = Provider.of<PageDataProvider>(context).selectedIndex;
+    Map pageDatas = Provider.of<PageDataProvider>(context).pageDatas;
     return Drawer(
       child: ListView(
         primary: true, //如果内容不足用户可以滚动
@@ -64,7 +66,7 @@ class _VDrawerState extends State<VDrawer> {
               )),
           ListTile(
             title: Text(
-              "主页",
+              pageDatas[0],
               style: TextStyle(
                 fontSize: titleTextSize,
               ),
@@ -78,53 +80,66 @@ class _VDrawerState extends State<VDrawer> {
             //   ),
             // ),
 
-            leading: Icon(widget.index == 0 ? Icons.home : Icons.home_outlined),
-            onTap: widget.onTap[0],
-            selected: widget.index == 0 ? true : false,
+            leading:
+                Icon(selectedIndex == 0 ? Icons.home : Icons.home_outlined),
+            onTap: () {
+              changePageIndex(0);
+              Navigator.of(context).pop();
+            },
+            selected: selectedIndex == 0 ? true : false,
             selectedColor: const Color.fromARGB(255, 56, 128, 255),
             selectedTileColor: const Color.fromARGB(79, 56, 129, 255),
           ),
           ListTile(
             title: Text(
-              "星墙",
+              pageDatas[1],
               style: TextStyle(
                 fontSize: titleTextSize,
               ),
             ),
-            leading: Icon(widget.index == 1
+            leading: Icon(selectedIndex == 1
                 ? Icons.star_rounded
                 : Icons.star_border_outlined),
-            onTap: widget.onTap[1],
-            selected: widget.index == 1 ? true : false,
+            onTap: () {
+              changePageIndex(1);
+              Navigator.of(context).pop();
+            },
+            selected: selectedIndex == 1 ? true : false,
             selectedColor: const Color.fromARGB(255, 56, 128, 255),
             selectedTileColor: const Color.fromARGB(79, 56, 129, 255),
           ),
           ListTile(
             title: Text(
-              "聊天页面",
+              pageDatas[2],
               style: TextStyle(
                 fontSize: titleTextSize,
               ),
             ),
-            leading: Icon(widget.index == 2
+            leading: Icon(selectedIndex == 2
                 ? Icons.text_snippet_rounded
                 : Icons.text_snippet_outlined),
-            onTap: widget.onTap[2],
-            selected: widget.index == 2 ? true : false,
+            onTap: () {
+              changePageIndex(2);
+              Navigator.of(context).pop();
+            },
+            selected: selectedIndex == 2 ? true : false,
             selectedColor: const Color.fromARGB(255, 56, 128, 255),
             selectedTileColor: const Color.fromARGB(79, 56, 129, 255),
           ),
           ListTile(
             title: Text(
-              "个人信息",
+              pageDatas[3],
               style: TextStyle(
                 fontSize: titleTextSize,
               ),
             ),
             leading:
-                Icon(widget.index == 3 ? Icons.person : Icons.person_outline),
-            onTap: widget.onTap[3],
-            selected: widget.index == 3 ? true : false,
+                Icon(selectedIndex == 3 ? Icons.person : Icons.person_outline),
+            onTap: () {
+              changePageIndex(3);
+              Navigator.of(context).pop();
+            },
+            selected: selectedIndex == 3 ? true : false,
             selectedColor: const Color.fromARGB(255, 56, 128, 255),
             selectedTileColor: const Color.fromARGB(79, 56, 129, 255),
           ),
