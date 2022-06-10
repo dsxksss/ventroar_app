@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class InputMessage extends StatefulWidget {
   final Function(String) onSubmitted;
@@ -9,29 +10,49 @@ class InputMessage extends StatefulWidget {
 }
 
 class _InputMessageState extends State<InputMessage> {
+  final FocusNode _focusNode = FocusNode();
+  late TextEditingController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Builder(builder: (context) {
-      return Container(
-        decoration: BoxDecoration(
-          color: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
-          borderRadius: const BorderRadius.all(
-            Radius.circular(50),
-          ),
-        ),
-        child: Row(
-          children: [
-            TextField(
-              decoration: const InputDecoration(
-                contentPadding: EdgeInsets.all(12),
-                hintText: "请输入点什么...",
-              ),
-              showCursor: false,
-              onSubmitted: widget.onSubmitted,
+    return Container(
+      width: double.infinity,
+      height: 50,
+      padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+      color: Theme.of(context).appBarTheme.backgroundColor,
+      child: Center(
+        child: TextField(
+          controller: _controller,
+          cursorHeight: 25,
+          decoration: const InputDecoration(
+            prefixIcon: Icon(
+              FontAwesomeIcons.solidPaperPlane,
+              size: 20,
             ),
-          ],
+            border: InputBorder.none,
+          ),
+          onSubmitted: (text) {
+            setState(() {
+              widget.onSubmitted(text);
+              FocusScope.of(context).requestFocus(_focusNode);
+              _controller.clear();
+            });
+          },
         ),
-      );
-    });
+      ),
+    );
   }
 }

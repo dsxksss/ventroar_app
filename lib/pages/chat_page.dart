@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ventroar_app/input_message_widget.dart';
+import 'package:ventroar_app/message_bubble.dart';
 import 'package:ventroar_app/pages/user_detail_page.dart';
+import 'package:ventroar_app/schemas/message.dart';
 
 class ChatPage extends StatefulWidget {
   final BuildContext context;
@@ -13,6 +16,32 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
+  List<Message> messages = [
+    Message(
+      text:
+          "Please try and give some feedback on it!Please try and give some feedback on itPlease try and give some feedback on itPlease try and give some feedback on itPlease try and give some feedback on it",
+      date: DateTime.now(),
+      isSentByMe: false,
+    ),
+    Message(
+      text: "Please try and give some feedon it",
+      date: DateTime.now(),
+      isSentByMe: true,
+    ),
+    Message(
+      text:
+          "Please try and give some feedback on it!Please try and give se try and give some feedback on it",
+      date: DateTime.now(),
+      isSentByMe: true,
+    ),
+    Message(
+      text:
+          "Please try and give some feedback on it!Please try and give se try and give some feedback on it",
+      date: DateTime.now(),
+      isSentByMe: false,
+    ),
+  ].toList();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,14 +79,32 @@ class _ChatPageState extends State<ChatPage> {
         color: Theme.of(context).backgroundColor,
         height: double.infinity,
         width: double.infinity,
-        child: Center(
-          child: Text(
-            widget.titleText,
-            style: const TextStyle(
-              fontSize: 25,
-              fontWeight: FontWeight.bold,
+        margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
+                itemCount: messages.length,
+                itemBuilder: (context, index) => MessageBubble(
+                  message: messages[index],
+                ),
+              ),
             ),
-          ),
+            InputMessage(
+              onSubmitted: (text) {
+                final message = Message(
+                  text: text,
+                  date: DateTime.now(),
+                  isSentByMe: true,
+                );
+                setState(
+                  () {
+                    messages.add(message);
+                  },
+                );
+              },
+            ),
+          ],
         ),
       ),
     );
