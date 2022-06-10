@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ventroar_app/pages/userDetail_page.dart';
 
 class ChatPage extends StatefulWidget {
   final BuildContext context;
@@ -18,12 +20,20 @@ class _ChatPageState extends State<ChatPage> {
         title: Text(widget.titleText),
         actions: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
+            padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
             child: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => UserDetailPage(
+                      titleText: widget.titleText,
+                    ),
+                  ),
+                );
+              },
               icon: const Icon(
-                Icons.list_rounded,
-                size: 30,
+                FontAwesomeIcons.ellipsisVertical,
+                size: 22,
               ),
             ),
           ),
@@ -36,7 +46,10 @@ class _ChatPageState extends State<ChatPage> {
         child: Center(
           child: Text(
             widget.titleText,
-            style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+            style: const TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ),
