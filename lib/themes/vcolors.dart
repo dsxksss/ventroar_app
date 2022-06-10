@@ -27,7 +27,7 @@ class VLightThemeColors {
 
   //头部导航栏颜色集
   static Map appBarColors = {
-    "bg": VColors.vPtext,
+    "bg": const Color.fromRGBO(238, 243, 250, 1),
     "foregroundColor": VColors.vBg100,
   };
 
@@ -40,7 +40,7 @@ class VLightThemeColors {
   static Map bottomNavColors = {
     "selectedItemColor": const Color.fromARGB(255, 230, 234, 236),
     "unselectedItemColor": VColors.vPtext,
-    "bg": const Color.fromARGB(255, 220, 231, 236),
+    "bg": const Color.fromRGBO(238, 243, 250, 1),
   };
 }
 
