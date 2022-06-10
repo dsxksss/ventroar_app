@@ -79,7 +79,7 @@ class _ChatPageState extends State<ChatPage> {
         color: Theme.of(context).backgroundColor,
         height: double.infinity,
         width: double.infinity,
-        margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+        padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
         child: Column(
           children: [
             Expanded(
