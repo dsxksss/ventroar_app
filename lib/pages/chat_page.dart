@@ -15,8 +15,19 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
         title: Text(widget.titleText),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
+            child: IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.list_rounded,
+                size: 30,
+              ),
+            ),
+          ),
+        ],
       ),
       body: Container(
         color: Theme.of(context).backgroundColor,
