@@ -16,8 +16,8 @@ class _MessageBubbleState extends State<MessageBubble> {
     return Container(
       width: 50,
       margin: widget.message.isSentByMe
-          ? const EdgeInsets.all(0)
-          : const EdgeInsets.fromLTRB(0, 10, 0, 10),
+          ? const EdgeInsets.fromLTRB(0, 5, 0, 5)
+          : const EdgeInsets.fromLTRB(0, 15, 0, 15),
       child: BubbleSpecialThree(
         text: widget.message.text,
         color: widget.message.isSentByMe
