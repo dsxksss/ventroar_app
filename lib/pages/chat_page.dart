@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:ventroar_app/pages/userDetail_page.dart';
+import 'package:ventroar_app/pages/user_detail_page.dart';
 
 class ChatPage extends StatefulWidget {
   final BuildContext context;
