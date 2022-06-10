@@ -8,7 +8,7 @@ ThemeData lightTheme(BuildContext context) {
     appBarTheme: AppBarTheme(
       elevation: 2,
       titleTextStyle: TextStyle(
-          color: VColors.vBg100, fontSize: 22, fontWeight: FontWeight.bold),
+          color: VColors.vBg100, fontSize: 20, fontWeight: FontWeight.bold),
       backgroundColor: VLightThemeColors.appBarColors["bg"],
       foregroundColor: VLightThemeColors.appBarColors["foregroundColor"],
     ),

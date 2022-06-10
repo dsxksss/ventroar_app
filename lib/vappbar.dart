@@ -17,11 +17,11 @@ class VAppBar extends StatefulWidget implements PreferredSizeWidget {
 class _VAppBarState extends State<VAppBar> {
   @override
   Widget build(BuildContext context) {
+    Map pageDatas = Provider.of<PageDataProvider>(context).pageDatas;
+    int selectedIndex = Provider.of<PageDataProvider>(context).selectedIndex;
     return AppBar(
       centerTitle: true,
-      title: const Text(
-        "Vent Roar",
-      ),
+      title: Text("${pageDatas[selectedIndex]}"),
       actions: [
         Padding(
           padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),

@@ -18,8 +18,8 @@ class PageDataProvider extends ChangeNotifier {
   int selectedIndex;
   PageDataProvider({
     this.pageDatas = const {
-      0: "主页",
-      1: "星墙",
+      0: "主 页",
+      1: "星 墙",
       2: "聊天页面",
       3: "个人信息",
     },
