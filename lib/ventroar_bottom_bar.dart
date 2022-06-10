@@ -1,5 +1,6 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'contexts/global_provider.dart';
 
@@ -72,9 +73,13 @@ class _DarkAppBarState extends State<DarkAppBar> {
           Icons.star_rounded,
           size: widget.index == 1 ? 31 : 27,
         ),
-        Icon(
-          Icons.textsms,
-          size: widget.index == 2 ? 31 : 27,
+        //FIXED:以下代码都是为了修复第三方图标的错误样式
+        Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: FaIcon(
+            FontAwesomeIcons.solidComments,
+            size: widget.index == 2 ? 24 : 20,
+          ),
         ),
         Icon(
           Icons.person,
