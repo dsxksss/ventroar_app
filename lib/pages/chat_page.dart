@@ -16,6 +16,7 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
+  final ScrollController _scrollController = ScrollController();
   List<Message> messages = [
     Message(
       text:
@@ -79,11 +80,12 @@ class _ChatPageState extends State<ChatPage> {
         color: Theme.of(context).backgroundColor,
         height: double.infinity,
         width: double.infinity,
-        padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
         child: Column(
           children: [
             Expanded(
               child: ListView.builder(
+                controller: _scrollController,
+                padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
                 itemCount: messages.length,
                 itemBuilder: (context, index) => MessageBubble(
                   message: messages[index],
@@ -97,9 +99,36 @@ class _ChatPageState extends State<ChatPage> {
                   date: DateTime.now(),
                   isSentByMe: true,
                 );
+
+                final robot = Message(
+                  text:
+                      "Hi👋! \t我叫 Robot\n我是一个机器人🤖\n检测到你输入了这些内容:\n$text\n酸 Q 👻 👻 👻",
+                  date: DateTime.now(),
+                  isSentByMe: false,
+                );
+
                 setState(
                   () {
                     messages.add(message);
+                    Future.delayed(const Duration(milliseconds: 300), () {
+                      _scrollController
+                          .jumpTo(_scrollController.position.maxScrollExtent);
+                    });
+                    Future.delayed(
+                      const Duration(seconds: 3),
+                      () {
+                        setState(
+                          () {
+                            messages.add(robot);
+                            Future.delayed(const Duration(milliseconds: 300),
+                                () {
+                              _scrollController.jumpTo(
+                                  _scrollController.position.maxScrollExtent);
+                            });
+                          },
+                        );
+                      },
+                    );
                   },
                 );
               },

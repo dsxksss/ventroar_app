@@ -14,7 +14,6 @@ class _MessageBubbleState extends State<MessageBubble> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 50,
       margin: widget.message.isSentByMe
           ? const EdgeInsets.fromLTRB(0, 5, 0, 5)
           : const EdgeInsets.fromLTRB(0, 15, 0, 15),

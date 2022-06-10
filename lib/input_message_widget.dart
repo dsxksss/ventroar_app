@@ -30,8 +30,8 @@ class _InputMessageState extends State<InputMessage> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 50,
-      padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+      height: 80,
+      padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
       color: Theme.of(context).appBarTheme.backgroundColor,
       child: Center(
         child: TextField(
