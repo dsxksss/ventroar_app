@@ -19,8 +19,15 @@ class _ChatPageState extends State<ChatPage> {
       appBar: AppBar(
         title: Text(widget.titleText),
         actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              FontAwesomeIcons.phone,
+              size: 18,
+            ),
+          ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+            padding: const EdgeInsets.fromLTRB(0, 0, 3, 0),
             child: IconButton(
               onPressed: () {
                 Navigator.of(context).push(
