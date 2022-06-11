@@ -3,6 +3,9 @@ import 'package:animations/animations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:ventroar_app/contexts/global_provider.dart';
+import 'package:ventroar_app/pages/pages_appbar/home_appbar.dart';
+import 'package:ventroar_app/pages/pages_appbar/star_appbar.dart';
+import 'package:ventroar_app/pages/pages_appbar/user_appbar.dart';
 import './ventroar_bottom_bar.dart';
 import './drawer.dart';
 import './themes/dark_theme.dart';
@@ -11,7 +14,7 @@ import './pages/home_page.dart';
 import './pages/star_page.dart';
 import './pages/chatlist_page.dart';
 import './pages/login_page.dart';
-import './vappbar.dart';
+import 'pages/pages_appbar/chat_appbar.dart';
 
 class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
@@ -32,6 +35,23 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     int _selectedIndex = Provider.of<PageDataProvider>(context).selectedIndex;
     bool _isDark = Provider.of<ThemeProvider>(context).isDark;
+
+    PreferredSizeWidget? getAppBar(int selectedIndex) {
+      switch (selectedIndex) {
+        case 0:
+          return const HomeAppBar();
+        case 1:
+          return const StarAppBar();
+        case 2:
+          return const ChatAppBar();
+        case 3:
+          return const UserAppBar();
+      }
+      return AppBar(
+        title: const Text("未初始化的导航栏"),
+      );
+    }
+
     return MaterialApp(
       /// 主题模式切换
       themeMode: _isDark ? ThemeMode.dark : ThemeMode.light,
@@ -40,7 +60,7 @@ class _AppState extends State<App> {
 
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: const VAppBar(),
+        appBar: getAppBar(_selectedIndex),
 
         //侧边导航栏手势打开宽度
         drawerEdgeDragWidth: 150.0,
