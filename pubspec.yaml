@@ -62,7 +62,7 @@ dependencies:
   #本地数据存储sqflite插件
   sqflite: ^2.0.2+1
   #一个全面的、跨平台的 Dart 路径操作库。
-  path: ^1.8.2
+  path: ^1.8.0
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
