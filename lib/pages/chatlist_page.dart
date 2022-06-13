@@ -42,6 +42,9 @@ class _ChatListPageState extends State<ChatListPage> {
             ),
           )
         : RefreshIndicator(
+            backgroundColor:
+                Theme.of(context).bottomNavigationBarTheme.backgroundColor,
+            color: Theme.of(context).floatingActionButtonTheme.backgroundColor,
             onRefresh: () {
               Fluttertoast.showToast(
                 msg: "刷新屏幕",
