@@ -85,17 +85,27 @@ class _ChatListPageState extends State<ChatListPage> {
               return fetchAndUpDate();
             },
             child: userList.isEmpty
-                ? ListView(children: const [
+                ? ListView(children: [
                     Center(
                       child: Text(
                         '您还没有联系人',
-                        style: TextStyle(color: Colors.black, fontSize: 24),
+                        style: TextStyle(
+                            color: Theme.of(context)
+                                .appBarTheme
+                                .titleTextStyle
+                                ?.color,
+                            fontSize: 24),
                       ),
                     ),
                     Center(
                       child: Text(
                         '尝试下拉随机添加部分联系人',
-                        style: TextStyle(color: Colors.black, fontSize: 24),
+                        style: TextStyle(
+                            color: Theme.of(context)
+                                .appBarTheme
+                                .titleTextStyle
+                                ?.color,
+                            fontSize: 24),
                       ),
                     ),
                   ])
