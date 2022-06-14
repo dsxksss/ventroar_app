@@ -62,11 +62,6 @@ class _ChatListPageState extends State<ChatListPage> {
   }
 
   @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return isLoading
         ? Center(
@@ -111,9 +106,9 @@ class _ChatListPageState extends State<ChatListPage> {
                       child: VSlidable(
                         onPressed: (sliderContext) => {
                           setState(() {
+                            UserDB.instance.deleteUser(userList[index].id!);
                             userList.remove(userList[index]);
                           }),
-                          UserDB.instance.deleteUser(userList[index].id!),
                         },
                         widget: ListTile(
                           onTap: () => {
