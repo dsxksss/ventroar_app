@@ -37,7 +37,7 @@ class UserDB {
     //这里表示,由数据库自动生成每个id
     const idType = "INTEGER PRIMARY KEY AUTOINCREMENT";
     //这里不用说都知道是啥
-    const integerType = "INTEGER NOT NULL";
+    // const integerType = "INTEGER NOT NULL";
     const textType = "TEXT NOT NULL";
     const boolType = "BOOLEAN NOT NULL";
 
@@ -49,10 +49,10 @@ class UserDB {
     await db.execute('''
 CREATE TABLE $userTables (
   ${UserFields.id} $idType,
-  ${UserFields.createTime} $integerType,
+  ${UserFields.createTime} $textType,
   ${UserFields.userName} $textType,
   ${UserFields.userImgUrl} $textType,
-  ${UserFields.isAdmin} $boolType,
+  ${UserFields.isAdmin} $boolType
 )
 ''');
   }
