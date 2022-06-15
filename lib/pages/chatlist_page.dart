@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:ventroar_app/databases/userdb/user_db.dart';
+import 'package:ventroar_app/functions/vent_snack.dart';
 import 'package:ventroar_app/schemas/user.dart';
 import 'package:ventroar_app/widgets/vent_slidable.dart';
 import '../pages/chat_page.dart';
@@ -128,10 +129,22 @@ class _ChatListPageState extends State<ChatListPage> {
                         },
                         widget: ListTile(
                           onLongPress: () {
-                            setState(() {
-                              UserDB.instance.deleteAllUsers();
-                              userList.clear();
-                            });
+                            vSnackBar(
+                              context: context,
+                              textWidget: const Text(
+                                "是否清空用户聊天列表?",
+                                style: TextStyle(fontSize: 20),
+                              ),
+                              button: ElevatedButton(
+                                onPressed: () {
+                                  setState(() {
+                                    UserDB.instance.deleteAllUsers();
+                                    userList.clear();
+                                  });
+                                },
+                                child: const Text("删除全部"),
+                              ),
+                            );
                           },
                           onTap: () => {
                             Navigator.of(context).push(
