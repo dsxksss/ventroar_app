@@ -110,7 +110,12 @@ class _ChatListPageState extends State<ChatListPage> {
                     ),
                   ])
                 : ListView.builder(
-                    physics: const BouncingScrollPhysics(),
+                    //确定每一个item的高度 会让item加载更加高效
+                    itemExtent: 90,
+                    primary: false,
+                    physics: userList.length > 10
+                        ? const BouncingScrollPhysics()
+                        : const AlwaysScrollableScrollPhysics(),
                     padding: const EdgeInsets.fromLTRB(3, 10, 3, 10),
                     itemCount: userList.length,
                     itemBuilder: (context, index) => Card(
