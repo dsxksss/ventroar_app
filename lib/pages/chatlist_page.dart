@@ -110,6 +110,7 @@ class _ChatListPageState extends State<ChatListPage> {
                     ),
                   ])
                 : ListView.builder(
+                    physics: const BouncingScrollPhysics(),
                     padding: const EdgeInsets.fromLTRB(3, 10, 3, 10),
                     itemCount: userList.length,
                     itemBuilder: (context, index) => Card(
@@ -134,23 +135,34 @@ class _ChatListPageState extends State<ChatListPage> {
                           },
                           minLeadingWidth: 10,
                           contentPadding:
-                              const EdgeInsets.fromLTRB(10, 0, 15, 0),
+                              const EdgeInsets.fromLTRB(10, 5, 15, 5),
                           leading: CircleAvatar(
                             radius: 28,
                             foregroundImage:
                                 NetworkImage(userList[index].userImgUrl),
                           ),
-                          title: Text(
-                            userList[index].userName.toString(),
-                            style: const TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
+                          title: Container(
+                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+                            child: Text(
+                              userList[index].userName.toString(),
+                              style: const TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                            ),
                           ),
-                          subtitle: userList.length <= index
-                              ? const Text("whit......")
-                              : Text(
-                                  "Create Time: ${userList[index].createTime.toString()}"),
-                          trailing: const Icon(
-                            Icons.arrow_forward,
+                          subtitle: const Text("用户的最新聊天记录信息"),
+                          trailing: SizedBox(
+                            width: 80,
+                            child: Column(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                      userList[index].createTime.toString()),
+                                ),
+                                const Icon(
+                                  Icons.arrow_forward,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),

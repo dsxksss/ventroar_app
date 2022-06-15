@@ -33,7 +33,7 @@ class _VSlidableState extends State<VSlidable> {
       ),
 
       /// 当组件没有被拖动时
-      child: ListTile(title: widget.widget),
+      child: widget.widget,
     );
   }
 }
