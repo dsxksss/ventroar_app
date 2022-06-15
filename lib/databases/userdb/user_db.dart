@@ -143,6 +143,14 @@ CREATE TABLE $userTables (
     );
   }
 
+  Future deleteAllUsers() async {
+    final db = await instance.database;
+//以一个时间获取全部表数据集对象
+    await db.execute('''
+DELETE FROM COMPANY
+''');
+  }
+
 //关闭数据库函数
   Future close() async {
     final db = await instance.database;
