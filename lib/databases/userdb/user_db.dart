@@ -147,7 +147,7 @@ CREATE TABLE $userTables (
     final db = await instance.database;
 //以一个时间获取全部表数据集对象
     await db.execute('''
-DELETE FROM COMPANY
+DELETE FROM $userTables
 ''');
   }
 

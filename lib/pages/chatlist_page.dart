@@ -136,15 +136,15 @@ class _ChatListPageState extends State<ChatListPage> {
                                 style: TextStyle(fontSize: 20),
                               ),
                               button: ElevatedButton(
-                                onPressed: () {
+                                onPressed: () => {
                                   setState(() {
                                     UserDB.instance.deleteAllUsers();
                                     userList.clear();
-                                  });
+                                  }),
                                   //隐藏上下文内的SnackBar
                                   ScaffoldMessenger.of(context)
                                       .hideCurrentSnackBar(
-                                          reason: SnackBarClosedReason.action);
+                                          reason: SnackBarClosedReason.action),
                                 },
                                 child: const Text("删除全部"),
                               ),
