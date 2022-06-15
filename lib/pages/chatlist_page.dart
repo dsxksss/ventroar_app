@@ -141,6 +141,10 @@ class _ChatListPageState extends State<ChatListPage> {
                                     UserDB.instance.deleteAllUsers();
                                     userList.clear();
                                   });
+                                  //隐藏上下文内的SnackBar
+                                  ScaffoldMessenger.of(context)
+                                      .hideCurrentSnackBar(
+                                          reason: SnackBarClosedReason.action);
                                 },
                                 child: const Text("删除全部"),
                               ),
