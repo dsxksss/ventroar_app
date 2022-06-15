@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 ScaffoldFeatureController<SnackBar, SnackBarClosedReason>? vSnackBar({
-  required Key key,
   required BuildContext context, //必要的上下文
   //以下是可选参数
   Widget? textWidget, //设置默认content里的Text组件,如果是自定义content可以忽略这个选项
   Widget? content, //设置自定义content
+  Widget? button, //设置自定义button
   Color? bgcolor = Colors.lightBlue, //设置背景颜色
   EdgeInsetsGeometry? padding = const EdgeInsets.all(16), //外边距
   EdgeInsetsGeometry? margin, //内边距(如果需要设置外边距，必须得位置方式设置为floating)
@@ -19,7 +19,6 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason>? vSnackBar({
 
   return ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
-      key: key,
       onVisible: onVisible ?? () => {},
       elevation: 3, //景深
       duration: showTime ?? const Duration(seconds: 5),
@@ -38,6 +37,7 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason>? vSnackBar({
       content: content ??
           VSnackContent(
             textWidget: textWidget,
+            buttons: button,
           ),
       backgroundColor: bgcolor,
     ),
@@ -47,9 +47,11 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason>? vSnackBar({
 //默认的content组件
 class VSnackContent extends StatefulWidget {
   final Widget? textWidget;
+  final Widget? buttons;
   const VSnackContent({
     Key? key,
     this.textWidget = const Text(""),
+    required this.buttons,
   }) : super(key: key);
 
   @override
@@ -69,14 +71,15 @@ class _VSnackContentState extends State<VSnackContent> {
             child: widget.textWidget ?? const Text("你没有设置TextWidget这个参数值!!!"),
           ),
           const SizedBox(width: 5),
-          IconButton(
-            onPressed: () {
-              //隐藏上下文内的SnackBar
-              ScaffoldMessenger.of(context)
-                  .hideCurrentSnackBar(reason: SnackBarClosedReason.action);
-            },
-            icon: const Icon(FontAwesomeIcons.check),
-          ),
+          widget.buttons ??
+              IconButton(
+                onPressed: () {
+                  //隐藏上下文内的SnackBar
+                  ScaffoldMessenger.of(context)
+                      .hideCurrentSnackBar(reason: SnackBarClosedReason.action);
+                },
+                icon: const Icon(FontAwesomeIcons.check),
+              ),
         ],
       ),
     );
