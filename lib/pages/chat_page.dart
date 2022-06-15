@@ -111,8 +111,11 @@ class _ChatPageState extends State<ChatPage> {
                   () {
                     messages.add(message);
                     Future.delayed(const Duration(milliseconds: 300), () {
-                      _scrollController
-                          .jumpTo(_scrollController.position.maxScrollExtent);
+                      _scrollController.animateTo(
+                        _scrollController.position.maxScrollExtent,
+                        duration: const Duration(milliseconds: 800),
+                        curve: Curves.easeInOutBack,
+                      ); //匀速;
                     });
                     Future.delayed(
                       const Duration(seconds: 3),
@@ -122,8 +125,11 @@ class _ChatPageState extends State<ChatPage> {
                             messages.add(robot);
                             Future.delayed(const Duration(milliseconds: 300),
                                 () {
-                              _scrollController.jumpTo(
-                                  _scrollController.position.maxScrollExtent);
+                              _scrollController.animateTo(
+                                _scrollController.position.maxScrollExtent,
+                                duration: const Duration(milliseconds: 800),
+                                curve: Curves.easeInOutBack,
+                              ); //匀速;
                             });
                           },
                         );
