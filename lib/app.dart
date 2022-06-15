@@ -36,6 +36,7 @@ class _AppState extends State<App> {
     int _selectedIndex = Provider.of<PageDataProvider>(context).selectedIndex;
     bool _isDark = Provider.of<ThemeProvider>(context).isDark;
 
+//获取每页对应的appbar
     PreferredSizeWidget? getAppBar(int selectedIndex) {
       switch (selectedIndex) {
         case 0:
@@ -52,6 +53,21 @@ class _AppState extends State<App> {
       );
     }
 
+//获取每页对应的侧滑触发drawer宽度
+    double? getDrawerEdgeDragWidth(int selectedIndex) {
+      switch (selectedIndex) {
+        case 0:
+          return 150.0;
+        case 1:
+          return 150.0;
+        case 2:
+          return 55.0;
+        case 3:
+          return 150.0;
+      }
+      return 0;
+    }
+
     return MaterialApp(
       /// 主题模式切换
       themeMode: _isDark ? ThemeMode.dark : ThemeMode.light,
@@ -63,7 +79,7 @@ class _AppState extends State<App> {
         appBar: getAppBar(_selectedIndex),
 
         //侧边导航栏手势打开宽度
-        drawerEdgeDragWidth: 150.0,
+        drawerEdgeDragWidth: getDrawerEdgeDragWidth(_selectedIndex),
 
         body: PageTransitionSwitcher(
           duration: const Duration(milliseconds: 700),
@@ -84,9 +100,11 @@ class _AppState extends State<App> {
 
         drawer: const VDrawer(),
 
-        bottomNavigationBar: Builder(builder: (context) {
-          return const VentRoarButtonBar();
-        }),
+        bottomNavigationBar: Builder(
+          builder: (context) {
+            return const VentRoarButtonBar();
+          },
+        ),
         floatingActionButton: FloatingActionButton(
           child: FaIcon(
               _isDark ? FontAwesomeIcons.cloudSun : FontAwesomeIcons.cloudMoon),
