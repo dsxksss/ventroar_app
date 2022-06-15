@@ -127,6 +127,12 @@ class _ChatListPageState extends State<ChatListPage> {
                           }),
                         },
                         widget: ListTile(
+                          onLongPress: () {
+                            setState(() {
+                              UserDB.instance.deleteAllUsers();
+                              userList.clear();
+                            });
+                          },
                           onTap: () => {
                             Navigator.of(context).push(
                               MaterialPageRoute(
