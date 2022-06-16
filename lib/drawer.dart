@@ -13,13 +13,92 @@ class VDrawer extends StatefulWidget {
 }
 
 class _VDrawerState extends State<VDrawer> {
-  double titleTextSize = 20;
   @override
   Widget build(BuildContext context) {
-    Function changePageIndex =
+    TextStyle _titleTextStyle = TextStyle(
+        fontSize: 20,
+        color: Theme.of(context).appBarTheme.titleTextStyle!.color);
+
+    Function _changePageIndex =
         Provider.of<PageDataProvider>(context, listen: false).changePageIndex;
-    int selectedIndex = Provider.of<PageDataProvider>(context).selectedIndex;
-    Map pageDatas = Provider.of<PageDataProvider>(context).pageDatas;
+
+    int _selectedIndex = Provider.of<PageDataProvider>(context).selectedIndex;
+
+    Map _pageDatas = Provider.of<PageDataProvider>(context).pageDatas;
+
+    List<Widget> _listTiles = [
+      ListTile(
+        leading: Icon(
+          _selectedIndex == 0 ? Icons.home : Icons.home_outlined,
+          size: 35,
+        ),
+        title: Text(
+          _pageDatas[0],
+          style: _titleTextStyle,
+        ),
+        onTap: () {
+          _changePageIndex(0);
+          Navigator.of(context).pop();
+        },
+        selected: _selectedIndex == 0 ? true : false,
+        selectedColor: const Color.fromARGB(255, 56, 128, 255),
+        selectedTileColor: const Color.fromARGB(79, 56, 129, 255),
+      ),
+      ListTile(
+        leading: Icon(
+          _selectedIndex == 1 ? Icons.star_rounded : Icons.star_border_outlined,
+          size: 35,
+        ),
+        title: Text(
+          _pageDatas[1],
+          style: _titleTextStyle,
+        ),
+        onTap: () {
+          _changePageIndex(1);
+          Navigator.of(context).pop();
+        },
+        selected: _selectedIndex == 1 ? true : false,
+        selectedColor: const Color.fromARGB(255, 56, 128, 255),
+        selectedTileColor: const Color.fromARGB(79, 56, 129, 255),
+      ),
+      ListTile(
+        leading: Icon(
+          _selectedIndex == 2
+              ? Icons.text_snippet_rounded
+              : Icons.text_snippet_outlined,
+          size: 35,
+        ),
+        title: Text(
+          _pageDatas[2],
+          style: _titleTextStyle,
+        ),
+        onTap: () {
+          _changePageIndex(2);
+          Navigator.of(context).pop();
+        },
+        selected: _selectedIndex == 2 ? true : false,
+        selectedColor: const Color.fromARGB(255, 56, 128, 255),
+        selectedTileColor: const Color.fromARGB(79, 56, 129, 255),
+      ),
+      ListTile(
+        leading: Icon(
+          _selectedIndex == 3 ? Icons.person : Icons.person_outline,
+          size: 35,
+        ),
+        title: Text(
+          _pageDatas[3],
+          style: _titleTextStyle,
+        ),
+        onTap: () {
+          _changePageIndex(3);
+          Navigator.of(context).pop();
+        },
+        selected: _selectedIndex == 3 ? true : false,
+        selectedColor: const Color.fromARGB(255, 56, 128, 255),
+        selectedTileColor: const Color.fromARGB(79, 56, 129, 255),
+      ),
+    ];
+
     return Drawer(
       child: ListView(
         padding: const EdgeInsets.fromLTRB(0, 55, 0, 0),
@@ -30,24 +109,13 @@ class _VDrawerState extends State<VDrawer> {
             height: 10,
           ),
           Container(
-            padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+            padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
             child: Column(
-              children: const [
-                ListTile(
-                  leading: Icon(FontAwesomeIcons.horse),
-                  title: Text("title"),
-                ),
-                ListTile(
-                  leading: Icon(FontAwesomeIcons.horse),
-                  title: Text("title"),
-                ),
-                ListTile(
-                  leading: Icon(FontAwesomeIcons.horse),
-                  title: Text("title"),
-                ),
-                ListTile(
-                  leading: Icon(FontAwesomeIcons.horse),
-                  title: Text("title"),
+              children: [
+                ..._listTiles,
+                const Divider(
+                  color: Colors.grey,
+                  height: 10,
                 ),
               ],
             ),
@@ -108,8 +176,8 @@ class DHeader extends StatelessWidget {
             ),
           ),
           Positioned(
-            bottom: 2,
-            right: 16,
+            bottom: 1,
+            right: 15,
             child: IconButton(
               onPressed: () {
                 Provider.of<ThemeProvider>(context, listen: false)
