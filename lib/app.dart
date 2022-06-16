@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:animations/animations.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:ventroar_app/contexts/global_provider.dart';
 import 'package:ventroar_app/pages/pages_appbar/home_appbar.dart';
@@ -103,14 +102,6 @@ class _AppState extends State<App> {
         bottomNavigationBar: Builder(
           builder: (context) {
             return const VentRoarButtonBar();
-          },
-        ),
-        floatingActionButton: FloatingActionButton(
-          child: FaIcon(
-              _isDark ? FontAwesomeIcons.cloudSun : FontAwesomeIcons.cloudMoon),
-          onPressed: () {
-            Provider.of<ThemeProvider>(context, listen: false)
-                .changeToDark(!_isDark);
           },
         ),
       ),

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:ventroar_app/contexts/global_provider.dart';
 
 class VDrawer extends StatefulWidget {
-  final String userName = "zhangxiaokang";
-  final String uesrEmail = "2546650292@qq.com";
   const VDrawer({
     Key? key,
   }) : super(key: key);
@@ -23,126 +22,112 @@ class _VDrawerState extends State<VDrawer> {
     Map pageDatas = Provider.of<PageDataProvider>(context).pageDatas;
     return Drawer(
       child: ListView(
-        primary: true, //如果内容不足用户可以滚动
-        physics: const AlwaysScrollableScrollPhysics(),
+        padding: const EdgeInsets.fromLTRB(0, 55, 0, 0),
+        children: <Widget>[
+          const DHeader(),
+          const Divider(
+            color: Colors.grey,
+            height: 10,
+          ),
+          Container(
+            padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+            child: Column(
+              children: const [
+                ListTile(
+                  leading: Icon(FontAwesomeIcons.horse),
+                  title: Text("title"),
+                ),
+                ListTile(
+                  leading: Icon(FontAwesomeIcons.horse),
+                  title: Text("title"),
+                ),
+                ListTile(
+                  leading: Icon(FontAwesomeIcons.horse),
+                  title: Text("title"),
+                ),
+                ListTile(
+                  leading: Icon(FontAwesomeIcons.horse),
+                  title: Text("title"),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
 
-        /// physics 属性接受一个ScrollPhysics类型的对象，它决定可滚动组件如何响应用户操作，
-        /// 比如用户滑动完抬起手指后，继续执行动画；或者滑动到边界时，如何显示。
-        /// 默认情况下，Flutter会根据具体平台分别使用不同的ScrollPhysics对象，
-        /// 应用不同的显示效果，如当滑动到边界时，继续拖动的话，在iOS上会出现弹性效果，
-        /// 而在Android上会出现微光效果。如果你想在所有平台下使用同一种效果，
-        /// 可以显式指定一个固定的ScrollPhysics，Flutter SDK中包含了两个ScrollPhysics的子类，
-        /// 他们可以直接使用：
+class DHeader extends StatelessWidget {
+  final String _userName = "zhangxiaokang";
+  final String _uesrEmail = "2546650292@qq.com";
+  const DHeader({
+    Key? key,
+  }) : super(key: key);
 
-        /// 这个属性几个滑动的选择
-        /// AlwaysScrollableScrollPhysics() 总是可以滑动
-        /// NeverScrollableScrollPhysics 禁止滚动
-        /// BouncingScrollPhysics 内容超过一屏 上拉有回弹效果（iOS下弹性效果）
-        /// ClampingScrollPhysics 包裹内容 不会有回弹（Android下微光效果）
+  @override
+  Widget build(BuildContext context) {
+    bool _isDark = Provider.of<ThemeProvider>(context).isDark;
+    return Container(
+      height: 120,
+      padding: const EdgeInsets.fromLTRB(20, 5, 2, 0),
+      child: Stack(
         children: [
-          DrawerHeader(
-              padding: const EdgeInsets.fromLTRB(20, 40, 10, 10),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 30),
-                    child: Text(
-                      '@${widget.userName}',
-                      textAlign: TextAlign.left,
-                      style: const TextStyle(
-                        fontSize: 23,
-                      ),
-                    ),
-                  ),
-                  Text(
-                    widget.uesrEmail,
-                    style: const TextStyle(
-                      fontSize: 18,
-                    ),
-                  )
-                ],
-              )),
-          ListTile(
-            title: Text(
-              pageDatas[0],
-              style: TextStyle(
-                fontSize: titleTextSize,
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(25),
+              child: Image.asset("images/t2.png"),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(120, 0, 0, 0),
+            child: ListTile(
+              contentPadding: const EdgeInsets.all(0),
+              minLeadingWidth: 0,
+              title: Text(
+                _userName,
+                style: const TextStyle(
+                  fontSize: 21,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
-
-            //副标题
-            // subtitle: const Text(
-            //   "回到主页",
-            //   style: TextStyle(
-            //     fontSize: 17,
-            //   ),
-            // ),
-
-            leading:
-                Icon(selectedIndex == 0 ? Icons.home : Icons.home_outlined),
-            onTap: () {
-              changePageIndex(0);
-              Navigator.of(context).pop();
-            },
-            selected: selectedIndex == 0 ? true : false,
-            selectedColor: const Color.fromARGB(255, 56, 128, 255),
-            selectedTileColor: const Color.fromARGB(79, 56, 129, 255),
           ),
-          ListTile(
-            title: Text(
-              pageDatas[1],
-              style: TextStyle(
-                fontSize: titleTextSize,
+          Padding(
+            padding: const EdgeInsets.fromLTRB(120, 35, 0, 0),
+            child: ListTile(
+              minLeadingWidth: 0,
+              contentPadding: const EdgeInsets.all(0),
+              title: Text(
+                _uesrEmail,
+                style: const TextStyle(
+                  fontSize: 14,
+                ),
               ),
             ),
-            leading: Icon(selectedIndex == 1
-                ? Icons.star_rounded
-                : Icons.star_border_outlined),
-            onTap: () {
-              changePageIndex(1);
-              Navigator.of(context).pop();
-            },
-            selected: selectedIndex == 1 ? true : false,
-            selectedColor: const Color.fromARGB(255, 56, 128, 255),
-            selectedTileColor: const Color.fromARGB(79, 56, 129, 255),
           ),
-          ListTile(
-            title: Text(
-              pageDatas[2],
-              style: TextStyle(
-                fontSize: titleTextSize,
+          Positioned(
+            bottom: 2,
+            right: 16,
+            child: IconButton(
+              onPressed: () {
+                Provider.of<ThemeProvider>(context, listen: false)
+                    .changeToDark(!_isDark);
+              },
+              splashColor: Colors.white.withOpacity(0),
+              hoverColor: Colors.white.withOpacity(0),
+              focusColor: Colors.white.withOpacity(0),
+              disabledColor: Colors.white.withOpacity(0),
+              highlightColor: Colors.white.withOpacity(0),
+              tooltip: "切换主题",
+              icon: Icon(
+                _isDark
+                    ? FontAwesomeIcons.cloudSun
+                    : FontAwesomeIcons.cloudMoon,
               ),
             ),
-            leading: Icon(selectedIndex == 2
-                ? Icons.text_snippet_rounded
-                : Icons.text_snippet_outlined),
-            onTap: () {
-              changePageIndex(2);
-              Navigator.of(context).pop();
-            },
-            selected: selectedIndex == 2 ? true : false,
-            selectedColor: const Color.fromARGB(255, 56, 128, 255),
-            selectedTileColor: const Color.fromARGB(79, 56, 129, 255),
-          ),
-          ListTile(
-            title: Text(
-              pageDatas[3],
-              style: TextStyle(
-                fontSize: titleTextSize,
-              ),
-            ),
-            leading:
-                Icon(selectedIndex == 3 ? Icons.person : Icons.person_outline),
-            onTap: () {
-              changePageIndex(3);
-              Navigator.of(context).pop();
-            },
-            selected: selectedIndex == 3 ? true : false,
-            selectedColor: const Color.fromARGB(255, 56, 128, 255),
-            selectedTileColor: const Color.fromARGB(79, 56, 129, 255),
-          ),
+          )
         ],
       ),
     );
