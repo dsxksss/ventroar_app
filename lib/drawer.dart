@@ -106,7 +106,6 @@ class _VDrawerState extends State<VDrawer> {
           const DHeader(),
           const Divider(
             color: Colors.grey,
-            height: 10,
           ),
           Container(
             padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
@@ -115,7 +114,6 @@ class _VDrawerState extends State<VDrawer> {
                 ..._listTiles,
                 const Divider(
                   color: Colors.grey,
-                  height: 10,
                 ),
               ],
             ),
