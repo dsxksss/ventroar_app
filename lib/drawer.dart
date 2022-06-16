@@ -16,8 +16,10 @@ class _VDrawerState extends State<VDrawer> {
   @override
   Widget build(BuildContext context) {
     TextStyle _titleTextStyle = TextStyle(
-        fontSize: 20,
+        fontSize: 18,
         color: Theme.of(context).appBarTheme.titleTextStyle!.color);
+
+    double _iconSize = 30;
 
     Function _changePageIndex =
         Provider.of<PageDataProvider>(context, listen: false).changePageIndex;
@@ -30,7 +32,7 @@ class _VDrawerState extends State<VDrawer> {
       ListTile(
         leading: Icon(
           _selectedIndex == 0 ? Icons.home : Icons.home_outlined,
-          size: 35,
+          size: _iconSize,
         ),
         title: Text(
           _pageDatas[0],
@@ -47,7 +49,7 @@ class _VDrawerState extends State<VDrawer> {
       ListTile(
         leading: Icon(
           _selectedIndex == 1 ? Icons.star_rounded : Icons.star_border_outlined,
-          size: 35,
+          size: _iconSize,
         ),
         title: Text(
           _pageDatas[1],
@@ -66,7 +68,7 @@ class _VDrawerState extends State<VDrawer> {
           _selectedIndex == 2
               ? Icons.text_snippet_rounded
               : Icons.text_snippet_outlined,
-          size: 35,
+          size: _iconSize,
         ),
         title: Text(
           _pageDatas[2],
@@ -83,7 +85,7 @@ class _VDrawerState extends State<VDrawer> {
       ListTile(
         leading: Icon(
           _selectedIndex == 3 ? Icons.person : Icons.person_outline,
-          size: 35,
+          size: _iconSize,
         ),
         title: Text(
           _pageDatas[3],
@@ -154,7 +156,7 @@ class DHeader extends StatelessWidget {
               title: Text(
                 _userName,
                 style: const TextStyle(
-                  fontSize: 21,
+                  fontSize: 22,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -168,7 +170,7 @@ class DHeader extends StatelessWidget {
               title: Text(
                 _uesrEmail,
                 style: const TextStyle(
-                  fontSize: 14,
+                  fontSize: 15,
                 ),
               ),
             ),
