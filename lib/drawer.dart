@@ -34,6 +34,9 @@ class _VDrawerState extends State<VDrawer> {
 
     List<Widget> _listTiles = [
       ListTile(
+        minVerticalPadding: 0,
+        minLeadingWidth: 0,
+        contentPadding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
         leading: Icon(
           _selectedIndex == 0 ? Icons.home : Icons.home_outlined,
           size: _iconSize,
@@ -49,6 +52,9 @@ class _VDrawerState extends State<VDrawer> {
         selected: _selectedIndex == 0 ? true : false,
       ),
       ListTile(
+        minVerticalPadding: 0,
+        minLeadingWidth: 0,
+        contentPadding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
         leading: Icon(
           _selectedIndex == 1 ? Icons.star_rounded : Icons.star_border_outlined,
           size: _iconSize,
@@ -64,6 +70,9 @@ class _VDrawerState extends State<VDrawer> {
         selected: _selectedIndex == 1 ? true : false,
       ),
       ListTile(
+        minVerticalPadding: 0,
+        minLeadingWidth: 0,
+        contentPadding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
         leading: Icon(
           _selectedIndex == 2
               ? Icons.text_snippet_rounded
@@ -81,6 +90,9 @@ class _VDrawerState extends State<VDrawer> {
         selected: _selectedIndex == 2 ? true : false,
       ),
       ListTile(
+        minVerticalPadding: 0,
+        minLeadingWidth: 0,
+        contentPadding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
         leading: Icon(
           _selectedIndex == 3 ? Icons.person : Icons.person_outline,
           size: _iconSize,
@@ -103,16 +115,16 @@ class _VDrawerState extends State<VDrawer> {
         children: <Widget>[
           const DHeader(),
           Container(
-            padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+            padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
             child: Column(
               children: [
                 ..._listTiles,
-                const Divider(
-                  color: Colors.grey,
+                Divider(
+                  color: Theme.of(context).textTheme.bodyText1!.color!,
                   thickness: 0.8,
                 ),
                 SizedBox(
-                  height: 350,
+                  height: 360,
                   child: Stack(
                     children: [
                       Positioned(
