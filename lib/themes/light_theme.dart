@@ -23,6 +23,8 @@ ThemeData lightTheme(BuildContext context) {
     backgroundColor: VLightThemeColors.pageBG,
     drawerTheme: DrawerThemeData(
       backgroundColor: VLightThemeColors.drawerColors["bg"],
+      //模态幕布颜色
+      // scrimColor: Colors.red,
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       elevation: 0,
@@ -35,7 +37,11 @@ ThemeData lightTheme(BuildContext context) {
       selectedLabelStyle: null,
     ),
     listTileTheme: ListTileThemeData(
-      tileColor: VColors.vStext,
+      tileColor: VLightThemeColors.listTileColors["tileColor"],
+      iconColor: VLightThemeColors.listTileColors["iconColor"],
+      textColor: VLightThemeColors.listTileColors["textColor"],
+      selectedColor: VLightThemeColors.listTileColors["selectedColor"],
+      selectedTileColor: VLightThemeColors.listTileColors["selectedTileColor"],
     ),
   );
 }

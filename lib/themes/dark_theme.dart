@@ -35,7 +35,11 @@ ThemeData darkTheme(BuildContext context) {
       selectedLabelStyle: null,
     ),
     listTileTheme: ListTileThemeData(
-      tileColor: VColors.vBg100,
+      tileColor: VDarkThemeColors.listTileColors["tileColor"],
+      iconColor: VDarkThemeColors.listTileColors["iconColor"],
+      textColor: VDarkThemeColors.listTileColors["textColor"],
+      selectedColor: VDarkThemeColors.listTileColors["selectedColor"],
+      selectedTileColor: VDarkThemeColors.listTileColors["selectedTileColor"],
     ),
   );
 }

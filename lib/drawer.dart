@@ -17,9 +17,9 @@ class VDrawer extends StatefulWidget {
 class _VDrawerState extends State<VDrawer> {
   @override
   Widget build(BuildContext context) {
-    TextStyle _titleTextStyle = TextStyle(
-        fontSize: 18,
-        color: Theme.of(context).appBarTheme.titleTextStyle!.color);
+    TextStyle _titleTextStyle = const TextStyle(
+      fontSize: 18,
+    );
 
     double _iconSize = 30;
 
@@ -47,8 +47,6 @@ class _VDrawerState extends State<VDrawer> {
           Navigator.of(context).pop();
         },
         selected: _selectedIndex == 0 ? true : false,
-        selectedColor: const Color.fromARGB(255, 56, 128, 255),
-        selectedTileColor: const Color.fromARGB(79, 56, 129, 255),
       ),
       ListTile(
         leading: Icon(
@@ -64,8 +62,6 @@ class _VDrawerState extends State<VDrawer> {
           Navigator.of(context).pop();
         },
         selected: _selectedIndex == 1 ? true : false,
-        selectedColor: const Color.fromARGB(255, 56, 128, 255),
-        selectedTileColor: const Color.fromARGB(79, 56, 129, 255),
       ),
       ListTile(
         leading: Icon(
@@ -83,8 +79,6 @@ class _VDrawerState extends State<VDrawer> {
           Navigator.of(context).pop();
         },
         selected: _selectedIndex == 2 ? true : false,
-        selectedColor: const Color.fromARGB(255, 56, 128, 255),
-        selectedTileColor: const Color.fromARGB(79, 56, 129, 255),
       ),
       ListTile(
         leading: Icon(
@@ -100,8 +94,6 @@ class _VDrawerState extends State<VDrawer> {
           Navigator.of(context).pop();
         },
         selected: _selectedIndex == 3 ? true : false,
-        selectedColor: const Color.fromARGB(255, 56, 128, 255),
-        selectedTileColor: const Color.fromARGB(79, 56, 129, 255),
       ),
     ];
 

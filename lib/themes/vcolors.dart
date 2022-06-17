@@ -17,6 +17,8 @@ class VColors {
   static Color vPblue = const Color.fromARGB(255, 56, 128, 255);
   //  次要按钮等背景色
   static Color vSblue = const Color.fromARGB(255, 0, 174, 243);
+  //  错误红色
+  static Color vError = Colors.redAccent;
 }
 
 class VLightThemeColors {
@@ -34,6 +36,15 @@ class VLightThemeColors {
   //侧边导航栏颜色集
   static Map drawerColors = {
     "bg": VColors.vPtext,
+  };
+
+  //listTile颜色集
+  static Map listTileColors = {
+    "tileColor": VColors.vStext,
+    "iconColor": VColors.vBg100,
+    "textColor": VColors.vBg100,
+    "selectedColor": const Color.fromARGB(255, 56, 128, 255),
+    "selectedTileColor": const Color.fromARGB(79, 56, 129, 255),
   };
 
   //底部导航栏颜色集
@@ -59,6 +70,15 @@ class VDarkThemeColors {
   //侧边导航栏颜色集
   static Map drawerColors = {
     "bg": VColors.vBg100,
+  };
+
+  //listTile颜色集
+  static Map listTileColors = {
+    "tileColor": VColors.vBg100,
+    "iconColor": VColors.vPtext,
+    "textColor": VColors.vPtext,
+    "selectedColor": const Color.fromARGB(255, 56, 128, 255),
+    "selectedTileColor": const Color.fromARGB(79, 56, 129, 255),
   };
 
   //底部导航栏颜色集
