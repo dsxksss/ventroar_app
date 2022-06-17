@@ -36,6 +36,11 @@ ThemeData lightTheme(BuildContext context) {
       unselectedIconTheme: null,
       selectedLabelStyle: null,
     ),
+    textTheme: TextTheme(
+      bodyText1: TextStyle(
+        color: VColors.vBg100,
+      ),
+    ),
     listTileTheme: ListTileThemeData(
       tileColor: VLightThemeColors.listTileColors["tileColor"],
       iconColor: VLightThemeColors.listTileColors["iconColor"],

@@ -128,6 +128,8 @@ class _VDrawerState extends State<VDrawer> {
                             size: 32,
                           ),
                           buttonText: "退出登录",
+                          textColor:
+                              Theme.of(context).textTheme.bodyText1!.color!,
                           buttonType: GFButtonType.transparent,
                         ),
                       ),
