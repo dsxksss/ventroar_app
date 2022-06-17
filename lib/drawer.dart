@@ -102,11 +102,8 @@ class _VDrawerState extends State<VDrawer> {
         padding: const EdgeInsets.fromLTRB(0, 55, 0, 0),
         children: <Widget>[
           const DHeader(),
-          const Divider(
-            color: Colors.grey,
-          ),
           Container(
-            padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+            padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
             child: Column(
               children: [
                 ..._listTiles,
@@ -118,7 +115,7 @@ class _VDrawerState extends State<VDrawer> {
                   child: Stack(
                     children: [
                       Positioned(
-                        bottom: 8,
+                        bottom: 0,
                         left: 10,
                         child: VTextIconButton(
                           onPressed: () {},
@@ -134,7 +131,7 @@ class _VDrawerState extends State<VDrawer> {
                         ),
                       ),
                       Positioned(
-                        bottom: 10,
+                        bottom: 1,
                         right: 10,
                         child: IconButton(
                           onPressed: () {
@@ -177,11 +174,11 @@ class DHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 120,
-      padding: const EdgeInsets.fromLTRB(10, 5, 0, 0),
+      padding: const EdgeInsets.fromLTRB(10, 15, 0, 0),
       child: Stack(
         children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+            padding: const EdgeInsets.fromLTRB(2, 0, 0, 0),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(50),
               child: Image.asset("images/t2.png"),
@@ -192,10 +189,10 @@ class DHeader extends StatelessWidget {
             right: 25,
             child: Text(
               _userName,
-              style: const TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).textTheme.bodyText1!.color!),
             ),
           ),
           Positioned(
@@ -203,9 +200,9 @@ class DHeader extends StatelessWidget {
             right: 25,
             child: Text(
               _uesrEmail,
-              style: const TextStyle(
-                fontSize: 15,
-              ),
+              style: TextStyle(
+                  fontSize: 15,
+                  color: Theme.of(context).textTheme.bodyText1!.color!),
             ),
           ),
         ],
