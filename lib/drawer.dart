@@ -109,6 +109,7 @@ class _VDrawerState extends State<VDrawer> {
                 ..._listTiles,
                 const Divider(
                   color: Colors.grey,
+                  thickness: 0.8,
                 ),
                 SizedBox(
                   height: 350,
