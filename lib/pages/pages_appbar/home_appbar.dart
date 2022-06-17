@@ -23,7 +23,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
       centerTitle: true,
       title: Text(
         "${pageDatas[selectedIndex]}",
-        style: GoogleFonts.ubuntu(),
+        style: GoogleFonts.ubuntu(fontSize: 21, fontWeight: FontWeight.w500),
       ),
       actions: [
         Padding(
