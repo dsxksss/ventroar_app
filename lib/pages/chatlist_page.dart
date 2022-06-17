@@ -117,7 +117,7 @@ class _ChatListPageState extends State<ChatListPage> {
                     physics: userList.length > 10
                         ? const BouncingScrollPhysics()
                         : const AlwaysScrollableScrollPhysics(),
-                    padding: const EdgeInsets.fromLTRB(3, 10, 3, 10),
+                    padding: const EdgeInsets.fromLTRB(3, 0, 3, 10),
                     itemCount: userList.length,
                     itemBuilder: (context, index) => Card(
                       child: VSlidable(
