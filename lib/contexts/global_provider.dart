@@ -18,7 +18,7 @@ class PageDataProvider extends ChangeNotifier {
   int selectedIndex;
   PageDataProvider({
     this.pageDatas = const {
-      0: "VentRoar 主页",
+      0: "Vent Roar",
       1: "星墙页面",
       2: "聊天页面",
       3: "用户个人",
