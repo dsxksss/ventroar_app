@@ -35,6 +35,7 @@ class _InputMessageState extends State<InputMessage> {
       color: Theme.of(context).appBarTheme.backgroundColor,
       child: Center(
         child: TextField(
+          style: TextStyle(color: Theme.of(context).textTheme.bodyText1!.color),
           controller: _controller,
           cursorHeight: 25,
           decoration: const InputDecoration(
