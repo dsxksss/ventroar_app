@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../contexts/global_provider.dart';
 
@@ -18,10 +19,12 @@ class _HomeAppBarState extends State<HomeAppBar> {
     Map pageDatas = Provider.of<PageDataProvider>(context).pageDatas;
     int selectedIndex = Provider.of<PageDataProvider>(context).selectedIndex;
     return AppBar(
-      elevation: 0,
       backgroundColor: Theme.of(context).canvasColor,
       centerTitle: true,
-      title: Text("${pageDatas[selectedIndex]}"),
+      title: Text(
+        "${pageDatas[selectedIndex]}",
+        style: GoogleFonts.ubuntu(),
+      ),
       actions: [
         Padding(
           padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),

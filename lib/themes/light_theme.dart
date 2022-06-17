@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import './vcolors.dart';
 
 //日间模式主题
@@ -6,9 +7,9 @@ ThemeData lightTheme(BuildContext context) {
   final base = ThemeData.light();
   return base.copyWith(
     appBarTheme: AppBarTheme(
-      elevation: 2,
-      titleTextStyle: TextStyle(
-          color: VColors.vBg100, fontSize: 20, fontWeight: FontWeight.bold),
+      elevation: 0,
+      titleTextStyle: GoogleFonts.zcoolKuaiLe(
+          fontWeight: FontWeight.w500, fontSize: 22, color: VColors.vBg100),
       backgroundColor: VLightThemeColors.appBarColors["bg"],
       foregroundColor: VLightThemeColors.appBarColors["foregroundColor"],
     ),

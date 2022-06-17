@@ -21,7 +21,9 @@ class _ChatAppBarState extends State<ChatAppBar> {
     int selectedIndex = Provider.of<PageDataProvider>(context).selectedIndex;
     return AppBar(
       centerTitle: true,
-      title: Text("${pageDatas[selectedIndex]}"),
+      title: Text(
+        "${pageDatas[selectedIndex]}",
+      ),
       actions: [
         Padding(
           padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),

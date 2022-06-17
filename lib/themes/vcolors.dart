@@ -29,7 +29,7 @@ class VLightThemeColors {
 
   //头部导航栏颜色集
   static Map appBarColors = {
-    "bg": const Color.fromRGBO(238, 243, 250, 1),
+    "bg": VColors.vStext,
     "foregroundColor": VColors.vBg100,
   };
 
@@ -63,7 +63,7 @@ class VDarkThemeColors {
 
   //头部导航栏颜色集
   static Map appBarColors = {
-    "bg": VColors.vBg100,
+    "bg": VColors.vBg90,
     "foregroundColor": VColors.vPtext,
   };
 
