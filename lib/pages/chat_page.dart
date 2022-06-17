@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:ventroar_app/input_message_widget.dart';
 import 'package:ventroar_app/message_bubble.dart';
 import 'package:ventroar_app/pages/user_detail_page.dart';
@@ -47,7 +48,10 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.titleText),
+        title: Text(
+          widget.titleText,
+          style: GoogleFonts.ubuntu(fontSize: 23),
+        ),
         actions: [
           IconButton(
             onPressed: () {},
