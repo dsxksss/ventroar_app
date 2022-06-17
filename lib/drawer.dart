@@ -145,7 +145,7 @@ class _VDrawerState extends State<VDrawer> {
                       ),
                       Positioned(
                         bottom: 1,
-                        right: 10,
+                        right: 22,
                         child: IconButton(
                           onPressed: () {
                             Provider.of<ThemeProvider>(context, listen: false)
