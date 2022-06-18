@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:rive/rive.dart';
 import '../../contexts/global_provider.dart';
 
 class HomeAppBar extends StatefulWidget implements PreferredSizeWidget {
@@ -18,6 +19,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
   Widget build(BuildContext context) {
     Map pageDatas = Provider.of<PageDataProvider>(context).pageDatas;
     int selectedIndex = Provider.of<PageDataProvider>(context).selectedIndex;
+    bool _isDark = Provider.of<ThemeProvider>(context, listen: true).isDark;
     return AppBar(
       backgroundColor: Theme.of(context).canvasColor,
       centerTitle: true,
@@ -27,10 +29,26 @@ class _HomeAppBarState extends State<HomeAppBar> {
       ),
       actions: [
         Padding(
-          padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
-          child: IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.search),
+          padding: const EdgeInsets.fromLTRB(0, 0, 25, 2),
+          child: GestureDetector(
+            onTap: () {},
+            child: _isDark
+                ? Container(
+                    color: Theme.of(context)
+                        .appBarTheme
+                        .foregroundColor!
+                        .withOpacity(0),
+                    width: 28,
+                    height: 28,
+                    child: const RiveAnimation.asset(
+                        "static/animations/dark/search_d.riv"),
+                  )
+                : const SizedBox(
+                    width: 28,
+                    height: 28,
+                    child: RiveAnimation.asset(
+                        "static/animations/light/search_l.riv"),
+                  ),
           ),
         ),
       ],

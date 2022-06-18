@@ -21,13 +21,13 @@ class _HomePageState extends State<HomePage> {
                   Theme.of(context).appBarTheme.foregroundColor!.withOpacity(0),
               width: 200,
               height: 200,
-              child:
-                  const RiveAnimation.asset('static/animations/dark/whitd.riv'),
+              child: const RiveAnimation.asset(
+                  'static/animations/dark/whit_d.riv'),
             )
           : const SizedBox(
               width: 200,
               height: 200,
-              child: RiveAnimation.asset('static/animations/light/whitl.riv'),
+              child: RiveAnimation.asset('static/animations/light/whit_l.riv'),
             ),
     );
   }
