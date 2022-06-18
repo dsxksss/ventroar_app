@@ -86,7 +86,10 @@ flutter:
   # To add Flutter specific assets to your application, add an assets section,
   # like this:
   assets:
-    - images/
+    - static/
+    - static/img/
+    - static/animations/dark/
+    - static/animations/light/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

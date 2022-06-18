@@ -194,7 +194,7 @@ class DHeader extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(2, 0, 0, 0),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(50),
-              child: Image.asset("images/t2.png"),
+              child: Image.asset("static/img/t2.png"),
             ),
           ),
           Positioned(
