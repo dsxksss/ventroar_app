@@ -22,12 +22,12 @@ class _HomePageState extends State<HomePage> {
               width: 200,
               height: 200,
               child: const RiveAnimation.asset(
-                  'static/animations/dark/whit_d.riv'),
+                  'static/animations/dark/wait_d.riv'),
             )
           : const SizedBox(
               width: 200,
               height: 200,
-              child: RiveAnimation.asset('static/animations/light/whit_l.riv'),
+              child: RiveAnimation.asset('static/animations/light/wait_l.riv'),
             ),
     );
   }
