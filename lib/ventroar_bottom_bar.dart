@@ -62,8 +62,14 @@ class _DarkAppBarState extends State<DarkAppBar> {
       //背景颜色
       color: Theme.of(context).bottomNavigationBarTheme.backgroundColor!,
 
-      ///动画曲线
+      //动画曲线
       animationCurve: Curves.easeOutCirc,
+
+      //阻止重复播放动画的判断函数
+      letIndexChange: (index) {
+        return index == widget.index ? false : true;
+      },
+
       items: [
         Icon(
           Icons.home,
