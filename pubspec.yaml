@@ -32,7 +32,7 @@ dependencies:
   #toast组件库
   fluttertoast: ^8.0.7
   #底部导航栏组件
-  curved_navigation_bar: ^1.0.1
+  curved_navigation_bar: ^1.0.3
   #页面切换组件 (建议) 代码使用: LiquidSwipe(pages:scaffolds)
   #liquid_swipe: ^2.1.0
   #徽标
