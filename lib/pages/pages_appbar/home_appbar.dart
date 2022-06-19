@@ -29,23 +29,54 @@ class _HomeAppBarState extends State<HomeAppBar> {
       ),
       actions: [
         Padding(
-          padding: const EdgeInsets.fromLTRB(0, 0, 25, 2),
+          padding: const EdgeInsets.fromLTRB(0, 0, 25, 0),
           child: GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => Scaffold(
+                  appBar: AppBar(
+                    centerTitle: true,
+                    title: const Text("搜索"),
+                  ),
+                  body: Container(
+                    color: Theme.of(context).canvasColor,
+                    child: Center(
+                      child: _isDark
+                          ? Container(
+                              color: Theme.of(context)
+                                  .appBarTheme
+                                  .foregroundColor!
+                                  .withOpacity(0),
+                              width: 300,
+                              height: 300,
+                              child: const RiveAnimation.asset(
+                                  "static/animations/dark/search_d.riv"),
+                            )
+                          : const SizedBox(
+                              width: 300,
+                              height: 300,
+                              child: RiveAnimation.asset(
+                                  "static/animations/light/search_l.riv"),
+                            ),
+                    ),
+                  ),
+                ),
+              ));
+            },
             child: _isDark
                 ? Container(
                     color: Theme.of(context)
                         .appBarTheme
                         .foregroundColor!
                         .withOpacity(0),
-                    width: 28,
-                    height: 28,
+                    width: 30,
+                    height: 30,
                     child: const RiveAnimation.asset(
                         "static/animations/dark/search_d.riv"),
                   )
                 : const SizedBox(
-                    width: 28,
-                    height: 28,
+                    width: 30,
+                    height: 30,
                     child: RiveAnimation.asset(
                         "static/animations/light/search_l.riv"),
                   ),
