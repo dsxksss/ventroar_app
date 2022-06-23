@@ -3,11 +3,13 @@ import 'dart:math';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:provider/provider.dart';
+import 'package:rive/rive.dart';
 import 'package:ventroar_app/databases/userdb/user_db.dart';
 import 'package:ventroar_app/functions/vent_snack.dart';
 import 'package:ventroar_app/schemas/user.dart';
 import 'package:ventroar_app/widgets/vent_slidable.dart';
+import '../contexts/global_provider.dart';
 import '../pages/chat_page.dart';
 
 class ChatListPage extends StatefulWidget {
@@ -64,13 +66,25 @@ class _ChatListPageState extends State<ChatListPage> {
 
   @override
   Widget build(BuildContext context) {
+    bool _isDark = Provider.of<ThemeProvider>(context, listen: true).isDark;
     return isLoading
-        ? Center(
-            child: LoadingAnimationWidget.stretchedDots(
-              color: Colors.blue.shade400,
-              size: 60,
-            ),
-          )
+        ? _isDark
+            ? Container(
+                color: Theme.of(context)
+                    .appBarTheme
+                    .foregroundColor!
+                    .withOpacity(0),
+                width: 200,
+                height: 200,
+                child: const RiveAnimation.asset(
+                    'static/animations/dark/wait_d.riv'),
+              )
+            : const SizedBox(
+                width: 200,
+                height: 200,
+                child:
+                    RiveAnimation.asset('static/animations/light/wait_l.riv'),
+              )
         : RefreshIndicator(
             backgroundColor:
                 Theme.of(context).bottomNavigationBarTheme.backgroundColor,

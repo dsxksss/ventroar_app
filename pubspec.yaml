@@ -53,8 +53,6 @@ dependencies:
   shared_preferences: ^2.0.15
   #具有一组内置效果的可定制动画页面指示器。
   smooth_page_indicator: ^1.0.0+2
-  #加载动画组件包
-  loading_animation_widget: ^1.2.0+1
   #grouped布局组件
   grouped_list: ^4.2.0
   #聊天气泡组件
@@ -65,6 +63,9 @@ dependencies:
   path: ^1.8.0
   #rive动画插件
   rive: ^0.9.0
+  #web_socket_channel 这个 package 提供了连接 WebSocket 服务器所需的一些工具。
+  web_socket_channel: ^2.2.0
+
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
