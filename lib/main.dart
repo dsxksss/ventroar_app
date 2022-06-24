@@ -29,6 +29,9 @@ class _MaterialAppState extends State<MaterialApp> {
         ChangeNotifierProvider(
           create: (context) => PageDataProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => UserVerificationProvider(),
+        ),
       ], child: const App());
     });
   }

@@ -31,3 +31,14 @@ class PageDataProvider extends ChangeNotifier {
     notifyListeners();
   }
 }
+
+//用户登录状态信息提供者
+class UserVerificationProvider extends ChangeNotifier {
+  bool isLoginState;
+  UserVerificationProvider({this.isLoginState = false});
+
+  void changeLoginState(bool loginState) {
+    isLoginState = loginState;
+    notifyListeners();
+  }
+}

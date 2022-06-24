@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../contexts/global_provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -8,7 +11,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  bool changeAnimated = false;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -17,15 +19,14 @@ class _LoginPageState extends State<LoginPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: const [
-          Text(
-            "登录页面",
-            style: TextStyle(fontSize: 30),
+        children: [
+          ElevatedButton(
+            onPressed: () {
+              Provider.of<UserVerificationProvider>(context, listen: false)
+                  .changeLoginState(true);
+            },
+            child: const Text("Login"),
           ),
-          Text(
-            "(制作中)...",
-            style: TextStyle(fontSize: 26),
-          )
         ],
       ),
     );
