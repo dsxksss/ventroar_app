@@ -115,7 +115,7 @@ class _VDrawerState extends State<VDrawer> {
         children: <Widget>[
           const DHeader(),
           Container(
-            padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+            padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
             child: Column(
               children: [
                 ..._listTiles,
