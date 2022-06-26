@@ -119,12 +119,8 @@ class _VDrawerState extends State<VDrawer> {
             child: Column(
               children: [
                 ..._listTiles,
-                Divider(
-                  color: Theme.of(context).textTheme.bodyText1!.color!,
-                  thickness: 0.8,
-                ),
                 SizedBox(
-                  height: 360,
+                  height: 370,
                   child: Stack(
                     children: [
                       Positioned(
