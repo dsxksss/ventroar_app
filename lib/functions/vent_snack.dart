@@ -65,7 +65,10 @@ class _VSnackContentState extends State<VSnackContent> {
       height: 40,
       child: Row(
         children: [
-          const Icon(FontAwesomeIcons.solidThumbsUp),
+          const Icon(
+            FontAwesomeIcons.solidThumbsUp,
+            color: Colors.white,
+          ),
           const SizedBox(width: 20),
           Expanded(
             child: widget.textWidget ?? const Text("你没有设置TextWidget这个参数值!!!"),

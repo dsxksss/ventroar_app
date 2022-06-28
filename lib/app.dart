@@ -77,7 +77,6 @@ class _AppState extends State<App> {
       themeMode: _isDark ? ThemeMode.dark : ThemeMode.light,
       theme: lightTheme(context),
       darkTheme: darkTheme(context),
-
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: getAppBar(_selectedIndex, _isLoginState),

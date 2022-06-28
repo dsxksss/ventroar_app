@@ -17,17 +17,23 @@ class _VSlidableState extends State<VSlidable> {
     return Slidable(
       /// 如果 Slidable 是可关闭的，则指定一个键
       key: const ValueKey(0),
-
       // 操作窗格位于右侧
       endActionPane: ActionPane(
         motion: const ScrollMotion(),
         children: [
           SlidableAction(
+            onPressed: (buildContext) {},
+            backgroundColor: Colors.blue,
+            foregroundColor: Colors.white,
+            icon: Icons.vertical_align_top_rounded,
+            label: '顶置消息',
+          ),
+          SlidableAction(
             onPressed: widget.onPressed,
             backgroundColor: const Color(0xFFFE4A49),
             foregroundColor: Colors.white,
             icon: Icons.delete,
-            label: 'Delete',
+            label: '删除聊天',
           ),
         ],
       ),

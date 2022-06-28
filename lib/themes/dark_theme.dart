@@ -22,6 +22,8 @@ ThemeData darkTheme(BuildContext context) {
     ),
     canvasColor: VDarkThemeColors.pageBG,
     backgroundColor: VDarkThemeColors.pageBG,
+    splashColor: Colors.white.withOpacity(0),
+    highlightColor: Colors.white.withOpacity(0),
     drawerTheme: DrawerThemeData(
       backgroundColor: VDarkThemeColors.drawerColors["bg"],
     ),

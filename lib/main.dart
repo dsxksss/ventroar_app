@@ -1,7 +1,7 @@
+import './app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import './app.dart';
 import 'contexts/global_provider.dart';
 import 'databases/userdb/user_db.dart';
 

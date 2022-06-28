@@ -22,6 +22,8 @@ ThemeData lightTheme(BuildContext context) {
     ),
     canvasColor: VLightThemeColors.pageBG,
     backgroundColor: VLightThemeColors.pageBG,
+    splashColor: Colors.white.withOpacity(0),
+    highlightColor: Colors.white.withOpacity(0),
     drawerTheme: DrawerThemeData(
       backgroundColor: VLightThemeColors.drawerColors["bg"],
       //模态幕布颜色
