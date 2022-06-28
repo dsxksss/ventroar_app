@@ -24,7 +24,7 @@ class _UserAppBarState extends State<UserAppBar> {
       title: Text("${pageDatas[selectedIndex]}"),
       actions: [
         Padding(
-          padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+          padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
           child: IconButton(
             splashColor: const Color.fromARGB(0, 255, 255, 255),
             icon: Badge(
@@ -44,18 +44,6 @@ class _UserAppBarState extends State<UserAppBar> {
               Provider.of<PageDataProvider>(context, listen: false)
                   .changePageIndex(2);
             },
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(0, 0, 5, 3),
-          child: IconButton(
-            splashColor: const Color.fromARGB(0, 255, 255, 255),
-            icon: const Icon(
-              FontAwesomeIcons.userPlus,
-              size: 20,
-            ),
-            tooltip: '添加好友',
-            onPressed: () {},
           ),
         ),
       ],

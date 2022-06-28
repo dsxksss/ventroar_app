@@ -29,7 +29,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
       ),
       actions: [
         Padding(
-          padding: const EdgeInsets.fromLTRB(0, 0, 25, 0),
+          padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
           child: GestureDetector(
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(

@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -142,7 +141,6 @@ class _ChatListPageState extends State<ChatListPage> {
                         }),
                       },
                       widget: ListTile(
-                        tileColor: Theme.of(context).canvasColor,
                         onLongPress: () {
                           vSnackBar(
                             context: context,
