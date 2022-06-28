@@ -87,7 +87,7 @@ class _AppState extends State<App> {
             _isLoginState ? getDrawerEdgeDragWidth(_selectedIndex) : 0,
 
         body: PageTransitionSwitcher(
-          duration: const Duration(milliseconds: 700),
+          duration: const Duration(milliseconds: 300),
           transitionBuilder: (
             child,
             animation,

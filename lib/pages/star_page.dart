@@ -35,14 +35,18 @@ class _StarPageState extends State<StarPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: const [
+        children: [
           Text(
             "星墙页面",
-            style: TextStyle(fontSize: 30),
+            style: TextStyle(
+                fontSize: 30,
+                color: Theme.of(context).textTheme.bodyText1!.color),
           ),
           Text(
             "(制作中)...",
-            style: TextStyle(fontSize: 26),
+            style: TextStyle(
+                fontSize: 26,
+                color: Theme.of(context).textTheme.bodyText1!.color),
           )
         ],
       ),

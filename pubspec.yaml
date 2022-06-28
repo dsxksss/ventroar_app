@@ -44,7 +44,7 @@ dependencies:
   #item滑动抽屉组件
   flutter_slidable: ^1.2.0
   #动画组件包
-  animations: ^2.0.2
+  animations: ^2.0.3
   #谷歌字体包
   google_fonts: ^3.0.0
   #谷歌动态导航栏
