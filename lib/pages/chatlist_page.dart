@@ -125,7 +125,7 @@ class _ChatListPageState extends State<ChatListPage> {
                   ])
                 : ListView.builder(
                     //确定每一个item的高度 会让item加载更加高效
-                    itemExtent: 80,
+                    itemExtent: 83,
                     primary: false,
                     physics: const AlwaysScrollableScrollPhysics(
                       //当内容不足时也可以启动反弹刷新
