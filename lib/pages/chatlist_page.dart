@@ -125,86 +125,81 @@ class _ChatListPageState extends State<ChatListPage> {
                     ),
                   ])
                 : ListView.builder(
-                    //确定每一个item的高度 会让item加载更加高效
-                    itemExtent: 90,
                     primary: false,
                     physics: userList.length > 10
                         ? const BouncingScrollPhysics()
                         : const AlwaysScrollableScrollPhysics(),
                     padding: const EdgeInsets.fromLTRB(3, 0, 3, 10),
                     itemCount: userList.length,
-                    itemBuilder: (context, index) => Card(
-                      child: VSlidable(
-                        onPressed: (sliderContext) => {
-                          setState(() {
-                            UserDB.instance.deleteUser(userList[index].id!);
-                            userList.remove(userList[index]);
-                          }),
+                    itemBuilder: (context, index) => VSlidable(
+                      onPressed: (sliderContext) => {
+                        setState(() {
+                          UserDB.instance.deleteUser(userList[index].id!);
+                          userList.remove(userList[index]);
+                        }),
+                      },
+                      widget: ListTile(
+                        tileColor: Theme.of(context).canvasColor,
+                        onLongPress: () {
+                          vSnackBar(
+                            context: context,
+                            textWidget: const Text(
+                              "是否清空用户聊天列表?",
+                              style: TextStyle(fontSize: 20),
+                            ),
+                            button: ElevatedButton(
+                              onPressed: () => {
+                                setState(() {
+                                  UserDB.instance.deleteAllUsers();
+                                  userList.clear();
+                                }),
+                                //隐藏上下文内的SnackBar
+                                ScaffoldMessenger.of(context)
+                                    .hideCurrentSnackBar(
+                                        reason: SnackBarClosedReason.action),
+                              },
+                              child: const Text("删除全部"),
+                            ),
+                          );
                         },
-                        widget: ListTile(
-                          onLongPress: () {
-                            vSnackBar(
-                              context: context,
-                              textWidget: const Text(
-                                "是否清空用户聊天列表?",
-                                style: TextStyle(fontSize: 20),
+                        onTap: () => {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => ChatPage(
+                                titleText: userList[index].userName.toString(),
+                                context: context,
                               ),
-                              button: ElevatedButton(
-                                onPressed: () => {
-                                  setState(() {
-                                    UserDB.instance.deleteAllUsers();
-                                    userList.clear();
-                                  }),
-                                  //隐藏上下文内的SnackBar
-                                  ScaffoldMessenger.of(context)
-                                      .hideCurrentSnackBar(
-                                          reason: SnackBarClosedReason.action),
-                                },
-                                child: const Text("删除全部"),
-                              ),
-                            );
-                          },
-                          onTap: () => {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => ChatPage(
-                                  titleText:
-                                      userList[index].userName.toString(),
-                                  context: context,
-                                ),
-                              ),
-                            ),
-                          },
-                          minLeadingWidth: 10,
-                          contentPadding:
-                              const EdgeInsets.fromLTRB(10, 5, 15, 5),
-                          leading: CircleAvatar(
-                            radius: 28,
-                            foregroundImage:
-                                NetworkImage(userList[index].userImgUrl),
-                          ),
-                          title: Container(
-                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
-                            child: Text(
-                              userList[index].userName.toString(),
-                              style: const TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.bold),
                             ),
                           ),
-                          subtitle: const Text("用户的最新聊天记录信息"),
-                          trailing: SizedBox(
-                            width: 80,
-                            child: Column(
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                      userList[index].createTime.toString()),
-                                ),
-                                const Icon(
-                                  Icons.arrow_forward,
-                                ),
-                              ],
-                            ),
+                        },
+                        minLeadingWidth: 10,
+                        contentPadding: const EdgeInsets.fromLTRB(10, 5, 15, 5),
+                        leading: CircleAvatar(
+                          radius: 28,
+                          foregroundImage:
+                              NetworkImage(userList[index].userImgUrl),
+                        ),
+                        title: Container(
+                          padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+                          child: Text(
+                            userList[index].userName.toString(),
+                            style: const TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        subtitle: const Text("用户的最新聊天记录信息"),
+                        trailing: SizedBox(
+                          width: 80,
+                          child: Column(
+                            children: [
+                              Expanded(
+                                child:
+                                    Text(userList[index].createTime.toString()),
+                              ),
+                              const Icon(
+                                Icons.arrow_forward,
+                              ),
+                            ],
                           ),
                         ),
                       ),
