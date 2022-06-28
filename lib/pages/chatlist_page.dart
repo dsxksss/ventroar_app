@@ -128,9 +128,10 @@ class _ChatListPageState extends State<ChatListPage> {
                     //确定每一个item的高度 会让item加载更加高效
                     itemExtent: 80,
                     primary: false,
-                    physics: userList.length > 10
-                        ? const BouncingScrollPhysics()
-                        : const AlwaysScrollableScrollPhysics(),
+                    physics: const AlwaysScrollableScrollPhysics(
+                      //当内容不足时也可以启动反弹刷新
+                      parent: BouncingScrollPhysics(),
+                    ),
                     padding: const EdgeInsets.fromLTRB(3, 0, 3, 10),
                     itemCount: userList.length,
                     itemBuilder: (context, index) => VSlidable(
