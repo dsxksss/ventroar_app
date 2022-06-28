@@ -125,6 +125,8 @@ class _ChatListPageState extends State<ChatListPage> {
                     ),
                   ])
                 : ListView.builder(
+                    //确定每一个item的高度 会让item加载更加高效
+                    itemExtent: 80,
                     primary: false,
                     physics: userList.length > 10
                         ? const BouncingScrollPhysics()
