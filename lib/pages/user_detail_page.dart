@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class UserDetailPage extends StatefulWidget {
   final String titleText;
@@ -13,18 +14,22 @@ class _UserDetailPageState extends State<UserDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.titleText),
+        title: Text(
+          widget.titleText,
+          style: GoogleFonts.ubuntu(),
+        ),
       ),
       body: Container(
         color: Theme.of(context).backgroundColor,
         height: double.infinity,
         width: double.infinity,
-        child: const Center(
+        child: Center(
           child: Text(
             "用户详细信息页面",
             style: TextStyle(
               fontSize: 25,
               fontWeight: FontWeight.bold,
+              color: Theme.of(context).textTheme.bodyText1!.color,
             ),
           ),
         ),
