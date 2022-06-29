@@ -127,8 +127,10 @@ class _VDrawerState extends State<VDrawer> {
                         child: Row(
                           children: [
                             IconButton(
-                              onPressed: () {},
-                              tooltip: "切换主题",
+                              onPressed: () {
+                                Navigator.of(context).pushNamed("./login");
+                              },
+                              tooltip: "退出登录",
                               icon: const Icon(
                                 Icons.output,
                                 color: Colors.redAccent,

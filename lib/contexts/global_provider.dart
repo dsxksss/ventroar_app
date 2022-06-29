@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 //昼夜主题值:isDark提供者
 class ThemeProvider extends ChangeNotifier {
   bool isDark;
-  ThemeProvider({this.isDark = false});
+  ThemeProvider({this.isDark = true});
   void changeToDark(bool isDark) {
     this.isDark = isDark;
     //随着新值的变化，我们创建一个监听器
