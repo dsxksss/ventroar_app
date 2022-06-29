@@ -163,13 +163,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "10.1.0"
-  getwidget:
-    dependency: "direct main"
-    description:
-      name: getwidget
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "3.0.1"
   google_fonts:
     dependency: "direct main"
     description:

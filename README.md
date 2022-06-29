@@ -1,9 +1,8 @@
-## pub.dev
+## pub.dev/packages
 
 | pub:package                | versions | TODO                    |
 | -------------------------- | -------- | ----------------------- |
 | [provider]                 | ^6.0.3   | flutter官方推荐的状态管理插件      |
-| [getwidget]                | ^3.0.1   | getwidgeUI组件库           |
 | [dio]                      | ^4.0.6   | http请求库                 |
 | [fluttertoast]             | ^8.0.7   | toast组件库                |
 | [curved_navigation_bar]    | ^1.0.1   | 底部导航栏组件                 |
@@ -19,7 +18,6 @@
 | [loading_animation_widget] | ^1.2.0+1 | 加载动画组件包                 |
 
 [provider]: https://pub.dev/packages/provider/
-[getwidget]: https://pub.dev/packages/getwidget
 [dio]: https://pub.dev/packages/dio/
 [fluttertoast]: https://pub.dev/packages/fluttertoast/
 [curved_navigation_bar]: https://pub.dev/packages/curved_navigation_bar/

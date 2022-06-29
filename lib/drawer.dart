@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:getwidget/getwidget.dart';
 import 'package:provider/provider.dart';
 import 'package:ventroar_app/contexts/global_provider.dart';
-import 'package:ventroar_app/widgets/vent_button.dart';
 
 class VDrawer extends StatefulWidget {
   const VDrawer({
@@ -126,17 +124,19 @@ class _VDrawerState extends State<VDrawer> {
                       Positioned(
                         bottom: 0,
                         left: 10,
-                        child: VTextIconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.output,
-                            color: Colors.redAccent,
-                            size: 32,
-                          ),
-                          buttonText: "退出登录",
-                          textColor:
-                              Theme.of(context).textTheme.bodyText1!.color!,
-                          buttonType: GFButtonType.transparent,
+                        child: Row(
+                          children: [
+                            IconButton(
+                              onPressed: () {},
+                              tooltip: "切换主题",
+                              icon: const Icon(
+                                Icons.output,
+                                color: Colors.redAccent,
+                                size: 32,
+                              ),
+                            ),
+                            const Text("退出登录"),
+                          ],
                         ),
                       ),
                       Positioned(
@@ -147,11 +147,6 @@ class _VDrawerState extends State<VDrawer> {
                             Provider.of<ThemeProvider>(context, listen: false)
                                 .changeToDark(!_isDark);
                           },
-                          splashColor: Colors.white.withOpacity(0),
-                          hoverColor: Colors.white.withOpacity(0),
-                          focusColor: Colors.white.withOpacity(0),
-                          disabledColor: Colors.white.withOpacity(0),
-                          highlightColor: Colors.white.withOpacity(0),
                           tooltip: "切换主题",
                           icon: Icon(
                             _isDark
