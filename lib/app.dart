@@ -24,16 +24,8 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  final List<Widget> _pages = [
-    const HomePage(),
-    const StarPage(),
-    const ChatListPage(),
-    const UserPage(),
-  ];
-
   @override
   Widget build(BuildContext context) {
-    int _selectedIndex = Provider.of<PageDataProvider>(context).selectedIndex;
     bool _isDark = Provider.of<ThemeProvider>(context).isDark;
     bool _isLoginState =
         Provider.of<UserVerificationProvider>(context).isLoginState;
@@ -46,68 +38,50 @@ class _AppState extends State<App> {
       debugShowCheckedModeBanner: false,
       initialRoute: _isLoginState ? "./" : "./login",
       routes: {
-        "./": (context) => AppPage(
-              selectedIndex: _selectedIndex,
-              pages: _pages,
-            ),
+        "./": (context) => const AppPage(),
         "./login": (context) => const LoginPage(),
       },
     );
   }
 }
 
-class AppPage extends StatelessWidget {
-  const AppPage({
-    Key? key,
-    required int selectedIndex,
-    required List<Widget> pages,
-  })  : _selectedIndex = selectedIndex,
-        _pages = pages,
-        super(key: key);
-
-  final int _selectedIndex;
-
-  final List<Widget> _pages;
+class AppPage extends StatefulWidget {
+  const AppPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    //获取每页对应的appbar
-    PreferredSizeWidget? getAppBar(int selectedIndex) {
-      switch (selectedIndex) {
-        case 0:
-          return const HomeAppBar();
-        case 1:
-          return const StarAppBar();
-        case 2:
-          return const ChatAppBar();
-        case 3:
-          return const UserAppBar();
-      }
-      return AppBar(
-        title: const Text("未初始化的导航栏"),
-      );
-    }
+  State<AppPage> createState() => _AppPageState();
+}
 
-//获取每页对应的侧滑触发drawer宽度
-    double? getDrawerEdgeDragWidth(int selectedIndex) {
-      switch (selectedIndex) {
-        case 0:
-          return 150.0;
-        case 1:
-          return 150.0;
-        case 2:
-          return 55.0;
-        case 3:
-          return 150.0;
-      }
-      return 0;
-    }
+class _AppPageState extends State<AppPage> {
+  @override
+  Widget build(BuildContext context) {
+    int _selectedIndex = Provider.of<PageDataProvider>(context).selectedIndex;
+    final List<Widget> _pages = [
+      const HomePage(),
+      const StarPage(),
+      const ChatListPage(),
+      const UserPage(),
+    ];
+
+    final List<PreferredSizeWidget?> _appBars = [
+      const HomeAppBar(),
+      const StarAppBar(),
+      const ChatAppBar(),
+      const UserAppBar(),
+    ];
+
+    final List<double> _drawerEdgeDragWidth = [
+      150.0,
+      150.0,
+      55.0,
+      150.0,
+    ];
 
     return Scaffold(
-      appBar: getAppBar(_selectedIndex),
+      appBar: _appBars[_selectedIndex],
 
       //侧边导航栏手势打开宽度
-      drawerEdgeDragWidth: getDrawerEdgeDragWidth(_selectedIndex),
+      drawerEdgeDragWidth: _drawerEdgeDragWidth[_selectedIndex],
 
       body: PageTransitionSwitcher(
         duration: const Duration(milliseconds: 300),
