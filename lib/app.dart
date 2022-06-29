@@ -77,35 +77,39 @@ class _AppPageState extends State<AppPage> {
       150.0,
     ];
 
-    return Scaffold(
-      appBar: _appBars[_selectedIndex],
+    return Builder(builder: (context) {
+      return MediaQuery(
+          data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+          child: Scaffold(
+            appBar: _appBars[_selectedIndex],
 
-      //侧边导航栏手势打开宽度
-      drawerEdgeDragWidth: _drawerEdgeDragWidth[_selectedIndex],
+            //侧边导航栏手势打开宽度
+            drawerEdgeDragWidth: _drawerEdgeDragWidth[_selectedIndex],
 
-      body: PageTransitionSwitcher(
-        duration: const Duration(milliseconds: 300),
-        transitionBuilder: (
-          child,
-          animation,
-          secondaryAnimation,
-        ) {
-          return FadeThroughTransition(
-            animation: animation,
-            secondaryAnimation: secondaryAnimation,
-            child: child,
-          );
-        },
-        child: _pages[_selectedIndex],
-      ),
+            body: PageTransitionSwitcher(
+              duration: const Duration(milliseconds: 300),
+              transitionBuilder: (
+                child,
+                animation,
+                secondaryAnimation,
+              ) {
+                return FadeThroughTransition(
+                  animation: animation,
+                  secondaryAnimation: secondaryAnimation,
+                  child: child,
+                );
+              },
+              child: _pages[_selectedIndex],
+            ),
 
-      drawer: const VDrawer(),
+            drawer: const VDrawer(),
 
-      bottomNavigationBar: Builder(
-        builder: (context) {
-          return const VentRoarButtonBar();
-        },
-      ),
-    );
+            bottomNavigationBar: Builder(
+              builder: (context) {
+                return const VentRoarButtonBar();
+              },
+            ),
+          ));
+    });
   }
 }
