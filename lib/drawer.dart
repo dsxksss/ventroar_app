@@ -124,22 +124,24 @@ class _VDrawerState extends State<VDrawer> {
                       Positioned(
                         bottom: 0,
                         left: 10,
-                        child: Row(
-                          children: [
-                            IconButton(
-                              onPressed: () {
-                                Navigator.of(context).pushNamed("./login");
-                              },
-                              tooltip: "退出登录",
-                              icon: const Icon(
-                                Icons.output,
-                                color: Colors.redAccent,
-                                size: 32,
-                              ),
+                        child: TextButton.icon(
+                            onPressed: () {
+                              Navigator.of(context).pushNamed("./login");
+                            },
+                            icon: const Icon(
+                              Icons.output,
+                              color: Colors.redAccent,
+                              size: 32,
                             ),
-                            const Text("退出登录"),
-                          ],
-                        ),
+                            label: Text(
+                              "退出登录",
+                              style: TextStyle(
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .headline1!
+                                    .color,
+                              ),
+                            )),
                       ),
                       Positioned(
                         bottom: 1,
