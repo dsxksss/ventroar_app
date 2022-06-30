@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import './vcolors.dart';
 
@@ -78,31 +79,31 @@ ThemeData darkTheme(BuildContext context) {
     ///全局字体设置
     textTheme: TextTheme(
       //1号标题字样式
-      headline1: TextStyle(color: VColors.vPtext),
+      headline1: TextStyle(color: VColors.vPtext, fontSize: 13.sp),
       //2号标题字样式
-      headline2: TextStyle(color: VColors.vPtext),
+      headline2: TextStyle(color: VColors.vPtext, fontSize: 13.sp),
       //3号标题字样式
-      headline3: TextStyle(color: VColors.vPtext),
+      headline3: TextStyle(color: VColors.vPtext, fontSize: 13.sp),
       //4号标题字样式
-      headline4: TextStyle(color: VColors.vPtext),
+      headline4: TextStyle(color: VColors.vPtext, fontSize: 13.sp),
       //5号标题字样式
-      headline5: TextStyle(color: VColors.vPtext),
+      headline5: TextStyle(color: VColors.vPtext, fontSize: 13.sp),
       //6号标题字样式
-      headline6: TextStyle(color: VColors.vPtext),
+      headline6: TextStyle(color: VColors.vPtext, fontSize: 13.sp),
       //1号副标题字样式
-      subtitle1: TextStyle(color: VColors.vPtext),
+      subtitle1: TextStyle(color: VColors.vPtext, fontSize: 13.sp),
       //2号副标题字样式
-      subtitle2: TextStyle(color: VColors.vPtext),
+      subtitle2: TextStyle(color: VColors.vPtext, fontSize: 13.sp),
       //1号内容字样式
-      bodyText1: TextStyle(color: VColors.vPtext),
+      bodyText1: TextStyle(color: VColors.vPtext, fontSize: 13.sp),
       //2号内容字样式
-      bodyText2: TextStyle(color: VColors.vPtext),
+      bodyText2: TextStyle(color: VColors.vPtext, fontSize: 13.sp),
       //说明文字样式
-      caption: TextStyle(color: VColors.vPtext),
+      caption: TextStyle(color: VColors.vPtext, fontSize: 13.sp),
       //按钮字体样式
-      button: TextStyle(color: VColors.vPtext),
+      button: TextStyle(color: VColors.vPtext, fontSize: 13.sp),
       //字体划线样式
-      overline: TextStyle(color: VColors.vPtext),
+      overline: TextStyle(color: VColors.vPtext, fontSize: 13.sp),
     ),
 
     //tile样式
