@@ -1,7 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:ventroar_app/contexts/global_provider.dart';
+
+class DHeader extends StatelessWidget {
+  final String _userName = "zhangxiaokang";
+  final String _userEmail = "2546650292@qq.com";
+  const DHeader({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 0.23.sh,
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(0.06.sw, 0.02.sh, 0, 0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(50),
+              child: Image.asset("static/img/t2.png"),
+            ),
+            SizedBox(height: 0.015.sh),
+            Text(
+              _userName,
+              style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500),
+            ),
+            SizedBox(height: 0.01.sh),
+            Text(_userEmail),
+          ],
+        ),
+      ),
+    );
+  }
+}
 
 class VDrawer extends StatefulWidget {
   const VDrawer({
@@ -15,11 +51,11 @@ class VDrawer extends StatefulWidget {
 class _VDrawerState extends State<VDrawer> {
   @override
   Widget build(BuildContext context) {
-    TextStyle _titleTextStyle = const TextStyle(
-      fontSize: 18,
+    TextStyle _titleTextStyle = TextStyle(
+      fontSize: 16.sp,
     );
 
-    double _iconSize = 30;
+    double _iconSize = 26.sp;
 
     Function _changePageIndex =
         Provider.of<PageDataProvider>(context, listen: false).changePageIndex;
@@ -34,7 +70,7 @@ class _VDrawerState extends State<VDrawer> {
       ListTile(
         minVerticalPadding: 0,
         minLeadingWidth: 0,
-        contentPadding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+        contentPadding: EdgeInsets.fromLTRB(0.05.sw, 0, 0, 0),
         leading: Icon(
           _selectedIndex == 0 ? Icons.home : Icons.home_outlined,
           size: _iconSize,
@@ -52,7 +88,7 @@ class _VDrawerState extends State<VDrawer> {
       ListTile(
         minVerticalPadding: 0,
         minLeadingWidth: 0,
-        contentPadding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+        contentPadding: EdgeInsets.fromLTRB(0.05.sw, 0, 0, 0),
         leading: Icon(
           _selectedIndex == 1 ? Icons.star_rounded : Icons.star_border_outlined,
           size: _iconSize,
@@ -70,7 +106,7 @@ class _VDrawerState extends State<VDrawer> {
       ListTile(
         minVerticalPadding: 0,
         minLeadingWidth: 0,
-        contentPadding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+        contentPadding: EdgeInsets.fromLTRB(0.05.sw, 0, 0, 0),
         leading: Icon(
           _selectedIndex == 2
               ? Icons.text_snippet_rounded
@@ -90,7 +126,7 @@ class _VDrawerState extends State<VDrawer> {
       ListTile(
         minVerticalPadding: 0,
         minLeadingWidth: 0,
-        contentPadding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+        contentPadding: EdgeInsets.fromLTRB(0.05.sw, 0, 0, 0),
         leading: Icon(
           _selectedIndex == 3 ? Icons.person : Icons.person_outline,
           size: _iconSize,
@@ -109,16 +145,15 @@ class _VDrawerState extends State<VDrawer> {
 
     return Drawer(
       child: ListView(
-        padding: const EdgeInsets.fromLTRB(0, 55, 0, 0),
         children: <Widget>[
           const DHeader(),
           Container(
-            padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+            padding: EdgeInsets.fromLTRB(0, 0.01.sh, 0, 0),
             child: Column(
               children: [
                 ..._listTiles,
                 SizedBox(
-                  height: 370,
+                  height: 0.77.sw,
                   child: Stack(
                     children: [
                       Positioned(
@@ -128,10 +163,10 @@ class _VDrawerState extends State<VDrawer> {
                             onPressed: () {
                               Navigator.of(context).pushNamed("./login");
                             },
-                            icon: const Icon(
+                            icon: Icon(
                               Icons.output,
                               color: Colors.redAccent,
-                              size: 32,
+                              size: 32.sp,
                             ),
                             label: Text(
                               "退出登录",
@@ -163,54 +198,6 @@ class _VDrawerState extends State<VDrawer> {
                   ),
                 )
               ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class DHeader extends StatelessWidget {
-  final String _userName = "zhangxiaokang";
-  final String _uesrEmail = "2546650292@qq.com";
-  const DHeader({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 120,
-      padding: const EdgeInsets.fromLTRB(10, 15, 0, 0),
-      child: Stack(
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(2, 0, 0, 0),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(50),
-              child: Image.asset("static/img/t2.png"),
-            ),
-          ),
-          Positioned(
-            top: 10,
-            right: 25,
-            child: Text(
-              _userName,
-              style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).textTheme.bodyText1!.color!),
-            ),
-          ),
-          Positioned(
-            top: 45,
-            right: 25,
-            child: Text(
-              _uesrEmail,
-              style: TextStyle(
-                  fontSize: 15,
-                  color: Theme.of(context).textTheme.bodyText1!.color!),
             ),
           ),
         ],
