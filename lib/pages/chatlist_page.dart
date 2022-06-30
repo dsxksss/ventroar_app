@@ -34,7 +34,7 @@ class _ChatListPageState extends State<ChatListPage> {
           createTime: DateTime.now(),
           userName: e["name"].toString(),
           userImgUrl:
-              "https://api.lorem.space/image/face?https://api.lorem.space/image/face?hash=${Random().nextInt(50)}"
+              "https://api.lorem.space/image/face?hash=${Random().nextInt(50)}"
                   .toString(),
           isAdmin: false,
         );
