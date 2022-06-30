@@ -23,7 +23,7 @@ class UserFields {
 //实体化变量等
 class User {
   final int? id;
-  final DateTime createTime;
+  final int createTime;
   final String userName;
   final String userImgUrl;
   final bool isAdmin;
@@ -40,7 +40,7 @@ class User {
 //获取原数据的内容拷贝一份出来
   User copy({
     int? id,
-    DateTime? createTime,
+    int? createTime,
     String? userName,
     String? userImgUrl,
     bool? isAdmin,
@@ -57,7 +57,7 @@ class User {
   static User fromJson(Map<String, Object?> json) => User(
         //利用Map里的键获取这个JSON类型(也可以叫Map类型)里的值数据.
         id: json[UserFields.id] as int?,
-        createTime: DateTime.parse(json[UserFields.createTime] as String),
+        createTime: json[UserFields.createTime] as int,
         userName: json[UserFields.userName] as String,
         userImgUrl: json[UserFields.userImgUrl] as String,
         //因为bool数据存表里就变成了整数类型(1=true, 0=false)
@@ -68,7 +68,7 @@ class User {
 //转换成K,V类型,在这里也可以理解为JSON类型
   Map<String, Object?> toJson() => {
         UserFields.id: id,
-        UserFields.createTime: createTime.toIso8601String(),
+        UserFields.createTime: createTime,
         UserFields.userName: userName,
         UserFields.userImgUrl: userImgUrl,
         UserFields.isAdmin: isAdmin,

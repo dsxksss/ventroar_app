@@ -9,6 +9,7 @@ import 'package:ventroar_app/functions/vent_snack.dart';
 import 'package:ventroar_app/schemas/user.dart';
 import 'package:ventroar_app/widgets/vent_slidable.dart';
 import '../contexts/global_provider.dart';
+import '../functions/curren_time_millis.dart';
 import '../pages/chat_page.dart';
 
 class ChatListPage extends StatefulWidget {
@@ -31,7 +32,7 @@ class _ChatListPageState extends State<ChatListPage> {
     for (var e in a) {
       {
         User result = User(
-          createTime: DateTime.now(),
+          createTime: currentTimeMillis(),
           userName: e["name"].toString(),
           userImgUrl:
               "https://api.lorem.space/image/face?hash=${Random().nextInt(50)}"
