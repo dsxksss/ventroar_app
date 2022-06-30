@@ -22,7 +22,7 @@ class _MessageBubbleState extends State<MessageBubble> {
         text: widget.message.text,
         color: widget.message.isSentByMe
             ? const Color.fromARGB(255, 31, 148, 238)
-            : const Color.fromARGB(255, 243, 243, 253),
+            : const Color.fromARGB(255, 223, 223, 235),
         tail: true, //是否显示边角
         seen: false, //是否设置已读
         sent: false, //是否发送完毕
