@@ -1,10 +1,13 @@
 import 'dart:math';
+import 'package:badges/badges.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:rive/rive.dart';
 import 'package:ventroar_app/databases/userdb/user_db.dart';
+import 'package:ventroar_app/functions/timestamp_conversion.dart';
 import 'package:ventroar_app/functions/vent_snack.dart';
 import 'package:ventroar_app/schemas/user.dart';
 import 'package:ventroar_app/widgets/vent_slidable.dart';
@@ -145,11 +148,12 @@ class _ChatListPageState extends State<ChatListPage> {
                         onLongPress: () {
                           vSnackBar(
                             context: context,
-                            textWidget: const Text(
+                            textWidget: Text(
                               "是否清空用户聊天列表?",
-                              style: TextStyle(fontSize: 20),
+                              style: TextStyle(
+                                  fontSize: 17.sp, color: Colors.white),
                             ),
-                            button: ElevatedButton(
+                            button: TextButton.icon(
                               onPressed: () => {
                                 setState(() {
                                   UserDB.instance.deleteAllUsers();
@@ -160,7 +164,10 @@ class _ChatListPageState extends State<ChatListPage> {
                                     .hideCurrentSnackBar(
                                         reason: SnackBarClosedReason.action),
                               },
-                              child: const Text("删除全部"),
+                              label: const Text("确定"),
+                              icon: const Icon(
+                                Icons.delete,
+                              ),
                             ),
                           );
                         },
@@ -191,15 +198,15 @@ class _ChatListPageState extends State<ChatListPage> {
                         ),
                         subtitle: const Text("用户的最新聊天记录信息"),
                         trailing: SizedBox(
-                          width: 80,
                           child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Expanded(
-                                child:
-                                    Text(userList[index].createTime.toString()),
+                                child: Text(timestampConversion(
+                                    userList[index].createTime)),
                               ),
-                              const Icon(
-                                Icons.arrow_forward,
+                              VBadge(
+                                count: Random().nextInt(120).toString(),
                               ),
                             ],
                           ),
@@ -207,6 +214,41 @@ class _ChatListPageState extends State<ChatListPage> {
                       ),
                     ),
                   ),
+          );
+  }
+}
+
+class VBadge extends StatelessWidget {
+  const VBadge({
+    Key? key,
+    required this.count,
+  }) : super(key: key);
+  final String count;
+  @override
+  Widget build(BuildContext context) {
+    return int.parse(count) >= 99
+        ? Badge(
+            toAnimate: false,
+            shape: BadgeShape.square,
+            badgeColor: Colors.grey,
+            borderRadius: BorderRadius.circular(20),
+            padding: const EdgeInsets.all(2),
+            badgeContent: Text('99+',
+                style: TextStyle(color: Colors.white, fontSize: 11.sp)),
+          )
+        : Badge(
+            toAnimate: false,
+            borderRadius: BorderRadius.circular(20),
+            badgeColor: Colors.grey,
+            padding: int.parse(count) >= 10
+                ? const EdgeInsets.all(3)
+                : const EdgeInsets.all(6),
+            badgeContent: Text(
+              count,
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: int.parse(count) >= 10 ? 12.sp : 13.sp),
+            ),
           );
   }
 }
