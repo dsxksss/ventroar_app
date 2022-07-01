@@ -206,7 +206,7 @@ class _ChatListPageState extends State<ChatListPage> {
                                     userList[index].createTime)),
                               ),
                               VBadge(
-                                count: Random().nextInt(120).toString(),
+                                count: Random().nextInt(120),
                               ),
                             ],
                           ),
@@ -223,10 +223,10 @@ class VBadge extends StatelessWidget {
     Key? key,
     required this.count,
   }) : super(key: key);
-  final String count;
+  final int count;
   @override
   Widget build(BuildContext context) {
-    return int.parse(count) >= 99
+    return count >= 99
         ? Badge(
             toAnimate: false,
             shape: BadgeShape.square,
@@ -240,14 +240,12 @@ class VBadge extends StatelessWidget {
             toAnimate: false,
             borderRadius: BorderRadius.circular(20),
             badgeColor: Colors.grey,
-            padding: int.parse(count) >= 10
-                ? const EdgeInsets.all(3)
-                : const EdgeInsets.all(6),
+            padding:
+                count >= 10 ? const EdgeInsets.all(3) : const EdgeInsets.all(6),
             badgeContent: Text(
-              count,
+              count.toString(),
               style: TextStyle(
-                  color: Colors.white,
-                  fontSize: int.parse(count) >= 10 ? 12.sp : 13.sp),
+                  color: Colors.white, fontSize: count >= 10 ? 12.sp : 13.sp),
             ),
           );
   }
