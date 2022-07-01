@@ -28,26 +28,44 @@ class _ChatListPageState extends State<ChatListPage> {
   Future fetchAndUpDate() async {
     Response response;
     var dio = Dio();
-    response = await dio.get('https://jsonplaceholder.typicode.com/users');
-    List<dynamic> a = response.data as List<dynamic>;
-
-    for (var e in a) {
-      {
-        User result = User(
-          createTime: currentTimeMillis(),
-          userName: e["name"].toString(),
-          userImgUrl:
-              "https://api.lorem.space/image/face?hash=${Random().nextInt(50)}"
-                  .toString(),
-          isAdmin: false,
+    try {
+      response = await dio.get('https://jsonplaceholder.typicode.com/users');
+      List<dynamic> a = response.data as List<dynamic>;
+      for (var e in a) {
+        {
+          User result = User(
+            createTime: currentTimeMillis(),
+            userName: e["name"].toString(),
+            userImgUrl:
+                "https://api.lorem.space/image/face?hash=${Random().nextInt(50)}"
+                    .toString(),
+            isAdmin: false,
+          );
+          userList.add(await UserDB.instance.createUser(result));
+        }
+      }
+      setState(() {
+        readAndLodingAllUsers();
+      });
+    } on DioError catch (e) {
+      if (e.response?.statusCode == 404) {
+        vSnackBar(
+          context: context,
+          textWidget: Text(
+            "数据没找到,请检查重试...",
+            style: TextStyle(fontSize: 15.sp, color: Colors.white),
+          ),
         );
-        userList.add(await UserDB.instance.createUser(result));
+      } else {
+        vSnackBar(
+          context: context,
+          textWidget: Text(
+            "网络繁忙,获取联系人失败,请重试...",
+            style: TextStyle(fontSize: 15.sp, color: Colors.white),
+          ),
+        );
       }
     }
-
-    setState(() {
-      readAndLodingAllUsers();
-    });
   }
 
   Future readAndLodingAllUsers() async {
