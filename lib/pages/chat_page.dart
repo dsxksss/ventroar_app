@@ -88,6 +88,10 @@ class _ChatPageState extends State<ChatPage> {
           children: [
             Expanded(
               child: ListView.builder(
+                physics: const AlwaysScrollableScrollPhysics(
+                  //当内容不足时也可以启动反弹刷新
+                  parent: BouncingScrollPhysics(),
+                ),
                 controller: _scrollController,
                 padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
                 itemCount: messages.length,
