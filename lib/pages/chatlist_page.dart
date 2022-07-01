@@ -3,7 +3,6 @@ import 'package:badges/badges.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:rive/rive.dart';
 import 'package:ventroar_app/databases/userdb/user_db.dart';
@@ -93,13 +92,6 @@ class _ChatListPageState extends State<ChatListPage> {
                 Theme.of(context).bottomNavigationBarTheme.backgroundColor,
             color: Theme.of(context).floatingActionButtonTheme.backgroundColor,
             onRefresh: () {
-              Fluttertoast.showToast(
-                msg: "刷新屏幕",
-                backgroundColor: Colors.blueAccent,
-                gravity: ToastGravity.BOTTOM,
-                toastLength: Toast.LENGTH_LONG,
-                fontSize: 18,
-              );
               return fetchAndUpDate();
             },
             child: userList.isEmpty

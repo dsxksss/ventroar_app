@@ -5,7 +5,6 @@
 | [provider]              | ^6.0.3   | flutter官方推荐的状态管理插件      |
 | [sqflite]               | ^2.0.2+1 | 本地数据存储sqflite插件         |
 | [dio]                   | ^4.0.6   | http请求库                 |
-| [fluttertoast]          | ^8.0.7   | toast组件库                |
 | [curved_navigation_bar] | ^1.0.1   | 底部导航栏组件                 |
 | [badges]                | ^2.0.2   | 徽标                      |
 | [font_awesome_flutter]  | ^10.1.0  | font_awesome图标库         |
@@ -25,7 +24,6 @@
 [provider]: https://pub.dev/packages/provider/
 [sqflite]: https://pub.dev/packages/sqflite/
 [dio]: https://pub.dev/packages/dio/
-[fluttertoast]: https://pub.dev/packages/fluttertoast/
 [curved_navigation_bar]: https://pub.dev/packages/curved_navigation_bar/
 [badges]: https://pub.dev/packages/badges/
 [font_awesome_flutter]: https://pub.dev/packages/font_awesome_flutter/
