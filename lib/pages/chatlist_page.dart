@@ -26,6 +26,14 @@ class _ChatListPageState extends State<ChatListPage> {
   bool isLoading = false;
 
   Future fetchAndUpDate() async {
+    vSnackBar(
+      showTime: const Duration(seconds: 1),
+      context: context,
+      textWidget: Text(
+        "刷新屏幕",
+        style: TextStyle(fontSize: 15.sp, color: Colors.white),
+      ),
+    );
     Response response;
     var dio = Dio();
     try {

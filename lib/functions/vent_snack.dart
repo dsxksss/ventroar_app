@@ -81,7 +81,10 @@ class _VSnackContentState extends State<VSnackContent> {
                   ScaffoldMessenger.of(context)
                       .hideCurrentSnackBar(reason: SnackBarClosedReason.action);
                 },
-                icon: const Icon(FontAwesomeIcons.check),
+                icon: const Icon(
+                  FontAwesomeIcons.check,
+                  color: Colors.white,
+                ),
               ),
         ],
       ),
