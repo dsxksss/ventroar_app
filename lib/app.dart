@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:animations/animations.dart';
 import 'package:provider/provider.dart';
 import 'package:ventroar_app/contexts/global_provider.dart';
-import 'package:ventroar_app/pages/login_page.dart';
+import 'package:ventroar_app/page_routers.dart';
 import 'package:ventroar_app/pages/pages_appbar/home_appbar.dart';
 import 'package:ventroar_app/pages/pages_appbar/star_appbar.dart';
 import 'package:ventroar_app/pages/pages_appbar/user_appbar.dart';
 import 'package:ventroar_app/pages/user_page.dart';
-import './ventroar_bottom_bar.dart';
-import './drawer.dart';
 import './themes/dark_theme.dart';
 import './themes/light_theme.dart';
 import './pages/home_page.dart';
 import './pages/star_page.dart';
 import './pages/chatlist_page.dart';
+import 'global/widgets/drawer.dart';
+import 'global/widgets/ventroar_bottom_bar.dart';
 import 'pages/pages_appbar/chat_appbar.dart';
 
 class App extends StatefulWidget {
@@ -37,10 +37,7 @@ class _AppState extends State<App> {
       darkTheme: darkTheme(context),
       debugShowCheckedModeBanner: false,
       initialRoute: _isLoginState ? "./" : "./login",
-      routes: {
-        "./": (context) => const AppPage(),
-        "./login": (context) => const LoginPage(),
-      },
+      routes: pageRouter(),
     );
   }
 }
