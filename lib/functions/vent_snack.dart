@@ -33,7 +33,7 @@ Widget? getModelIcon(VSnackModel vSnackBar) {
       return const FaIcon(FontAwesomeIcons.bullhorn, color: Colors.white);
 
     case VSnackModel.success:
-      return const Icon(Icons.done_all, color: Colors.white);
+      return const FaIcon(FontAwesomeIcons.clipboardCheck, color: Colors.white);
 
     case VSnackModel.warning:
       return const FaIcon(FontAwesomeIcons.personDigging, color: Colors.white);

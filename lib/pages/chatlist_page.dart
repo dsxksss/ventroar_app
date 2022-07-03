@@ -59,7 +59,7 @@ class _ChatListPageState extends State<ChatListPage> {
       if (e.response?.statusCode == 404) {
         vSnackBar(
           context: context,
-          bgcolor: Colors.redAccent,
+          model: VSnackModel.error,
           textWidget: Text(
             "数据没找到,请检查重试...",
             style: TextStyle(fontSize: 15.sp, color: Colors.white),
@@ -68,7 +68,7 @@ class _ChatListPageState extends State<ChatListPage> {
       } else {
         vSnackBar(
           context: context,
-          bgcolor: Colors.redAccent,
+          model: VSnackModel.error,
           textWidget: Text(
             "网络繁忙,获取联系人失败,请重试...",
             style: TextStyle(fontSize: 15.sp, color: Colors.white),
@@ -168,7 +168,6 @@ class _ChatListPageState extends State<ChatListPage> {
                         onLongPress: () {
                           vSnackBar(
                             context: context,
-                            bgcolor: Colors.redAccent,
                             model: VSnackModel.error,
                             textWidget: Text(
                               "是否清空用户聊天列表?",
