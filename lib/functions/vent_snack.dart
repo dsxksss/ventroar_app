@@ -1,13 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+enum VSnackModel {
+  info,
+  warning,
+  error,
+  success,
+}
+
+Color getModel(VSnackModel vSnackBar) {
+  switch (vSnackBar) {
+    case VSnackModel.info:
+      return const Color.fromARGB(255, 62, 194, 255);
+
+    case VSnackModel.success:
+      return const Color.fromARGB(255, 9, 214, 95);
+
+    case VSnackModel.warning:
+      return const Color.fromARGB(255, 253, 122, 22);
+
+    case VSnackModel.error:
+      return const Color.fromARGB(255, 252, 81, 81);
+
+    default:
+      return Colors.grey;
+  }
+}
+
 ScaffoldFeatureController<SnackBar, SnackBarClosedReason>? vSnackBar({
   required BuildContext context, //必要的上下文
   //以下是可选参数
   Widget? textWidget, //设置默认content里的Text组件,如果是自定义content可以忽略这个选项
   Widget? content, //设置自定义content
   Widget? button, //设置自定义button
+  Widget? icon, //设置自定义icon
   Color? bgcolor = Colors.lightBlue, //设置背景颜色
+  VSnackModel? model, //一些自定义的颜色模式/如果设置则会覆盖bgcolor
   EdgeInsetsGeometry? padding = const EdgeInsets.all(16), //外边距
   EdgeInsetsGeometry? margin, //内边距(如果需要设置外边距，必须得位置方式设置为floating)
   SnackBarBehavior? behavior, //设置位置方式(并非设置位置)
@@ -38,8 +66,9 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason>? vSnackBar({
           VSnackContent(
             textWidget: textWidget,
             buttons: button,
+            icon: icon,
           ),
-      backgroundColor: bgcolor,
+      backgroundColor: model != null ? getModel(model) : bgcolor,
     ),
   );
 }
@@ -48,9 +77,11 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason>? vSnackBar({
 class VSnackContent extends StatefulWidget {
   final Widget? textWidget;
   final Widget? buttons;
+  final Widget? icon;
   const VSnackContent({
     Key? key,
     this.textWidget = const Text(""),
+    this.icon,
     required this.buttons,
   }) : super(key: key);
 
@@ -65,11 +96,8 @@ class _VSnackContentState extends State<VSnackContent> {
       height: 40,
       child: Row(
         children: [
-          const Icon(
-            FontAwesomeIcons.solidThumbsUp,
-            color: Colors.white,
-          ),
-          const SizedBox(width: 20),
+          if (widget.icon != null) widget.icon!,
+          if (widget.icon != null) const SizedBox(width: 20),
           Expanded(
             child: widget.textWidget ?? const Text("你没有设置TextWidget这个参数值!!!"),
           ),
