@@ -168,10 +168,14 @@ class _ChatListPageState extends State<ChatListPage> {
                         onLongPress: () {
                           vSnackBar(
                             context: context,
+                            bgcolor: Colors.redAccent,
+                            model: VSnackModel.error,
                             textWidget: Text(
                               "是否清空用户聊天列表?",
                               style: TextStyle(
-                                  fontSize: 17.sp, color: Colors.white),
+                                  fontSize: 17.sp,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
                             ),
                             button: TextButton.icon(
                               onPressed: () => {
@@ -184,7 +188,12 @@ class _ChatListPageState extends State<ChatListPage> {
                                     .hideCurrentSnackBar(
                                         reason: SnackBarClosedReason.action),
                               },
-                              label: const Text("确定"),
+                              label: Text(
+                                "确定",
+                                style: TextStyle(
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.bold),
+                              ),
                               icon: const Icon(
                                 Icons.delete,
                               ),

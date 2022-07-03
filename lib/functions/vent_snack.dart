@@ -8,7 +8,7 @@ enum VSnackModel {
   success,
 }
 
-Color getModel(VSnackModel vSnackBar) {
+Color? getModelBg(VSnackModel vSnackBar) {
   switch (vSnackBar) {
     case VSnackModel.info:
       return const Color.fromARGB(255, 62, 194, 255);
@@ -23,7 +23,27 @@ Color getModel(VSnackModel vSnackBar) {
       return const Color.fromARGB(255, 252, 81, 81);
 
     default:
-      return Colors.grey;
+      return null;
+  }
+}
+
+Widget? getModelIcon(VSnackModel vSnackBar) {
+  switch (vSnackBar) {
+    case VSnackModel.info:
+      return const FaIcon(FontAwesomeIcons.bullhorn, color: Colors.white);
+
+    case VSnackModel.success:
+      return const Icon(Icons.done_all, color: Colors.white);
+
+    case VSnackModel.warning:
+      return const FaIcon(FontAwesomeIcons.personDigging, color: Colors.white);
+
+    case VSnackModel.error:
+      return const FaIcon(FontAwesomeIcons.triangleExclamation,
+          color: Colors.white);
+
+    default:
+      return null;
   }
 }
 
@@ -66,9 +86,9 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason>? vSnackBar({
           VSnackContent(
             textWidget: textWidget,
             buttons: button,
-            icon: icon,
+            icon: model != null ? getModelIcon(model) : icon,
           ),
-      backgroundColor: model != null ? getModel(model) : bgcolor,
+      backgroundColor: model != null ? getModelBg(model) : bgcolor,
     ),
   );
 }
@@ -97,7 +117,7 @@ class _VSnackContentState extends State<VSnackContent> {
       child: Row(
         children: [
           if (widget.icon != null) widget.icon!,
-          if (widget.icon != null) const SizedBox(width: 20),
+          if (widget.icon != null) const SizedBox(width: 10),
           Expanded(
             child: widget.textWidget ?? const Text("你没有设置TextWidget这个参数值!!!"),
           ),
