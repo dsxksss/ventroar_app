@@ -27,11 +27,16 @@ class _ChatListPageState extends State<ChatListPage> {
 
   Future fetchAndUpDate() async {
     vSnackBar(
-      showTime: const Duration(seconds: 1),
+      showTime: const Duration(seconds: 2),
       context: context,
+      model: VSnackModel.success,
       textWidget: Text(
         "刷新屏幕",
-        style: TextStyle(fontSize: 15.sp, color: Colors.white),
+        style: TextStyle(
+          fontSize: 17.sp,
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
       ),
     );
     Response response;
