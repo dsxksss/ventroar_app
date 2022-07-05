@@ -161,7 +161,8 @@ class _VDrawerState extends State<VDrawer> {
                         left: 10,
                         child: TextButton.icon(
                             onPressed: () {
-                              Navigator.of(context).pushNamed("./login");
+                              Navigator.of(context).pushNamedAndRemoveUntil(
+                                  "./login", (route) => false);
                             },
                             icon: Icon(
                               Icons.output,
