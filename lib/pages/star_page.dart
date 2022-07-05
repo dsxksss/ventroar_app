@@ -1,5 +1,5 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:ventroar_app/services/http_lib.dart';
 
 class StarPage extends StatefulWidget {
   const StarPage({Key? key}) : super(key: key);
@@ -9,26 +9,15 @@ class StarPage extends StatefulWidget {
 }
 
 class _StarPageState extends State<StarPage> {
-  List<dynamic> datalist = [];
-
-  Future getData() async {
-    Response response;
-    var dio = Dio();
-    response = await dio.get('https://ventroar.xyz:2546/textDataApi/');
-    setState(() {
-      datalist = response.data;
-    });
-    // Fluttertoast.showToast(
-    //   msg: "刷新屏幕",
-    //   backgroundColor: Colors.blueAccent,
-    //   gravity: ToastGravity.BOTTOM,
-    //   toastLength: Toast.LENGTH_LONG,
-    //   fontSize: 20,
-    // );
-  }
-
   @override
   Widget build(BuildContext context) {
+    void a() async {
+      BasicHttpLib a = BasicHttpLib();
+      List<dynamic> datalist = await a.getListData();
+      print(datalist[0]);
+    }
+
+    a();
     return SizedBox(
       height: double.infinity,
       width: double.infinity,
