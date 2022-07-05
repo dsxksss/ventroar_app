@@ -84,7 +84,6 @@ class Services implements HttpMethod {
     var interceptorsWrapper = CustomInterceptors();
     Dio a = Dio(options);
     a.interceptors.add(interceptorsWrapper);
-
     //检查静态变量dio是否存在
     //如果存在就返回已有的dio
     //如果不存在就创建新的dio实例返回
@@ -92,8 +91,8 @@ class Services implements HttpMethod {
   }
 
   /// 清空全局dio对象
-  static clear() {
-    _dio = null;
+  void close() {
+    _dio != null ? _dio!.close() : _dio = null;
   }
 
   Map<String, dynamic> responseFactory(Map<String, dynamic> dataMap) {
