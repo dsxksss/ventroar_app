@@ -1,13 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 //昼夜主题值:isDark提供者
 class ThemeProvider extends ChangeNotifier {
   bool isDark;
-  ThemeProvider({this.isDark = true});
-  void changeToDark(bool isDark) {
+  late bool? phoneDark;
+
+  ThemeProvider({this.isDark = true}) {
+    initThemeData();
+  }
+
+  void initThemeData() async {
+    var perfs = await SharedPreferences.getInstance();
+    phoneDark = perfs.getBool("themeData");
+    isDark = phoneDark!;
+    notifyListeners();
+  }
+
+  void changeToDark(bool isDark) async {
     this.isDark = isDark;
     //随着新值的变化，我们创建一个监听器
     //如果发生了值的改变，就会通知各widget
+    final perfs = await SharedPreferences.getInstance();
+    await perfs.setBool("themeData", isDark);
     notifyListeners();
   }
 }
