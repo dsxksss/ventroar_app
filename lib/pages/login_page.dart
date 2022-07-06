@@ -119,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
             context: context,
             model: VSnackModel.error,
             textWidget: Text(
-              "网络繁忙,登录失败,请重试...",
+              "网络繁忙,自动登录失败,请重试",
               style: TextStyle(fontSize: 15.sp, color: Colors.white),
             ),
           );
@@ -127,9 +127,12 @@ class _LoginPageState extends State<LoginPage> {
       }
     }
 
-    if (_isLoginState) {
-      autoLogin();
-    }
+    Future.delayed(
+      const Duration(milliseconds: 1500),
+      () => {
+        if (_isLoginState) {autoLogin()}
+      },
+    );
 
     return Builder(builder: (context) {
       bool _isDark = Provider.of<ThemeProvider>(context, listen: true).isDark;
@@ -141,30 +144,30 @@ class _LoginPageState extends State<LoginPage> {
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             child: Center(
-              child: SizedBox(
-                height: MediaQuery.of(context).size.height,
-                width: MediaQuery.of(context).size.width * 0.70,
-                child: _isLoginState
-                    ? Center(
-                        child: _isDark
-                            ? Container(
-                                color: Theme.of(context)
-                                    .appBarTheme
-                                    .foregroundColor!
-                                    .withOpacity(0),
-                                width: 200,
-                                height: 200,
-                                child: const RiveAnimation.asset(
-                                    'static/animations/dark/wait_d.riv'),
-                              )
-                            : const SizedBox(
-                                width: 200,
-                                height: 200,
-                                child: RiveAnimation.asset(
-                                    'static/animations/light/wait_l.riv'),
-                              ),
-                      )
-                    : Column(
+              child: _isLoginState
+                  ? Center(
+                      child: _isDark
+                          ? Container(
+                              color: Theme.of(context)
+                                  .appBarTheme
+                                  .foregroundColor!
+                                  .withOpacity(0),
+                              width: 200,
+                              height: 200,
+                              child: const RiveAnimation.asset(
+                                  'static/animations/dark/wait_d.riv'),
+                            )
+                          : const SizedBox(
+                              width: 200,
+                              height: 200,
+                              child: RiveAnimation.asset(
+                                  'static/animations/light/wait_l.riv'),
+                            ),
+                    )
+                  : SizedBox(
+                      height: MediaQuery.of(context).size.height,
+                      width: MediaQuery.of(context).size.width * 0.70,
+                      child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
@@ -199,7 +202,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ],
                       ),
-              ),
+                    ),
             ),
           ),
         ),
