@@ -50,10 +50,37 @@ class PageDataProvider extends ChangeNotifier {
 //用户登录状态信息提供者
 class UserVerificationProvider extends ChangeNotifier {
   bool isLoginState;
-  UserVerificationProvider({this.isLoginState = false});
+  late bool? phoneLoginState;
+  String nowLoginToken;
+  late String? phoneLoginToken;
 
-  void changeLoginState(bool loginState) {
-    isLoginState = loginState;
+  UserVerificationProvider(
+      {this.isLoginState = false, this.nowLoginToken = ""}) {
+    initThemeData();
+  }
+
+  void initThemeData() async {
+    var perfs = await SharedPreferences.getInstance();
+    phoneLoginToken = perfs.getString("userToken");
+    phoneLoginState = perfs.getBool("userLoginState");
+    isLoginState = phoneLoginState ?? false;
+    nowLoginToken = phoneLoginToken ?? "";
+    notifyListeners();
+  }
+
+  void loginIn(String token) async {
+    isLoginState = true;
+    var perfs = await SharedPreferences.getInstance();
+    await perfs.setString("userToken", token);
+    await perfs.setBool("userLoginState", isLoginState);
+    notifyListeners();
+  }
+
+  void loginOut() async {
+    isLoginState = false;
+    var perfs = await SharedPreferences.getInstance();
+    await perfs.remove("userToken");
+    await perfs.setBool("userLoginState", isLoginState);
     notifyListeners();
   }
 }
