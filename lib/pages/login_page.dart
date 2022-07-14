@@ -31,10 +31,9 @@ class _LoginPageState extends State<LoginPage> {
       try {
         Response _response;
         var dio = Dio();
-        _response =
-            await dio.post("https://ventroar.xyz:2546/userLoginApi/", data: {
-          "userPhoneNumber": _accountController.text,
-          "userPassword": _passwordController.text,
+        _response = await dio.post("https://ventroar.xyz:2548/signin/", data: {
+          "account": _accountController.text,
+          "password": _passwordController.text,
         });
         // print(_response);//登录时间
         print(_response.headers["x-auth-token"]);
@@ -82,7 +81,7 @@ class _LoginPageState extends State<LoginPage> {
       try {
         var dio = Dio();
         await dio.post(
-          "https://ventroar.xyz:2546/userLoginApi/autoLogin",
+          "https://ventroar.xyz:2548/tokenlogin",
           options: Options(
             headers: {"x-auth-token": _loginToken},
           ),
