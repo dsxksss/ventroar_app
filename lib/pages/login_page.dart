@@ -57,13 +57,14 @@ class _LoginPageState extends State<LoginPage> {
       } on DioError catch (e) {
         if (e.response?.statusCode == 400) {
           vSnackBar(
-            context: context,
-            model: VSnackModel.error,
-            textWidget: Text(
-              "账号或密码错误,请重试!",
-              style: TextStyle(fontSize: 15.sp, color: Colors.white),
-            ),
-          );
+              context: context,
+              model: VSnackModel.error,
+              textWidget: Text(
+                "账号或密码错误,请重试!",
+                style: TextStyle(fontSize: 15.sp, color: Colors.white),
+              ));
+          Navigator.of(context)
+              .pushNamedAndRemoveUntil("./login", (route) => false);
         } else {
           vSnackBar(
             context: context,
@@ -73,6 +74,8 @@ class _LoginPageState extends State<LoginPage> {
               style: TextStyle(fontSize: 15.sp, color: Colors.white),
             ),
           );
+          Navigator.of(context)
+              .pushNamedAndRemoveUntil("./login", (route) => false);
         }
       }
     }
