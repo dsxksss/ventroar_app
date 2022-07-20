@@ -13,7 +13,7 @@ class ThemeProvider extends ChangeNotifier {
   void initThemeData() async {
     var perfs = await SharedPreferences.getInstance();
     phoneDark = perfs.getBool("themeData");
-    isDark = phoneDark!;
+    isDark = phoneDark ?? true;
     notifyListeners();
   }
 
