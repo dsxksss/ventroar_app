@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:rive/rive.dart';
+import 'package:ventroar_app/widgets/wait_animation.dart';
 
 import '../contexts/global_provider.dart';
 import '../functions/vent_snack.dart';
@@ -147,25 +148,7 @@ class _LoginPageState extends State<LoginPage> {
             width: MediaQuery.of(context).size.width,
             child: Center(
               child: _isLoginState
-                  ? Center(
-                      child: _isDark
-                          ? Container(
-                              color: Theme.of(context)
-                                  .appBarTheme
-                                  .foregroundColor!
-                                  .withOpacity(0),
-                              width: 200,
-                              height: 200,
-                              child: const RiveAnimation.asset(
-                                  'static/animations/dark/wait_d.riv'),
-                            )
-                          : const SizedBox(
-                              width: 200,
-                              height: 200,
-                              child: RiveAnimation.asset(
-                                  'static/animations/light/wait_l.riv'),
-                            ),
-                    )
+                  ? const WaitAnimation()
                   : SizedBox(
                       height: MediaQuery.of(context).size.height,
                       width: MediaQuery.of(context).size.width * 0.70,

@@ -10,6 +10,7 @@ import 'package:ventroar_app/functions/timestamp_conversion.dart';
 import 'package:ventroar_app/functions/vent_snack.dart';
 import 'package:ventroar_app/schemas/user.dart';
 import 'package:ventroar_app/widgets/vent_slidable.dart';
+import 'package:ventroar_app/widgets/wait_animation.dart';
 import '../contexts/global_provider.dart';
 import '../functions/curren_time_millis.dart';
 import '../pages/chat_page.dart';
@@ -103,23 +104,7 @@ class _ChatListPageState extends State<ChatListPage> {
   Widget build(BuildContext context) {
     bool _isDark = Provider.of<ThemeProvider>(context, listen: true).isDark;
     return isLoading
-        ? _isDark
-            ? Container(
-                color: Theme.of(context)
-                    .appBarTheme
-                    .foregroundColor!
-                    .withOpacity(0),
-                width: 200,
-                height: 200,
-                child: const RiveAnimation.asset(
-                    'static/animations/dark/wait_d.riv'),
-              )
-            : const SizedBox(
-                width: 200,
-                height: 200,
-                child:
-                    RiveAnimation.asset('static/animations/light/wait_l.riv'),
-              )
+        ? const WaitAnimation()
         : RefreshIndicator(
             backgroundColor:
                 Theme.of(context).bottomNavigationBarTheme.backgroundColor,
