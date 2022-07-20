@@ -23,15 +23,15 @@ class _VSlidableState extends State<VSlidable> {
         children: [
           SlidableAction(
             onPressed: (buildContext) {},
-            backgroundColor: Colors.blue,
-            foregroundColor: Colors.white,
+            backgroundColor: Theme.of(context).canvasColor,
+            foregroundColor: Colors.blue,
             icon: Icons.vertical_align_top_rounded,
             label: '顶置消息',
           ),
           SlidableAction(
             onPressed: widget.onPressed,
-            backgroundColor: const Color(0xFFFE4A49),
-            foregroundColor: Colors.white,
+            backgroundColor: Theme.of(context).canvasColor,
+            foregroundColor: const Color(0xFFFE4A49),
             icon: Icons.delete,
             label: '删除聊天',
           ),
