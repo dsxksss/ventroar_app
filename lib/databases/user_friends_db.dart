@@ -42,11 +42,11 @@ class UserFriendDB {
     //V:要用sql语句来表示类型
     await db.execute('''
 CREATE TABLE $userTables (
-  ${UserFields.id} ${SqlTypes.idType},
-  ${UserFields.createDate} ${SqlTypes.integerType},
-  ${UserFields.friendName} ${SqlTypes.textType},
-  ${UserFields.avatarUrl} ${SqlTypes.textType},
-  ${UserFields.isOnlien} ${SqlTypes.boolType}
+  ${UserFriendFields.id} ${SqlTypes.idType},
+  ${UserFriendFields.createDate} ${SqlTypes.integerType},
+  ${UserFriendFields.friendName} ${SqlTypes.textType},
+  ${UserFriendFields.avatarUrl} ${SqlTypes.textType},
+  ${UserFriendFields.isOnlien} ${SqlTypes.boolType}
 )
 ''');
   }
@@ -79,8 +79,8 @@ CREATE TABLE $userTables (
     //C2.whereArgs:?号占位符的具体值内容,类型是List
     final maps = await db.query(
       userTables,
-      columns: UserFields.dbValues,
-      where: "${UserFields.id} = ?",
+      columns: UserFriendFields.dbValues,
+      where: "${UserFriendFields.id} = ?",
       whereArgs: [id],
     );
 
@@ -99,7 +99,7 @@ CREATE TABLE $userTables (
     final db = await instance.database;
 
     //以一个时间获取全部表数据集对象
-    const orderBy = "${UserFields.createDate} ASC";
+    const orderBy = "${UserFriendFields.createDate} ASC";
     final result = await db.query(userTables, orderBy: orderBy);
     //将每个获取的数据利用Map进行类型转换
     return result.map((e) => UserFriend.fromJson(e)).toList();
@@ -117,7 +117,7 @@ CREATE TABLE $userTables (
     return db.update(
       userTables,
       user.toJson(),
-      where: "${UserFields.id} = ?",
+      where: "${UserFriendFields.id} = ?",
       //利用传入的更新数据的id查找相应的位置进行数据更新
       whereArgs: [user.id],
     );
@@ -132,7 +132,7 @@ CREATE TABLE $userTables (
     //返回的是已经删除后的数据的id
     return db.delete(
       userTables,
-      where: "${UserFields.id} = ?",
+      where: "${UserFriendFields.id} = ?",
       whereArgs: [id],
     );
   }
