@@ -3,15 +3,12 @@ import 'package:badges/badges.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
-import 'package:rive/rive.dart';
-import 'package:ventroar_app/databases/userdb/user_db.dart';
 import 'package:ventroar_app/functions/timestamp_conversion.dart';
 import 'package:ventroar_app/functions/vent_snack.dart';
-import 'package:ventroar_app/schemas/user.dart';
+import 'package:ventroar_app/schemas/user_friend.dart';
 import 'package:ventroar_app/widgets/vent_slidable.dart';
 import 'package:ventroar_app/widgets/wait_animation.dart';
-import '../contexts/global_provider.dart';
+import '../databases/user_friends_db.dart';
 import '../functions/curren_time_millis.dart';
 import '../pages/chat_page.dart';
 
@@ -23,7 +20,7 @@ class ChatListPage extends StatefulWidget {
 }
 
 class _ChatListPageState extends State<ChatListPage> {
-  late List<User> userList;
+  late List<UserFriend> userList;
   bool isLoading = false;
 
   Future fetchAndUpDate() async {
@@ -47,15 +44,15 @@ class _ChatListPageState extends State<ChatListPage> {
       List<dynamic> a = response.data as List<dynamic>;
       for (var e in a) {
         {
-          User result = User(
-            createTime: currentTimeMillis(),
-            userName: e["name"].toString(),
-            userImgUrl:
+          UserFriend result = UserFriend(
+            createDate: currentTimeMillis(),
+            friendName: e["name"].toString(),
+            avatarUrl:
                 "https://api.lorem.space/image/face?hash=${Random().nextInt(50)}"
                     .toString(),
-            isAdmin: false,
+            isOnlien: false,
           );
-          userList.add(await UserDB.instance.createUser(result));
+          userList.add(await UserFriendDB.instance.createUser(result));
         }
       }
       setState(() {
@@ -88,7 +85,7 @@ class _ChatListPageState extends State<ChatListPage> {
     setState(() {
       isLoading = true;
     });
-    userList = await UserDB.instance.readAllUsers();
+    userList = await UserFriendDB.instance.readAllUsers();
     setState(() {
       isLoading = false;
     });
@@ -102,7 +99,6 @@ class _ChatListPageState extends State<ChatListPage> {
 
   @override
   Widget build(BuildContext context) {
-    bool _isDark = Provider.of<ThemeProvider>(context, listen: true).isDark;
     return isLoading
         ? const WaitAnimation()
         : RefreshIndicator(
@@ -150,7 +146,7 @@ class _ChatListPageState extends State<ChatListPage> {
                     itemBuilder: (context, index) => VSlidable(
                       onPressed: (sliderContext) => {
                         setState(() {
-                          UserDB.instance.deleteUser(userList[index].id!);
+                          UserFriendDB.instance.deleteUser(userList[index].id!);
                           userList.remove(userList[index]);
                         }),
                       },
@@ -169,7 +165,7 @@ class _ChatListPageState extends State<ChatListPage> {
                             button: TextButton.icon(
                               onPressed: () => {
                                 setState(() {
-                                  UserDB.instance.deleteAllUsers();
+                                  UserFriendDB.instance.deleteAllUsers();
                                   userList.clear();
                                 }),
                                 //隐藏上下文内的SnackBar
@@ -193,7 +189,8 @@ class _ChatListPageState extends State<ChatListPage> {
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) => ChatPage(
-                                titleText: userList[index].userName.toString(),
+                                titleText:
+                                    userList[index].friendName.toString(),
                                 context: context,
                               ),
                             ),
@@ -204,12 +201,12 @@ class _ChatListPageState extends State<ChatListPage> {
                         leading: CircleAvatar(
                           radius: 28,
                           foregroundImage:
-                              NetworkImage(userList[index].userImgUrl),
+                              NetworkImage(userList[index].avatarUrl),
                         ),
                         title: Container(
                           padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
                           child: Text(
-                            userList[index].userName.toString(),
+                            userList[index].friendName.toString(),
                             style: const TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold),
                           ),
@@ -221,7 +218,7 @@ class _ChatListPageState extends State<ChatListPage> {
                             children: [
                               Expanded(
                                 child: Text(timestampConversion(
-                                    userList[index].createTime)),
+                                    userList[index].createDate)),
                               ),
                               VBadge(
                                 count: Random().nextInt(120),

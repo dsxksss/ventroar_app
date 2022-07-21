@@ -1,13 +1,15 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:ventroar_app/schemas/user.dart';
+import 'package:ventroar_app/databases/sql_type.dart';
+import '../schemas/user_friend.dart';
+import './sql_type.dart';
 
-class UserDB {
-  static final UserDB instance = UserDB._init();
+class UserFriendDB {
+  static final UserFriendDB instance = UserFriendDB._init();
 
   static Database? _database;
 
-  UserDB._init();
+  UserFriendDB._init();
 
 //获取一个已经打开的DabaBase对象
   Future<Database> get database async {
@@ -16,7 +18,7 @@ class UserDB {
     if (_database != null) return _database!;
 
     //如果不存在的话就打开user.db数据文件
-    _database = await _initDB("user.db");
+    _database = await _initDB("userFriends.db");
     //返回一个新打开的DabaBase对象给调用者
     return _database!;
   }
@@ -33,14 +35,6 @@ class UserDB {
 
 //在一个已经打开的数据库文件里建表操作
   Future _createDB(Database db, int version) async {
-    //表内类型
-    //这里表示,由数据库自动生成每个id
-    const idType = "INTEGER PRIMARY KEY AUTOINCREMENT";
-    //这里不用说都知道是啥
-    const integerType = "INTEGER NOT NULL";
-    const textType = "TEXT NOT NULL";
-    const boolType = "BOOLEAN NOT NULL";
-
     //sqlite建表语句等
     //CREATE TABLE <表明>
     //() 里的是这个表要装的K V
@@ -48,17 +42,17 @@ class UserDB {
     //V:要用sql语句来表示类型
     await db.execute('''
 CREATE TABLE $userTables (
-  ${UserFields.id} $idType,
-  ${UserFields.createTime} $integerType,
-  ${UserFields.userName} $textType,
-  ${UserFields.userImgUrl} $textType,
-  ${UserFields.isAdmin} $boolType
+  ${UserFields.id} ${SqlTypes.idType},
+  ${UserFields.createDate} ${SqlTypes.integerType},
+  ${UserFields.friendName} ${SqlTypes.textType},
+  ${UserFields.avatarUrl} ${SqlTypes.textType},
+  ${UserFields.isOnlien} ${SqlTypes.boolType}
 )
 ''');
   }
 
 //在表里添加新的数据
-  Future<User> createUser(User user) async {
+  Future<UserFriend> createUser(UserFriend userFriend) async {
     //获取已经打开的DabaBase对象实例
     final db = await instance.database;
 
@@ -67,12 +61,12 @@ CREATE TABLE $userTables (
     //C1:表名,C2:要存入的表数据(里面元素得和上面创建表时声明的一样)
     //C2:只支持存入Map<String, Object?>类型 (个人猜测)
     //return:会返回此创建好的数据id值
-    final id = await db.insert(userTables, user.toJson());
+    final id = await db.insert(userTables, userFriend.toJson());
     //返回带有id值的copy备份给外界调用
-    return user.copy(id: id);
+    return userFriend.copy(id: id);
   }
 
-  Future<User> readUser(int id) async {
+  Future<UserFriend> readUser(int id) async {
     //获取已经打开的DabaBase对象实例
     final db = await instance.database;
 
@@ -93,25 +87,25 @@ CREATE TABLE $userTables (
     //如果查找成功的话就返回一个经过类型转换好的User类型对象
     if (maps.isNotEmpty) {
       //Map.first 等同于 Map[0]
-      return User.fromJson(maps.first);
+      return UserFriend.fromJson(maps.first);
     } else {
       //如果查找失败或者数据不存在的话就抛出一个异常
       throw Exception("ID $id not found!!!");
     }
   }
 
-  Future<List<User>> readAllUsers() async {
+  Future<List<UserFriend>> readAllUsers() async {
     //获取已经打开的DabaBase对象实例
     final db = await instance.database;
 
     //以一个时间获取全部表数据集对象
-    const orderBy = "${UserFields.createTime} ASC";
+    const orderBy = "${UserFields.createDate} ASC";
     final result = await db.query(userTables, orderBy: orderBy);
     //将每个获取的数据利用Map进行类型转换
-    return result.map((e) => User.fromJson(e)).toList();
+    return result.map((e) => UserFriend.fromJson(e)).toList();
   }
 
-  Future<int> update(User user) async {
+  Future<int> update(UserFriend user) async {
     //获取已经打开的DabaBase对象实例
     final db = await instance.database;
 

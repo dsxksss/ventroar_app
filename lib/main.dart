@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'contexts/global_provider.dart';
-import 'databases/userdb/user_db.dart';
+import 'databases/user_friends_db.dart';
 import 'package:ventroar_app/services/http_lib.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -17,7 +17,7 @@ class MaterialApp extends StatefulWidget {
 class _MaterialAppState extends State<MaterialApp> {
   @override
   void dispose() {
-    UserDB.instance.close();
+    UserFriendDB.instance.close();
     Services.instance.close();
     super.dispose();
   }
