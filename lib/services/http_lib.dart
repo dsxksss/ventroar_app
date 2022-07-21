@@ -59,7 +59,7 @@ abstract class HttpMethod<T> {
 }
 
 //服务总类(基类、父类)
-class Services implements HttpMethod {
+class Services {
   //全局Dio实例
   static final Services instance = Services._init();
   static Dio? _dio;
@@ -94,25 +94,6 @@ class Services implements HttpMethod {
   void close() {
     _dio != null ? _dio!.close() : _dio = null;
   }
-
-  Map<String, dynamic> responseFactory(Map<String, dynamic> dataMap) {
-    //TODO:对请求结果进行加工
-    return dataMap;
-  }
-
-  String errorFactory(DioError error) {
-    // 请求错误处理
-    String errorMessage = error.message;
-    /*
-    TODO:具体的错误处理
-    */
-    return errorMessage;
-  }
-
-  @override
-  Future<List> getListData({String? url}) async {
-    return [];
-  }
 }
 
 class BasicHttpLib implements HttpMethod {
@@ -126,9 +107,7 @@ class BasicHttpLib implements HttpMethod {
 }
 
 // class RoarHttpLib implements HttpMethod {
-//   static RoarHttpLib instance = RoarHttpLib();
 // }
 
 // class UserHttpLib implements HttpMethod {
-//   static UserHttpLib instance = UserHttpLib();
 // }
