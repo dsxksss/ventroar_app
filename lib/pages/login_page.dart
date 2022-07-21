@@ -26,6 +26,8 @@ class _LoginPageState extends State<LoginPage> {
         Provider.of<UserVerificationProvider>(context).loginIn;
     String _loginToken =
         Provider.of<UserVerificationProvider>(context).nowLoginToken;
+    final Function _loginOut =
+        Provider.of<UserVerificationProvider>(context).loginOut;
 
     Future login() async {
       try {
@@ -116,6 +118,9 @@ class _LoginPageState extends State<LoginPage> {
               style: TextStyle(fontSize: 15.sp, color: Colors.white),
             ),
           );
+          _loginOut();
+          Navigator.of(context)
+              .pushNamedAndRemoveUntil("./login", (route) => false);
         } else {
           vSnackBar(
             context: context,
@@ -125,6 +130,9 @@ class _LoginPageState extends State<LoginPage> {
               style: TextStyle(fontSize: 15.sp, color: Colors.white),
             ),
           );
+          _loginOut();
+          Navigator.of(context)
+              .pushNamedAndRemoveUntil("./login", (route) => false);
         }
       }
     }
