@@ -221,6 +221,7 @@ class _ChatListPageState extends State<ChatListPage> {
                                     userList[index].createDate)),
                               ),
                               VBadge(
+                                //TODOFIX数字为0的时候还显示消息气泡
                                 count: Random().nextInt(120),
                               ),
                             ],
