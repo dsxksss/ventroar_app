@@ -145,7 +145,6 @@ class _LoginPageState extends State<LoginPage> {
     );
 
     return Builder(builder: (context) {
-      bool _isDark = Provider.of<ThemeProvider>(context, listen: true).isDark;
       return MediaQuery(
         data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
         child: Scaffold(
