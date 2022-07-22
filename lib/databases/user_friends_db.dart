@@ -41,7 +41,7 @@ class UserFriendDB {
     //K:String类型
     //V:要用sql语句来表示类型
     await db.execute('''
-CREATE TABLE $userTables (
+CREATE TABLE $userFriendTables (
   ${UserFriendFields.id} ${SqlTypes.idType},
   ${UserFriendFields.createDate} ${SqlTypes.integerType},
   ${UserFriendFields.friendName} ${SqlTypes.textType},
@@ -61,7 +61,7 @@ CREATE TABLE $userTables (
     //C1:表名,C2:要存入的表数据(里面元素得和上面创建表时声明的一样)
     //C2:只支持存入Map<String, Object?>类型 (个人猜测)
     //return:会返回此创建好的数据id值
-    final id = await db.insert(userTables, userFriend.toJson());
+    final id = await db.insert(userFriendTables, userFriend.toJson());
     //返回带有id值的copy备份给外界调用
     return userFriend.copy(id: id);
   }
@@ -78,7 +78,7 @@ CREATE TABLE $userTables (
     //?号的好处是不设置具体的数据值,以防sql注入
     //C2.whereArgs:?号占位符的具体值内容,类型是List
     final maps = await db.query(
-      userTables,
+      userFriendTables,
       columns: UserFriendFields.dbValues,
       where: "${UserFriendFields.id} = ?",
       whereArgs: [id],
@@ -100,7 +100,7 @@ CREATE TABLE $userTables (
 
     //以一个时间获取全部表数据集对象
     const orderBy = "${UserFriendFields.createDate} ASC";
-    final result = await db.query(userTables, orderBy: orderBy);
+    final result = await db.query(userFriendTables, orderBy: orderBy);
     //将每个获取的数据利用Map进行类型转换
     return result.map((e) => UserFriend.fromJson(e)).toList();
   }
@@ -115,7 +115,7 @@ CREATE TABLE $userTables (
     //C2:需要进行更新的数据内容
     //返回的是已经更新完的数据的id
     return db.update(
-      userTables,
+      userFriendTables,
       user.toJson(),
       where: "${UserFriendFields.id} = ?",
       //利用传入的更新数据的id查找相应的位置进行数据更新
@@ -131,7 +131,7 @@ CREATE TABLE $userTables (
     //参数类似于上面提到的query函数里的参数
     //返回的是已经删除后的数据的id
     return db.delete(
-      userTables,
+      userFriendTables,
       where: "${UserFriendFields.id} = ?",
       whereArgs: [id],
     );
@@ -141,7 +141,7 @@ CREATE TABLE $userTables (
     final db = await instance.database;
 //以一个时间获取全部表数据集对象
     await db.execute('''
-DELETE FROM $userTables
+DELETE FROM $userFriendTables
 ''');
   }
 

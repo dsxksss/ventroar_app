@@ -1,4 +1,4 @@
-const String userTables = "userFriends";
+const String userFriendTables = "userFriends";
 
 //表内变量等
 class UserFriendFields {
