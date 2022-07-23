@@ -1,5 +1,5 @@
 import 'package:hive/hive.dart';
-part "user_db.g.dart";
+part "user_db.g.dart"; //flutter packages pub run build_runner build 记得使用此命令生成文件
 
 @HiveType(typeId: 0)
 class User extends HiveObject {
