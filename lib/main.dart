@@ -1,8 +1,11 @@
+import 'package:hive_flutter/hive_flutter.dart';
+
 import './app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'contexts/global_provider.dart';
+import 'databases/user_db.dart';
 import 'databases/user_friends_db.dart';
 import 'package:ventroar_app/services/http_lib.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -46,10 +49,16 @@ class _MaterialAppState extends State<MaterialApp> {
   }
 }
 
-void main() {
+void main() async {
   //顶部状态栏透明
   SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
 
+  // init hive localDB
+  await Hive.initFlutter();
+  // Register Adapter
+  Hive.registerAdapter(UserAdapter());
+  // open db box
+  await Hive.openBox<User>('userBox');
   runApp(const MaterialApp());
 }
