@@ -23,7 +23,8 @@ class DHeader extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(50),
-              child: Image.asset("static/img/t2.png"),
+              child: Image.network(
+                  "https://ventroar.xyz:2548/avatars/62d2a4a97f54698b299619ff--73477803.png"),
             ),
             SizedBox(height: 0.015.sh),
             Text(

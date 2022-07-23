@@ -11,10 +11,22 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late Box<User> box;
+
+  @override
+  void initState() {
+    super.initState();
+    box = Hive.box("userbox");
+  }
+
+  @override
+  void dispose() {
+    box.close();
+    super.dispose();
+  }
+
   void putData() async {
-    var box = Hive.box("userBox");
-    await box.put(
-      "x",
+    await box.add(
       User(
         name: "Jack",
         email: "2546650292@qq.com",
@@ -28,9 +40,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   void readData() async {
-    var box = Hive.box("userBox");
-    User obj = await box.get("x");
-    print(obj);
+    print(box.getAt(0));
+  }
+
+  void removeData() async {
+    box.deleteAt(0);
   }
 
   @override
@@ -47,6 +61,12 @@ class _HomePageState extends State<HomePage> {
           readData();
         },
         child: const Text("read Data"),
+      ),
+      ElevatedButton(
+        onPressed: () {
+          removeData();
+        },
+        child: const Text("delete Data"),
       ),
     ]);
   }

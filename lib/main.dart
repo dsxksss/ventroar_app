@@ -49,16 +49,16 @@ class _MaterialAppState extends State<MaterialApp> {
   }
 }
 
-void main() async {
+Future<void> main() async {
   //顶部状态栏透明
   SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
-
-  // init hive localDB
-  await Hive.initFlutter();
   // Register Adapter
   Hive.registerAdapter(UserAdapter());
+  // init hive localDB
+  await Hive.initFlutter();
   // open db box
-  await Hive.openBox<User>('userBox');
+  await Hive.openBox<User>('userbox');
+
   runApp(const MaterialApp());
 }
