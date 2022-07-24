@@ -21,7 +21,7 @@ class UserAdapter extends TypeAdapter<User> {
       createDate: fields[1] as int,
       name: fields[2] as String,
       email: fields[3] as String,
-      isOline: fields[4] as bool,
+      isOnline: fields[4] as bool,
       isAdmin: fields[5] as bool,
       avatarUrl: fields[6] as String,
     );
@@ -40,7 +40,7 @@ class UserAdapter extends TypeAdapter<User> {
       ..writeByte(3)
       ..write(obj.email)
       ..writeByte(4)
-      ..write(obj.isOline)
+      ..write(obj.isOnline)
       ..writeByte(5)
       ..write(obj.isAdmin)
       ..writeByte(6)

@@ -16,7 +16,7 @@ class User extends HiveObject {
   String email;
 
   @HiveField(4)
-  bool isOline;
+  bool isOnline;
 
   @HiveField(5)
   bool isAdmin;
@@ -28,7 +28,7 @@ class User extends HiveObject {
     required this.createDate,
     required this.name,
     required this.email,
-    required this.isOline,
+    required this.isOnline,
     required this.isAdmin,
     required this.avatarUrl,
   });

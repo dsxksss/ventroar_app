@@ -1,18 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 import 'package:ventroar_app/contexts/global_provider.dart';
+import '../../databases/user_db.dart';
 
-class DHeader extends StatelessWidget {
-  final String _userName = "zhangxiaokang";
-  final String _userEmail = "2546650292@qq.com";
+class DHeader extends StatefulWidget {
   const DHeader({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<DHeader> createState() => _DHeaderState();
+}
+
+class _DHeaderState extends State<DHeader> {
+  late Box<User> box;
+  late User _user;
+
+  @override
+  void initState() {
+    super.initState();
+    box = Hive.box("userbox");
+  }
+
+  void getUserData() async {
+    _user = box.get("myuser")!;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    getUserData();
     return SizedBox(
       height: 0.23.sh,
       child: Padding(
@@ -24,15 +43,15 @@ class DHeader extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(50),
               child: Image.network(
-                  "https://ventroar.xyz:2548/avatars/62d2a4a97f54698b299619ff--73477803.png"),
+                  "https://ventroar.xyz:2548/avatars/${_user.avatarUrl}"),
             ),
             SizedBox(height: 0.015.sh),
             Text(
-              _userName,
+              _user.name,
               style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500),
             ),
             SizedBox(height: 0.01.sh),
-            Text(_userEmail),
+            Text(_user.email),
           ],
         ),
       ),
@@ -50,6 +69,13 @@ class VDrawer extends StatefulWidget {
 }
 
 class _VDrawerState extends State<VDrawer> {
+  late Box<User> box;
+  @override
+  void initState() {
+    super.initState();
+    box = Hive.box("userbox");
+  }
+
   @override
   Widget build(BuildContext context) {
     TextStyle _titleTextStyle = TextStyle(
@@ -167,6 +193,7 @@ class _VDrawerState extends State<VDrawer> {
                             onPressed: () {
                               Navigator.of(context).pushNamedAndRemoveUntil(
                                   "./login", (route) => false);
+                              box.delete("myuser");
                               _loginOut();
                             },
                             icon: Icon(

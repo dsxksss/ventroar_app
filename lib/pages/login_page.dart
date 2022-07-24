@@ -2,10 +2,12 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 import 'package:ventroar_app/widgets/wait_animation.dart';
 
 import '../contexts/global_provider.dart';
+import '../databases/user_db.dart';
 import '../functions/vent_snack.dart';
 
 class LoginPage extends StatefulWidget {
@@ -16,6 +18,14 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  late Box<User> box;
+
+  @override
+  void initState() {
+    super.initState();
+    box = Hive.box("userbox");
+  }
+
   @override
   Widget build(BuildContext context) {
     final TextEditingController _accountController = TextEditingController();
@@ -40,6 +50,19 @@ class _LoginPageState extends State<LoginPage> {
         // print(_response);//登录时间
         print(_response.headers["x-auth-token"]);
         _loginIn(_response.headers["x-auth-token"]![0]);
+
+        box.put(
+          "myuser",
+          User(
+              id: _response.data["_id"],
+              createDate: _response.data["createDate"],
+              name: _response.data["name"],
+              email: _response.data["email"],
+              isOnline: _response.data["isOnline"],
+              isAdmin: _response.data["isAdmin"],
+              avatarUrl: _response.data["avatarUrl"]),
+        );
+
         vSnackBar(
           context: context,
           model: VSnackModel.success,
@@ -84,12 +107,24 @@ class _LoginPageState extends State<LoginPage> {
 
     Future autoLogin() async {
       try {
+        Response _response;
         var dio = Dio();
-        await dio.post(
+        _response = await dio.post(
           "https://ventroar.xyz:2548/tokenlogin",
           options: Options(
             headers: {"x-auth-token": _loginToken},
           ),
+        );
+        box.put(
+          "myuser",
+          User(
+              id: _response.data["_id"],
+              createDate: _response.data["createDate"],
+              name: _response.data["name"],
+              email: _response.data["email"],
+              isOnline: _response.data["isOnline"],
+              isAdmin: _response.data["isAdmin"],
+              avatarUrl: _response.data["avatarUrl"]),
         );
         Future.delayed(
           const Duration(milliseconds: 1000),
