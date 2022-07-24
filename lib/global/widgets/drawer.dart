@@ -34,7 +34,7 @@ class _DHeaderState extends State<DHeader> {
     box = Hive.box("userbox");
     getUserData();
     return SizedBox(
-      height: 0.23.sh,
+      height: 0.24.sh,
       child: Padding(
         padding: EdgeInsets.fromLTRB(0.06.sw, 0.02.sh, 0, 0),
         child: Column(
@@ -45,8 +45,8 @@ class _DHeaderState extends State<DHeader> {
               borderRadius: BorderRadius.circular(999),
               child: _user.avatarUrl == "null"
                   ? Container(
-                      width: 95,
-                      height: 95,
+                      width: 100,
+                      height: 100,
                       color: Colors.blue[200],
                       child: Center(
                         child: Text(
@@ -56,8 +56,8 @@ class _DHeaderState extends State<DHeader> {
                         ),
                       ))
                   : SizedBox(
-                      width: 95,
-                      height: 95,
+                      width: 100,
+                      height: 100,
                       child: Image.network(
                           "https://ventroar.xyz:2548/avatars/${_user.avatarUrl}"),
                     ),
@@ -68,7 +68,10 @@ class _DHeaderState extends State<DHeader> {
               style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500),
             ),
             SizedBox(height: 0.01.sh),
-            Text(_user.email),
+            Text(
+              _user.email,
+              style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
+            ),
           ],
         ),
       ),
