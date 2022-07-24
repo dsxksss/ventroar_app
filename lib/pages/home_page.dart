@@ -21,7 +21,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void dispose() {
-    box.close();
     super.dispose();
   }
 

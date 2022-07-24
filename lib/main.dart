@@ -22,6 +22,7 @@ class _MaterialAppState extends State<MaterialApp> {
   void dispose() {
     UserFriendDB.instance.close();
     Services.instance.close();
+    Hive.close();
     super.dispose();
   }
 
