@@ -25,12 +25,13 @@ class _DHeaderState extends State<DHeader> {
     box = Hive.box("userbox");
   }
 
-  void getUserData() async {
+  void getUserData() {
     _user = box.get("myuser")!;
   }
 
   @override
   Widget build(BuildContext context) {
+    box = Hive.box("userbox");
     getUserData();
     return SizedBox(
       height: 0.23.sh,
@@ -41,9 +42,25 @@ class _DHeaderState extends State<DHeader> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.circular(50),
-              child: Image.network(
-                  "https://ventroar.xyz:2548/avatars/${_user.avatarUrl}"),
+              borderRadius: BorderRadius.circular(999),
+              child: _user.avatarUrl == "null"
+                  ? Container(
+                      width: 95,
+                      height: 95,
+                      color: Colors.blue[200],
+                      child: Center(
+                        child: Text(
+                          _user.name[0],
+                          style:
+                              TextStyle(color: Colors.white, fontSize: 25.sp),
+                        ),
+                      ))
+                  : SizedBox(
+                      width: 95,
+                      height: 95,
+                      child: Image.network(
+                          "https://ventroar.xyz:2548/avatars/${_user.avatarUrl}"),
+                    ),
             ),
             SizedBox(height: 0.015.sh),
             Text(
@@ -69,15 +86,9 @@ class VDrawer extends StatefulWidget {
 }
 
 class _VDrawerState extends State<VDrawer> {
-  late Box<User> box;
-  @override
-  void initState() {
-    super.initState();
-    box = Hive.box("userbox");
-  }
-
   @override
   Widget build(BuildContext context) {
+    Box<User> box = Hive.box("userbox");
     TextStyle _titleTextStyle = TextStyle(
       fontSize: 16.sp,
     );
