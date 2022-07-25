@@ -35,15 +35,9 @@ class _MaterialAppState extends State<MaterialApp> {
         splitScreenMode: true,
         builder: (BuildContext context, Widget? child) =>
             MultiProvider(providers: [
-          ChangeNotifierProvider(
-            create: (context) => ThemeProvider(),
-          ),
-          ChangeNotifierProvider(
-            create: (context) => PageDataProvider(),
-          ),
-          ChangeNotifierProvider(
-            create: (context) => UserVerificationProvider(),
-          ),
+          ChangeNotifierProvider(create: (_) => ThemeProvider()),
+          ChangeNotifierProvider(create: (_) => PageDataProvider()),
+          ChangeNotifierProvider(create: (_) => UserVerificationProvider()),
         ], child: const App()),
       );
     });

@@ -30,14 +30,6 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     final TextEditingController _accountController = TextEditingController();
     final TextEditingController _passwordController = TextEditingController();
-    bool _isLoginState =
-        Provider.of<UserVerificationProvider>(context).isLoginState;
-    final Function _loginIn =
-        Provider.of<UserVerificationProvider>(context).loginIn;
-    String _loginToken =
-        Provider.of<UserVerificationProvider>(context).nowLoginToken;
-    final Function _loginOut =
-        Provider.of<UserVerificationProvider>(context).loginOut;
 
     Future login() async {
       try {
@@ -48,8 +40,10 @@ class _LoginPageState extends State<LoginPage> {
           "password": _passwordController.text,
         });
         // print(_response);//登录时间
-        print(_response.headers["x-auth-token"]);
-        _loginIn(_response.headers["x-auth-token"]![0]);
+        // print(_response.headers["x-auth-token"]);
+        context
+            .read<UserVerificationProvider>()
+            .loginIn(_response.headers["x-auth-token"]![0]);
 
         box.put(
           "myuser",
@@ -62,7 +56,6 @@ class _LoginPageState extends State<LoginPage> {
               isAdmin: _response.data["isAdmin"],
               avatarUrl: _response.data["avatarUrl"]),
         );
-
         vSnackBar(
           context: this.context,
           model: VSnackModel.success,
@@ -73,12 +66,9 @@ class _LoginPageState extends State<LoginPage> {
           showTime: const Duration(milliseconds: 1400),
         );
         Future.delayed(
-          const Duration(seconds: 1),
-          () => {
-            Navigator.of(context)
-                .pushNamedAndRemoveUntil("./", (route) => false)
-          },
-        );
+            const Duration(seconds: 1),
+            () => Navigator.of(context)
+                .pushNamedAndRemoveUntil("./", (route) => false));
       } on DioError catch (e) {
         if (e.response?.statusCode == 400) {
           vSnackBar(
@@ -107,12 +97,16 @@ class _LoginPageState extends State<LoginPage> {
 
     Future autoLogin() async {
       try {
+        if (!context.watch<UserVerificationProvider>().isLoginState) return;
         Response _response;
         var dio = Dio();
         _response = await dio.post(
           "https://ventroar.xyz:2548/tokenlogin",
           options: Options(
-            headers: {"x-auth-token": _loginToken},
+            headers: {
+              "x-auth-token":
+                  context.watch<UserVerificationProvider>().nowLoginToken
+            },
           ),
         );
         box.put(
@@ -143,7 +137,6 @@ class _LoginPageState extends State<LoginPage> {
           },
         );
       } on DioError catch (e) {
-        print(e.message);
         if (e.response?.statusCode == 400) {
           vSnackBar(
             context: this.context,
@@ -153,7 +146,7 @@ class _LoginPageState extends State<LoginPage> {
               style: TextStyle(fontSize: 15.sp, color: Colors.white),
             ),
           );
-          _loginOut();
+          context.read<UserVerificationProvider>().loginOut();
           Navigator.of(context)
               .pushNamedAndRemoveUntil("./login", (route) => false);
         } else {
@@ -165,7 +158,7 @@ class _LoginPageState extends State<LoginPage> {
               style: TextStyle(fontSize: 15.sp, color: Colors.white),
             ),
           );
-          _loginOut();
+          context.read<UserVerificationProvider>().loginOut();
           Navigator.of(context)
               .pushNamedAndRemoveUntil("./login", (route) => false);
         }
@@ -175,10 +168,10 @@ class _LoginPageState extends State<LoginPage> {
     Future.delayed(
       const Duration(milliseconds: 1500),
       () => {
-        if (_isLoginState) {autoLogin()}
+        if (context.read<UserVerificationProvider>().phoneLoginState!)
+          {autoLogin()}
       },
     );
-
     return Builder(builder: (context) {
       return MediaQuery(
         data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
@@ -188,7 +181,7 @@ class _LoginPageState extends State<LoginPage> {
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             child: Center(
-              child: _isLoginState
+              child: context.watch<UserVerificationProvider>().isLoginState
                   ? const WaitAnimation()
                   : SizedBox(
                       height: MediaQuery.of(context).size.height,
