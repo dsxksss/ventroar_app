@@ -64,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
         );
 
         vSnackBar(
-          context: context,
+          context: this.context,
           model: VSnackModel.success,
           textWidget: Text(
             "登录成功",
@@ -82,7 +82,7 @@ class _LoginPageState extends State<LoginPage> {
       } on DioError catch (e) {
         if (e.response?.statusCode == 400) {
           vSnackBar(
-              context: context,
+              context: this.context,
               model: VSnackModel.error,
               textWidget: Text(
                 "账号或密码错误,请重试!",
@@ -92,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
               .pushNamedAndRemoveUntil("./login", (route) => false);
         } else {
           vSnackBar(
-            context: context,
+            context: this.context,
             model: VSnackModel.error,
             textWidget: Text(
               "网络繁忙,登录失败,请重试...",
@@ -130,7 +130,7 @@ class _LoginPageState extends State<LoginPage> {
           const Duration(milliseconds: 1000),
           () => {
             vSnackBar(
-              context: context,
+              context: this.context,
               model: VSnackModel.success,
               textWidget: Text(
                 "自动登录~",
@@ -146,7 +146,7 @@ class _LoginPageState extends State<LoginPage> {
         print(e.message);
         if (e.response?.statusCode == 400) {
           vSnackBar(
-            context: context,
+            context: this.context,
             model: VSnackModel.warning,
             textWidget: Text(
               "自动登录失败!",
@@ -158,7 +158,7 @@ class _LoginPageState extends State<LoginPage> {
               .pushNamedAndRemoveUntil("./login", (route) => false);
         } else {
           vSnackBar(
-            context: context,
+            context: this.context,
             model: VSnackModel.error,
             textWidget: Text(
               "网络繁忙,自动登录失败,请重试",
