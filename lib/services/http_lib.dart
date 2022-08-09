@@ -4,13 +4,47 @@ import 'package:dio/dio.dart';
 
 //自定url地址配置类
 class VentUrls {
-  static String apiPath = "https://ventroar.xyz:2546/";
-  static String userDataApi = "${apiPath}userDataApi/"; //只用于获得用户数据、不提供其他权限
-  static String roarDataApi = "${apiPath}textDataApi/"; //只用于获得发泄墙数据、不提供其他权限
-  static String userCreateApi = "${apiPath}userCreateApi/"; //只允许用户创建数据,不提供其他权限
-  static String userLoginApi =
-      "${apiPath}userLoginApi/"; //只允许验证用户创建后的数据,不提供其他权限
-  static String userTextApi = "${apiPath}userTextApi/"; //用户提交发泄墙类型等功能的一个集合
+  static String apiPath = "https://ventroar.xyz:2548";
+  //POST  登录账号(返回该登录用户基本数据)	account,password
+  static String signIn = "$apiPath/signin";
+  //POST  注册账号(不提供激活但发送验证邮件)	name,email,password
+  static String signUp = "$apiPath/signup";
+  //POST  作用于接受邮箱激活账号	null
+  static String emailActivation = "$apiPath/emailactivation";
+  //POST  仅接受头部token登录账号(返回该登录用户基本数据)	null
+  static String tokenLogin = "$apiPath/tokenlogin";
+  //POST  仅发送激活账号的验证邮件	email
+  static String sendActivationEmail = "$apiPath/sendactivationemail";
+  //POST  仅发送修改密码的验证邮件	email
+  static String rePassword = "$apiPath/repassword";
+  //PUT   作用于接受邮箱修改密码	password
+  static String rePasswordValidate = "$apiPath/repassword/validate";
+  //POST  用于上传图片资源	imager
+  static String uploadImg = "$apiPath/uploadImg";
+  //POST  用于上传用户头像资源	avatar
+  static String uploadAvatar = "$apiPath/uploadavatar";
+}
+
+class VentUrlsTest {
+  static String apiPath = "http://localhost:2547";
+  //POST  登录账号(返回该登录用户基本数据)	account,password
+  static String signIn = "$apiPath/signin";
+  //POST  注册账号(不提供激活但发送验证邮件)	name,email,password
+  static String signUp = "$apiPath/signup";
+  //POST  作用于接受邮箱激活账号	null
+  static String emailActivation = "$apiPath/emailactivation";
+  //POST  仅接受头部token登录账号(返回该登录用户基本数据)	null
+  static String tokenLogin = "$apiPath/tokenlogin";
+  //POST  仅发送激活账号的验证邮件	email
+  static String sendActivationEmail = "$apiPath/sendactivationemail";
+  //POST  仅发送修改密码的验证邮件	email
+  static String rePassword = "$apiPath/repassword";
+  //PUT   作用于接受邮箱修改密码	password
+  static String rePasswordValidate = "$apiPath/repassword/validate";
+  //POST  用于上传图片资源	imager
+  static String uploadImg = "$apiPath/uploadImg";
+  //POST  用于上传用户头像资源	avatar
+  static String uploadAvatar = "$apiPath/uploadavatar";
 }
 
 //自定配置信息类
@@ -39,7 +73,7 @@ class CustomInterceptors extends Interceptor {
     print('响应之后');
     print(
         'RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path}');
-    // print('datas: ${response.data}');
+    print('datas: ${response.data}');
     return super.onResponse(response, handler);
   }
 
@@ -49,13 +83,10 @@ class CustomInterceptors extends Interceptor {
     print('发生异常');
     print(
         'ERROR[${err.response?.statusCode}] => PATH: ${err.requestOptions.path}');
+    print('ERROR-MESSAGE => [${err.response?.data["msg"]}]');
+
     return super.onError(err, handler);
   }
-}
-
-abstract class HttpMethod<T> {
-  Future<T> getListData({String? url});
-  //TODO: 待完成剩余http请求方法...
 }
 
 //服务总类(基类、父类)
@@ -81,9 +112,8 @@ class Services {
     );
 
     //设置自定义网络拦截器配置
-    var interceptorsWrapper = CustomInterceptors();
     Dio a = Dio(options);
-    a.interceptors.add(interceptorsWrapper);
+    a.interceptors.add(CustomInterceptors());
     //检查静态变量dio是否存在
     //如果存在就返回已有的dio
     //如果不存在就创建新的dio实例返回
@@ -96,18 +126,35 @@ class Services {
   }
 }
 
-class BasicHttpLib implements HttpMethod {
-  @override
-  Future<List> getListData({String? url}) async {
+class RoarHttpLib {}
+
+class UserHttpLib {
+  Future<Map> signIn({required Map<String, dynamic> data}) async {
     Response response;
     response = await Services.instance.dio
-        .then((value) => value.get(url ?? VentUrls.roarDataApi));
-    return response.data as List<dynamic>;
+        .then((value) => value.post(VentUrlsTest.signIn, data: data));
+    return {"headers": response.headers, "data": response.data};
   }
+
+  Future<Map> tokenLogin(
+      {required Map<String, dynamic> data, required String token}) async {
+    Response response;
+    response = await Services.instance.dio.then((value) => value.post(
+          VentUrlsTest.signIn,
+          data: data,
+          options: Options(
+            headers: {"x-auth-token": token},
+          ),
+        ));
+    return response.data;
+  }
+
+  Future<Map> signUp({required Map<String, dynamic> data}) async {
+    Response response;
+    response = await Services.instance.dio
+        .then((value) => value.post(VentUrlsTest.signUp, data: data));
+    return response.data;
+  }
+
+  void signOut() {}
 }
-
-// class RoarHttpLib implements HttpMethod {
-// }
-
-// class UserHttpLib implements HttpMethod {
-// }

@@ -27,8 +27,6 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     bool _isDark = Provider.of<ThemeProvider>(context).isDark;
-    bool _isLoginState =
-        Provider.of<UserVerificationProvider>(context).isLoginState;
 
     return MaterialApp(
       /// 主题模式切换
@@ -36,7 +34,7 @@ class _AppState extends State<App> {
       theme: lightTheme(context),
       darkTheme: darkTheme(context),
       debugShowCheckedModeBanner: false,
-      initialRoute: _isLoginState ? "./" : "./login",
+      initialRoute: "./",
       routes: pageRouter(),
     );
   }
