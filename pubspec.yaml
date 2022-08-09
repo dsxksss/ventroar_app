@@ -53,8 +53,6 @@ dependencies:
   grouped_list: ^4.2.0
   #聊天气泡组件
   chat_bubbles: ^1.2.0
-  #本地数据存储sqflite插件
-  sqflite: ^2.0.2+1
   #一个全面的、跨平台的 Dart 路径操作库。
   path: ^1.8.0
   #rive动画插件

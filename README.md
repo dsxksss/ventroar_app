@@ -3,7 +3,6 @@
 | pub:package             | versions | TODO                    |
 | ----------------------- | -------- | ----------------------- |
 | [provider]              | ^6.0.3   | flutter官方推荐的状态管理插件      |
-| [sqflite]               | ^2.0.2+1 | 本地数据存储sqflite插件         |
 | [dio]                   | ^4.0.6   | http请求库                 |
 | [curved_navigation_bar] | ^1.0.1   | 底部导航栏组件                 |
 | [badges]                | ^2.0.2   | 徽标                      |
@@ -22,7 +21,6 @@
 | [flutter_screenutil]    | ^5.5.3+2 | 页面尺寸适配插件                |
 
 [provider]: https://pub.dev/packages/provider/
-[sqflite]: https://pub.dev/packages/sqflite/
 [dio]: https://pub.dev/packages/dio/
 [curved_navigation_bar]: https://pub.dev/packages/curved_navigation_bar/
 [badges]: https://pub.dev/packages/badges/
