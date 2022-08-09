@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:ventroar_app/widgets/wait_animation.dart';
 
 import '../contexts/global_provider.dart';
-import '../databases/user_db.dart';
+import '../schemas/user.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);

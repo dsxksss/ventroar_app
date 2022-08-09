@@ -1,11 +1,10 @@
-import 'package:hive_flutter/hive_flutter.dart';
-
 import './app.dart';
+import './schemas/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'contexts/global_provider.dart';
-import 'databases/user_db.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:ventroar_app/services/network_lib.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

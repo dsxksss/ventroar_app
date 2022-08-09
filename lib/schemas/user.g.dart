@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user_db.dart';
+part of 'user.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
@@ -18,33 +18,42 @@ class UserAdapter extends TypeAdapter<User> {
     };
     return User(
       id: fields[0] as String,
-      createDate: fields[1] as int,
-      name: fields[2] as String,
-      email: fields[3] as String,
-      isOnline: fields[4] as bool,
-      isAdmin: fields[5] as bool,
+      name: fields[1] as String,
+      email: fields[2] as String,
+      friends: fields[3] as Array<NativeType>,
+      inBox: fields[4] as Array<NativeType>,
+      createDate: fields[5] as int,
       avatarUrl: fields[6] as String,
+      authToken: fields[7] as String,
+      isOnline: fields[8] as bool,
+      isAdmin: fields[9] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, User obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(10)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.createDate)
-      ..writeByte(2)
       ..write(obj.name)
-      ..writeByte(3)
+      ..writeByte(2)
       ..write(obj.email)
+      ..writeByte(3)
+      ..write(obj.friends)
       ..writeByte(4)
-      ..write(obj.isOnline)
+      ..write(obj.inBox)
       ..writeByte(5)
-      ..write(obj.isAdmin)
+      ..write(obj.createDate)
       ..writeByte(6)
-      ..write(obj.avatarUrl);
+      ..write(obj.avatarUrl)
+      ..writeByte(7)
+      ..write(obj.authToken)
+      ..writeByte(8)
+      ..write(obj.isOnline)
+      ..writeByte(9)
+      ..write(obj.isAdmin);
   }
 
   @override

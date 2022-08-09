@@ -4,7 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 import 'package:ventroar_app/contexts/global_provider.dart';
-import '../../databases/user_db.dart';
+import '../../schemas/user.dart';
 
 class DHeader extends StatefulWidget {
   const DHeader({
