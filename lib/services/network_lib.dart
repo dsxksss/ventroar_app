@@ -1,51 +1,7 @@
 // 取消命名检查
 // ignore_for_file: non_constant_identifier_names, constant_identifier_names
 import 'package:dio/dio.dart';
-
-//自定url地址配置类
-class VentUrls {
-  static String apiPath = "https://ventroar.xyz:2548";
-  //POST  登录账号(返回该登录用户基本数据)	account,password
-  static String signIn = "$apiPath/signin";
-  //POST  注册账号(不提供激活但发送验证邮件)	name,email,password
-  static String signUp = "$apiPath/signup";
-  //POST  作用于接受邮箱激活账号	null
-  static String emailActivation = "$apiPath/emailactivation";
-  //POST  仅接受头部token登录账号(返回该登录用户基本数据)	null
-  static String tokenLogin = "$apiPath/tokenlogin";
-  //POST  仅发送激活账号的验证邮件	email
-  static String sendActivationEmail = "$apiPath/sendactivationemail";
-  //POST  仅发送修改密码的验证邮件	email
-  static String rePassword = "$apiPath/repassword";
-  //PUT   作用于接受邮箱修改密码	password
-  static String rePasswordValidate = "$apiPath/repassword/validate";
-  //POST  用于上传图片资源	imager
-  static String uploadImg = "$apiPath/uploadImg";
-  //POST  用于上传用户头像资源	avatar
-  static String uploadAvatar = "$apiPath/uploadavatar";
-}
-
-class VentUrlsTest {
-  static String apiPath = "http://localhost:2547";
-  //POST  登录账号(返回该登录用户基本数据)	account,password
-  static String signIn = "$apiPath/signin";
-  //POST  注册账号(不提供激活但发送验证邮件)	name,email,password
-  static String signUp = "$apiPath/signup";
-  //POST  作用于接受邮箱激活账号	null
-  static String emailActivation = "$apiPath/emailactivation";
-  //POST  仅接受头部token登录账号(返回该登录用户基本数据)	null
-  static String tokenLogin = "$apiPath/tokenlogin";
-  //POST  仅发送激活账号的验证邮件	email
-  static String sendActivationEmail = "$apiPath/sendactivationemail";
-  //POST  仅发送修改密码的验证邮件	email
-  static String rePassword = "$apiPath/repassword";
-  //PUT   作用于接受邮箱修改密码	password
-  static String rePasswordValidate = "$apiPath/repassword/validate";
-  //POST  用于上传图片资源	imager
-  static String uploadImg = "$apiPath/uploadImg";
-  //POST  用于上传用户头像资源	avatar
-  static String uploadAvatar = "$apiPath/uploadavatar";
-}
+import './vent_apis.dart';
 
 //自定配置信息类
 class DioOptions {
