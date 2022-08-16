@@ -1,6 +1,8 @@
 // 取消命名检查
 // ignore_for_file: non_constant_identifier_names, constant_identifier_names
 import 'package:dio/dio.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import '../schemas/user.dart';
 import './vent_apis.dart';
 
 //自定配置信息类
@@ -30,6 +32,7 @@ class CustomInterceptors extends Interceptor {
     print(
         'RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path}');
     print('datas: ${response.data}');
+
     return super.onResponse(response, handler);
   }
 
@@ -85,16 +88,38 @@ class Services {
 class RoarHttpLib {}
 
 class UserHttpLib {
-  Future<Map> signIn({required Map<String, dynamic> data}) async {
+  Future<Map> signIn(
+      {required Map<String, dynamic> data, required Box<User> box}) async {
     Response response;
     response = await Services.instance.dio
-        .then((value) => value.post(VentUrlsTest.signIn, data: data));
-    return {"headers": response.headers, "data": response.data};
+        .then((value) => value.post(VentUrls.signIn, data: data));
+
+    if (response.statusCode == 200) {
+      box.put(
+          "my",
+          User(
+            id: response.data["result"]["_id"],
+            name: response.data["result"]["name"],
+            email: response.data["result"]["email"],
+            friends: response.data["result"]["friends"],
+            inBox: response.data["result"]["inBox"],
+            createDate: response.data["result"]["createDate"],
+            avatarUrl: response.data["result"]["avatarUrl"],
+            authToken: response.data["result"]["authToken"],
+            isOnline: response.data["result"]["isOnline"],
+            isAdmin: response.data["result"]["isAdmin"],
+          ));
+      return {"headers": response.headers, "data": response.data};
+    }
+    return {"msg": "login network error!!!"};
   }
 
   Future<Map> tokenLogin(
-      {required Map<String, dynamic> data, required String token}) async {
+      {required Map<String, dynamic> data,
+      required String token,
+      required Box<User> box}) async {
     Response response;
+
     response = await Services.instance.dio.then((value) => value.post(
           VentUrlsTest.signIn,
           data: data,
@@ -102,7 +127,24 @@ class UserHttpLib {
             headers: {"x-auth-token": token},
           ),
         ));
-    return response.data;
+    if (response.statusCode == 200) {
+      box.put(
+          "my",
+          User(
+            id: response.data["result"]["_id"],
+            name: response.data["result"]["name"],
+            email: response.data["result"]["email"],
+            friends: response.data["result"]["friends"],
+            inBox: response.data["result"]["inBox"],
+            createDate: response.data["result"]["createDate"],
+            avatarUrl: response.data["result"]["avatarUrl"],
+            authToken: response.data["result"]["authToken"],
+            isOnline: response.data["result"]["isOnline"],
+            isAdmin: response.data["result"]["isAdmin"],
+          ));
+      return response.data;
+    }
+    return {"msg": "tokenLogin network error!!!"};
   }
 
   Future<Map> signUp({required Map<String, dynamic> data}) async {

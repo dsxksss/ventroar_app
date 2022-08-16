@@ -16,10 +16,10 @@ class User extends HiveObject {
   String email;
 
   @HiveField(3)
-  Array friends;
+  List<dynamic> friends;
 
   @HiveField(4)
-  Array inBox;
+  List<dynamic> inBox;
 
   @HiveField(5)
   int createDate;

@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 import 'package:ventroar_app/contexts/global_provider.dart';
+import 'package:ventroar_app/services/network_lib.dart';
 import '../../schemas/user.dart';
 
 class DHeader extends StatefulWidget {
@@ -26,13 +27,24 @@ class _DHeaderState extends State<DHeader> {
   }
 
   void getUserData() {
-    _user = box.get("myuser")!;
+    _user = box.get("my")!;
+  }
+
+  Future a() async {
+    UserHttpLib signin = UserHttpLib();
+    await signin.signIn(data: {
+      "account": "2546650292@qq.com",
+      "password": "123456789",
+    }, box: box);
+    // _loginIn(_re.headers["x-auth-token"]![0]);
   }
 
   @override
   Widget build(BuildContext context) {
     box = Hive.box("userbox");
+    a();
     getUserData();
+
     return SizedBox(
       height: 0.24.sh,
       child: Padding(
@@ -207,7 +219,7 @@ class _VDrawerState extends State<VDrawer> {
                             onPressed: () {
                               Navigator.of(context).pushNamedAndRemoveUntil(
                                   "./login", (route) => false);
-                              box.delete("myuser");
+                              box.delete("my");
                               _loginOut();
                             },
                             icon: Icon(
