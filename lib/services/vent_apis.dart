@@ -69,7 +69,7 @@ class VentUrls {
 }
 
 class VentUrlsTest {
-  static String apiPath = "http://...:2547";
+  static String apiPath = "http://localhost:2547";
 
   ///-----------------User基本操作api---------------------
   //POST   登录账号(返回该登录用户基本数据)	account,password
