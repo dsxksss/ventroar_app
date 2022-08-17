@@ -37,7 +37,7 @@ class _DHeaderState extends State<DHeader> {
     return SizedBox(
       height: 0.18.sh,
       child: Padding(
-        padding: EdgeInsets.fromLTRB(0.02.sw, 0.05.sh, 0, 0),
+        padding: EdgeInsets.fromLTRB(0.04.sw, 0.05.sh, 0, 0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
