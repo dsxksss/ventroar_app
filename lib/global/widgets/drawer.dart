@@ -35,10 +35,10 @@ class _DHeaderState extends State<DHeader> {
     getUserData();
 
     return SizedBox(
-      height: 0.24.sh,
+      height: 0.18.sh,
       child: Padding(
-        padding: EdgeInsets.fromLTRB(0.06.sw, 0.02.sh, 0, 0),
-        child: Column(
+        padding: EdgeInsets.fromLTRB(0.02.sw, 0.04.sh, 0, 0),
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -46,8 +46,8 @@ class _DHeaderState extends State<DHeader> {
               borderRadius: BorderRadius.circular(999),
               child: _user.avatarUrl == "null"
                   ? Container(
-                      width: 100,
-                      height: 100,
+                      width: 80,
+                      height: 80,
                       color: Colors.blue[200],
                       child: Center(
                         child: Text(
@@ -57,22 +57,33 @@ class _DHeaderState extends State<DHeader> {
                         ),
                       ))
                   : SizedBox(
-                      width: 100,
-                      height: 100,
+                      width: 80,
+                      height: 80,
                       child: Image.network(
                           "https://ventroar.xyz:2548/avatars/${_user.avatarUrl}"),
                     ),
             ),
-            SizedBox(height: 0.015.sh),
-            Text(
-              _user.name,
-              style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500),
-            ),
-            SizedBox(height: 0.01.sh),
-            Text(
-              _user.email,
-              style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
-            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 0.015.sh),
+                  Text(
+                    _user.name,
+                    style:
+                        TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500),
+                  ),
+                  SizedBox(height: 0.01.sh),
+                  Text(
+                    _user.email,
+                    style:
+                        TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),
@@ -202,7 +213,7 @@ class _VDrawerState extends State<VDrawer> {
                   child: Stack(
                     children: [
                       Positioned(
-                        bottom: 0,
+                        bottom: -10,
                         left: 10,
                         child: TextButton.icon(
                             onPressed: () {
