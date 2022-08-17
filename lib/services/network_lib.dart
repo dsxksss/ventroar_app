@@ -92,7 +92,7 @@ class UserHttpLib {
       {required Map<String, dynamic> data, required Box<User> box}) async {
     Response response;
     response = await Services.instance.dio
-        .then((value) => value.post(VentUrlsTest.signIn, data: data));
+        .then((value) => value.post(VentUrls.signIn, data: data));
 
     if (response.statusCode == 200) {
       box.put(

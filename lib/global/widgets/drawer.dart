@@ -37,7 +37,7 @@ class _DHeaderState extends State<DHeader> {
     return SizedBox(
       height: 0.18.sh,
       child: Padding(
-        padding: EdgeInsets.fromLTRB(0.02.sw, 0.04.sh, 0, 0),
+        padding: EdgeInsets.fromLTRB(0.02.sw, 0.05.sh, 0, 0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,8 +46,8 @@ class _DHeaderState extends State<DHeader> {
               borderRadius: BorderRadius.circular(999),
               child: _user.avatarUrl == "null"
                   ? Container(
-                      width: 80,
-                      height: 80,
+                      width: 85,
+                      height: 85,
                       color: Colors.blue[200],
                       child: Center(
                         child: Text(
@@ -57,14 +57,14 @@ class _DHeaderState extends State<DHeader> {
                         ),
                       ))
                   : SizedBox(
-                      width: 80,
-                      height: 80,
+                      width: 85,
+                      height: 85,
                       child: Image.network(
                           "https://ventroar.xyz:2548/avatars/${_user.avatarUrl}"),
                     ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+              padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -208,57 +208,54 @@ class _VDrawerState extends State<VDrawer> {
             child: Column(
               children: [
                 ..._listTiles,
-                SizedBox(
-                  height: 0.77.sw,
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        bottom: -10,
-                        left: 10,
-                        child: TextButton.icon(
-                            onPressed: () {
-                              Navigator.of(context).pushNamedAndRemoveUntil(
-                                  "/login", (route) => false);
-                              box.delete("my");
-                              _loginOut();
-                            },
-                            icon: Icon(
-                              Icons.output,
-                              color: Colors.redAccent,
-                              size: 32.sp,
-                            ),
-                            label: Text(
-                              "退出登录",
-                              style: TextStyle(
-                                color: Theme.of(context)
-                                    .textTheme
-                                    .headline1!
-                                    .color,
-                              ),
-                            )),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 1.sw,
+            child: Stack(
+              children: [
+                Positioned(
+                  bottom: 0,
+                  left: 10,
+                  child: TextButton.icon(
+                      onPressed: () {
+                        Navigator.of(context).pushNamedAndRemoveUntil(
+                            "/login", (route) => false);
+                        box.delete("my");
+                        _loginOut();
+                      },
+                      icon: Icon(
+                        Icons.output,
+                        color: Colors.redAccent,
+                        size: 32.sp,
                       ),
-                      Positioned(
-                        bottom: 1,
-                        right: 22,
-                        child: IconButton(
-                          onPressed: () {
-                            Provider.of<ThemeProvider>(context, listen: false)
-                                .changeToDark(!_isDark);
-                          },
-                          tooltip: "切换主题",
-                          icon: Icon(
-                            _isDark
-                                ? FontAwesomeIcons.cloudSun
-                                : FontAwesomeIcons.cloudMoon,
-                          ),
+                      label: Text(
+                        "退出登录",
+                        style: TextStyle(
+                          color: Theme.of(context).textTheme.headline1!.color,
                         ),
-                      )
-                    ],
+                      )),
+                ),
+                Positioned(
+                  bottom: 1,
+                  right: 22,
+                  child: IconButton(
+                    onPressed: () {
+                      Provider.of<ThemeProvider>(context, listen: false)
+                          .changeToDark(!_isDark);
+                    },
+                    tooltip: "切换主题",
+                    icon: Icon(
+                      _isDark
+                          ? FontAwesomeIcons.cloudSun
+                          : FontAwesomeIcons.cloudMoon,
+                    ),
                   ),
                 )
               ],
             ),
-          ),
+          )
         ],
       ),
     );
