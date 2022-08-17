@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:animations/animations.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:ventroar_app/contexts/global_provider.dart';
 import 'package:ventroar_app/page_routers.dart';
@@ -15,6 +16,7 @@ import './pages/chatlist_page.dart';
 import 'global/widgets/drawer.dart';
 import 'global/widgets/ventroar_bottom_bar.dart';
 import 'pages/pages_appbar/chat_appbar.dart';
+import 'schemas/user.dart';
 
 class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
@@ -24,17 +26,30 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
+  late Box<User> box;
+  late User? _user;
+
+  @override
+  void initState() {
+    super.initState();
+    box = Hive.box("userbox");
+    getUserData();
+  }
+
+  void getUserData() {
+    _user = box.get("my");
+  }
+
   @override
   Widget build(BuildContext context) {
     bool _isDark = Provider.of<ThemeProvider>(context).isDark;
-
     return MaterialApp(
       /// 主题模式切换
       themeMode: _isDark ? ThemeMode.dark : ThemeMode.light,
       theme: lightTheme(context),
       darkTheme: darkTheme(context),
       debugShowCheckedModeBanner: false,
-      initialRoute: "./",
+      initialRoute: _user != null ? "/" : "/login",
       routes: pageRouter(),
     );
   }

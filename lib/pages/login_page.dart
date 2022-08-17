@@ -7,6 +7,7 @@ import 'package:ventroar_app/widgets/wait_animation.dart';
 
 import '../contexts/global_provider.dart';
 import '../schemas/user.dart';
+import '../services/network_lib.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -28,6 +29,17 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     final TextEditingController _accountController = TextEditingController();
     final TextEditingController _passwordController = TextEditingController();
+    Future signIn() async {
+      UserHttpLib signin = UserHttpLib();
+      var response = await signin.signIn(data: {
+        "account": "2546650292@qq.com",
+        "password": "123456789",
+      }, box: box);
+      // _loginIn(_re.headers["x-auth-token"]![0]);
+      if (response["statusCode"] == 200) {
+        Navigator.of(context).pushNamedAndRemoveUntil("/", (route) => false);
+      }
+    }
 
     return Builder(builder: (context) {
       return MediaQuery(
@@ -71,7 +83,9 @@ class _LoginPageState extends State<LoginPage> {
                             height: 20,
                           ),
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              signIn();
+                            },
                             child: const Text("Login"),
                           ),
                         ],

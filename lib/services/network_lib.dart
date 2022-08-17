@@ -109,9 +109,13 @@ class UserHttpLib {
             isOnline: response.data["result"]["isOnline"],
             isAdmin: response.data["result"]["isAdmin"],
           ));
-      return {"headers": response.headers, "data": response.data};
+      return {
+        "headers": response.headers,
+        "data": response.data,
+        "statusCode": response.statusCode
+      };
     }
-    return {"msg": "login network error!!!"};
+    return {"msg": "login network error!!!", "statusCode": response.statusCode};
   }
 
   Future<Map> tokenLogin(
