@@ -32,8 +32,8 @@ class _LoginPageState extends State<LoginPage> {
     Future signIn() async {
       UserHttpLib signin = UserHttpLib();
       var response = await signin.signIn(data: {
-        "account": "2546650292@qq.com",
-        "password": "123456789",
+        "account": _accountController.text,
+        "password": _passwordController.text,
       }, box: box);
       // _loginIn(_re.headers["x-auth-token"]![0]);
       if (response["statusCode"] == 200) {
