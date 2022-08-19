@@ -1,7 +1,10 @@
 // 取消命名检查
 // ignore_for_file: non_constant_identifier_names, constant_identifier_names
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:ventroar_app/functions/vent_snack.dart';
 import '../schemas/user.dart';
 import './vent_apis.dart';
 
@@ -32,7 +35,14 @@ class CustomInterceptors extends Interceptor {
     print(
         'RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path}');
     print('datas: ${response.data}');
-
+    vSnackBar(
+      model: VSnackModel.success,
+      textWidget: Text(
+        response.data["msg"],
+        style: TextStyle(
+            fontSize: 17.sp, color: Colors.white, fontWeight: FontWeight.bold),
+      ),
+    );
     return super.onResponse(response, handler);
   }
 
@@ -43,6 +53,21 @@ class CustomInterceptors extends Interceptor {
     print(
         'ERROR[${err.response?.statusCode}] => PATH: ${err.requestOptions.path}');
     print('ERROR-MESSAGE => [${err.response?.data["msg"]}]');
+    vSnackBar(
+      showTime: const Duration(seconds: 60),
+      model: VSnackModel.error,
+      textWidget: ListView(
+        children: [
+          Text(
+            err.response?.data["msg"],
+            style: TextStyle(
+                fontSize: 17.sp,
+                color: Colors.white,
+                fontWeight: FontWeight.bold),
+          )
+        ],
+      ),
+    );
 
     return super.onError(err, handler);
   }

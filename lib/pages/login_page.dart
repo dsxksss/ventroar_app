@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:ventroar_app/widgets/wait_animation.dart';
 
 import '../contexts/global_provider.dart';
+import '../functions/vent_snack.dart';
 import '../schemas/user.dart';
 import '../services/network_lib.dart';
 
@@ -71,6 +72,7 @@ class _LoginPageState extends State<LoginPage> {
                             height: 0.03.sh,
                           ),
                           TextFormField(
+                            obscureText: true,
                             controller: _passwordController,
                             decoration: const InputDecoration(
                               isDense: false,
@@ -84,7 +86,23 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           ElevatedButton(
                             onPressed: () {
-                              signIn();
+                              if (_accountController.text.length >= 3 ||
+                                  _passwordController.text.length >= 8) {
+                                signIn();
+                              } else if (_accountController.text.isEmpty ||
+                                  _passwordController.text.isEmpty) {
+                                vSnackBar(
+                                  showTime: const Duration(seconds: 60),
+                                  model: VSnackModel.error,
+                                  textWidget: Text(
+                                    "账号或密码不能为空!",
+                                    style: TextStyle(
+                                        fontSize: 17.sp,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                );
+                              }
                             },
                             child: const Text("Login"),
                           ),
