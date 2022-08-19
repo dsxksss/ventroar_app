@@ -13,6 +13,7 @@ import './themes/light_theme.dart';
 import './pages/home_page.dart';
 import './pages/star_page.dart';
 import './pages/chatlist_page.dart';
+import 'global/global_context.dart';
 import 'global/widgets/drawer.dart';
 import 'global/widgets/ventroar_bottom_bar.dart';
 import 'pages/pages_appbar/chat_appbar.dart';
@@ -44,6 +45,8 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     bool _isDark = Provider.of<ThemeProvider>(context).isDark;
     return MaterialApp(
+      navigatorKey: NavigationService.navigatorKey,
+
       /// 主题模式切换
       themeMode: _isDark ? ThemeMode.dark : ThemeMode.light,
       theme: lightTheme(context),

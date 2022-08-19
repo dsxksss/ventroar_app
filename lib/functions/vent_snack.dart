@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../global/global_context.dart';
+
 enum VSnackModel {
   info,
   warning,
@@ -48,7 +50,6 @@ Widget? getModelIcon(VSnackModel vSnackBar) {
 }
 
 ScaffoldFeatureController<SnackBar, SnackBarClosedReason>? vSnackBar({
-  required BuildContext context, //必要的上下文
   //以下是可选参数
   Widget? textWidget, //设置默认content里的Text组件,如果是自定义content可以忽略这个选项
   Widget? content, //设置自定义content
@@ -63,10 +64,13 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason>? vSnackBar({
   Duration? showTime, //持续时长
 }) {
   //在显示其他snackbar之前，先删除当前snackbar
-  ScaffoldMessenger.of(context).removeCurrentSnackBar();
+  ScaffoldMessenger.of(NavigationService.navigatorKey.currentContext!)
+      .removeCurrentSnackBar();
 
-  return ScaffoldMessenger.of(context).showSnackBar(
+  return ScaffoldMessenger.of(NavigationService.navigatorKey.currentContext!)
+      .showSnackBar(
     SnackBar(
+      dismissDirection: DismissDirection.startToEnd,
       onVisible: onVisible ?? () => {},
       elevation: 3, //景深
       duration: showTime ?? const Duration(seconds: 5),
