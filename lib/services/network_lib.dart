@@ -58,6 +58,10 @@ class CustomInterceptors extends Interceptor {
       dismissDirection: DismissDirection.startToEnd,
       model: VSnackModel.error,
       textWidget: ListView(
+        physics: const AlwaysScrollableScrollPhysics(
+          //当内容不足时也可以启动反弹刷新
+          parent: BouncingScrollPhysics(),
+        ),
         children: [
           Text(
             err.response?.data["msg"],
