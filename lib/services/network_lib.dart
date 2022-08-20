@@ -55,6 +55,7 @@ class CustomInterceptors extends Interceptor {
     print('ERROR-MESSAGE => [${err.response?.data["msg"]}]');
     vSnackBar(
       showTime: const Duration(seconds: 60),
+      dismissDirection: DismissDirection.startToEnd,
       model: VSnackModel.error,
       textWidget: ListView(
         children: [

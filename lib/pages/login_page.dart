@@ -30,6 +30,8 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     final TextEditingController _accountController = TextEditingController();
     final TextEditingController _passwordController = TextEditingController();
+    final FocusNode _accountNode = FocusNode();
+    final FocusNode _passwordNode = FocusNode();
     Future signIn() async {
       UserHttpLib signin = UserHttpLib();
       var response = await signin.signIn(data: {
@@ -61,7 +63,9 @@ class _LoginPageState extends State<LoginPage> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           TextFormField(
+                            autofocus: true,
                             controller: _accountController,
+                            focusNode: _accountNode,
                             decoration: const InputDecoration(
                               prefixIcon: Icon(
                                 FontAwesomeIcons.solidUser,
@@ -73,6 +77,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           TextFormField(
                             obscureText: true,
+                            focusNode: _passwordNode,
                             controller: _passwordController,
                             decoration: const InputDecoration(
                               isDense: false,
@@ -89,8 +94,12 @@ class _LoginPageState extends State<LoginPage> {
                               if (_accountController.text.length >= 3 ||
                                   _passwordController.text.length >= 8) {
                                 signIn();
+                                _accountNode.unfocus();
+                                _passwordNode.unfocus();
                               } else if (_accountController.text.isEmpty ||
                                   _passwordController.text.isEmpty) {
+                                _accountNode.unfocus();
+                                _passwordNode.unfocus();
                                 vSnackBar(
                                   showTime: const Duration(seconds: 60),
                                   model: VSnackModel.error,
