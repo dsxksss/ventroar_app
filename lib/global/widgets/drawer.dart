@@ -218,7 +218,7 @@ class _VDrawerState extends State<VDrawer> {
                   child: TextButton.icon(
                       onPressed: () {
                         Navigator.of(context).pushNamedAndRemoveUntil(
-                            "/login", (route) => false);
+                            "/loginPage", (route) => false);
                         box.delete("my");
                       },
                       icon: Icon(

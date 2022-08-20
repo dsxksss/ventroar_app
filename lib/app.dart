@@ -13,11 +13,11 @@ import './themes/light_theme.dart';
 import './pages/home_page.dart';
 import './pages/star_page.dart';
 import './pages/chatlist_page.dart';
-import 'global/global_context.dart';
-import 'global/widgets/drawer.dart';
-import 'global/widgets/ventroar_bottom_bar.dart';
-import 'pages/pages_appbar/chat_appbar.dart';
-import 'schemas/user.dart';
+import './global/global_context.dart';
+import './global/widgets/drawer.dart';
+import './global/widgets/ventroar_bottom_bar.dart';
+import './pages/pages_appbar/chat_appbar.dart';
+import './schemas/user.dart';
 
 class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
@@ -28,23 +28,18 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   late Box<User> box;
-  late User? _user;
 
   @override
   void initState() {
     super.initState();
     box = Hive.box("userbox");
-    getUserData();
-  }
-
-  void getUserData() {
-    _user = box.get("my");
   }
 
   @override
   Widget build(BuildContext context) {
     bool _isDark = Provider.of<ThemeProvider>(context).isDark;
     return MaterialApp(
+      //全局context
       navigatorKey: NavigationService.navigatorKey,
 
       /// 主题模式切换
@@ -52,7 +47,7 @@ class _AppState extends State<App> {
       theme: lightTheme(context),
       darkTheme: darkTheme(context),
       debugShowCheckedModeBanner: false,
-      initialRoute: _user != null ? "/" : "/login",
+      initialRoute: "/loginPage",
       routes: pageRouter(),
     );
   }
