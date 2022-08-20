@@ -34,7 +34,6 @@ class _MaterialAppState extends State<MaterialApp> {
             MultiProvider(providers: [
           ChangeNotifierProvider(create: (_) => ThemeProvider()),
           ChangeNotifierProvider(create: (_) => PageDataProvider()),
-          ChangeNotifierProvider(create: (_) => UserVerificationProvider()),
         ], child: const App()),
       );
     });

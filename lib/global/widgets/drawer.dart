@@ -119,9 +119,6 @@ class _VDrawerState extends State<VDrawer> {
 
     bool _isDark = Provider.of<ThemeProvider>(context).isDark;
 
-    final Function _loginOut =
-        Provider.of<UserVerificationProvider>(context).loginOut;
-
     List<Widget> _listTiles = [
       ListTile(
         minVerticalPadding: 0,
@@ -223,7 +220,6 @@ class _VDrawerState extends State<VDrawer> {
                         Navigator.of(context).pushNamedAndRemoveUntil(
                             "/login", (route) => false);
                         box.delete("my");
-                        _loginOut();
                       },
                       icon: Icon(
                         Icons.output,

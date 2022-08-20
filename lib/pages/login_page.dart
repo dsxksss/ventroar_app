@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive/hive.dart';
-import 'package:provider/provider.dart';
-import 'package:ventroar_app/widgets/wait_animation.dart';
 
-import '../contexts/global_provider.dart';
 import '../functions/vent_snack.dart';
 import '../schemas/user.dart';
 import '../services/network_lib.dart';
@@ -53,71 +50,69 @@ class _LoginPageState extends State<LoginPage> {
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             child: Center(
-              child: context.watch<UserVerificationProvider>().isLoginState
-                  ? const WaitAnimation()
-                  : SizedBox(
-                      height: MediaQuery.of(context).size.height,
-                      width: MediaQuery.of(context).size.width * 0.70,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          TextFormField(
-                            autofocus: true,
-                            controller: _accountController,
-                            focusNode: _accountNode,
-                            decoration: const InputDecoration(
-                              prefixIcon: Icon(
-                                FontAwesomeIcons.solidUser,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 0.03.sh,
-                          ),
-                          TextFormField(
-                            obscureText: true,
-                            focusNode: _passwordNode,
-                            controller: _passwordController,
-                            decoration: const InputDecoration(
-                              isDense: false,
-                              prefixIcon: Icon(
-                                FontAwesomeIcons.lock,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          ElevatedButton(
-                            onPressed: () {
-                              if (_accountController.text.length >= 3 ||
-                                  _passwordController.text.length >= 8) {
-                                signIn();
-                                _accountNode.unfocus();
-                                _passwordNode.unfocus();
-                              } else if (_accountController.text.isEmpty ||
-                                  _passwordController.text.isEmpty) {
-                                _accountNode.unfocus();
-                                _passwordNode.unfocus();
-                                vSnackBar(
-                                  showTime: const Duration(seconds: 60),
-                                  model: VSnackModel.error,
-                                  textWidget: Text(
-                                    "账号或密码不能为空!",
-                                    style: TextStyle(
-                                        fontSize: 17.sp,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                );
-                              }
-                            },
-                            child: const Text("Login"),
-                          ),
-                        ],
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width * 0.70,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    TextFormField(
+                      autofocus: true,
+                      controller: _accountController,
+                      focusNode: _accountNode,
+                      decoration: const InputDecoration(
+                        prefixIcon: Icon(
+                          FontAwesomeIcons.solidUser,
+                        ),
                       ),
                     ),
+                    SizedBox(
+                      height: 0.03.sh,
+                    ),
+                    TextFormField(
+                      obscureText: true,
+                      focusNode: _passwordNode,
+                      controller: _passwordController,
+                      decoration: const InputDecoration(
+                        isDense: false,
+                        prefixIcon: Icon(
+                          FontAwesomeIcons.lock,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        if (_accountController.text.length >= 3 &&
+                            _passwordController.text.length >= 8) {
+                          signIn();
+                          _accountNode.unfocus();
+                          _passwordNode.unfocus();
+                        } else if (_accountController.text.isEmpty ||
+                            _passwordController.text.isEmpty) {
+                          _accountNode.unfocus();
+                          _passwordNode.unfocus();
+                          vSnackBar(
+                            showTime: const Duration(seconds: 60),
+                            model: VSnackModel.error,
+                            textWidget: Text(
+                              "账号或密码不能为空!",
+                              style: TextStyle(
+                                  fontSize: 17.sp,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          );
+                        }
+                      },
+                      child: const Text("Login"),
+                    ),
+                  ],
+                ),
+              ),
             ),
           ),
         ),
