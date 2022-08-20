@@ -62,6 +62,7 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason>? vSnackBar({
   SnackBarBehavior? behavior, //设置位置方式(并非设置位置)
   VoidCallback? onVisible, //在SnackBar显示之后的回调函数
   Duration? showTime, //持续时长
+  DismissDirection? dismissDirection, //持续时长
 }) {
   //在显示其他snackbar之前，先删除当前snackbar
   ScaffoldMessenger.of(NavigationService.navigatorKey.currentContext!)
@@ -70,7 +71,7 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason>? vSnackBar({
   return ScaffoldMessenger.of(NavigationService.navigatorKey.currentContext!)
       .showSnackBar(
     SnackBar(
-      dismissDirection: DismissDirection.startToEnd,
+      dismissDirection: dismissDirection ?? DismissDirection.down,
       onVisible: onVisible ?? () => {},
       elevation: 3, //景深
       duration: showTime ?? const Duration(seconds: 5),
