@@ -30,18 +30,40 @@ class _HomeAppBarState extends State<HomeAppBar> {
           },
           icon: const Icon(
             FontAwesomeIcons.barsStaggered,
-            size: 25,
+            size: 20,
           ),
         ),
       ),
       title: Text(
         "${pageDatas[selectedIndex]}",
-        style: GoogleFonts.ubuntu(fontSize: 26, fontWeight: FontWeight.w500),
+        style: GoogleFonts.ubuntu(fontSize: 25, fontWeight: FontWeight.w500),
       ),
-      actions: const [
+      actions: [
         Padding(
-          padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
-          child: SearchAnimation(height: 40, width: 40),
+          padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
+          child: SearchAnimation(
+            height: 35,
+            width: 35,
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => Scaffold(
+                  appBar: AppBar(
+                    centerTitle: true,
+                    title: const Text("搜索"),
+                  ),
+                  body: Container(
+                    color: Theme.of(context).canvasColor,
+                    child: const Center(
+                      child: SearchAnimation(
+                        height: 300,
+                        width: 300,
+                      ),
+                    ),
+                  ),
+                ),
+              ));
+            },
+          ),
         )
       ],
     );
