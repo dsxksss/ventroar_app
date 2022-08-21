@@ -1,10 +1,7 @@
 // 取消命名检查
 // ignore_for_file: non_constant_identifier_names, constant_identifier_names
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:ventroar_app/functions/vent_snack.dart';
 import '../schemas/user.dart';
 import './vent_apis.dart';
 
@@ -24,7 +21,7 @@ class CustomInterceptors extends Interceptor {
   //请求之前
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     print('请求之前');
-    print('REQUEST[${options.method}] => PATH: ${options.path}');
+    // print('REQUEST[${options.method}] => PATH: ${options.path}');
     return super.onRequest(options, handler);
   }
 
@@ -32,17 +29,17 @@ class CustomInterceptors extends Interceptor {
   //响应之后
   void onResponse(Response response, ResponseInterceptorHandler handler) {
     print('响应之后');
-    print(
-        'RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path}');
-    print('datas: ${response.data}');
-    vSnackBar(
-      model: VSnackModel.success,
-      textWidget: Text(
-        response.data["msg"],
-        style: TextStyle(
-            fontSize: 17.sp, color: Colors.white, fontWeight: FontWeight.bold),
-      ),
-    );
+    // print(
+    //     'RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path}');
+    // print('datas: ${response.data}');
+    // vSnackBar(
+    //   model: VSnackModel.success,
+    //   textWidget: Text(
+    //     response.data["msg"],
+    //     style: TextStyle(
+    //         fontSize: 17.sp, color: Colors.white, fontWeight: FontWeight.bold),
+    //   ),
+    // );
     return super.onResponse(response, handler);
   }
 
@@ -50,29 +47,9 @@ class CustomInterceptors extends Interceptor {
   //发生异常时
   void onError(DioError err, ErrorInterceptorHandler handler) {
     print('发生异常');
-    print(
-        'ERROR[${err.response?.statusCode}] => PATH: ${err.requestOptions.path}');
-    print('ERROR-MESSAGE => [${err.response?.data["msg"]}]');
-    vSnackBar(
-      showTime: const Duration(seconds: 60),
-      dismissDirection: DismissDirection.startToEnd,
-      model: VSnackModel.error,
-      textWidget: ListView(
-        physics: const AlwaysScrollableScrollPhysics(
-          //当内容不足时也可以启动反弹刷新
-          parent: BouncingScrollPhysics(),
-        ),
-        children: [
-          Text(
-            err.response?.data["msg"],
-            style: TextStyle(
-                fontSize: 17.sp,
-                color: Colors.white,
-                fontWeight: FontWeight.bold),
-          )
-        ],
-      ),
-    );
+    // print(
+    //     'ERROR[${err.response?.statusCode}] => PATH: ${err.requestOptions.path}');
+    // print('ERROR-MESSAGE => [${err.response?.data["msg"]}]');
 
     return super.onError(err, handler);
   }

@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:hive/hive.dart';
 //flutter packages pub run build_runner build 记得使用此命令生成文件
 part "user.g.dart";

@@ -48,8 +48,27 @@ class _LoginPageState extends State<LoginPage> {
         if (response["statusCode"] == 200) {
           Navigator.of(context).pushNamedAndRemoveUntil("/", (route) => false);
         }
-      } on DioError {
-        return;
+      } on DioError catch (e) {
+        vSnackBar(
+          showTime: const Duration(seconds: 60),
+          dismissDirection: DismissDirection.startToEnd,
+          model: VSnackModel.error,
+          textWidget: ListView(
+            physics: const AlwaysScrollableScrollPhysics(
+              //当内容不足时也可以启动反弹刷新
+              parent: BouncingScrollPhysics(),
+            ),
+            children: [
+              Text(
+                e.response?.data["msg"],
+                style: TextStyle(
+                    fontSize: 17.sp,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
+              )
+            ],
+          ),
+        );
       }
     }
 
@@ -64,6 +83,26 @@ class _LoginPageState extends State<LoginPage> {
           });
         }
       } on DioError catch (e) {
+        vSnackBar(
+          showTime: const Duration(seconds: 60),
+          dismissDirection: DismissDirection.startToEnd,
+          model: VSnackModel.error,
+          textWidget: ListView(
+            physics: const AlwaysScrollableScrollPhysics(
+              //当内容不足时也可以启动反弹刷新
+              parent: BouncingScrollPhysics(),
+            ),
+            children: [
+              Text(
+                e.response?.data["msg"],
+                style: TextStyle(
+                    fontSize: 17.sp,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
+              )
+            ],
+          ),
+        );
         if (e.response!.statusCode == 400) {
           box.delete("my");
           getUserData();
