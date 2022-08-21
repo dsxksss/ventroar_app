@@ -35,9 +35,8 @@ class _DHeaderState extends State<DHeader> {
     getUserData();
 
     return SizedBox(
-      height: 0.18.sh,
       child: Padding(
-        padding: EdgeInsets.fromLTRB(0.04.sw, 0.05.sh, 0, 0),
+        padding: EdgeInsets.fromLTRB(0.04.sw, 0.1.sh, 0, 0.02.sh),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -197,23 +196,16 @@ class _VDrawerState extends State<VDrawer> {
     ];
 
     return Drawer(
-      child: ListView(
-        children: <Widget>[
+      child: Column(
+        children: [
           const DHeader(),
-          Container(
-            padding: EdgeInsets.fromLTRB(0, 0.01.sh, 0, 0),
-            child: Column(
-              children: [
-                ..._listTiles,
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 1.sw,
+          ..._listTiles,
+          Expanded(
             child: Stack(
+              fit: StackFit.expand,
               children: [
                 Positioned(
-                  bottom: 0,
+                  bottom: 25,
                   left: 10,
                   child: TextButton.icon(
                       onPressed: () {
@@ -234,7 +226,7 @@ class _VDrawerState extends State<VDrawer> {
                       )),
                 ),
                 Positioned(
-                  bottom: 1,
+                  bottom: 26,
                   right: 22,
                   child: IconButton(
                     onPressed: () {
