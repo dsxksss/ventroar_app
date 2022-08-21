@@ -125,7 +125,10 @@ class _LoginPageState extends State<LoginPage> {
             width: MediaQuery.of(context).size.width,
             child: Center(
               child: _user != null
-                  ? const WaitAnimation()
+                  ? const WaitAnimation(
+                      width: 200,
+                      height: 200,
+                    )
                   : SizedBox(
                       height: MediaQuery.of(context).size.height,
                       width: MediaQuery.of(context).size.width * 0.70,

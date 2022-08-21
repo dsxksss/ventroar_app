@@ -11,6 +11,9 @@ class ChatListPage extends StatefulWidget {
 class _ChatListPageState extends State<ChatListPage> {
   @override
   Widget build(BuildContext context) {
-    return const WaitAnimation();
+    return const WaitAnimation(
+      width: 200,
+      height: 200,
+    );
   }
 }

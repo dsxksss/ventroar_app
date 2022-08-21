@@ -3,16 +3,17 @@ import 'package:provider/provider.dart';
 import 'package:rive/rive.dart';
 import '../contexts/global_provider.dart';
 
-class WaitAnimation extends StatefulWidget {
-  const WaitAnimation({Key? key, required this.height, required this.width})
+class SearchAnimation extends StatefulWidget {
+  const SearchAnimation({Key? key, required this.height, required this.width})
       : super(key: key);
   final double height;
   final double width;
+
   @override
-  State<WaitAnimation> createState() => _WaitAnimationState();
+  State<SearchAnimation> createState() => _SearchAnimationState();
 }
 
-class _WaitAnimationState extends State<WaitAnimation> {
+class _SearchAnimationState extends State<SearchAnimation> {
   @override
   Widget build(BuildContext context) {
     bool _isDark = Provider.of<ThemeProvider>(context, listen: true).isDark;
@@ -25,13 +26,13 @@ class _WaitAnimationState extends State<WaitAnimation> {
               width: widget.width,
               height: widget.height,
               child: const RiveAnimation.asset(
-                  'static/animations/dark/wait_d.riv'),
+                  "static/animations/dark/search_d.riv"),
             )
           : SizedBox(
               width: widget.width,
               height: widget.height,
               child: const RiveAnimation.asset(
-                  'static/animations/light/wait_l.riv'),
+                  "static/animations/light/search_l.riv"),
             ),
     );
   }
