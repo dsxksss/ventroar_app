@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:rive/rive.dart';
+import 'package:ventroar_app/widgets/search_animation.dart';
 import '../../contexts/global_provider.dart';
 
 class HomeAppBar extends StatefulWidget implements PreferredSizeWidget {
@@ -19,69 +20,29 @@ class _HomeAppBarState extends State<HomeAppBar> {
   Widget build(BuildContext context) {
     Map pageDatas = Provider.of<PageDataProvider>(context).pageDatas;
     int selectedIndex = Provider.of<PageDataProvider>(context).selectedIndex;
-    bool _isDark = Provider.of<ThemeProvider>(context, listen: true).isDark;
     return AppBar(
       backgroundColor: Theme.of(context).canvasColor,
-      centerTitle: true,
-      title: Text(
-        "${pageDatas[selectedIndex]}",
-        style: GoogleFonts.ubuntu(fontSize: 21, fontWeight: FontWeight.w500),
-      ),
-      actions: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
-          child: GestureDetector(
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => Scaffold(
-                  appBar: AppBar(
-                    centerTitle: true,
-                    title: const Text("搜索"),
-                  ),
-                  body: Container(
-                    color: Theme.of(context).canvasColor,
-                    child: Center(
-                      child: _isDark
-                          ? Container(
-                              color: Theme.of(context)
-                                  .appBarTheme
-                                  .foregroundColor!
-                                  .withOpacity(0),
-                              width: 300,
-                              height: 300,
-                              child: const RiveAnimation.asset(
-                                  "static/animations/dark/search_d.riv"),
-                            )
-                          : const SizedBox(
-                              width: 300,
-                              height: 300,
-                              child: RiveAnimation.asset(
-                                  "static/animations/light/search_l.riv"),
-                            ),
-                    ),
-                  ),
-                ),
-              ));
-            },
-            child: _isDark
-                ? Container(
-                    color: Theme.of(context)
-                        .appBarTheme
-                        .foregroundColor!
-                        .withOpacity(0),
-                    width: 30,
-                    height: 30,
-                    child: const RiveAnimation.asset(
-                        "static/animations/dark/search_d.riv"),
-                  )
-                : const SizedBox(
-                    width: 30,
-                    height: 30,
-                    child: RiveAnimation.asset(
-                        "static/animations/light/search_l.riv"),
-                  ),
+      leading: Padding(
+        padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+        child: IconButton(
+          onPressed: () {
+            Scaffold.of(context).openDrawer();
+          },
+          icon: const Icon(
+            FontAwesomeIcons.barsStaggered,
+            size: 25,
           ),
         ),
+      ),
+      title: Text(
+        "${pageDatas[selectedIndex]}",
+        style: GoogleFonts.ubuntu(fontSize: 26, fontWeight: FontWeight.w500),
+      ),
+      actions: const [
+        Padding(
+          padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
+          child: SearchAnimation(height: 40, width: 40),
+        )
       ],
     );
   }
