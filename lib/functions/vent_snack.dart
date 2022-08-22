@@ -55,7 +55,8 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason>? vSnackBar({
   Widget? content, //设置自定义content
   Widget? button, //设置自定义button
   Widget? icon, //设置自定义icon
-  Color? bgcolor = Colors.lightBlue, //设置背景颜色
+  bool? isScroll, //设置文字内容是否可以滚动,默认可以
+  Color? bgcolor, //设置背景颜色
   VSnackModel? model, //一些自定义的颜色模式/如果设置则会覆盖bgcolor
   EdgeInsetsGeometry? padding = const EdgeInsets.all(16), //外边距
   EdgeInsetsGeometry? margin, //内边距(如果需要设置外边距，必须得位置方式设置为floating)
@@ -92,8 +93,10 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason>? vSnackBar({
             textWidget: textWidget,
             buttons: button,
             icon: model != null ? getModelIcon(model) : icon,
+            isScroll: isScroll ?? false,
           ),
-      backgroundColor: model != null ? getModelBg(model) : bgcolor,
+      backgroundColor:
+          model != null ? getModelBg(model) : bgcolor ?? Colors.lightBlue,
     ),
   );
 }
@@ -101,12 +104,14 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason>? vSnackBar({
 //默认的content组件
 class VSnackContent extends StatefulWidget {
   final Widget? textWidget;
+  final bool isScroll;
   final Widget? buttons;
   final Widget? icon;
   const VSnackContent({
     Key? key,
     this.textWidget = const Text(""),
     this.icon,
+    required this.isScroll,
     required this.buttons,
   }) : super(key: key);
 
@@ -124,7 +129,17 @@ class _VSnackContentState extends State<VSnackContent> {
           if (widget.icon != null) widget.icon!,
           if (widget.icon != null) const SizedBox(width: 10),
           Expanded(
-            child: widget.textWidget ?? const Text("你没有设置TextWidget这个参数值!!!"),
+            child: widget.isScroll
+                ? ListView(
+                    physics: const AlwaysScrollableScrollPhysics(
+                      //当内容不足时也可以启动反弹刷新
+                      parent: BouncingScrollPhysics(),
+                    ),
+                    children: [
+                        widget.textWidget ??
+                            const Text("你没有设置TextWidget这个参数值!!!"),
+                      ])
+                : widget.textWidget ?? const Text("你没有设置TextWidget这个参数值!!!"),
           ),
           const SizedBox(width: 5),
           widget.buttons ??

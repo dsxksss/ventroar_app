@@ -1,11 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive/hive.dart';
 import 'package:ventroar_app/widgets/wait_animation.dart';
 
 import '../functions/vent_snack.dart';
+import '../global/global_context.dart';
 import '../schemas/user.dart';
 import '../services/network_lib.dart';
 
@@ -46,27 +48,30 @@ class _LoginPageState extends State<LoginPage> {
           "password": _passwordController.text,
         }, box: box);
         if (response["statusCode"] == 200) {
-          Navigator.of(context).pushNamedAndRemoveUntil("/", (route) => false);
+          Future.delayed(const Duration(milliseconds: 1000), () {
+            Navigator.of(context)
+                .pushNamedAndRemoveUntil("/", (route) => false);
+          });
+          //在显示其他snackbar之前，先删除当前snackbar
+          ScaffoldMessenger.of(NavigationService.navigatorKey.currentContext!)
+              .removeCurrentSnackBar();
         }
       } on DioError catch (e) {
         vSnackBar(
           showTime: const Duration(seconds: 60),
           dismissDirection: DismissDirection.startToEnd,
           model: VSnackModel.error,
-          textWidget: ListView(
-            physics: const AlwaysScrollableScrollPhysics(
-              //当内容不足时也可以启动反弹刷新
-              parent: BouncingScrollPhysics(),
-            ),
-            children: [
-              Text(
-                e.response?.data["msg"],
-                style: TextStyle(
-                    fontSize: 17.sp,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
-              )
-            ],
+          isScroll: e.type != DioErrorType.connectTimeout && e.response != null
+              ? true
+              : false,
+          textWidget: Text(
+            e.type == DioErrorType.connectTimeout
+                ? "网络超时,请检查网络重试!"
+                : e.response?.data["msg"] ?? "未连接网络,请检查后重试!",
+            style: TextStyle(
+                fontSize: 17.sp,
+                color: Colors.white,
+                fontWeight: FontWeight.bold),
           ),
         );
       }
@@ -77,33 +82,33 @@ class _LoginPageState extends State<LoginPage> {
         UserHttpLib tokenLogin = UserHttpLib();
         var response = await tokenLogin.tokenLogin(box: box);
         if (response["statusCode"] == 200) {
-          Future.delayed(const Duration(milliseconds: 1000), () {
+          Future.delayed(const Duration(milliseconds: 200), () {
             Navigator.of(context)
                 .pushNamedAndRemoveUntil("/", (route) => false);
           });
+          //在显示其他snackbar之前，先删除当前snackbar
+          ScaffoldMessenger.of(NavigationService.navigatorKey.currentContext!)
+              .removeCurrentSnackBar();
         }
       } on DioError catch (e) {
         vSnackBar(
           showTime: const Duration(seconds: 60),
           dismissDirection: DismissDirection.startToEnd,
           model: VSnackModel.error,
-          textWidget: ListView(
-            physics: const AlwaysScrollableScrollPhysics(
-              //当内容不足时也可以启动反弹刷新
-              parent: BouncingScrollPhysics(),
-            ),
-            children: [
-              Text(
-                e.response?.data["msg"],
-                style: TextStyle(
-                    fontSize: 17.sp,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
-              )
-            ],
+          isScroll: e.type != DioErrorType.connectTimeout && e.response != null
+              ? true
+              : false,
+          textWidget: Text(
+            e.type == DioErrorType.connectTimeout
+                ? "网络超时,请检查网络重试!"
+                : e.response?.data["msg"] ?? "未连接网络,请检查后重试!",
+            style: TextStyle(
+                fontSize: 17.sp,
+                color: Colors.white,
+                fontWeight: FontWeight.bold),
           ),
         );
-        if (e.response!.statusCode == 400) {
+        if (e.response?.statusCode == 400 || e.response == null) {
           box.delete("my");
           getUserData();
           setState(() {
@@ -140,6 +145,9 @@ class _LoginPageState extends State<LoginPage> {
                             autofocus: true,
                             controller: _accountController,
                             focusNode: _accountNode,
+                            maxLength: 20,
+                            //如果超过最大值后的显示效果
+                            maxLengthEnforcement: MaxLengthEnforcement.enforced,
                             decoration: const InputDecoration(
                               prefixIcon: Icon(
                                 FontAwesomeIcons.solidUser,
@@ -153,6 +161,9 @@ class _LoginPageState extends State<LoginPage> {
                             obscureText: true,
                             focusNode: _passwordNode,
                             controller: _passwordController,
+                            maxLength: 20,
+                            //如果超过最大值后的显示效果
+                            maxLengthEnforcement: MaxLengthEnforcement.enforced,
                             decoration: const InputDecoration(
                               isDense: false,
                               prefixIcon: Icon(
