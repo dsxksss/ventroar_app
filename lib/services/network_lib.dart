@@ -161,14 +161,23 @@ class UserHttpLib {
           ));
       return {"data": response.data, "statusCode": response.statusCode};
     }
-    return {"msg": "tokenLogin network error!!!", "statusCode": 400};
+    return {
+      "msg": "SignIn network error!!!",
+      "statusCode": response.statusCode
+    };
   }
 
   Future<Map> signUp({required Map<String, dynamic> data}) async {
     Response response;
     response = await Services.instance.dio
-        .then((value) => value.post(VentUrlsTest.signUp, data: data));
-    return response.data;
+        .then((value) => value.post(VentUrls.signUp, data: data));
+    if (response.statusCode == 202) {
+      return {"data": response.data, "statusCode": response.statusCode};
+    }
+    return {
+      "msg": "SignUp network error!!!",
+      "statusCode": response.statusCode
+    };
   }
 
   void signOut() {}

@@ -42,8 +42,7 @@ class _LoginPageState extends State<LoginPage> {
 
     Future signIn() async {
       try {
-        UserHttpLib signin = UserHttpLib();
-        var response = await signin.signIn(data: {
+        var response = await UserHttpLib().signIn(data: {
           "account": _accountController.text,
           "password": _passwordController.text,
         }, box: box);
@@ -79,8 +78,7 @@ class _LoginPageState extends State<LoginPage> {
 
     Future tokenLogin() async {
       try {
-        UserHttpLib tokenLogin = UserHttpLib();
-        var response = await tokenLogin.tokenLogin(box: box);
+        var response = await UserHttpLib().tokenLogin(box: box);
         if (response["statusCode"] == 200) {
           Future.delayed(const Duration(milliseconds: 200), () {
             Navigator.of(context)
