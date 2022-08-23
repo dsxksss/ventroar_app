@@ -180,5 +180,22 @@ class UserHttpLib {
     };
   }
 
-  void signOut() {}
+  Future<Map> signOut({required String token}) async {
+    Response response;
+    response = await Services.instance.dio.then(
+      (value) => value.post(
+        VentUrls.signOut,
+        options: Options(
+          headers: {"x-auth-token": token},
+        ),
+      ),
+    );
+    if (response.statusCode == 200) {
+      return {"data": response.data, "statusCode": response.statusCode};
+    }
+    return {
+      "msg": "SignUp network error!!!",
+      "statusCode": response.statusCode
+    };
+  }
 }
