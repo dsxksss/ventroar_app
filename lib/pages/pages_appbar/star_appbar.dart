@@ -1,25 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import '../../contexts/global_provider.dart';
+import '../../global/widgets/avatars.dart';
+import '../../schemas/user.dart';
 
-class StarAppBar extends StatefulWidget implements PreferredSizeWidget {
-  const StarAppBar({Key? key}) : super(key: key);
-  @override
-  State<StarAppBar> createState() => _StarAppBarState();
+List<Widget> starAppBar(BuildContext context, bool innerBoxIsScrolled) {
+  Map pageDatas = Provider.of<PageDataProvider>(context).pageDatas;
+  int selectedIndex = Provider.of<PageDataProvider>(context).selectedIndex;
+  Box<User> box = Hive.box("userbox");
+  User _user = box.get("my")!;
 
-  //appbar需要实现一个preferredSize接口才可以导出为widget使用
-  @override
-  Size get preferredSize => const Size.fromHeight(55.0);
-}
+  return <Widget>[
+    SliverAppBar(
+      leading: Padding(
+        padding: const EdgeInsets.fromLTRB(18.0, 10.0, 2.0, 10.0),
+        child: Avatar(
+          user: _user,
+          onPressed: () {
+            Scaffold.of(context).openDrawer();
+          },
+        ),
+      ),
 
-class _StarAppBarState extends State<StarAppBar> {
-  @override
-  Widget build(BuildContext context) {
-    Map pageDatas = Provider.of<PageDataProvider>(context).pageDatas;
-    int selectedIndex = Provider.of<PageDataProvider>(context).selectedIndex;
-    return AppBar(
-      centerTitle: true,
       title: Text("${pageDatas[selectedIndex]}"),
-    );
-  }
+      centerTitle: true, //标题居中
+      expandedHeight: 55.0, //展开高度200
+      floating: true, //不随着滑动隐藏标题
+      pinned: false, //不固定在顶部
+      flexibleSpace: const FlexibleSpaceBar(
+        centerTitle: true,
+      ),
+    )
+  ];
 }

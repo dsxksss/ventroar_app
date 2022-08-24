@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:animations/animations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:ventroar_app/contexts/global_provider.dart';
 import 'package:ventroar_app/page_routers.dart';
 import 'package:ventroar_app/pages/pages_appbar/home_appbar.dart';
-import 'package:ventroar_app/pages/pages_appbar/star_appbar.dart';
 import 'package:ventroar_app/pages/pages_appbar/user_appbar.dart';
 import 'package:ventroar_app/pages/user_page.dart';
 import './themes/dark_theme.dart';
@@ -73,7 +71,7 @@ class _AppPageState extends State<AppPage> {
 
     final List<PreferredSizeWidget?> _appBars = [
       const HomeAppBar(),
-      const StarAppBar(),
+      null,
       const ChatAppBar(),
       const UserAppBar(),
     ];
@@ -87,37 +85,23 @@ class _AppPageState extends State<AppPage> {
 
     return Builder(builder: (context) {
       return MediaQuery(
-          data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-          child: Scaffold(
-            appBar: _appBars[_selectedIndex],
-
-            //侧边导航栏手势打开宽度
-            drawerEdgeDragWidth: _drawerEdgeDragWidth[_selectedIndex],
-
-            body: PageTransitionSwitcher(
-              duration: const Duration(milliseconds: 300),
-              transitionBuilder: (
-                child,
-                animation,
-                secondaryAnimation,
-              ) {
-                return FadeThroughTransition(
-                  animation: animation,
-                  secondaryAnimation: secondaryAnimation,
-                  child: child,
-                );
-              },
-              child: _pages[_selectedIndex],
-            ),
-
-            drawer: const VDrawer(),
-
-            bottomNavigationBar: Builder(
-              builder: (context) {
-                return const VentRoarButtonBar();
-              },
-            ),
-          ));
+        data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+        child: Scaffold(
+          appBar: _appBars[_selectedIndex],
+          //侧边导航栏手势打开宽度
+          drawerEdgeDragWidth: _drawerEdgeDragWidth[_selectedIndex],
+          body: Container(
+            color: Theme.of(context).backgroundColor,
+            child: _pages[_selectedIndex],
+          ),
+          drawer: const VDrawer(),
+          bottomNavigationBar: Builder(
+            builder: (context) {
+              return const VentRoarButtonBar();
+            },
+          ),
+        ),
+      );
     });
   }
 }
