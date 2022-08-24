@@ -1,42 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:ventroar_app/widgets/search_animation.dart';
 import '../../contexts/global_provider.dart';
+import '../../global/widgets/avatars.dart';
+import '../../schemas/user.dart';
 
-class HomeAppBar extends StatefulWidget implements PreferredSizeWidget {
-  const HomeAppBar({Key? key}) : super(key: key);
-  @override
-  State<HomeAppBar> createState() => _HomeAppBarState();
+List<Widget> homeAppBar(BuildContext context, bool innerBoxIsScrolled) {
+  Map pageDatas = Provider.of<PageDataProvider>(context).pageDatas;
+  int selectedIndex = Provider.of<PageDataProvider>(context).selectedIndex;
+  Box<User> box = Hive.box("userbox");
+  User _user = box.get("my")!;
 
-  //appbar需要实现一个preferredSize接口才可以导出为widget使用
-  @override
-  Size get preferredSize => const Size.fromHeight(55.0);
-}
-
-class _HomeAppBarState extends State<HomeAppBar> {
-  @override
-  Widget build(BuildContext context) {
-    Map pageDatas = Provider.of<PageDataProvider>(context).pageDatas;
-    int selectedIndex = Provider.of<PageDataProvider>(context).selectedIndex;
-    return AppBar(
-      backgroundColor: Theme.of(context).canvasColor,
+  return <Widget>[
+    SliverAppBar(
       leading: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-        child: IconButton(
+        padding: const EdgeInsets.fromLTRB(18.0, 10.0, 2.0, 10.0),
+        child: Avatar(
+          user: _user,
+          fontSize: 20.sp,
           onPressed: () {
             Scaffold.of(context).openDrawer();
           },
-          icon: const Icon(
-            FontAwesomeIcons.barsStaggered,
-            size: 20,
-          ),
         ),
       ),
       title: Text(
         "${pageDatas[selectedIndex]}",
         style: GoogleFonts.ubuntu(fontSize: 25, fontWeight: FontWeight.w500),
+      ),
+      expandedHeight: 55.0, //展开高度200
+      floating: true, //不随着滑动隐藏标题
+      pinned: false, //不固定在顶部
+      flexibleSpace: const FlexibleSpaceBar(
+        centerTitle: true,
       ),
       actions: [
         Padding(
@@ -66,6 +64,6 @@ class _HomeAppBarState extends State<HomeAppBar> {
           ),
         )
       ],
-    );
-  }
+    )
+  ];
 }

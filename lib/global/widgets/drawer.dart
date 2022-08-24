@@ -47,6 +47,7 @@ class _DHeaderState extends State<DHeader> {
               height: 85,
               child: Avatar(
                 user: _user,
+                fontSize: 30.sp,
               ),
             ),
             Padding(

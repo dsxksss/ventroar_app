@@ -20,6 +20,18 @@ class _ChatAppBarState extends State<ChatAppBar> {
     int selectedIndex = Provider.of<PageDataProvider>(context).selectedIndex;
     return AppBar(
       centerTitle: true,
+      leading: Padding(
+        padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+        child: IconButton(
+          onPressed: () {
+            Scaffold.of(context).openDrawer();
+          },
+          icon: const Icon(
+            FontAwesomeIcons.barsStaggered,
+            size: 20,
+          ),
+        ),
+      ),
       title: Text(
         "${pageDatas[selectedIndex]}",
       ),

@@ -3,7 +3,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:ventroar_app/contexts/global_provider.dart';
 import 'package:ventroar_app/page_routers.dart';
-import 'package:ventroar_app/pages/pages_appbar/home_appbar.dart';
+import 'package:ventroar_app/pages/pages_appbar/star_appbar.dart';
 import 'package:ventroar_app/pages/pages_appbar/user_appbar.dart';
 import 'package:ventroar_app/pages/user_page.dart';
 import './themes/dark_theme.dart';
@@ -70,8 +70,8 @@ class _AppPageState extends State<AppPage> {
     ];
 
     final List<PreferredSizeWidget?> _appBars = [
-      const HomeAppBar(),
       null,
+      const StarAppBar(),
       const ChatAppBar(),
       const UserAppBar(),
     ];

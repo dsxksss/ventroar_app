@@ -48,6 +48,7 @@ class _LoginPageState extends State<LoginPage> {
         }, box: box);
         if (response["statusCode"] == 200) {
           Future.delayed(const Duration(milliseconds: 1000), () {
+            //TODO:待实现网络登录等待反馈动画
             Navigator.of(context)
                 .pushNamedAndRemoveUntil("/", (route) => false);
           });

@@ -1,36 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import '../../contexts/global_provider.dart';
-import '../../global/widgets/avatars.dart';
-import '../../schemas/user.dart';
 
-List<Widget> starAppBar(BuildContext context, bool innerBoxIsScrolled) {
-  Map pageDatas = Provider.of<PageDataProvider>(context).pageDatas;
-  int selectedIndex = Provider.of<PageDataProvider>(context).selectedIndex;
-  Box<User> box = Hive.box("userbox");
-  User _user = box.get("my")!;
+//TODO:待调整文件命名规范
+class StarAppBar extends StatefulWidget implements PreferredSizeWidget {
+  const StarAppBar({Key? key}) : super(key: key);
+  @override
+  State<StarAppBar> createState() => _StarAppBarState();
 
-  return <Widget>[
-    SliverAppBar(
+  //appbar需要实现一个preferredSize接口才可以导出为widget使用
+  @override
+  Size get preferredSize => const Size.fromHeight(55.0);
+}
+
+class _StarAppBarState extends State<StarAppBar> {
+  @override
+  Widget build(BuildContext context) {
+    Map pageDatas = Provider.of<PageDataProvider>(context).pageDatas;
+    int selectedIndex = Provider.of<PageDataProvider>(context).selectedIndex;
+    return AppBar(
+      centerTitle: true,
       leading: Padding(
-        padding: const EdgeInsets.fromLTRB(18.0, 10.0, 2.0, 10.0),
-        child: Avatar(
-          user: _user,
+        padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+        child: IconButton(
           onPressed: () {
             Scaffold.of(context).openDrawer();
           },
+          icon: const Icon(
+            FontAwesomeIcons.barsStaggered,
+            size: 20,
+          ),
         ),
       ),
-
       title: Text("${pageDatas[selectedIndex]}"),
-      centerTitle: true, //标题居中
-      expandedHeight: 55.0, //展开高度200
-      floating: true, //不随着滑动隐藏标题
-      pinned: false, //不固定在顶部
-      flexibleSpace: const FlexibleSpaceBar(
-        centerTitle: true,
-      ),
-    )
-  ];
+    );
+  }
 }
