@@ -5,6 +5,7 @@ import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 import 'package:ventroar_app/contexts/global_provider.dart';
 import '../../schemas/user.dart';
+import 'avatars.dart';
 
 class DHeader extends StatefulWidget {
   const DHeader({
@@ -41,26 +42,12 @@ class _DHeaderState extends State<DHeader> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(999),
-              child: _user.avatarUrl == "null"
-                  ? Container(
-                      width: 85,
-                      height: 85,
-                      color: Colors.blue[200],
-                      child: Center(
-                        child: Text(
-                          _user.name[0],
-                          style:
-                              TextStyle(color: Colors.white, fontSize: 25.sp),
-                        ),
-                      ))
-                  : SizedBox(
-                      width: 85,
-                      height: 85,
-                      child: Image.network(
-                          "https://ventroar.xyz:2548/avatars/${_user.avatarUrl}"),
-                    ),
+            SizedBox(
+              width: 85,
+              height: 85,
+              child: Avatar(
+                user: _user,
+              ),
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
@@ -111,11 +98,8 @@ class _VDrawerState extends State<VDrawer> {
 
     Function _changePageIndex =
         Provider.of<PageDataProvider>(context, listen: false).changePageIndex;
-
     int _selectedIndex = Provider.of<PageDataProvider>(context).selectedIndex;
-
     Map _pageDatas = Provider.of<PageDataProvider>(context).pageDatas;
-
     bool _isDark = Provider.of<ThemeProvider>(context).isDark;
 
     List<Widget> _listTiles = [
