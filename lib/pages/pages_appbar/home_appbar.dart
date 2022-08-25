@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -25,6 +26,12 @@ List<Widget> homeAppBar(BuildContext context, bool innerBoxIsScrolled) {
             Scaffold.of(context).openDrawer();
           },
         ),
+      ),
+      systemOverlayStyle: SystemUiOverlayStyle(
+        statusBarColor: Theme.of(context).appBarTheme.backgroundColor,
+        statusBarIconBrightness: context.watch<ThemeProvider>().isDark
+            ? Brightness.light
+            : Brightness.dark,
       ),
       title: Text(
         "${pageDatas[selectedIndex]}",

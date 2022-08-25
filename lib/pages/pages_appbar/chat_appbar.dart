@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import '../../contexts/global_provider.dart';
@@ -31,6 +32,12 @@ class _ChatAppBarState extends State<ChatAppBar> {
             size: 20,
           ),
         ),
+      ),
+      systemOverlayStyle: SystemUiOverlayStyle(
+        statusBarColor: Theme.of(context).appBarTheme.backgroundColor,
+        statusBarIconBrightness: context.watch<ThemeProvider>().isDark
+            ? Brightness.light
+            : Brightness.dark,
       ),
       title: Text(
         "${pageDatas[selectedIndex]}",

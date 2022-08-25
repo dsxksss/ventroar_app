@@ -123,12 +123,12 @@ class VDarkThemeColors {
 
   //侧边导航栏颜色集
   static Map drawerColors = {
-    "bg": VColors.vBg100,
+    "bg": VColors.vBg90,
   };
 
   //listTile颜色集
   static Map listTileColors = {
-    "tileColor": VColors.vBg100,
+    "tileColor": VColors.vBg90,
     "iconColor": VColors.vPtext,
     "textColor": VColors.vPtext,
     "selectedColor": const Color.fromARGB(255, 56, 128, 255),

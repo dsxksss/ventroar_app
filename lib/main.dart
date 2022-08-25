@@ -1,7 +1,6 @@
 import './app.dart';
 import './schemas/user.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'contexts/global_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -41,10 +40,6 @@ class _MaterialAppState extends State<MaterialApp> {
 }
 
 Future<void> main() async {
-  //顶部状态栏透明
-  SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
-  );
   // Register Adapter
   Hive.registerAdapter(UserAdapter());
   // init hive localDB
