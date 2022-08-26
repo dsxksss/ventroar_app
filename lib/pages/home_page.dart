@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import '../global/widgets/roar.dart';
+import '../schemas/user.dart';
 import 'pages_appbar/home_appbar.dart';
 
 class HomePage extends StatefulWidget {
@@ -11,14 +14,23 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late final ScrollController _scrollController;
+  late Box<User> box;
+  late User _user;
+
+  void getUserData() {
+    _user = box.get("my")!;
+  }
+
   @override
   void initState() {
     super.initState();
     _scrollController = ScrollController();
+    box = Hive.box("userbox");
   }
 
   @override
   Widget build(BuildContext context) {
+    getUserData();
     return NestedScrollView(
       controller: _scrollController,
       floatHeaderSlivers: true, //只要有下滑手势就显示appbar
@@ -40,62 +52,20 @@ class _HomePageState extends State<HomePage> {
           parent: BouncingScrollPhysics(),
         ),
         children: [
-          SizedBox(
-            height: 1.sh,
-            child: Column(
-              children: [
-                Text(
-                  "星墙页面",
-                  style: TextStyle(
-                      fontSize: 30,
-                      color: Theme.of(context).textTheme.bodyText1!.color),
-                ),
-                Text(
-                  "(制作中)...",
-                  style: TextStyle(
-                      fontSize: 26,
-                      color: Theme.of(context).textTheme.bodyText1!.color),
-                ),
-              ],
-            ),
+          Roar(
+            user: _user,
           ),
           SizedBox(
-            height: 1.sh,
-            child: Column(
-              children: [
-                Text(
-                  "星墙页面",
-                  style: TextStyle(
-                      fontSize: 30,
-                      color: Theme.of(context).textTheme.bodyText1!.color),
-                ),
-                Text(
-                  "(制作中)...",
-                  style: TextStyle(
-                      fontSize: 26,
-                      color: Theme.of(context).textTheme.bodyText1!.color),
-                ),
-              ],
-            ),
+            height: 0.01.sh,
+          ),
+          Roar(
+            user: _user,
           ),
           SizedBox(
-            height: 1.sh,
-            child: Column(
-              children: [
-                Text(
-                  "星墙页面",
-                  style: TextStyle(
-                      fontSize: 30,
-                      color: Theme.of(context).textTheme.bodyText1!.color),
-                ),
-                Text(
-                  "(制作中)...",
-                  style: TextStyle(
-                      fontSize: 26,
-                      color: Theme.of(context).textTheme.bodyText1!.color),
-                ),
-              ],
-            ),
+            height: 0.01.sh,
+          ),
+          Roar(
+            user: _user,
           ),
         ],
       ),
