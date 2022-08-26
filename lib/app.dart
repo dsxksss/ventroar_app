@@ -83,25 +83,23 @@ class _AppPageState extends State<AppPage> {
       150.0,
     ];
 
-    return Builder(builder: (context) {
-      return MediaQuery(
-        data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-        child: Scaffold(
-          appBar: _appBars[_selectedIndex],
-          //侧边导航栏手势打开宽度
-          drawerEdgeDragWidth: _drawerEdgeDragWidth[_selectedIndex],
-          body: Container(
-            color: Theme.of(context).backgroundColor,
-            child: _pages[_selectedIndex],
+    return Builder(
+      builder: (context) {
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+          child: Scaffold(
+            appBar: _appBars[_selectedIndex],
+            //侧边导航栏手势打开宽度
+            drawerEdgeDragWidth: _drawerEdgeDragWidth[_selectedIndex],
+            body: Container(
+              color: Theme.of(context).backgroundColor,
+              child: _pages[_selectedIndex],
+            ),
+            drawer: const VDrawer(),
+            bottomNavigationBar: const VentRoarButtonBar(),
           ),
-          drawer: const VDrawer(),
-          bottomNavigationBar: Builder(
-            builder: (context) {
-              return const VentRoarButtonBar();
-            },
-          ),
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 }
