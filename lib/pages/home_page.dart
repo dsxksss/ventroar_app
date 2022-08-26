@@ -10,11 +10,30 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late final ScrollController _scrollController;
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+  }
+
   @override
   Widget build(BuildContext context) {
     return NestedScrollView(
+      controller: _scrollController,
       floatHeaderSlivers: true, //只要有下滑手势就显示appbar
-      headerSliverBuilder: homeAppBar,
+      headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) =>
+          <Widget>[
+        HomeAppBar(
+          onPressed: () {
+            _scrollController.animateTo(
+              _scrollController.position.minScrollExtent,
+              duration: const Duration(milliseconds: 800),
+              curve: Curves.easeInOut,
+            ); //匀速;
+          },
+        ),
+      ],
       body: ListView(
         physics: const AlwaysScrollableScrollPhysics(
           //当内容不足时也可以启动反弹刷新

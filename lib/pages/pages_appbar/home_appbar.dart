@@ -9,14 +9,25 @@ import '../../contexts/global_provider.dart';
 import '../../global/widgets/avatars.dart';
 import '../../schemas/user.dart';
 
-List<Widget> homeAppBar(BuildContext context, bool innerBoxIsScrolled) {
-  Map pageDatas = Provider.of<PageDataProvider>(context).pageDatas;
-  int selectedIndex = Provider.of<PageDataProvider>(context).selectedIndex;
-  Box<User> box = Hive.box("userbox");
-  User _user = box.get("my")!;
+class HomeAppBar extends StatefulWidget {
+  const HomeAppBar({
+    Key? key,
+    this.onPressed,
+  }) : super(key: key);
+  final VoidCallback? onPressed;
+  @override
+  State<HomeAppBar> createState() => _HomeAppBarState();
+}
 
-  return <Widget>[
-    SliverAppBar(
+class _HomeAppBarState extends State<HomeAppBar> {
+  @override
+  Widget build(BuildContext context) {
+    final Map pageDatas = Provider.of<PageDataProvider>(context).pageDatas;
+    final int selectedIndex =
+        Provider.of<PageDataProvider>(context).selectedIndex;
+    final Box<User> box = Hive.box("userbox");
+    final User _user = box.get("my")!;
+    return SliverAppBar(
       leading: Padding(
         padding: const EdgeInsets.fromLTRB(18.0, 10.0, 2.0, 10.0),
         child: Avatar(
@@ -33,9 +44,12 @@ List<Widget> homeAppBar(BuildContext context, bool innerBoxIsScrolled) {
             ? Brightness.light
             : Brightness.dark,
       ),
-      title: Text(
-        "${pageDatas[selectedIndex]}",
-        style: GoogleFonts.ubuntu(fontSize: 25, fontWeight: FontWeight.w500),
+      title: GestureDetector(
+        child: Text(
+          "${pageDatas[selectedIndex]}",
+          style: GoogleFonts.ubuntu(fontSize: 25, fontWeight: FontWeight.w500),
+        ),
+        onTap: widget.onPressed,
       ),
       expandedHeight: 55.0, //展开高度200
       floating: true, //不随着滑动隐藏标题
@@ -71,6 +85,6 @@ List<Widget> homeAppBar(BuildContext context, bool innerBoxIsScrolled) {
           ),
         )
       ],
-    )
-  ];
+    );
+  }
 }
