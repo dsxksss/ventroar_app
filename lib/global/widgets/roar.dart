@@ -14,28 +14,31 @@ class _RoarState extends State<Roar> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(right: 0.05.sw, left: 0.05.sw),
+      padding: EdgeInsets.only(right: 0.02.sw, left: 0.02.sw),
       child: Flex(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         direction: Axis.horizontal,
         children: [
           Container(
-            constraints: BoxConstraints(maxWidth: 0.13.sw),
+            constraints: BoxConstraints(minHeight: 0.33.sh, maxWidth: 0.13.sw),
             child: Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.fromLTRB(0, 0, 0, 0.sh),
+                  padding: EdgeInsets.fromLTRB(0.01.sw, 0, 0, 0),
                   child: Avatar(user: widget.user),
                 ),
               ],
             ),
           ),
           Container(
-            constraints: BoxConstraints(minHeight: 0.28.sh),
-            width: 0.77.sw,
-            color: Colors.yellow,
-            child: const Text("content"),
+            constraints: BoxConstraints(minHeight: 0.33.sh, minWidth: 0.82.sw),
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(0.04.sw, 0.01.sh, 0, 0),
+              child: Text("content",
+                  style:
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 20.sp)),
+            ),
           ),
         ],
       ),

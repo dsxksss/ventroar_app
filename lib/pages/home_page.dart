@@ -47,6 +47,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ],
       body: ListView(
+        padding: EdgeInsets.fromLTRB(0, 0, 0, 0.2.sh),
         physics: const AlwaysScrollableScrollPhysics(
           //当内容不足时也可以启动反弹刷新
           parent: BouncingScrollPhysics(),
@@ -55,14 +56,16 @@ class _HomePageState extends State<HomePage> {
           Roar(
             user: _user,
           ),
-          SizedBox(
-            height: 0.01.sh,
+          const Divider(
+            height: 30,
+            thickness: 1.5,
           ),
           Roar(
             user: _user,
           ),
-          SizedBox(
-            height: 0.01.sh,
+          const Divider(
+            height: 30,
+            thickness: 1.5,
           ),
           Roar(
             user: _user,

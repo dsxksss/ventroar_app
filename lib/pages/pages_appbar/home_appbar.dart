@@ -29,7 +29,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
     final User _user = box.get("my")!;
     return SliverAppBar(
       leading: Padding(
-        padding: const EdgeInsets.fromLTRB(18.0, 10.0, 2.0, 10.0),
+        padding: const EdgeInsets.fromLTRB(20.0, 12.0, 4.0, 12.0),
         child: Avatar(
           user: _user,
           fontSize: 20.sp,
