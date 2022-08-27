@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ventroar_app/global/widgets/avatars.dart';
 import '../../schemas/user.dart';
 
 class Roar extends StatefulWidget {
-  const Roar({Key? key, required this.user}) : super(key: key);
+  const Roar({Key? key, required this.user, this.onPressed}) : super(key: key);
   final User user;
+  final VoidCallback? onPressed;
   @override
   State<Roar> createState() => _RoarState();
 }
@@ -13,34 +15,78 @@ class Roar extends StatefulWidget {
 class _RoarState extends State<Roar> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(right: 0.02.sw, left: 0.02.sw),
-      child: Flex(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        direction: Axis.horizontal,
-        children: [
-          Container(
-            constraints: BoxConstraints(minHeight: 0.33.sh, maxWidth: 0.13.sw),
-            child: Column(
-              children: [
-                Padding(
-                  padding: EdgeInsets.fromLTRB(0.01.sw, 0, 0, 0),
-                  child: Avatar(user: widget.user),
-                ),
-              ],
+    return GestureDetector(
+      onTap: widget.onPressed,
+      child: Container(
+        decoration: const BoxDecoration(
+          border: Border(
+            top: BorderSide(
+              //分割线
+              style: BorderStyle.solid,
+              width: 2,
+              color: Colors.grey,
             ),
           ),
-          Container(
-            constraints: BoxConstraints(minHeight: 0.33.sh, minWidth: 0.82.sw),
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(0.04.sw, 0.01.sh, 0, 0),
-              child: Text("content",
-                  style:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 20.sp)),
+          // color: Colors.red,
+        ),
+        child: Flex(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          direction: Axis.horizontal,
+          children: [
+            Container(
+              // color: Colors.blue,
+              constraints: BoxConstraints(minHeight: 0.44.sh, maxWidth: 0.2.sw),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(0.04.sw, 0.03.sh, 0, 0),
+                    child: Avatar(user: widget.user),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+            Container(
+              // color: Colors.yellow,
+              padding: EdgeInsets.fromLTRB(0, 0.03.sh, 0, 0),
+              constraints:
+                  BoxConstraints(minHeight: 0.01.sh, minWidth: 0.80.sw),
+              child: Flex(
+                direction: Axis.horizontal,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(0.04.sw, 0, 0, 0),
+                    child: Row(
+                      children: [
+                        Text(
+                          widget.user.name,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16.sp),
+                        ),
+                        Text(
+                          widget.user.name,
+                          style: TextStyle(fontSize: 16.sp),
+                        ),
+                      ],
+                    ),
+                  ),
+                  IconButton(
+                    padding: EdgeInsets.fromLTRB(0, 0, 0.03.sw, 0),
+                    //覆盖原本icon内边距
+                    constraints: BoxConstraints(minHeight: 0.01.sh),
+                    onPressed: () {},
+                    icon: const FaIcon(
+                      FontAwesomeIcons.ellipsisVertical,
+                      size: 18,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

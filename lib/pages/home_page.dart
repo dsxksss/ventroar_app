@@ -56,16 +56,8 @@ class _HomePageState extends State<HomePage> {
           Roar(
             user: _user,
           ),
-          const Divider(
-            height: 30,
-            thickness: 1.5,
-          ),
           Roar(
             user: _user,
-          ),
-          const Divider(
-            height: 30,
-            thickness: 1.5,
           ),
           Roar(
             user: _user,
