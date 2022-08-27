@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ventroar_app/global/widgets/avatars.dart';
+import '../../functions/timestamp_conversion.dart';
 import '../../schemas/user.dart';
 
 class Roar extends StatefulWidget {
@@ -23,7 +24,7 @@ class _RoarState extends State<Roar> {
             top: BorderSide(
               //分割线
               style: BorderStyle.solid,
-              width: 2,
+              width: 0.2,
               color: Colors.grey,
             ),
           ),
@@ -40,7 +41,7 @@ class _RoarState extends State<Roar> {
               child: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.fromLTRB(0.04.sw, 0.03.sh, 0, 0),
+                    padding: EdgeInsets.fromLTRB(0.04.sw, 0.02.sh, 0.03.sw, 0),
                     child: Avatar(user: widget.user),
                   ),
                 ],
@@ -48,7 +49,7 @@ class _RoarState extends State<Roar> {
             ),
             Container(
               // color: Colors.yellow,
-              padding: EdgeInsets.fromLTRB(0, 0.03.sh, 0, 0),
+              padding: EdgeInsets.fromLTRB(0, 0.02.sh, 0, 0),
               constraints:
                   BoxConstraints(minHeight: 0.01.sh, minWidth: 0.80.sw),
               child: Flex(
@@ -57,7 +58,7 @@ class _RoarState extends State<Roar> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: EdgeInsets.fromLTRB(0.04.sw, 0, 0, 0),
+                    padding: EdgeInsets.zero,
                     child: Row(
                       children: [
                         Text(
@@ -65,9 +66,13 @@ class _RoarState extends State<Roar> {
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 16.sp),
                         ),
-                        Text(
-                          widget.user.name,
-                          style: TextStyle(fontSize: 16.sp),
+                        Padding(
+                          //日期显示边距
+                          padding: EdgeInsets.fromLTRB(0.25.sw, 0, 0, 0),
+                          child: Text(
+                            timestampConversion(widget.user.createDate),
+                            style: TextStyle(fontSize: 15.sp),
+                          ),
                         ),
                       ],
                     ),

@@ -24,18 +24,20 @@ class _MaterialAppState extends State<MaterialApp> {
 
   @override
   Widget build(BuildContext context) {
-    return Builder(builder: (context) {
-      return ScreenUtilInit(
-        //默认designSize:w360,h690
-        minTextAdapt: true,
-        splitScreenMode: true,
-        builder: (BuildContext context, Widget? child) =>
-            MultiProvider(providers: [
-          ChangeNotifierProvider(create: (_) => ThemeProvider()),
-          ChangeNotifierProvider(create: (_) => PageDataProvider()),
-        ], child: const App()),
-      );
-    });
+    return Builder(
+      builder: (context) {
+        return ScreenUtilInit(
+          //默认designSize:w360,h690
+          minTextAdapt: true,
+          splitScreenMode: true,
+          builder: (BuildContext context, Widget? child) =>
+              MultiProvider(providers: [
+            ChangeNotifierProvider(create: (_) => ThemeProvider()),
+            ChangeNotifierProvider(create: (_) => PageDataProvider()),
+          ], child: const App()),
+        );
+      },
+    );
   }
 }
 
