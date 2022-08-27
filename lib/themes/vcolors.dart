@@ -80,6 +80,10 @@ class VLightThemeColors {
   static Color pageBG = VColors.vStext;
   //图标颜色
   static Color iconColor = VColors.vBg90;
+  //水波色
+  static Color splashColor = Colors.grey.shade300;
+  //高亮项内容色
+  static Color highlightColor = Colors.white.withOpacity(0);
 
   //头部导航栏颜色集
   static Map appBarColors = {
@@ -114,6 +118,10 @@ class VDarkThemeColors {
   static Color pageBG = VColors.vBg90;
   //图标颜色
   static Color iconColor = VColors.vPtext;
+  //水波色
+  static Color splashColor = VColors.vBg80;
+  //高亮项内容色
+  static Color highlightColor = Colors.white.withOpacity(0);
 
   //头部导航栏颜色集
   static Map appBarColors = {

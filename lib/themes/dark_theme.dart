@@ -45,9 +45,9 @@ ThemeData darkTheme(BuildContext context) {
     //背景色
     backgroundColor: VDarkThemeColors.pageBG,
     //水波色
-    splashColor: Colors.white.withOpacity(0),
+    splashColor: VDarkThemeColors.splashColor,
     //高亮项内容色
-    highlightColor: Colors.white.withOpacity(0),
+    highlightColor: VDarkThemeColors.highlightColor,
 
     //侧边导航栏样式
     drawerTheme: DrawerThemeData(
