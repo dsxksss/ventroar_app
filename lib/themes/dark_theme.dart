@@ -18,41 +18,41 @@ ThemeData darkTheme(BuildContext context) {
         //字号
         fontSize: 22,
         //字色
-        color: VColors.vPtext,
+        color: Colors.white,
       ),
       //背景色
-      backgroundColor: VDarkThemeColors.appBarColors["bg"],
+      backgroundColor: VColors.black2,
       //前景色
-      foregroundColor: VDarkThemeColors.appBarColors["foregroundColor"],
+      foregroundColor: Colors.white,
     ),
 
     //悬浮按钮样式
-    floatingActionButtonTheme: FloatingActionButtonThemeData(
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
       //背景色
-      backgroundColor: const Color.fromARGB(148, 0, 174, 243),
+      backgroundColor: Color.fromARGB(148, 0, 174, 243),
       //前景色
-      foregroundColor: VColors.vPtext,
+      foregroundColor: Colors.white,
     ),
 
     //icon图标样式
-    iconTheme: IconThemeData(
+    iconTheme: const IconThemeData(
       //图标色
-      color: VDarkThemeColors.iconColor,
+      color: Colors.white,
     ),
 
     //画布色
-    canvasColor: VDarkThemeColors.pageBG,
+    canvasColor: VColors.black2,
     //背景色
-    backgroundColor: VDarkThemeColors.pageBG,
+    backgroundColor: VColors.black2,
     //水波色
-    splashColor: VDarkThemeColors.splashColor,
+    splashColor: VColors.black3,
     //高亮项内容色
-    highlightColor: VDarkThemeColors.highlightColor,
+    highlightColor: Colors.white.withOpacity(0),
 
     //侧边导航栏样式
     drawerTheme: DrawerThemeData(
       //背景色
-      backgroundColor: VDarkThemeColors.drawerColors["bg"],
+      backgroundColor: VColors.black2,
       //模态幕布色
       // scrimColor: Colors.red,
     ),
@@ -62,12 +62,11 @@ ThemeData darkTheme(BuildContext context) {
       //景深或阴影深度
       elevation: 0,
       //选中色
-      selectedItemColor: VDarkThemeColors.bottomNavColors["selectedItemColor"],
+      selectedItemColor: VColors.black3,
       //未选中色
-      unselectedItemColor:
-          VDarkThemeColors.bottomNavColors["unselectedItemColor"],
+      unselectedItemColor: Colors.white,
       //背景色
-      backgroundColor: VDarkThemeColors.bottomNavColors["bg"],
+      backgroundColor: VColors.black1,
       //选中icon样式
       selectedIconTheme: null,
       //未选中icon样式
@@ -79,45 +78,45 @@ ThemeData darkTheme(BuildContext context) {
     ///全局字体设置
     textTheme: TextTheme(
       //1号标题字样式
-      headline1: TextStyle(color: VColors.vPtext, fontSize: 13.sp),
+      headline1: TextStyle(color: Colors.white, fontSize: 13.sp),
       //2号标题字样式
-      headline2: TextStyle(color: VColors.vPtext, fontSize: 13.sp),
+      headline2: TextStyle(color: Colors.white, fontSize: 13.sp),
       //3号标题字样式
-      headline3: TextStyle(color: VColors.vPtext, fontSize: 13.sp),
+      headline3: TextStyle(color: Colors.white, fontSize: 13.sp),
       //4号标题字样式
-      headline4: TextStyle(color: VColors.vPtext, fontSize: 13.sp),
+      headline4: TextStyle(color: Colors.white, fontSize: 13.sp),
       //5号标题字样式
-      headline5: TextStyle(color: VColors.vPtext, fontSize: 13.sp),
+      headline5: TextStyle(color: Colors.white, fontSize: 13.sp),
       //6号标题字样式
-      headline6: TextStyle(color: VColors.vPtext, fontSize: 13.sp),
+      headline6: TextStyle(color: Colors.white, fontSize: 13.sp),
       //1号副标题字样式
-      subtitle1: TextStyle(color: VColors.vPtext, fontSize: 13.sp),
+      subtitle1: TextStyle(color: Colors.white, fontSize: 13.sp),
       //2号副标题字样式
-      subtitle2: TextStyle(color: VColors.vPtext, fontSize: 13.sp),
+      subtitle2: TextStyle(color: Colors.white, fontSize: 13.sp),
       //1号内容字样式
-      bodyText1: TextStyle(color: VColors.vPtext, fontSize: 13.sp),
+      bodyText1: TextStyle(color: Colors.white, fontSize: 13.sp),
       //2号内容字样式
-      bodyText2: TextStyle(color: VColors.vPtext, fontSize: 13.sp),
+      bodyText2: TextStyle(color: Colors.white, fontSize: 13.sp),
       //说明文字样式
-      caption: TextStyle(color: VColors.vPtext, fontSize: 13.sp),
+      caption: TextStyle(color: Colors.white, fontSize: 13.sp),
       //按钮字体样式
-      button: TextStyle(color: VColors.vPtext, fontSize: 13.sp),
+      button: TextStyle(color: Colors.white, fontSize: 13.sp),
       //字体划线样式
-      overline: TextStyle(color: VColors.vPtext, fontSize: 13.sp),
+      overline: TextStyle(color: Colors.white, fontSize: 13.sp),
     ),
 
     //tile样式
     listTileTheme: ListTileThemeData(
       //tile内容背景色
-      tileColor: VDarkThemeColors.listTileColors["tileColor"],
+      tileColor: VColors.black2,
       //tile图标色
-      iconColor: VDarkThemeColors.listTileColors["iconColor"],
+      iconColor: Colors.white,
       //tile文字色
-      textColor: VDarkThemeColors.listTileColors["textColor"],
+      textColor: Colors.white,
       //tile被选中色
-      selectedColor: VDarkThemeColors.listTileColors["selectedColor"],
+      selectedColor: const Color.fromARGB(255, 56, 128, 255),
       //tile内容被选中色
-      selectedTileColor: VDarkThemeColors.listTileColors["selectedTileColor"],
+      selectedTileColor: const Color.fromARGB(79, 56, 129, 255),
     ),
   );
 }
