@@ -59,6 +59,7 @@
 | **GetAllRoarText**        | /getallroartext        | 获取全部用户发布的宣泄帖子                        | GET    |
 | **GetUserAllRoarText**    | /getuserallroartext    | 获取该用户的全部宣泄贴                          | GET    |
 | **PostRoarText**          | /postroartext          | 用户发布宣泄帖子                             | POST   |
+| **PostTextImages**        | /posttextimages/id     | 指定id宣泄帖子上传图片                         | POST   |
 | **ClickTextLikes**        | /clicktextlikes        | 给指定的宣泄帖点赞                            | PUT    |
 | **PutRoarText**           | /putroartext           | 编辑指定的宣泄帖内容                           | PUT    |
 | **DeleteRoarText**        | /deleteroartext        | 删除指定的宣泄帖(支持管理员删除)                    | DELETE |
@@ -67,16 +68,17 @@
 
 ## 需要参数及返回参数内容(返回内容统一为result字段)
 
-| api名称                     | 是否需要头部AuthToken或临时TokenT | 需要参数                                             | 返回result内容                                                                                                                |
-| ------------------------- | ------------------------ | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
-| **GetAllRoarText**        | NO                       | NULL                                             | [ { _id,text,isPublic,isShowUserName,isCanComment,likeUsers[ ],textComments[ ],userId,createDate,smil,heart } ]           |
-| **GetUserAllRoarText**    | YES header-token         | NULL                                             | [ { _id,text,isPublic,isShowUserName,isCanComment,likeUsers[ ],textComments[ ],userId,createDate,smil,heart } ]           |
-| **PostRoarText**          | YES header-token         | text,isPublic,isShowUserName,isCanComment        | NULL                                                                                                                      |
-| **ClickTextLikes**        | YES header-token         | textId,smil(bool),heart(bool)                    | { smil,heart }                                                                                                            |
-| **PutRoarText**           | YES header-token         | textId,text,isPublic,isShowUserName,isCanComment | { _id,text,isPublic,isShowUserName,isCanComment,likeUsers[ ],textComments[ ],userId,createDate,smil,heart }               |
-| **DeleteRoarText**        | YES header-token         | id(宣泄贴ID)                                        | { _id,text,isPublic,isShowUserName,isCanComment,likeUsers[ ],textComments[ ],userId,createDate,smil,heart } -> 被删除的宣泄贴    |
-| **PostRoarTextComment**   | YSE header-token         | textId,commentText,isShowUserName                | RoarText{ ... , textComments:[ { _id,commentUserId,commentName,commentText,commentUserAvatarUrl,isShowUserName,date } ] } |
-| **DeleteRoarTextComment** | YES header-token         | roarTextId, commentId                            | RoarText{ ... , textComments:[ { _id,commentUserId,commentName,commentText,commentUserAvatarUrl,isShowUserName,date } ] } |
+| api名称                     | 是否需要头部AuthToken或临时TokenT | 需要参数                                             | 返回result内容                                                                                                                           |
+| ------------------------- | ------------------------ | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
+| **GetAllRoarText**        | NO                       | NULL                                             | [ { _id,text,isPublic,isShowUserName,isCanComment,likeUsers[ ],textImages[ ],textComments[ ],userId,createDate,smil,heart } ]        |
+| **GetUserAllRoarText**    | YES header-token         | NULL                                             | [ { _id,text,isPublic,isShowUserName,isCanComment,likeUsers[ ],textImages[ ],textComments[ ],userId,createDate,smil,heart } ]        |
+| **PostRoarText**          | YES header-token         | text,isPublic,isShowUserName,isCanComment        | NULL                                                                                                                                 |
+| **PostTextImages**        | YES header-token         | file:images <= 4                                 | { _id,text,isPublic,isShowUserName,isCanComment,likeUsers[ ],textImages[ ],textComments[ ],userId,createDate,smil,heart }            |
+| **ClickTextLikes**        | YES header-token         | textId,smil(bool),heart(bool)                    | { smil,heart }                                                                                                                       |
+| **PutRoarText**           | YES header-token         | textId,text,isPublic,isShowUserName,isCanComment | { _id,text,isPublic,isShowUserName,isCanComment,likeUsers[ ],textImages[ ],textComments[ ],userId,createDate,smil,heart }            |
+| **DeleteRoarText**        | YES header-token         | id(宣泄贴ID)                                        | { _id,text,isPublic,isShowUserName,isCanComment,likeUsers[ ],textImages[ ],textComments[ ],userId,createDate,smil,heart } -> 被删除的宣泄贴 |
+| **PostRoarTextComment**   | YSE header-token         | textId,commentText,isShowUserName                | RoarText{ ... , textComments:[ { _id,commentUserId,commentName,commentText,commentUserAvatarUrl,isShowUserName,date } ] }            |
+| **DeleteRoarTextComment** | YES header-token         | roarTextId, commentId                            | RoarText{ ... , textComments:[ { _id,commentUserId,commentName,commentText,commentUserAvatarUrl,isShowUserName,date } ] }            |
 
 # 4、friend好友路由api
 

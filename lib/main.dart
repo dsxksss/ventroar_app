@@ -1,5 +1,6 @@
 import './app.dart';
 import './schemas/user.dart';
+import './schemas/roar.dart';
 import 'package:flutter/material.dart';
 import 'contexts/global_provider.dart';
 import 'package:provider/provider.dart';
@@ -46,6 +47,7 @@ class _MaterialAppState extends State<MaterialApp> {
 Future<void> main() async {
   // Register Adapter
   Hive.registerAdapter(UserAdapter());
+  Hive.registerAdapter(RoarAdapter());
   // init hive localDB
   await Hive.initFlutter();
   // open db box
