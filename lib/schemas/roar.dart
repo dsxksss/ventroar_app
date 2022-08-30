@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'roar_comment.dart';
 //flutter packages pub run build_runner build 记得使用此命令生成文件
 part "roar.g.dart";
 
@@ -20,13 +21,13 @@ class Roar extends HiveObject {
   bool isCanComment;
 
   @HiveField(5)
-  List<dynamic> likeUsers;
+  List<String>? likeUsers;
 
   @HiveField(6)
-  List<dynamic> textImages;
+  List<String> textImages;
 
   @HiveField(7)
-  List<dynamic> textComments;
+  List<RoarComment>? textComments;
 
   @HiveField(8)
   String userId;
@@ -39,6 +40,12 @@ class Roar extends HiveObject {
 
   @HiveField(11)
   int heart;
+
+  @HiveField(12)
+  String userName;
+
+  @HiveField(13)
+  String userAvatarUrl;
 
   Roar({
     required this.id,
@@ -53,5 +60,7 @@ class Roar extends HiveObject {
     required this.createDate,
     required this.smil,
     required this.heart,
+    required this.userName,
+    required this.userAvatarUrl,
   });
 }

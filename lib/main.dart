@@ -1,6 +1,7 @@
 import './app.dart';
 import './schemas/user.dart';
 import './schemas/roar.dart';
+import './schemas/roar_comment.dart';
 import 'package:flutter/material.dart';
 import 'contexts/global_provider.dart';
 import 'package:provider/provider.dart';
@@ -48,6 +49,7 @@ Future<void> main() async {
   // Register Adapter
   Hive.registerAdapter(UserAdapter());
   Hive.registerAdapter(RoarAdapter());
+  Hive.registerAdapter(RoarCommentAdapter());
   // init hive localDB
   await Hive.initFlutter();
   // open db box

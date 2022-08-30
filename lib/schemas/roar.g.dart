@@ -22,20 +22,22 @@ class RoarAdapter extends TypeAdapter<Roar> {
       isPublic: fields[2] as bool,
       isShowUserName: fields[3] as bool,
       isCanComment: fields[4] as bool,
-      likeUsers: (fields[5] as List).cast<dynamic>(),
-      textImages: (fields[6] as List).cast<dynamic>(),
-      textComments: (fields[7] as List).cast<dynamic>(),
+      likeUsers: (fields[5] as List?)?.cast<String>(),
+      textImages: (fields[6] as List).cast<String>(),
+      textComments: (fields[7] as List?)?.cast<RoarComment>(),
       userId: fields[8] as String,
       createDate: fields[9] as int,
       smil: fields[10] as int,
       heart: fields[11] as int,
+      userName: fields[12] as String,
+      userAvatarUrl: fields[13] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, Roar obj) {
     writer
-      ..writeByte(12)
+      ..writeByte(14)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -59,7 +61,11 @@ class RoarAdapter extends TypeAdapter<Roar> {
       ..writeByte(10)
       ..write(obj.smil)
       ..writeByte(11)
-      ..write(obj.heart);
+      ..write(obj.heart)
+      ..writeByte(12)
+      ..write(obj.userName)
+      ..writeByte(13)
+      ..write(obj.userAvatarUrl);
   }
 
   @override
