@@ -61,22 +61,19 @@ class _RoarWidgetState extends State<RoarWidget> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding: EdgeInsets.zero,
+                  Container(
+                    constraints: BoxConstraints(maxWidth: 0.67.sw),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           widget.roar.userName,
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 16.sp),
                         ),
-                        Padding(
-                          //日期显示边距
-                          padding: EdgeInsets.fromLTRB(0.25.sw, 0, 0, 0),
-                          child: Text(
-                            timestampConversion(widget.roar.createDate),
-                            style: TextStyle(fontSize: 15.sp),
-                          ),
+                        Text(
+                          timestampConversion(widget.roar.createDate),
+                          style: TextStyle(fontSize: 15.sp),
                         ),
                       ],
                     ),
