@@ -6,7 +6,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:ventroar_app/widgets/search_animation.dart';
 import '../../contexts/global_provider.dart';
-import '../../global/widgets/avatars.dart';
+import '../../global/widgets/avatar_widget.dart';
 import '../../schemas/user.dart';
 
 class HomeAppBar extends StatefulWidget {
@@ -30,8 +30,9 @@ class _HomeAppBarState extends State<HomeAppBar> {
     return SliverAppBar(
       leading: Padding(
         padding: const EdgeInsets.fromLTRB(20.0, 12.0, 4.0, 12.0),
-        child: Avatar(
-          user: _user,
+        child: AvatarWidget(
+          avatarUrl: _user.avatarUrl,
+          userName: _user.name,
           fontSize: 20.sp,
           onPressed: () {
             Scaffold.of(context).openDrawer();

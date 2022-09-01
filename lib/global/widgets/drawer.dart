@@ -5,7 +5,7 @@ import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 import 'package:ventroar_app/contexts/global_provider.dart';
 import '../../schemas/user.dart';
-import 'avatars.dart';
+import 'avatar_widget.dart';
 
 class DHeader extends StatefulWidget {
   const DHeader({
@@ -45,9 +45,10 @@ class _DHeaderState extends State<DHeader> {
             SizedBox(
               width: 85,
               height: 85,
-              child: Avatar(
-                user: _user,
+              child: AvatarWidget(
                 fontSize: 30.sp,
+                avatarUrl: _user.avatarUrl,
+                userName: _user.name,
               ),
             ),
             Padding(

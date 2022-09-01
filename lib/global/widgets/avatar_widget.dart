@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../schemas/user.dart';
 
-class Avatar extends StatelessWidget {
-  Avatar({
+class AvatarWidget extends StatelessWidget {
+  AvatarWidget({
     Key? key,
     borderRadius,
     this.fontSize,
     this.onPressed,
-    required user,
-  })  : _user = user,
-        super(key: key);
+    required this.avatarUrl,
+    required this.userName,
+  }) : super(key: key);
 
-  final User _user;
+  final String avatarUrl;
+  final String userName;
   final double? fontSize;
   final VoidCallback? onPressed;
   final BorderRadius? _borderRadius = BorderRadius.circular(999);
@@ -23,19 +23,19 @@ class Avatar extends StatelessWidget {
       onTap: onPressed,
       child: ClipRRect(
         borderRadius: _borderRadius,
-        child: _user.avatarUrl == "null"
+        child: avatarUrl == "null"
             ? Container(
                 color: Colors.blue[200],
                 child: Center(
                   child: Text(
-                    _user.name[0],
+                    userName[0],
                     style: TextStyle(
                         color: Colors.white, fontSize: fontSize ?? 26.sp),
                   ),
                 ))
             : SizedBox(
                 child: Image.network(
-                    "https://ventroar.xyz:2548/avatars/${_user.avatarUrl}"),
+                    "https://ventroar.xyz:2548/avatars/$avatarUrl"),
               ),
       ),
     );
