@@ -8,30 +8,34 @@ class RoarComment extends HiveObject {
   String id;
 
   @HiveField(1)
-  String commentUserId;
-
-  @HiveField(2)
-  String commentName;
-
-  @HiveField(3)
   String commentText;
 
-  @HiveField(4)
-  String commentUserAvatarUrl;
-
-  @HiveField(5)
+  @HiveField(2)
   bool isShowUserName;
 
-  @HiveField(6)
+  @HiveField(3)
   int createDate;
+
+  @HiveField(4)
+  String userId;
+
+  @HiveField(5)
+  String userName;
+
+  @HiveField(6)
+  String userEmail;
+
+  @HiveField(7)
+  String userAvatarUrl;
 
   RoarComment({
     required this.id,
-    required this.commentUserId,
-    required this.commentName,
     required this.commentText,
-    required this.commentUserAvatarUrl,
     required this.isShowUserName,
     required this.createDate,
+    required this.userId,
+    required this.userName,
+    required this.userEmail,
+    required this.userAvatarUrl,
   });
 }

@@ -18,33 +18,36 @@ class RoarCommentAdapter extends TypeAdapter<RoarComment> {
     };
     return RoarComment(
       id: fields[0] as String,
-      commentUserId: fields[1] as String,
-      commentName: fields[2] as String,
-      commentText: fields[3] as String,
-      commentUserAvatarUrl: fields[4] as String,
-      isShowUserName: fields[5] as bool,
-      createDate: fields[6] as int,
+      commentText: fields[1] as String,
+      isShowUserName: fields[2] as bool,
+      createDate: fields[3] as int,
+      userId: fields[4] as String,
+      userName: fields[5] as String,
+      userEmail: fields[6] as String,
+      userAvatarUrl: fields[7] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, RoarComment obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.commentUserId)
-      ..writeByte(2)
-      ..write(obj.commentName)
-      ..writeByte(3)
       ..write(obj.commentText)
-      ..writeByte(4)
-      ..write(obj.commentUserAvatarUrl)
-      ..writeByte(5)
+      ..writeByte(2)
       ..write(obj.isShowUserName)
+      ..writeByte(3)
+      ..write(obj.createDate)
+      ..writeByte(4)
+      ..write(obj.userId)
+      ..writeByte(5)
+      ..write(obj.userName)
       ..writeByte(6)
-      ..write(obj.createDate);
+      ..write(obj.userEmail)
+      ..writeByte(7)
+      ..write(obj.userAvatarUrl);
   }
 
   @override

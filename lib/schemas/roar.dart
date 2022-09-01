@@ -30,7 +30,7 @@ class Roar extends HiveObject {
   List<RoarComment>? textComments;
 
   @HiveField(8)
-  String userId;
+  int textCommentCount;
 
   @HiveField(9)
   int createDate;
@@ -42,9 +42,15 @@ class Roar extends HiveObject {
   int heart;
 
   @HiveField(12)
-  String userName;
+  String userId;
 
   @HiveField(13)
+  String userName;
+
+  @HiveField(14)
+  String userEmail;
+
+  @HiveField(15)
   String userAvatarUrl;
 
   Roar({
@@ -56,11 +62,13 @@ class Roar extends HiveObject {
     required this.likeUsers,
     required this.textImages,
     required this.textComments,
-    required this.userId,
+    required this.textCommentCount,
     required this.createDate,
     required this.smil,
     required this.heart,
+    required this.userId,
     required this.userName,
+    required this.userEmail,
     required this.userAvatarUrl,
   });
 }
