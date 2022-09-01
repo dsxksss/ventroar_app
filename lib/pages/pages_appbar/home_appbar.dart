@@ -20,13 +20,25 @@ class HomeAppBar extends StatefulWidget {
 }
 
 class _HomeAppBarState extends State<HomeAppBar> {
+  late Box<User> box;
+  late User _user;
+
+  @override
+  void initState() {
+    super.initState();
+    box = Hive.box("userbox");
+  }
+
+  void getUserData() {
+    _user = box.get("my")!;
+  }
+
   @override
   Widget build(BuildContext context) {
+    getUserData();
     final Map pageDatas = Provider.of<PageDataProvider>(context).pageDatas;
     final int selectedIndex =
         Provider.of<PageDataProvider>(context).selectedIndex;
-    final Box<User> box = Hive.box("userbox");
-    final User _user = box.get("my")!;
     return SliverAppBar(
       leading: Padding(
         padding: const EdgeInsets.fromLTRB(20.0, 12.0, 4.0, 12.0),

@@ -54,6 +54,9 @@ Future<void> main() async {
   await Hive.initFlutter();
   // open db box
   await Hive.openBox<User>('userbox');
+  await Hive.openBox<Roar>('roarbox');
+  // 如果是批量自定local类型的话,直接dynamic
+  await Hive.openBox<List<dynamic>>('roarsbox');
 
   runApp(const MaterialApp());
 }

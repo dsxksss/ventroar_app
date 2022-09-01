@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:ventroar_app/global/widgets/avatars.dart';
+import 'package:ventroar_app/global/widgets/avatar_widget.dart';
 import '../../functions/timestamp_conversion.dart';
-import '../../schemas/user.dart';
+import '../../schemas/roar.dart';
 
-class Roar extends StatefulWidget {
-  const Roar({Key? key, required this.user, this.onPressed}) : super(key: key);
-  final User user;
+class RoarWidget extends StatefulWidget {
+  const RoarWidget({Key? key, required this.roar, this.onPressed})
+      : super(key: key);
+  final Roar roar;
   final VoidCallback? onPressed;
   @override
-  State<Roar> createState() => _RoarState();
+  State<RoarWidget> createState() => _RoarWidgetState();
 }
 
-class _RoarState extends State<Roar> {
+class _RoarWidgetState extends State<RoarWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -42,7 +43,10 @@ class _RoarState extends State<Roar> {
                 children: [
                   Padding(
                     padding: EdgeInsets.fromLTRB(0.04.sw, 0.02.sh, 0.03.sw, 0),
-                    child: Avatar(user: widget.user),
+                    child: AvatarWidget(
+                      avatarUrl: widget.roar.userAvatarUrl,
+                      userName: widget.roar.userName,
+                    ),
                   ),
                 ],
               ),
@@ -62,7 +66,7 @@ class _RoarState extends State<Roar> {
                     child: Row(
                       children: [
                         Text(
-                          widget.user.name,
+                          widget.roar.userName,
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 16.sp),
                         ),
@@ -70,7 +74,7 @@ class _RoarState extends State<Roar> {
                           //日期显示边距
                           padding: EdgeInsets.fromLTRB(0.25.sw, 0, 0, 0),
                           child: Text(
-                            timestampConversion(widget.user.createDate),
+                            timestampConversion(widget.roar.createDate),
                             style: TextStyle(fontSize: 15.sp),
                           ),
                         ),
