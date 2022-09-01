@@ -21,10 +21,10 @@ class Roar extends HiveObject {
   bool isCanComment;
 
   @HiveField(5)
-  List<String>? likeUsers;
+  List<dynamic>? likeUsers;
 
   @HiveField(6)
-  List<String> textImages;
+  List<dynamic> textImages;
 
   @HiveField(7)
   List<RoarComment>? textComments;
