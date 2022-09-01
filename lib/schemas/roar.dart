@@ -12,7 +12,7 @@ class Roar extends HiveObject {
   String text;
 
   @HiveField(2)
-  bool isPublic;
+  bool? isPublic;
 
   @HiveField(3)
   bool isShowUserName;

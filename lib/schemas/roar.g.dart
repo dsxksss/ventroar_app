@@ -19,7 +19,7 @@ class RoarAdapter extends TypeAdapter<Roar> {
     return Roar(
       id: fields[0] as String,
       text: fields[1] as String,
-      isPublic: fields[2] as bool,
+      isPublic: fields[2] as bool?,
       isShowUserName: fields[3] as bool,
       isCanComment: fields[4] as bool,
       likeUsers: (fields[5] as List?)?.cast<String>(),
