@@ -7,7 +7,7 @@ import '../../schemas/roar.dart';
 
 class RoarHeightSize {
   static double minHeight = 0.25.sh;
-  static double maxHeight = 0.4.sh;
+  static double maxHeight = 0.45.sh;
 }
 
 class RoarWidget extends StatefulWidget {
@@ -42,19 +42,55 @@ class _RoarWidgetState extends State<RoarWidget> {
             ),
           ),
         ),
+        // 结构框架:左侧头像内容、时间线样式
         child: Flex(
+          direction: Axis.horizontal,
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
-          direction: Axis.horizontal,
           children: [
+            // 内容细节:左侧头像内容、时间线样式
             RoarAvatar(
               userAvatarUrl: widget.roar.userAvatarUrl,
               userName: widget.roar.userName,
             ),
-            RoarTitle(
-              userName: widget.roar.userName,
-              createDate: widget.roar.createDate,
-            ),
+
+            //结构框架:标题、内容、其他按钮
+            Container(
+              // color: Colors.yellow,
+              constraints: BoxConstraints(
+                minHeight: RoarHeightSize.minHeight,
+                maxHeight: RoarHeightSize.maxHeight,
+                minWidth: 0.8.sw,
+                maxWidth: 0.8.sw,
+              ),
+              child: Flex(
+                direction: Axis.vertical,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                //最小占位
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // 内容细节:其他按钮
+
+                  //标题
+                  RoarTitle(
+                    userName: widget.roar.userName,
+                    createDate: widget.roar.createDate,
+                  ),
+
+                  //内容
+                  RoarContent(
+                    text: widget.roar.text,
+                  ),
+
+                  RoarLikes(
+                    heart: widget.roar.heart,
+                    smil: widget.roar.smil,
+                    commentCount: widget.roar.textCommentCount,
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),
@@ -117,54 +153,137 @@ class RoarTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // color: Colors.yellow,
       constraints: BoxConstraints(
-        minHeight: RoarHeightSize.minHeight,
-        maxHeight: RoarHeightSize.maxHeight,
+        minHeight: 0.05.sh,
+        maxHeight: 0.05.sh,
         minWidth: 0.8.sw,
         maxWidth: 0.8.sw,
       ),
-      child: Flex(
-        direction: Axis.horizontal,
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          Container(
-            constraints: BoxConstraints(
-              minHeight: 0.05.sh,
-              maxHeight: 0.05.sh,
-              minWidth: 0.8.sw,
-              maxWidth: 0.8.sw,
+          Text(
+            userName,
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.sp),
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(
+                timestampConversion(createDate),
+                style: TextStyle(fontSize: 15.sp, color: Colors.grey),
+              ),
+              IconButton(
+                padding: EdgeInsets.fromLTRB(0.03.sw, 0, 0.03.sw, 0),
+                //覆盖原本icon内边距
+                constraints: BoxConstraints(minHeight: 0.02.sh),
+                onPressed: () {},
+                icon: const FaIcon(
+                  FontAwesomeIcons.ellipsisVertical,
+                  size: 18,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class RoarContent extends StatelessWidget {
+  const RoarContent({
+    Key? key,
+    required this.text,
+  }) : super(key: key);
+
+  final String text;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      // color: Colors.green,
+      constraints: BoxConstraints(
+        minWidth: 0.7.sw,
+        maxWidth: 0.7.sw,
+      ),
+      child: Text(
+        text,
+        maxLines: 12,
+        textAlign: TextAlign.start,
+        style: TextStyle(
+          fontSize: 13.sp,
+          overflow: TextOverflow.ellipsis,
+        ),
+      ),
+    );
+  }
+}
+
+class RoarLikes extends StatelessWidget {
+  const RoarLikes({
+    Key? key,
+    required this.heart,
+    required this.smil,
+    required this.commentCount,
+  }) : super(key: key);
+
+  final int heart;
+  final int smil;
+  final int commentCount;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      constraints: BoxConstraints(
+        minWidth: 0.7.sw,
+        maxWidth: 0.7.sw,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          TextButton.icon(
+            onPressed: () {},
+            icon: Icon(
+              heart <= 0 ? Icons.heart_broken_outlined : FontAwesomeIcons.heart,
+              size: heart <= 0 ? 26 : 20,
+              color: heart <= 0 ? Colors.grey : Colors.redAccent,
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(
-                  userName,
-                  style:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 16.sp),
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      timestampConversion(createDate),
-                      style: TextStyle(fontSize: 15.sp, color: Colors.grey),
-                    ),
-                    IconButton(
-                      padding: EdgeInsets.fromLTRB(0.03.sw, 0, 0.03.sw, 0),
-                      //覆盖原本icon内边距
-                      constraints: BoxConstraints(minHeight: 0.02.sh),
-                      onPressed: () {},
-                      icon: const FaIcon(
-                        FontAwesomeIcons.ellipsisVertical,
-                        size: 18,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+            label: Text(
+              heart <= 99 ? heart.toString() : "99+",
+              style: const TextStyle(
+                color: Colors.grey,
+              ),
+            ),
+          ),
+          TextButton.icon(
+            onPressed: () {},
+            icon: Icon(
+              smil <= 0
+                  ? FontAwesomeIcons.faceSadTear
+                  : FontAwesomeIcons.faceSmileBeam,
+              color: smil <= 0 ? Colors.grey : Colors.amberAccent,
+              size: 20,
+            ),
+            label: Text(
+              smil <= 99 ? smil.toString() : "99+",
+              style: const TextStyle(
+                color: Colors.grey,
+              ),
+            ),
+          ),
+          TextButton.icon(
+            onPressed: () {},
+            icon: Icon(
+              FontAwesomeIcons.comment,
+              size: 20,
+              color: commentCount <= 0 ? Colors.grey : Colors.blue,
+            ),
+            label: Text(
+              commentCount <= 99 ? commentCount.toString() : "99+",
+              style: const TextStyle(
+                color: Colors.grey,
+              ),
             ),
           ),
         ],
