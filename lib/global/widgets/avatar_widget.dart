@@ -25,8 +25,6 @@ class AvatarWidget extends StatelessWidget {
         borderRadius: _borderRadius,
         child: avatarUrl == "null"
             ? Container(
-                width: 50,
-                height: 50,
                 color: Colors.blue[200],
                 child: Center(
                   child: Text(
