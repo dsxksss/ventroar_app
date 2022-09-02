@@ -21,7 +21,6 @@ class HomeAppBar extends StatefulWidget {
 
 class _HomeAppBarState extends State<HomeAppBar> {
   late Box<User> box;
-  late User _user;
 
   @override
   void initState() {
@@ -29,13 +28,8 @@ class _HomeAppBarState extends State<HomeAppBar> {
     box = Hive.box("userbox");
   }
 
-  void getUserData() {
-    _user = box.get("my")!;
-  }
-
   @override
   Widget build(BuildContext context) {
-    getUserData();
     final Map pageDatas = Provider.of<PageDataProvider>(context).pageDatas;
     final int selectedIndex =
         Provider.of<PageDataProvider>(context).selectedIndex;
@@ -43,8 +37,8 @@ class _HomeAppBarState extends State<HomeAppBar> {
       leading: Padding(
         padding: const EdgeInsets.fromLTRB(20.0, 12.0, 4.0, 12.0),
         child: AvatarWidget(
-          avatarUrl: _user.avatarUrl,
-          userName: _user.name,
+          avatarUrl: box.get("my")?.avatarUrl ?? "null",
+          userName: box.get("my")?.name ?? "null",
           fontSize: 20.sp,
           onPressed: () {
             Scaffold.of(context).openDrawer();

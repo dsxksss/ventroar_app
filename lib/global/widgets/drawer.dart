@@ -18,23 +18,14 @@ class DHeader extends StatefulWidget {
 
 class _DHeaderState extends State<DHeader> {
   late Box<User> box;
-  late User _user;
-
   @override
   void initState() {
     super.initState();
     box = Hive.box("userbox");
   }
 
-  void getUserData() {
-    _user = box.get("my")!;
-  }
-
   @override
   Widget build(BuildContext context) {
-    box = Hive.box("userbox");
-    getUserData();
-
     return SizedBox(
       child: Padding(
         padding: EdgeInsets.fromLTRB(0.04.sw, 0.08.sh, 0, 0.02.sh),
@@ -47,8 +38,8 @@ class _DHeaderState extends State<DHeader> {
               height: 85,
               child: AvatarWidget(
                 fontSize: 30.sp,
-                avatarUrl: _user.avatarUrl,
-                userName: _user.name,
+                avatarUrl: box.get("my")?.avatarUrl ?? "null",
+                userName: box.get("my")?.name ?? "null",
               ),
             ),
             Padding(
@@ -59,13 +50,13 @@ class _DHeaderState extends State<DHeader> {
                 children: [
                   SizedBox(height: 0.015.sh),
                   Text(
-                    _user.name,
+                    box.get("my")?.name ?? "null",
                     style:
                         TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500),
                   ),
                   SizedBox(height: 0.01.sh),
                   Text(
-                    _user.email,
+                    box.get("my")?.email ?? "null",
                     style:
                         TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
                   ),
