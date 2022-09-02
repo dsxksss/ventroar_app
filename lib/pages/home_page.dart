@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:ventroar_app/widgets/wait_animation.dart';
 import '../functions/vent_snack.dart';
 import '../global/widgets/roar_widget.dart';
 import '../services/network_lib.dart';
@@ -38,6 +37,19 @@ class _HomePageState extends State<HomePage> {
         setState(() {
           _roars = response["data"];
         });
+        vSnackBar(
+          showTime: const Duration(seconds: 1),
+          dismissDirection: DismissDirection.startToEnd,
+          model: VSnackModel.info,
+          isScroll: false,
+          textWidget: Text(
+            "刷新宣泄列表",
+            style: TextStyle(
+                fontSize: 17.sp,
+                color: Colors.white,
+                fontWeight: FontWeight.bold),
+          ),
+        );
       }
     } on DioError catch (e) {
       vSnackBar(
@@ -78,24 +90,29 @@ class _HomePageState extends State<HomePage> {
           },
         ),
       ],
-      body: _roars == []
-          ? const WaitAnimation(height: 300, width: 300)
-          : RefreshIndicator(
-              onRefresh: getAllRoar,
-              child: ListView.builder(
-                //确定每一个item的高度 会让item加载更加高效
-                //  itemExtent: 83,
-                //  primary: false,
-                itemCount: _roars.length,
-                itemBuilder: (BuildContext context, int index) =>
-                    RoarWidget(roar: _roars[index]),
-                padding: EdgeInsets.fromLTRB(0, 0, 0, 0.2.sh),
-                physics: const AlwaysScrollableScrollPhysics(
-                  //当内容不足时也可以启动反弹刷新
-                  parent: BouncingScrollPhysics(),
-                ),
-              ),
-            ),
+      body: RefreshIndicator(
+        onRefresh: getAllRoar,
+        child: ListView.builder(
+          //确定每一个item的高度 会让item加载更加高效
+          //  itemExtent: 83,
+          //  primary: false,
+          itemCount: _roars.isEmpty ? 1 : _roars.length,
+          itemBuilder: (BuildContext context, int index) => _roars.isEmpty
+              ? SizedBox(
+                  width: 1.sw,
+                  height: 0.7.sh,
+                  child: const Center(
+                    child: Text("尝试下拉屏幕获取内容"),
+                  ),
+                )
+              : RoarWidget(roar: _roars[index]),
+          padding: EdgeInsets.fromLTRB(0, 0, 0, 0.2.sh),
+          physics: const AlwaysScrollableScrollPhysics(
+            //当内容不足时也可以启动反弹刷新
+            parent: BouncingScrollPhysics(),
+          ),
+        ),
+      ),
     );
   }
 }
