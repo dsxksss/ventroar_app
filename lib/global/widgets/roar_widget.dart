@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ventroar_app/functions/date_conversion.dart';
 import 'package:ventroar_app/global/widgets/avatar_widget.dart';
 import '../../schemas/roar.dart';
 
@@ -170,7 +171,7 @@ class RoarTitle extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                createDate.toString(),
+                dateConversion(createDate),
                 style: TextStyle(fontSize: 15.sp, color: Colors.grey),
               ),
               IconButton(
