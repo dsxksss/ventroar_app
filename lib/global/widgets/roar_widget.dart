@@ -5,7 +5,7 @@ import 'package:ventroar_app/global/widgets/avatar_widget.dart';
 import '../../schemas/roar.dart';
 
 class RoarHeightSize {
-  static double minHeight = 0.1.sh;
+  static double minHeight = 0.05.sh;
   static double maxHeight = 0.45.sh;
 }
 
