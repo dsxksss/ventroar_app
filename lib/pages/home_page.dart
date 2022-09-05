@@ -28,6 +28,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     _scrollController = ScrollController();
     box = Hive.box("roarsbox");
+    getAllRoar();
   }
 
   Future getAllRoar() async {
@@ -61,7 +62,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    getAllRoar();
     getLocalData();
     return NestedScrollView(
       controller: _scrollController,
