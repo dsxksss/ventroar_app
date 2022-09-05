@@ -48,8 +48,8 @@ class CustomInterceptors extends Interceptor {
   //发生异常时
   void onError(DioError err, ErrorInterceptorHandler handler) {
     print('发生异常');
-    // print(
-    // 'ERROR[${err.response?.statusCode}] => PATH: ${err.requestOptions.path}');
+    print(
+        'ERROR[${err.response?.statusCode}] => PATH: ${err.requestOptions.path}');
     // print('ERROR-MESSAGE => [${err.response?.data["msg"]}]');
     // print('ERROR-RESPONSE => [$err.response}]');
     // print('ERROR-HANDLER => [$handler}]');
@@ -63,6 +63,7 @@ class Services {
   //全局Dio实例
   static final Services instance = Services._init();
   static Dio? _dio;
+  static User? _user;
   Services._init();
 
   Future<Dio> get dio async {
@@ -87,6 +88,12 @@ class Services {
     //如果存在就返回已有的dio
     //如果不存在就创建新的dio实例返回
     return _dio ?? a;
+  }
+
+  User? get user {
+    Box<User> box = Hive.box("userbox");
+    User? a = box.get("my");
+    return _user ?? a;
   }
 
   /// 清空全局dio对象
@@ -132,7 +139,33 @@ class RoarHttpLib {
     };
   }
 
-  getAllRoar({required Box<List<Roar>> box}) {}
+  Future<Map> clickTextLikes({
+    required Map<String, dynamic> data,
+  }) async {
+    User? user = Services.instance.user;
+    if (user == null || user.authToken.isEmpty || user.authToken.length < 8) {
+      return {"msg": "error authToken is empty!!!", "statusCode": 400};
+    }
+    Response response;
+    response = await Services.instance.dio.then((value) => value.put(
+          VentUrls.clickTextLikes,
+          data: data,
+          options: Options(
+            headers: {"x-auth-token": user.authToken},
+          ),
+        ));
+    if (response.statusCode == 200) {
+      return {
+        "headers": response.headers,
+        "data": response.data,
+        "statusCode": response.statusCode
+      };
+    }
+    return {
+      "msg": "clickTextLikes network error!!!",
+      "statusCode": response.statusCode
+    };
+  }
 }
 
 class UserHttpLib {

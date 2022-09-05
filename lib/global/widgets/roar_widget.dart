@@ -1,9 +1,14 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:ventroar_app/functions/date_conversion.dart';
 import 'package:ventroar_app/global/widgets/avatar_widget.dart';
+import '../../functions/vent_snack.dart';
 import '../../schemas/roar.dart';
+import '../../schemas/user.dart';
+import '../../services/network_lib.dart';
 
 class RoarHeightSize {
   static double minHeight = 0.05.sh;
@@ -84,6 +89,7 @@ class _RoarWidgetState extends State<RoarWidget> {
                   ),
 
                   RoarLikes(
+                    id: widget.roar.id,
                     heart: widget.roar.heart,
                     smil: widget.roar.smil,
                     commentCount: widget.roar.textCommentCount,
@@ -220,20 +226,101 @@ class RoarContent extends StatelessWidget {
   }
 }
 
-class RoarLikes extends StatelessWidget {
+class RoarLikes extends StatefulWidget {
   const RoarLikes({
     Key? key,
+    required this.id,
     required this.heart,
     required this.smil,
     required this.commentCount,
   }) : super(key: key);
 
+  final String id;
   final int heart;
   final int smil;
   final int commentCount;
 
   @override
+  State<RoarLikes> createState() => _RoarLikesState();
+}
+
+class _RoarLikesState extends State<RoarLikes> {
+  late Box<User> box;
+  late int heart;
+  late int smil;
+  @override
+  void initState() {
+    super.initState();
+    box = Hive.box("userbox");
+    heart = widget.heart;
+    smil = widget.smil;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    Future clickLike(String clickWhere) async {
+      try {
+        var response = await RoarHttpLib().clickTextLikes(data: {
+          "textId": widget.id,
+          clickWhere: true,
+        });
+        if (response["statusCode"] == 200) {
+          setState(() {
+            heart = response["data"]["result"]["heart"] ?? 88;
+            smil = response["data"]["result"]["smil"] ?? 88;
+          });
+          vSnackBar(
+            showTime: const Duration(seconds: 1),
+            dismissDirection: DismissDirection.startToEnd,
+            model: VSnackModel.success,
+            isScroll: false,
+            textWidget: Text(
+              "表达成功",
+              style: TextStyle(
+                  fontSize: 17.sp,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
+            ),
+          );
+        }
+      } on DioError catch (e) {
+        if (e.response!.statusCode == 404) {
+          vSnackBar(
+            showTime: const Duration(seconds: 1),
+            dismissDirection: DismissDirection.startToEnd,
+            model: VSnackModel.error,
+            isScroll: false,
+            textWidget: Text(
+              "没找到该帖子!",
+              style: TextStyle(
+                  fontSize: 17.sp,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
+            ),
+          );
+        } else {
+          vSnackBar(
+            showTime: const Duration(seconds: 60),
+            dismissDirection: DismissDirection.startToEnd,
+            model: VSnackModel.error,
+            isScroll:
+                e.type != DioErrorType.connectTimeout && e.response != null
+                    ? true
+                    : false,
+            textWidget: Text(
+              e.type == DioErrorType.connectTimeout
+                  ? "网络超时,请检查网络重试!"
+                  : e.response?.data["msg"] ?? "未连接网络,请检查后重试!",
+              style: TextStyle(
+                  fontSize: 17.sp,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
+            ),
+          );
+        }
+      }
+    }
+
     return Container(
       constraints: BoxConstraints(
         minWidth: 0.7.sw,
@@ -243,7 +330,9 @@ class RoarLikes extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           TextButton.icon(
-            onPressed: () {},
+            onPressed: () {
+              clickLike("heart");
+            },
             icon: Icon(
               heart <= 0 ? Icons.heart_broken_outlined : FontAwesomeIcons.heart,
               size: heart <= 0 ? 26 : 20,
@@ -257,7 +346,9 @@ class RoarLikes extends StatelessWidget {
             ),
           ),
           TextButton.icon(
-            onPressed: () {},
+            onPressed: () {
+              clickLike("smil");
+            },
             icon: Icon(
               smil <= 0
                   ? FontAwesomeIcons.faceSadTear
@@ -277,10 +368,12 @@ class RoarLikes extends StatelessWidget {
             icon: Icon(
               FontAwesomeIcons.comment,
               size: 20,
-              color: commentCount <= 0 ? Colors.grey : Colors.blue,
+              color: widget.commentCount <= 0 ? Colors.grey : Colors.blue,
             ),
             label: Text(
-              commentCount <= 99 ? commentCount.toString() : "99+",
+              widget.commentCount <= 99
+                  ? widget.commentCount.toString()
+                  : "99+",
               style: const TextStyle(
                 color: Colors.grey,
               ),

@@ -37,19 +37,6 @@ class _HomePageState extends State<HomePage> {
         setState(() {
           _roars = response["data"];
         });
-        vSnackBar(
-          showTime: const Duration(seconds: 1),
-          dismissDirection: DismissDirection.startToEnd,
-          model: VSnackModel.info,
-          isScroll: false,
-          textWidget: Text(
-            "刷新宣泄列表",
-            style: TextStyle(
-                fontSize: 17.sp,
-                color: Colors.white,
-                fontWeight: FontWeight.bold),
-          ),
-        );
       }
     } on DioError catch (e) {
       vSnackBar(
@@ -74,6 +61,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    getAllRoar();
     getLocalData();
     return NestedScrollView(
       controller: _scrollController,
