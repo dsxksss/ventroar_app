@@ -1,10 +1,9 @@
 // 取消命名检查
 // ignore_for_file: non_constant_identifier_names, constant_identifier_names
-import 'package:dio/dio.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import '../schemas/roar.dart';
-import '../schemas/user.dart';
 import './vent_apis.dart';
+import 'package:dio/dio.dart';
+import '../schemas/user.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 //自定配置信息类
 class DioOptions {
@@ -63,7 +62,7 @@ class Services {
   //全局Dio实例
   static final Services instance = Services._init();
   static Dio? _dio;
-  static User? _user;
+  static User? _my;
   Services._init();
 
   Future<Dio> get dio async {
@@ -90,184 +89,14 @@ class Services {
     return _dio ?? a;
   }
 
-  User? get user {
+  User? get my {
     Box<User> box = Hive.box("userbox");
     User? a = box.get("my");
-    return _user ?? a;
+    return _my ?? a;
   }
 
   /// 清空全局dio对象
   void close() {
     _dio != null ? _dio!.close() : _dio = null;
-  }
-}
-
-class RoarHttpLib {
-  Future<Map> getAllRoarText({required Box<List<dynamic>> box}) async {
-    Response response;
-    response = await Services.instance.dio
-        .then((value) => value.get(VentUrls.getAllRoarText));
-    if (response.statusCode == 200) {
-      int count = response.data["result"].length ?? 0;
-      List<Roar> roars = [];
-      for (int i = 0; i < count; i++) {
-        roars.add(Roar(
-          id: response.data["result"][i]["_id"],
-          text: response.data["result"][i]["text"],
-          isPublic: null,
-          isShowUserName: response.data["result"][i]["isShowUserName"],
-          isCanComment: response.data["result"][i]["isCanComment"],
-          likeUsers: response.data["result"][i]["likeUsers"],
-          textImages: response.data["result"][i]["textImages"],
-          textComments: null,
-          textCommentCount: response.data["result"][i]["textCommentCount"],
-          createDate: response.data["result"][i]["createDate"],
-          smil: response.data["result"][i]["smil"],
-          heart: response.data["result"][i]["heart"],
-          userId: response.data["result"][i]["userId"],
-          userName: response.data["result"][i]["userName"],
-          userEmail: response.data["result"][i]["userEmail"],
-          userAvatarUrl: response.data["result"][i]["userAvatarUrl"],
-        ));
-      }
-      box.put("homePageRoars", roars);
-      return {"data": roars, "statusCode": response.statusCode};
-    }
-    return {
-      "msg": "getAllRoarText network error!!!",
-      "statusCode": response.statusCode
-    };
-  }
-
-  Future<Map> clickTextLikes({
-    required Map<String, dynamic> data,
-  }) async {
-    User? user = Services.instance.user;
-    if (user == null || user.authToken.isEmpty || user.authToken.length < 8) {
-      return {"msg": "error authToken is empty!!!", "statusCode": 400};
-    }
-    Response response;
-    response = await Services.instance.dio.then((value) => value.put(
-          VentUrls.clickTextLikes,
-          data: data,
-          options: Options(
-            headers: {"x-auth-token": user.authToken},
-          ),
-        ));
-    if (response.statusCode == 200) {
-      return {
-        "headers": response.headers,
-        "data": response.data,
-        "statusCode": response.statusCode
-      };
-    }
-    return {
-      "msg": "clickTextLikes network error!!!",
-      "statusCode": response.statusCode
-    };
-  }
-}
-
-class UserHttpLib {
-  Future<Map> signIn({
-    required Map<String, dynamic> data,
-    required Box<User> box,
-  }) async {
-    Response response;
-    response = await Services.instance.dio
-        .then((value) => value.post(VentUrls.signIn, data: data));
-
-    if (response.statusCode == 200) {
-      box.put(
-          "my",
-          User(
-            id: response.data["result"]["_id"],
-            name: response.data["result"]["name"],
-            email: response.data["result"]["email"],
-            friends: response.data["result"]["friends"],
-            inBox: response.data["result"]["inBox"],
-            createDate: response.data["result"]["createDate"],
-            avatarUrl: response.data["result"]["avatarUrl"],
-            authToken: response.data["result"]["authToken"],
-            isOnline: response.data["result"]["isOnline"],
-            isAdmin: response.data["result"]["isAdmin"],
-          ));
-      return {
-        "headers": response.headers,
-        "data": response.data,
-        "statusCode": response.statusCode
-      };
-    }
-    return {"msg": "login network error!!!", "statusCode": response.statusCode};
-  }
-
-  Future<Map> tokenLogin({
-    required Box<User> box,
-  }) async {
-    User? user = box.get("my");
-    if (user == null || user.authToken.isEmpty || user.authToken.length < 8) {
-      return {"msg": "error authToken is empty!!!", "statusCode": 400};
-    }
-
-    Response response;
-    response = await Services.instance.dio.then((value) => value.post(
-          VentUrls.tokenLogin,
-          options: Options(
-            headers: {"x-auth-token": user.authToken},
-          ),
-        ));
-    if (response.statusCode == 200) {
-      box.put(
-          "my",
-          User(
-            id: response.data["result"]["_id"],
-            name: response.data["result"]["name"],
-            email: response.data["result"]["email"],
-            friends: response.data["result"]["friends"],
-            inBox: response.data["result"]["inBox"],
-            createDate: response.data["result"]["createDate"],
-            avatarUrl: response.data["result"]["avatarUrl"],
-            authToken: user.authToken,
-            isOnline: response.data["result"]["isOnline"],
-            isAdmin: response.data["result"]["isAdmin"],
-          ));
-      return {"data": response.data, "statusCode": response.statusCode};
-    }
-    return {
-      "msg": "SignIn network error!!!",
-      "statusCode": response.statusCode
-    };
-  }
-
-  Future<Map> signUp({required Map<String, dynamic> data}) async {
-    Response response;
-    response = await Services.instance.dio
-        .then((value) => value.post(VentUrls.signUp, data: data));
-    if (response.statusCode == 202) {
-      return {"data": response.data, "statusCode": response.statusCode};
-    }
-    return {
-      "msg": "SignUp network error!!!",
-      "statusCode": response.statusCode
-    };
-  }
-
-  Future<Map> signOut({required String token}) async {
-    Response response;
-    response = await Services.instance.dio.then(
-      (value) => value.post(
-        VentUrls.signOut,
-        options: Options(
-          headers: {"x-auth-token": token},
-        ),
-      ),
-    );
-    if (response.statusCode == 200) {
-      return {"data": response.data, "statusCode": response.statusCode};
-    }
-    return {
-      "msg": "SignUp network error!!!",
-      "statusCode": response.statusCode
-    };
   }
 }

@@ -1,15 +1,15 @@
 import 'package:dio/dio.dart';
+import 'package:hive/hive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:hive/hive.dart';
 import 'package:ventroar_app/widgets/wait_animation.dart';
 
+import '../schemas/user.dart';
 import '../functions/vent_snack.dart';
 import '../global/global_context.dart';
-import '../schemas/user.dart';
-import '../services/network_lib.dart';
+import '../services/user_http_lib.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);

@@ -1,14 +1,15 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:ventroar_app/functions/date_conversion.dart';
 import 'package:ventroar_app/global/widgets/avatar_widget.dart';
-import '../../functions/vent_snack.dart';
-import '../../schemas/roar.dart';
+
 import '../../schemas/user.dart';
-import '../../services/network_lib.dart';
+import '../../schemas/roar.dart';
+import '../../functions/vent_snack.dart';
+import '../../services/roar_http_lib.dart';
 
 class RoarHeightSize {
   static double minHeight = 0.05.sh;
