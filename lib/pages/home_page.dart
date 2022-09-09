@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> {
             _scrollController.animateTo(
               _scrollController.position.minScrollExtent,
               duration: const Duration(milliseconds: 800),
-              curve: Curves.easeInOutBack,
+              curve: Curves.easeInOut,
             ); //匀速;
           },
         ),
