@@ -83,7 +83,7 @@ class RoarHttpLib {
       return {"msg": "error authToken is empty!!!", "statusCode": 400};
     }
     Response response;
-    response = await Services.instance.dio.then((value) => value.put(
+    response = await Services.instance.dio.then((value) => value.delete(
           VentUrls.deleteRoarText,
           data: {"id": deleteId},
           options: Options(
