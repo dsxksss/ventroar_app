@@ -42,10 +42,11 @@ class _LoginPageState extends State<LoginPage> {
 
     Future signIn() async {
       try {
-        var response = await UserHttpLib().signIn(data: {
-          "account": _accountController.text,
-          "password": _passwordController.text,
-        }, box: box);
+        var response = await UserHttpLib().signIn(
+          account: _accountController.text,
+          password: _passwordController.text,
+          box: box,
+        );
         if (response["statusCode"] == 200) {
           Future.delayed(const Duration(milliseconds: 1000), () {
             //TODO:待实现网络登录等待反馈动画

@@ -6,12 +6,16 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 class UserHttpLib {
   Future<Map> signIn({
-    required Map<String, dynamic> data,
+    required String account,
+    required String password,
     required Box<User> box,
   }) async {
     Response response;
     response = await Services.instance.dio
-        .then((value) => value.post(VentUrls.signIn, data: data));
+        .then((value) => value.post(VentUrls.signIn, data: {
+              "account": account,
+              "password": password,
+            }));
 
     if (response.statusCode == 200) {
       box.put(
@@ -75,6 +79,7 @@ class UserHttpLib {
     };
   }
 
+  //TODO:signUp未实现
   Future<Map> signUp({required Map<String, dynamic> data}) async {
     Response response;
     response = await Services.instance.dio
@@ -88,6 +93,7 @@ class UserHttpLib {
     };
   }
 
+  //TODO:signOut未实现
   Future<Map> signOut({required String token}) async {
     Response response;
     response = await Services.instance.dio.then(

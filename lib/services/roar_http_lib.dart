@@ -43,7 +43,8 @@ class RoarHttpLib {
   }
 
   Future<Map> clickTextLikes({
-    required Map<String, dynamic> data,
+    required String likeId,
+    required String likeWho,
   }) async {
     User? user = Services.instance.my;
     if (user == null || user.authToken.isEmpty || user.authToken.length < 8) {
@@ -52,7 +53,10 @@ class RoarHttpLib {
     Response response;
     response = await Services.instance.dio.then((value) => value.put(
           VentUrls.clickTextLikes,
-          data: data,
+          data: {
+            "textId": likeId,
+            likeWho: true,
+          },
           options: Options(
             headers: {"x-auth-token": user.authToken},
           ),
@@ -68,5 +72,31 @@ class RoarHttpLib {
       "msg": "clickTextLikes network error!!!",
       "statusCode": response.statusCode
     };
+  }
+
+  //TODO:deleteRoarText未测试
+  Future<Map> deleteRoarText({
+    required deleteId,
+  }) async {
+    User? user = Services.instance.my;
+    if (user == null || user.authToken.isEmpty || user.authToken.length < 8) {
+      return {"msg": "error authToken is empty!!!", "statusCode": 400};
+    }
+    Response response;
+    response = await Services.instance.dio.then((value) => value.put(
+          VentUrls.deleteRoarText,
+          data: {"id": deleteId},
+          options: Options(
+            headers: {"x-auth-token": user.authToken},
+          ),
+        ));
+    if (response.statusCode == 200) {
+      return {
+        "headers": response.headers,
+        "data": response.data,
+        "statusCode": response.statusCode
+      };
+    }
+    return {"msg": "delete failed!!!", "statusCode": response.statusCode};
   }
 }

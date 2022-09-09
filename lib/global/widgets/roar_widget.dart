@@ -259,12 +259,12 @@ class _RoarLikesState extends State<RoarLikes> {
 
   @override
   Widget build(BuildContext context) {
-    Future clickLike(String clickWhere) async {
+    Future clickLike(String clickWho) async {
       try {
-        var response = await RoarHttpLib().clickTextLikes(data: {
-          "textId": widget.id,
-          clickWhere: true,
-        });
+        var response = await RoarHttpLib().clickTextLikes(
+          likeId: widget.id,
+          likeWho: clickWho,
+        );
         if (response["statusCode"] == 200) {
           setState(() {
             heart = response["data"]["result"]["heart"] ?? 88;
@@ -301,7 +301,7 @@ class _RoarLikesState extends State<RoarLikes> {
           );
         } else {
           vSnackBar(
-            showTime: const Duration(seconds: 60),
+            showTime: const Duration(seconds: 1),
             dismissDirection: DismissDirection.startToEnd,
             model: VSnackModel.error,
             isScroll:
@@ -336,7 +336,7 @@ class _RoarLikesState extends State<RoarLikes> {
             },
             icon: Icon(
               heart <= 0 ? Icons.heart_broken_outlined : FontAwesomeIcons.heart,
-              size: heart <= 0 ? 26 : 20,
+              size: heart <= 0 ? 26 : 21,
               color: heart <= 0 ? Colors.grey : Colors.redAccent,
             ),
             label: Text(
