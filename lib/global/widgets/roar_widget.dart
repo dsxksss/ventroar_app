@@ -80,6 +80,7 @@ class _RoarWidgetState extends State<RoarWidget> {
 
                   //标题
                   RoarTitle(
+                    id: widget.roar.id,
                     userName: widget.roar.userName,
                     createDate: widget.roar.createDate,
                   ),
@@ -150,15 +151,73 @@ class RoarAvatar extends StatelessWidget {
 class RoarTitle extends StatelessWidget {
   const RoarTitle({
     Key? key,
+    required this.id,
     required this.userName,
     required this.createDate,
   }) : super(key: key);
 
+  final String id;
   final String userName;
   final int createDate;
 
   @override
   Widget build(BuildContext context) {
+    Future deleteRoarText() async {
+      try {
+        var response = await RoarHttpLib().deleteRoarText(deleteId: id);
+        if (response["statusCode"] == 200) {
+          vSnackBar(
+            showTime: const Duration(seconds: 1),
+            dismissDirection: DismissDirection.startToEnd,
+            model: VSnackModel.success,
+            isScroll: false,
+            textWidget: Text(
+              "删除成功",
+              style: TextStyle(
+                  fontSize: 17.sp,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
+            ),
+          );
+        }
+      } on DioError catch (e) {
+        if (e.response!.statusCode == 404) {
+          vSnackBar(
+            showTime: const Duration(seconds: 1),
+            dismissDirection: DismissDirection.startToEnd,
+            model: VSnackModel.error,
+            isScroll: false,
+            textWidget: Text(
+              "没找到该帖子!",
+              style: TextStyle(
+                  fontSize: 17.sp,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
+            ),
+          );
+        } else {
+          vSnackBar(
+            showTime: const Duration(seconds: 1),
+            dismissDirection: DismissDirection.startToEnd,
+            model: VSnackModel.error,
+            isScroll:
+                e.type != DioErrorType.connectTimeout && e.response != null
+                    ? true
+                    : false,
+            textWidget: Text(
+              e.type == DioErrorType.connectTimeout
+                  ? "网络超时,请检查网络重试!"
+                  : e.response?.data["msg"] ?? "未连接网络,请检查后重试!",
+              style: TextStyle(
+                  fontSize: 17.sp,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
+            ),
+          );
+        }
+      }
+    }
+
     return Container(
       constraints: BoxConstraints(
         minHeight: 0.05.sh,
@@ -185,7 +244,24 @@ class RoarTitle extends StatelessWidget {
                 padding: EdgeInsets.fromLTRB(0.03.sw, 0, 0.03.sw, 0),
                 //覆盖原本icon内边距
                 constraints: BoxConstraints(minHeight: 0.02.sh),
-                onPressed: () {},
+                onPressed: () {
+                  vSnackBar(
+                    model: VSnackModel.error,
+                    textWidget: Text(
+                      "确定要删除此条宣泄吗?",
+                      style: TextStyle(
+                          fontSize: 17.sp,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    button: IconButton(
+                      onPressed: () {
+                        deleteRoarText();
+                      },
+                      icon: const Icon(FontAwesomeIcons.trash),
+                    ),
+                  );
+                },
                 icon: const FaIcon(
                   FontAwesomeIcons.ellipsisVertical,
                   size: 18,
