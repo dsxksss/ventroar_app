@@ -343,8 +343,8 @@ class _RoarLikesState extends State<RoarLikes> {
         );
         if (response["statusCode"] == 200) {
           setState(() {
-            heart = response["data"]["result"]["heart"] ?? 88;
-            smil = response["data"]["result"]["smil"] ?? 88;
+            heart = response["data"]["result"]["heart"] ?? 0;
+            smil = response["data"]["result"]["smil"] ?? 0;
           });
           vSnackBar(
             showTime: const Duration(seconds: 1),
