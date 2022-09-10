@@ -1,12 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hive/hive.dart';
 import 'package:ventroar_app/functions/date_conversion.dart';
 import 'package:ventroar_app/global/widgets/avatar_widget.dart';
 
-import '../../schemas/user.dart';
 import '../../schemas/roar.dart';
 import '../../functions/vent_snack.dart';
 import '../../services/roar_http_lib.dart';
@@ -17,9 +16,14 @@ class RoarHeightSize {
 }
 
 class RoarWidget extends StatefulWidget {
-  const RoarWidget({Key? key, required this.roar, this.onPressed})
-      : super(key: key);
+  const RoarWidget({
+    Key? key,
+    this.onPressed,
+    required this.roar,
+    required this.roarsBox,
+  }) : super(key: key);
   final Roar roar;
+  final Box<Roar> roarsBox;
   final VoidCallback? onPressed;
   @override
   State<RoarWidget> createState() => _RoarWidgetState();
@@ -81,6 +85,7 @@ class _RoarWidgetState extends State<RoarWidget> {
                   //标题
                   RoarTitle(
                     id: widget.roar.id,
+                    roarsBox: widget.roarsBox,
                     userName: widget.roar.userName,
                     createDate: widget.roar.createDate,
                   ),
@@ -91,10 +96,8 @@ class _RoarWidgetState extends State<RoarWidget> {
                   ),
 
                   RoarLikes(
-                    id: widget.roar.id,
-                    heart: widget.roar.heart,
-                    smil: widget.roar.smil,
-                    commentCount: widget.roar.textCommentCount,
+                    roar: widget.roar,
+                    roarsBox: widget.roarsBox,
                   ),
                 ],
               ),
@@ -148,24 +151,34 @@ class RoarAvatar extends StatelessWidget {
   }
 }
 
-class RoarTitle extends StatelessWidget {
+class RoarTitle extends StatefulWidget {
   const RoarTitle({
     Key? key,
     required this.id,
     required this.userName,
     required this.createDate,
+    required this.roarsBox,
   }) : super(key: key);
 
   final String id;
+  final Box<Roar> roarsBox;
   final String userName;
   final int createDate;
 
   @override
+  State<RoarTitle> createState() => _RoarTitleState();
+}
+
+class _RoarTitleState extends State<RoarTitle> {
+  @override
   Widget build(BuildContext context) {
     Future deleteRoarText() async {
       try {
-        var response = await RoarHttpLib().deleteRoarText(deleteId: id);
+        var response = await RoarHttpLib().deleteRoarText(deleteId: widget.id);
         if (response["statusCode"] == 200) {
+          setState(() {
+            widget.roarsBox.delete(widget.id);
+          });
           vSnackBar(
             showTime: const Duration(seconds: 1),
             dismissDirection: DismissDirection.startToEnd,
@@ -230,14 +243,14 @@ class RoarTitle extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Text(
-            userName,
+            widget.userName,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.sp),
           ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                dateConversion(createDate),
+                dateConversion(widget.createDate),
                 style: TextStyle(fontSize: 15.sp, color: Colors.grey),
               ),
               IconButton(
@@ -306,45 +319,34 @@ class RoarContent extends StatelessWidget {
 class RoarLikes extends StatefulWidget {
   const RoarLikes({
     Key? key,
-    required this.id,
-    required this.heart,
-    required this.smil,
-    required this.commentCount,
+    required this.roar,
+    required this.roarsBox,
   }) : super(key: key);
 
-  final String id;
-  final int heart;
-  final int smil;
-  final int commentCount;
+  final Roar roar;
+  final Box<Roar> roarsBox;
 
   @override
   State<RoarLikes> createState() => _RoarLikesState();
 }
 
 class _RoarLikesState extends State<RoarLikes> {
-  late Box<User> box;
-  late int heart;
-  late int smil;
-  @override
-  void initState() {
-    super.initState();
-    box = Hive.box("userbox");
-    heart = widget.heart;
-    smil = widget.smil;
-  }
-
   @override
   Widget build(BuildContext context) {
     Future clickLike(String clickWho) async {
       try {
         var response = await RoarHttpLib().clickTextLikes(
-          likeId: widget.id,
+          likeId: widget.roar.id,
           likeWho: clickWho,
         );
         if (response["statusCode"] == 200) {
+          Roar newRoar = widget.roar;
+          newRoar.heart =
+              clickWho == "heart" ? widget.roar.heart + 1 : widget.roar.heart;
+          newRoar.smil =
+              clickWho == "smil" ? widget.roar.smil + 1 : widget.roar.smil;
           setState(() {
-            heart = response["data"]["result"]["heart"] ?? 0;
-            smil = response["data"]["result"]["smil"] ?? 0;
+            widget.roarsBox.put(widget.roar.id, newRoar);
           });
           vSnackBar(
             showTime: const Duration(seconds: 1),
@@ -411,12 +413,14 @@ class _RoarLikesState extends State<RoarLikes> {
               clickLike("heart");
             },
             icon: Icon(
-              heart <= 0 ? Icons.heart_broken_outlined : FontAwesomeIcons.heart,
-              size: heart <= 0 ? 26 : 21,
-              color: heart <= 0 ? Colors.grey : Colors.redAccent,
+              widget.roar.heart <= 0
+                  ? Icons.heart_broken_outlined
+                  : FontAwesomeIcons.heart,
+              size: widget.roar.heart <= 0 ? 26 : 21,
+              color: widget.roar.heart <= 0 ? Colors.grey : Colors.redAccent,
             ),
             label: Text(
-              heart <= 99 ? heart.toString() : "99+",
+              widget.roar.heart <= 99 ? widget.roar.heart.toString() : "99+",
               style: const TextStyle(
                 color: Colors.grey,
               ),
@@ -427,14 +431,14 @@ class _RoarLikesState extends State<RoarLikes> {
               clickLike("smil");
             },
             icon: Icon(
-              smil <= 0
+              widget.roar.smil <= 0
                   ? FontAwesomeIcons.faceSadTear
                   : FontAwesomeIcons.faceSmileBeam,
-              color: smil <= 0 ? Colors.grey : Colors.amberAccent,
+              color: widget.roar.smil <= 0 ? Colors.grey : Colors.amberAccent,
               size: 20,
             ),
             label: Text(
-              smil <= 99 ? smil.toString() : "99+",
+              widget.roar.smil <= 99 ? widget.roar.smil.toString() : "99+",
               style: const TextStyle(
                 color: Colors.grey,
               ),
@@ -445,11 +449,12 @@ class _RoarLikesState extends State<RoarLikes> {
             icon: Icon(
               FontAwesomeIcons.comment,
               size: 20,
-              color: widget.commentCount <= 0 ? Colors.grey : Colors.blue,
+              color:
+                  widget.roar.textCommentCount <= 0 ? Colors.grey : Colors.blue,
             ),
             label: Text(
-              widget.commentCount <= 99
-                  ? widget.commentCount.toString()
+              widget.roar.textCommentCount <= 99
+                  ? widget.roar.textCommentCount.toString()
                   : "99+",
               style: const TextStyle(
                 color: Colors.grey,

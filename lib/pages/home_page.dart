@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import '../functions/vent_snack.dart';
+import '../schemas/roar.dart';
 import 'pages_appbar/home_appbar.dart';
 import 'package:flutter/material.dart';
 import '../services/roar_http_lib.dart';
@@ -16,32 +17,23 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late final ScrollController _scrollController;
-  late Box<List<dynamic>> box;
-  late List<dynamic> _roars;
-
-  void getLocalData() {
-    _roars = box.get("homePageRoars") ?? [];
-  }
+  late Box<Roar> roarsBox;
 
   @override
   void initState() {
     super.initState();
     _scrollController = ScrollController();
-    box = Hive.box("roarsbox");
+    roarsBox = Hive.box("roarsbox");
     getAllRoar();
   }
 
   Future getAllRoar() async {
     try {
-      var response = await RoarHttpLib().getAllRoarText(box: box);
-      if (response["statusCode"] == 200) {
-        setState(() {
-          _roars = response["data"];
-        });
-      }
+      var response = await RoarHttpLib().getAllRoarText(box: roarsBox);
+      if (response["statusCode"] == 200) {}
     } on DioError catch (e) {
       vSnackBar(
-        showTime: const Duration(seconds: 60),
+        showTime: const Duration(seconds: 2),
         dismissDirection: DismissDirection.startToEnd,
         model: VSnackModel.error,
         isScroll: e.type != DioErrorType.connectTimeout && e.response != null
@@ -62,7 +54,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    getLocalData();
     return NestedScrollView(
       controller: _scrollController,
       floatHeaderSlivers: true, //只要有下滑手势就显示appbar
@@ -80,25 +71,28 @@ class _HomePageState extends State<HomePage> {
       ],
       body: RefreshIndicator(
         onRefresh: getAllRoar,
-        child: ListView.builder(
-          //确定每一个item的高度 会让item加载更加高效
-          //  itemExtent: 83,
-          //  primary: false,
-          itemCount: _roars.isEmpty ? 1 : _roars.length,
-          itemBuilder: (BuildContext context, int index) => _roars.isEmpty
-              ? SizedBox(
-                  width: 1.sw,
-                  height: 0.7.sh,
-                  child: const Center(
-                    child: Text("尝试下拉屏幕获取内容"),
-                  ),
-                )
-              : RoarWidget(roar: _roars[index]),
-          padding: EdgeInsets.fromLTRB(0, 0, 0, 0.2.sh),
-          physics: const AlwaysScrollableScrollPhysics(
-            //当内容不足时也可以启动反弹刷新
-            parent: BouncingScrollPhysics(),
-          ),
+        child: ValueListenableBuilder(
+          valueListenable: roarsBox.listenable(),
+          builder: (context, Box<Roar> box, _) {
+            List<Roar> roars = box.values.toList();
+            return ListView.builder(
+              itemCount: roars.isEmpty ? 1 : roars.length,
+              padding: EdgeInsets.fromLTRB(0, 0, 0, 0.2.sh),
+              physics: const AlwaysScrollableScrollPhysics(
+                //当内容不足时也可以启动反弹刷新
+                parent: BouncingScrollPhysics(),
+              ),
+              itemBuilder: (context, index) => roars.isEmpty
+                  ? SizedBox(
+                      width: 1.sw,
+                      height: 0.7.sh,
+                      child: const Center(
+                        child: Text("尝试下拉屏幕获取内容"),
+                      ),
+                    )
+                  : RoarWidget(roar: roars[index], roarsBox: roarsBox),
+            );
+          },
         ),
       ),
     );
