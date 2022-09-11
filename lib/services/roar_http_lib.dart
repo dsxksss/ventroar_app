@@ -12,6 +12,8 @@ class RoarHttpLib {
     response = await Services.instance.dio
         .then((value) => value.get(VentUrls.getAllRoarText));
     if (response.statusCode == 200) {
+      //获取新数据前先清理老数据
+      box.deleteAll(box.values.map((e) => e.id));
       int count = response.data["result"].length ?? 0;
       for (int i = 0; i < count; i++) {
         box.put(
