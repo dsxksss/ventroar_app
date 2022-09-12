@@ -22,24 +22,25 @@ class RoarAdapter extends TypeAdapter<Roar> {
       isPublic: fields[2] as bool?,
       isShowUserName: fields[3] as bool,
       isCanComment: fields[4] as bool,
-      likeUsers: (fields[5] as List?)?.cast<dynamic>(),
-      textImages: (fields[6] as List).cast<dynamic>(),
-      textComments: (fields[7] as List?)?.cast<RoarComment>(),
-      textCommentCount: fields[8] as int,
-      createDate: fields[9] as int,
-      smil: fields[10] as int,
-      heart: fields[11] as int,
-      userId: fields[12] as String,
-      userName: fields[13] as String,
-      userEmail: fields[14] as String,
-      userAvatarUrl: fields[15] as String,
+      smilLikeUsers: (fields[5] as List?)?.cast<dynamic>(),
+      heartLikeUsers: (fields[6] as List?)?.cast<dynamic>(),
+      textImages: (fields[7] as List).cast<dynamic>(),
+      textComments: (fields[8] as List?)?.cast<RoarComment>(),
+      textCommentCount: fields[9] as int,
+      createDate: fields[10] as int,
+      smil: fields[11] as int,
+      heart: fields[12] as int,
+      userId: fields[13] as String,
+      userName: fields[14] as String,
+      userEmail: fields[15] as String,
+      userAvatarUrl: fields[16] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, Roar obj) {
     writer
-      ..writeByte(16)
+      ..writeByte(17)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -51,26 +52,28 @@ class RoarAdapter extends TypeAdapter<Roar> {
       ..writeByte(4)
       ..write(obj.isCanComment)
       ..writeByte(5)
-      ..write(obj.likeUsers)
+      ..write(obj.smilLikeUsers)
       ..writeByte(6)
-      ..write(obj.textImages)
+      ..write(obj.heartLikeUsers)
       ..writeByte(7)
-      ..write(obj.textComments)
+      ..write(obj.textImages)
       ..writeByte(8)
-      ..write(obj.textCommentCount)
+      ..write(obj.textComments)
       ..writeByte(9)
-      ..write(obj.createDate)
+      ..write(obj.textCommentCount)
       ..writeByte(10)
-      ..write(obj.smil)
+      ..write(obj.createDate)
       ..writeByte(11)
-      ..write(obj.heart)
+      ..write(obj.smil)
       ..writeByte(12)
-      ..write(obj.userId)
+      ..write(obj.heart)
       ..writeByte(13)
-      ..write(obj.userName)
+      ..write(obj.userId)
       ..writeByte(14)
-      ..write(obj.userEmail)
+      ..write(obj.userName)
       ..writeByte(15)
+      ..write(obj.userEmail)
+      ..writeByte(16)
       ..write(obj.userAvatarUrl);
   }
 

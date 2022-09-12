@@ -21,36 +21,39 @@ class Roar extends HiveObject {
   bool isCanComment;
 
   @HiveField(5)
-  List<dynamic>? likeUsers;
+  List<dynamic>? smilLikeUsers;
 
   @HiveField(6)
-  List<dynamic> textImages;
+  List<dynamic>? heartLikeUsers;
 
   @HiveField(7)
-  List<RoarComment>? textComments;
+  List<dynamic> textImages;
 
   @HiveField(8)
-  int textCommentCount;
+  List<RoarComment>? textComments;
 
   @HiveField(9)
-  int createDate;
+  int textCommentCount;
 
   @HiveField(10)
-  int smil;
+  int createDate;
 
   @HiveField(11)
-  int heart;
+  int smil;
 
   @HiveField(12)
-  String userId;
+  int heart;
 
   @HiveField(13)
-  String userName;
+  String userId;
 
   @HiveField(14)
-  String userEmail;
+  String userName;
 
   @HiveField(15)
+  String userEmail;
+
+  @HiveField(16)
   String userAvatarUrl;
 
   Roar({
@@ -59,7 +62,8 @@ class Roar extends HiveObject {
     required this.isPublic,
     required this.isShowUserName,
     required this.isCanComment,
-    required this.likeUsers,
+    required this.smilLikeUsers,
+    required this.heartLikeUsers,
     required this.textImages,
     required this.textComments,
     required this.textCommentCount,
