@@ -6,6 +6,11 @@ import 'package:ventroar_app/page_routers.dart';
 import 'package:ventroar_app/pages/pages_appbar/star_appbar.dart';
 import 'package:ventroar_app/pages/pages_appbar/user_appbar.dart';
 import 'package:ventroar_app/pages/user_page.dart';
+import 'pages/pages_floatbutton/chat_floatbutton.dart';
+import 'pages/pages_floatbutton/home_floatbutton.dart';
+import 'pages/pages_floatbutton/star_floatbutton.dart';
+import 'pages/pages_floatbutton/user_floatbutton.dart';
+
 import './themes/dark_theme.dart';
 import './themes/light_theme.dart';
 import './pages/home_page.dart';
@@ -83,6 +88,13 @@ class _AppPageState extends State<AppPage> {
       150.0,
     ];
 
+    final List<Widget> _floatingButtons = [
+      const HomeFloatButton(),
+      const StarFloatButton(),
+      const ChatFloatButton(),
+      const UserFloatButton(),
+    ];
+
     return Builder(
       builder: (context) {
         return MediaQuery(
@@ -95,6 +107,8 @@ class _AppPageState extends State<AppPage> {
               color: Theme.of(context).backgroundColor,
               child: _pages[_selectedIndex],
             ),
+            floatingActionButton: _floatingButtons[_selectedIndex],
+            floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
             drawer: const VDrawer(),
             bottomNavigationBar: const VentRoarButtonBar(),
           ),
