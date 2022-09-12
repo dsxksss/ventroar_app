@@ -341,26 +341,11 @@ class _RoarLikesState extends State<RoarLikes> {
         );
         if (response["statusCode"] == 200) {
           Roar newRoar = widget.roar;
-          newRoar.heart =
-              clickWho == "heart" ? widget.roar.heart + 1 : widget.roar.heart;
-          newRoar.smil =
-              clickWho == "smil" ? widget.roar.smil + 1 : widget.roar.smil;
+          newRoar.smil = response["data"]["result"]["smil"];
+          newRoar.heart = response["data"]["result"]["heart"];
           setState(() {
             widget.roarsBox.put(widget.roar.id, newRoar);
           });
-          vSnackBar(
-            showTime: const Duration(seconds: 1),
-            dismissDirection: DismissDirection.startToEnd,
-            model: VSnackModel.success,
-            isScroll: false,
-            textWidget: Text(
-              "表达成功",
-              style: TextStyle(
-                  fontSize: 17.sp,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold),
-            ),
-          );
         }
       } on DioError catch (e) {
         if (e.response!.statusCode == 404) {

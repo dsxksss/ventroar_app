@@ -60,7 +60,7 @@ class RoarHttpLib {
           VentUrls.clickTextLikes,
           data: {
             "textId": likeId,
-            likeWho: true,
+            "likeWho": likeWho,
           },
           options: Options(
             headers: {"x-auth-token": user.authToken},
