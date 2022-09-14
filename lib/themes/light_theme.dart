@@ -21,7 +21,7 @@ ThemeData lightTheme(BuildContext context) {
         color: Colors.black,
       ),
       //背景色
-      backgroundColor: Colors.white60,
+      backgroundColor: Colors.grey.shade100,
       //前景色
       foregroundColor: VColors.black1,
     ),
@@ -41,9 +41,9 @@ ThemeData lightTheme(BuildContext context) {
     ),
 
     //画布色
-    canvasColor: Colors.white60,
+    canvasColor: Colors.grey.shade100,
     //背景色
-    backgroundColor: Colors.white60,
+    backgroundColor: Colors.grey.shade100,
     //水波色
     splashColor: Colors.grey.shade300,
     //高亮项内容色
@@ -62,11 +62,11 @@ ThemeData lightTheme(BuildContext context) {
       //景深或阴影深度
       elevation: 0,
       //选中色
-      selectedItemColor: Color.fromARGB(255, 230, 234, 236),
+      selectedItemColor: Color.fromARGB(255, 220, 225, 225),
       //未选中色
       unselectedItemColor: Colors.white,
       //背景色
-      backgroundColor: Color.fromRGBO(238, 243, 250, 1),
+      backgroundColor: Colors.white,
       //选中icon样式
       selectedIconTheme: null,
       //未选中icon样式
