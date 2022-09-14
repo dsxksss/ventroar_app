@@ -29,7 +29,7 @@ ThemeData darkTheme(BuildContext context) {
     //悬浮按钮样式
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
       //背景色
-      backgroundColor: Color.fromARGB(148, 0, 174, 243),
+      backgroundColor: Color.fromARGB(255, 2, 114, 159),
       //前景色
       foregroundColor: Colors.white,
     ),
