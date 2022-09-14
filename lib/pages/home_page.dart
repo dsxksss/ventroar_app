@@ -1,12 +1,13 @@
 import 'package:dio/dio.dart';
-import '../functions/vent_snack.dart';
-import '../schemas/roar.dart';
 import 'pages_appbar/home_appbar.dart';
 import 'package:flutter/material.dart';
-import '../services/roar_http_lib.dart';
-import '../global/widgets/roar_widget.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../schemas/roar.dart';
+import '../functions/vent_snack.dart';
+import '../services/roar_http_lib.dart';
+import '../global/widgets/roar_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -24,7 +25,6 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     _scrollController = ScrollController();
     roarsBox = Hive.box("roarsbox");
-    getAllRoar();
   }
 
   Future getAllRoar() async {

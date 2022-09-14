@@ -1,4 +1,6 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:ventroar_app/contexts/global_provider.dart';
@@ -6,6 +8,7 @@ import 'package:ventroar_app/page_routers.dart';
 import 'package:ventroar_app/pages/pages_appbar/star_appbar.dart';
 import 'package:ventroar_app/pages/pages_appbar/user_appbar.dart';
 import 'package:ventroar_app/pages/user_page.dart';
+import 'functions/vent_snack.dart';
 import 'pages/pages_floatbutton/chat_floatbutton.dart';
 import 'pages/pages_floatbutton/home_floatbutton.dart';
 import 'pages/pages_floatbutton/star_floatbutton.dart';
@@ -21,6 +24,8 @@ import './global/widgets/drawer.dart';
 import './global/widgets/ventroar_bottom_bar.dart';
 import './pages/pages_appbar/chat_appbar.dart';
 import './schemas/user.dart';
+import './schemas/roar.dart';
+import './services/roar_http_lib.dart';
 
 class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
@@ -64,6 +69,39 @@ class AppPage extends StatefulWidget {
 }
 
 class _AppPageState extends State<AppPage> {
+  late Box<Roar> roarsBox;
+  @override
+  void initState() {
+    super.initState();
+    roarsBox = Hive.box("roarsbox");
+    getAllRoar();
+  }
+
+  Future getAllRoar() async {
+    try {
+      var response = await RoarHttpLib().getAllRoarText(box: roarsBox);
+      if (response["statusCode"] == 200) {}
+    } on DioError catch (e) {
+      vSnackBar(
+        showTime: const Duration(seconds: 2),
+        dismissDirection: DismissDirection.startToEnd,
+        model: VSnackModel.error,
+        isScroll: e.type != DioErrorType.connectTimeout && e.response != null
+            ? true
+            : false,
+        textWidget: Text(
+          e.type == DioErrorType.connectTimeout
+              ? "网络超时,请检查网络重试!"
+              : e.response?.data["msg"] ?? "未连接网络,请检查后重试!",
+          style: TextStyle(
+              fontSize: 17.sp,
+              color: Colors.white,
+              fontWeight: FontWeight.bold),
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     int _selectedIndex = Provider.of<PageDataProvider>(context).selectedIndex;
