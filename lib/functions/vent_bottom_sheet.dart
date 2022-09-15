@@ -4,8 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 vBottomSheet({required BuildContext context}) {
   showModalBottomSheet(
     context: context,
+    elevation: 0.65.sh,
+    anchorPoint: const Offset(100, 100),
+    isScrollControlled: true,
     backgroundColor: Theme.of(context).backgroundColor,
-    isScrollControlled: false,
     shape: const RoundedRectangleBorder(
       //顶部圆角
       borderRadius: BorderRadius.vertical(
@@ -14,6 +16,8 @@ vBottomSheet({required BuildContext context}) {
     ),
     builder: (context) {
       return Container(
+        clipBehavior: Clip.none,
+        height: 0.65.sh,
         decoration: BoxDecoration(
           //顶部圆角
           borderRadius: const BorderRadius.vertical(
@@ -21,8 +25,26 @@ vBottomSheet({required BuildContext context}) {
           ),
           color: Theme.of(context).backgroundColor,
         ),
-        height: 0.5.sh,
-        child: const Text(""),
+        child: Stack(
+          clipBehavior: Clip.none,
+          alignment: AlignmentDirectional.center,
+          children: [
+            Positioned(
+              top: -0.013.sh,
+              child: Container(
+                decoration: BoxDecoration(
+                  //顶部圆角
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(99),
+                  ),
+                  color: Colors.grey.shade300,
+                ),
+                height: 0.01.sh,
+                width: 0.3.sw,
+              ),
+            ),
+          ],
+        ),
       );
     },
   );
