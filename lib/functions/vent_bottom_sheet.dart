@@ -11,16 +11,13 @@ vBottomSheet({
     isScrollControlled: true,
     clipBehavior: Clip.none,
     backgroundColor: Colors.transparent,
-    shape: const RoundedRectangleBorder(
-      //顶部圆角
-      borderRadius: BorderRadius.vertical(
-        top: Radius.circular(20),
-      ),
-    ),
     builder: (context) {
       return Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          SizedBox(
+            height: 0.02.sh,
+          ),
           Container(
             alignment: AlignmentDirectional.center,
             width: 1.sw,
