@@ -9,10 +9,11 @@ import 'package:ventroar_app/global/widgets/avatar_widget.dart';
 import '../../schemas/roar.dart';
 import '../../functions/vent_snack.dart';
 import '../../services/roar_http_lib.dart';
+import 'photo_widget.dart';
 
 class RoarHeightSize {
   static double minHeight = 0.05.sh;
-  static double maxHeight = 0.45.sh;
+  static double maxHeight = 0.6.sh;
 }
 
 class RoarWidget extends StatefulWidget {
@@ -93,6 +94,19 @@ class _RoarWidgetState extends State<RoarWidget> {
                   //内容
                   RoarContent(
                     text: widget.roar.text,
+                    //判断是否含有帖子图片
+                    //并且判断是否超出了缩略图的最大显示
+                    //如果超出了最大显示，则只显示前四张图片
+                    images: widget.roar.textImages.isNotEmpty
+                        ? widget.roar.textImages.length >= 4
+                            ? [
+                                widget.roar.textImages[0] as String,
+                                widget.roar.textImages[1] as String,
+                                widget.roar.textImages[2] as String,
+                                widget.roar.textImages[3] as String
+                              ]
+                            : widget.roar.textImages
+                        : [],
                   ),
 
                   RoarLikes(
@@ -292,25 +306,69 @@ class RoarContent extends StatelessWidget {
   const RoarContent({
     Key? key,
     required this.text,
+    required this.images,
   }) : super(key: key);
 
   final String text;
+  final List images;
   @override
   Widget build(BuildContext context) {
+    void openPhoto(int selectIndex) {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => PhotoWidget(
+            images: images,
+            selectIndex: selectIndex,
+          ),
+        ),
+      );
+    }
+
     return Container(
       // color: Colors.green,
       constraints: BoxConstraints(
         minWidth: 0.7.sw,
         maxWidth: 0.7.sw,
       ),
-      child: Text(
-        text,
-        maxLines: 12,
-        textAlign: TextAlign.start,
-        style: TextStyle(
-          fontSize: 13.sp,
-          overflow: TextOverflow.ellipsis,
-        ),
+      child: Column(
+        children: [
+          Text(
+            text,
+            //文字最大显示行数
+            maxLines: images.length <= 2 ? 5 : 8,
+            textAlign: TextAlign.start,
+            style: TextStyle(
+              fontSize: 13.sp,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+          Wrap(
+            direction: images.length <= 2 ? Axis.vertical : Axis.horizontal,
+            spacing: 5,
+            runSpacing: 5,
+            children: [
+              ...images.asMap().entries.map((e) {
+                return GestureDetector(
+                  child: Image(
+                    fit: BoxFit.cover,
+                    //只有两张图片显示宽度
+                    width: images.length <= 2 ? 0.7.sw : 0.34.sw,
+                    height: images.length <= 2
+                        ? images.length == 1
+                            ? 0.22.sh //只有一张图片显示高度
+                            : 0.18.sh //只有两张图片显示高度
+                        : 0.12.sh,
+                    image: NetworkImage(
+                        "https://ventroar.xyz:2548/images/${e.value}"),
+                  ),
+                  onTap: () {
+                    openPhoto(e.key);
+                  },
+                );
+              })
+            ],
+          )
+        ],
       ),
     );
   }
