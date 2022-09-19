@@ -15,7 +15,7 @@ import 'photo_widget.dart';
 
 class RoarHeightSize {
   static double minHeight = 0.05.sh;
-  static double maxHeight = 0.6.sh;
+  static double maxHeight = 0.7.sh;
 }
 
 class RoarWidget extends StatefulWidget {
