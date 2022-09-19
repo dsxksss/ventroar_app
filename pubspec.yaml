@@ -67,7 +67,7 @@ dependencies:
   #对图片的放大或手势操控插件
   photo_view: ^0.14.0
   #缓存网络图片至本地插件(数据超时未使用自动删除)
-  cached_network_image: ^3.2.2
+  cached_network_image: ^3.2.1
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2

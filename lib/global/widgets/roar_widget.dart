@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive/hive.dart';
 import 'package:ventroar_app/functions/date_conversion.dart';
 import 'package:ventroar_app/global/widgets/avatar_widget.dart';
+import 'package:ventroar_app/widgets/wait_animation.dart';
 
 import '../../schemas/roar.dart';
 import '../../functions/vent_snack.dart';
@@ -343,31 +344,50 @@ class RoarContent extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
             ),
           ),
-          Wrap(
-            direction: images.length <= 2 ? Axis.vertical : Axis.horizontal,
-            spacing: 5,
-            runSpacing: 5,
-            children: [
-              ...images.asMap().entries.map((e) {
-                return GestureDetector(
-                  child: Image(
-                    fit: BoxFit.cover,
-                    //只有两张图片显示宽度
-                    width: images.length <= 2 ? 0.7.sw : 0.34.sw,
-                    height: images.length <= 2
-                        ? images.length == 1
-                            ? 0.22.sh //只有一张图片显示高度
-                            : 0.18.sh //只有两张图片显示高度
-                        : 0.12.sh,
-                    image: CachedNetworkImageProvider(
-                        "https://ventroar.xyz:2548/images/${e.value}"),
-                  ),
-                  onTap: () {
-                    openPhoto(e.key);
+          Container(
+            clipBehavior: Clip.antiAlias,
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.all(
+                Radius.circular(10),
+              ),
+            ),
+            child: Wrap(
+              spacing: 2,
+              runSpacing: 2,
+              direction: images.length <= 2 ? Axis.vertical : Axis.horizontal,
+              children: [
+                ...images.asMap().entries.map(
+                  (e) {
+                    return GestureDetector(
+                      child: CachedNetworkImage(
+                        placeholderFadeInDuration:
+                            const Duration(milliseconds: 100),
+                        fadeInDuration: const Duration(milliseconds: 100),
+                        fadeOutDuration: const Duration(milliseconds: 300),
+                        //载入widget
+                        placeholder: (context, url) =>
+                            const WaitAnimation(height: 60, width: 60),
+                        //出错widget
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error_outline_outlined),
+                        fit: BoxFit.cover,
+                        //只有两张图片显示宽度
+                        width: images.length <= 2 ? 0.7.sw : 0.34.sw,
+                        height: images.length <= 2
+                            ? images.length == 1
+                                ? 0.22.sh //只有一张图片显示高度
+                                : 0.18.sh //只有两张图片显示高度
+                            : 0.12.sh,
+                        imageUrl: "https://ventroar.xyz:2548/images/${e.value}",
+                      ),
+                      onTap: () {
+                        openPhoto(e.key);
+                      },
+                    );
                   },
-                );
-              })
-            ],
+                )
+              ],
+            ),
           )
         ],
       ),
