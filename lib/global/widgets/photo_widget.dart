@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
@@ -33,7 +34,7 @@ class _PhotoWidgetState extends State<PhotoWidget> {
             //捏合图片最小缩放和最大缩放
             minScale: PhotoViewComputedScale.contained,
             maxScale: PhotoViewComputedScale.contained * 4,
-            imageProvider: NetworkImage(
+            imageProvider: CachedNetworkImageProvider(
                 "https://ventroar.xyz:2548/images/${widget.images[index]}"),
           );
         },

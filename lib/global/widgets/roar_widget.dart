@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -358,7 +359,7 @@ class RoarContent extends StatelessWidget {
                             ? 0.22.sh //只有一张图片显示高度
                             : 0.18.sh //只有两张图片显示高度
                         : 0.12.sh,
-                    image: NetworkImage(
+                    image: CachedNetworkImageProvider(
                         "https://ventroar.xyz:2548/images/${e.value}"),
                   ),
                   onTap: () {
