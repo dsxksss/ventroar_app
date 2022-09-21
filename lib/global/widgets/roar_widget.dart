@@ -269,7 +269,7 @@ class _RoarTitleState extends State<RoarTitle> {
                 "@",
                 style: TextStyle(
                   fontSize: 19.sp,
-                  color: Colors.blue.shade100,
+                  color: const Color.fromARGB(255, 45, 137, 184),
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -279,7 +279,6 @@ class _RoarTitleState extends State<RoarTitle> {
                   widget.userName,
                   style: TextStyle(
                     fontSize: 17.sp,
-                    color: Colors.grey.shade300,
                     fontWeight: FontWeight.bold,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -292,7 +291,9 @@ class _RoarTitleState extends State<RoarTitle> {
             children: [
               Text(
                 dateConversion(widget.createDate),
-                style: TextStyle(fontSize: 15.sp, color: Colors.grey),
+                style: TextStyle(
+                    fontSize: 15.5.sp,
+                    color: const Color.fromARGB(255, 114, 126, 132)),
               ),
               IconButton(
                 padding: EdgeInsets.fromLTRB(0.03.sw, 0, 0.03.sw, 0),
