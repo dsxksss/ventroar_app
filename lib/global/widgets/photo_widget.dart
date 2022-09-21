@@ -57,7 +57,7 @@ class _PhotoWidgetState extends State<PhotoWidget> {
             },
           ),
           Positioned(
-            top: 0.075.sh,
+            top: 0.06.sh,
             child: Container(
               width: 1.sw,
               padding: EdgeInsets.fromLTRB(0.02.sw, 0, 0.02.sw, 0),
