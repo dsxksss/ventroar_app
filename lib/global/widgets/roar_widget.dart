@@ -262,9 +262,26 @@ class _RoarTitleState extends State<RoarTitle> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          Text(
-            widget.userName,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.sp),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(
+                "@",
+                style: TextStyle(
+                  fontSize: 19.sp,
+                  color: Colors.blue.shade100,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                widget.userName,
+                style: TextStyle(
+                  fontSize: 17.sp,
+                  color: Colors.grey.shade300,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
           ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
