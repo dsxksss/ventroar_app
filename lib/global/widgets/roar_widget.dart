@@ -93,6 +93,10 @@ class _RoarWidgetState extends State<RoarWidget> {
                     createDate: widget.roar.createDate,
                   ),
 
+                  SizedBox(
+                    height: 0.005.sh,
+                  ),
+
                   //内容
                   RoarContent(
                     text: widget.roar.text,
@@ -344,14 +348,14 @@ class RoarContent extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
             ),
           ),
-          const SizedBox(
-            height: 10,
+          SizedBox(
+            height: 0.01.sh,
           ),
           Container(
             clipBehavior: Clip.antiAlias,
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               borderRadius: BorderRadius.all(
-                Radius.circular(10),
+                Radius.circular(images.length == 3 ? 3 : 10),
               ),
             ),
             child: Wrap(
