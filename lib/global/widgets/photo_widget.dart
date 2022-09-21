@@ -1,5 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
@@ -15,29 +17,64 @@ class PhotoWidget extends StatefulWidget {
 }
 
 class _PhotoWidgetState extends State<PhotoWidget> {
-  late int _index = widget.selectIndex;
+  late int selectIndex = widget.selectIndex;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 45,
-        title: Text("${_index + 1} - ${widget.images.length}"),
-      ),
-      body: PhotoViewGallery.builder(
-        pageController: widget.pageController,
-        itemCount: widget.images.length,
-        onPageChanged: (index) => setState(() {
-          _index = index;
-        }),
-        builder: (context, index) {
-          return PhotoViewGalleryPageOptions(
-            //捏合图片最小缩放和最大缩放
-            minScale: PhotoViewComputedScale.contained,
-            maxScale: PhotoViewComputedScale.contained * 4,
-            imageProvider: CachedNetworkImageProvider(
-                "https://ventroar.xyz:2548/images/${widget.images[index]}"),
-          );
-        },
+      body: Stack(
+        children: [
+          PhotoViewGallery.builder(
+            pageController: widget.pageController,
+            itemCount: widget.images.length,
+            onPageChanged: (index) => setState(() {
+              selectIndex = index;
+            }),
+            builder: (context, index) {
+              return PhotoViewGalleryPageOptions(
+                //捏合图片最小缩放和最大缩放
+                minScale: PhotoViewComputedScale.contained,
+                maxScale: PhotoViewComputedScale.contained * 4,
+                imageProvider: CachedNetworkImageProvider(
+                    "https://ventroar.xyz:2548/images/${widget.images[index]}"),
+              );
+            },
+          ),
+          Positioned(
+            top: 0.075.sh,
+            child: Container(
+              width: 1.sw,
+              padding: EdgeInsets.fromLTRB(0.02.sw, 0, 0.02.sw, 0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    icon: const Icon(
+                      FontAwesomeIcons.arrowLeft,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Text(
+                    "${selectIndex + 1} - ${widget.images.length}",
+                    style: TextStyle(
+                      fontSize: 20.sp,
+                      color: Colors.white,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      FontAwesomeIcons.ellipsisVertical,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          )
+        ],
       ),
     );
   }
