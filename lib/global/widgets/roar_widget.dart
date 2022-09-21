@@ -273,12 +273,16 @@ class _RoarTitleState extends State<RoarTitle> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Text(
-                widget.userName,
-                style: TextStyle(
-                  fontSize: 17.sp,
-                  color: Colors.grey.shade300,
-                  fontWeight: FontWeight.bold,
+              SizedBox(
+                width: 0.26.sw,
+                child: Text(
+                  widget.userName,
+                  style: TextStyle(
+                    fontSize: 17.sp,
+                    color: Colors.grey.shade300,
+                    fontWeight: FontWeight.bold,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
               ),
             ],
