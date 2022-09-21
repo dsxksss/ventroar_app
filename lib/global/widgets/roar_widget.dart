@@ -344,6 +344,9 @@ class RoarContent extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
             ),
           ),
+          const SizedBox(
+            height: 10,
+          ),
           Container(
             clipBehavior: Clip.antiAlias,
             decoration: const BoxDecoration(
