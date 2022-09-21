@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:photo_view/photo_view.dart';
@@ -18,6 +19,22 @@ class PhotoWidget extends StatefulWidget {
 
 class _PhotoWidgetState extends State<PhotoWidget> {
   late int selectIndex = widget.selectIndex;
+  @override
+  void initState() {
+    super.initState();
+    //隐藏状态栏，保留底部按钮栏
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: [SystemUiOverlay.bottom]);
+  }
+
+  @override
+  void dispose() {
+    //显示状态栏、底部按钮栏
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: SystemUiOverlay.values);
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
