@@ -14,7 +14,7 @@ class HomeFloatButton extends StatelessWidget {
         vBottomSheet(
           context: context,
           content: const PostRoarWidget(),
-          height: 0.65.sh,
+          height: 0.70.sh,
         );
       },
       child: const Icon(Icons.edit),
