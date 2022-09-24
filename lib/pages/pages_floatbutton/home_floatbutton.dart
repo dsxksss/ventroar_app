@@ -15,7 +15,6 @@ class HomeFloatButton extends StatelessWidget {
           height: 0.70.sh,
           isEnableDrag: false,
           isShowDragWidget: false,
-          isDismissible: false,
           context: context,
           content: const PostRoarWidget(),
         );
