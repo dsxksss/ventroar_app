@@ -1,6 +1,6 @@
 ## pub.dev/packages
 
-| pub:package             | versions | TODO                    |
+| pub:package             | versions | 插件功能                    |
 | ----------------------- | -------- | ----------------------- |
 | [provider]              | ^6.0.3   | flutter官方推荐的状态管理插件      |
 | [dio]                   | ^4.0.6   | http请求库                 |
