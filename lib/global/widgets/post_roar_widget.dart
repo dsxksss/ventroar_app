@@ -50,13 +50,15 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all(
                     RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18.67),
+                      borderRadius: BorderRadius.circular(20),
                     ),
                   ),
                 ),
                 child: const Text(
                   "发 帖",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               )
             ],
@@ -73,8 +75,8 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
                 width: 40,
                 height: 40,
                 child: AvatarWidget(
-                  avatarUrl: userBox.get("my")!.avatarUrl,
-                  userName: userBox.get("my")!.name,
+                  avatarUrl: userBox.get("my")?.avatarUrl ?? "null",
+                  userName: userBox.get("my")?.name ?? "null",
                 ),
               ),
             ],

@@ -12,9 +12,12 @@ class HomeFloatButton extends StatelessWidget {
     return FloatingActionButton(
       onPressed: () {
         vBottomSheet(
+          height: 0.70.sh,
+          isEnableDrag: false,
+          isShowDragWidget: false,
+          isDismissible: false,
           context: context,
           content: const PostRoarWidget(),
-          height: 0.70.sh,
         );
       },
       child: const Icon(Icons.edit),
