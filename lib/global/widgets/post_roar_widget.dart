@@ -14,11 +14,39 @@ class PostRoarWidget extends StatefulWidget {
 
 class _PostRoarWidgetState extends State<PostRoarWidget> {
   late Box<User> userBox;
+  TextEditingController textEditingController = TextEditingController();
+  String contentText = "";
 
   @override
   void initState() {
     super.initState();
     userBox = Hive.box("userbox");
+  }
+
+  Future<bool> closePostRoar(BuildContext context) async {
+    bool? exit = await showDialog(
+      context: context,
+      builder: (isCanExit) => AlertDialog(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(10),
+          ),
+        ),
+        title: const Text("提示"),
+        content: const Text("内容已编辑,但未发布,你确定要离开吗?"),
+        actions: [
+          ElevatedButton(
+            onPressed: () => Navigator.of(isCanExit).pop(true),
+            child: const Text("确定"),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.of(isCanExit).pop(false),
+            child: const Text("取消"),
+          ),
+        ],
+      ),
+    );
+    return exit ?? false;
   }
 
   @override
@@ -53,6 +81,7 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
                       borderRadius: BorderRadius.circular(20),
                     ),
                   ),
+                  elevation: MaterialStateProperty.all(0),
                 ),
                 child: const Text(
                   "发 帖",
@@ -79,8 +108,55 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
                   userName: userBox.get("my")?.name ?? "null",
                 ),
               ),
+              SizedBox(
+                width: 0.03.sw,
+              ),
             ],
           ),
+          SizedBox(
+            width: 0.9.sw,
+            height: 0.53.sh,
+            child: Column(
+              children: [
+                TextField(
+                  controller: textEditingController,
+                  onChanged: (string) => setState(() {
+                    contentText = string;
+                  }),
+                  //自动补全
+                  autocorrect: false,
+                  //光标高度
+                  cursorHeight: 20,
+                  //最小字行
+                  minLines: 1,
+                  //最大字行
+                  maxLines: 12,
+                  scrollPadding: EdgeInsets.zero,
+                  style: TextStyle(fontSize: 16.sp),
+                  decoration: InputDecoration(
+                    //提示文字样式
+                    hintStyle: TextStyle(fontSize: 18.sp),
+                    hintText: " 随便说些什么吧",
+                    //取消下边框线
+                    border: InputBorder.none,
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      "${contentText.length.toString()} / 500",
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                        color:
+                            contentText.length > 500 ? Colors.redAccent : null,
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          )
         ],
       ),
     );
