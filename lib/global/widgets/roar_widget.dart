@@ -274,7 +274,7 @@ class _RoarTitleState extends State<RoarTitle> {
                 ),
               ),
               SizedBox(
-                width: 0.26.sw,
+                width: 0.24.sw,
                 child: Text(
                   widget.userName,
                   style: TextStyle(
