@@ -113,21 +113,52 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
             height: 0.01.sh,
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(
-                width: 0.01.sw,
+              Row(
+                children: [
+                  SizedBox(
+                    width: 0.03.sw,
+                  ),
+                  SizedBox(
+                    width: 0.1.sw,
+                    height: 0.045.sh,
+                    child: AvatarWidget(
+                      avatarUrl: userBox.get("my")?.avatarUrl ?? "null",
+                      userName: userBox.get("my")?.name ?? "null",
+                    ),
+                  ),
+                ],
               ),
-              SizedBox(
-                width: 40,
-                height: 40,
-                child: AvatarWidget(
-                  avatarUrl: userBox.get("my")?.avatarUrl ?? "null",
-                  userName: userBox.get("my")?.name ?? "null",
-                ),
-              ),
-              SizedBox(
-                width: 0.03.sw,
-              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  SizedBox(
+                    width: 0.052.sw,
+                    height: 0.024.sh,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 3,
+                      //计算填充度
+                      value: 500 * contentText.length * 4 / 1000000,
+                      backgroundColor: Colors.blueGrey,
+                      color: contentText.length > 500 ? Colors.redAccent : null,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 0.02.sw,
+                  ),
+                  Text(
+                    "/ 500",
+                    style: TextStyle(
+                      fontSize: 17.sp,
+                      color: contentText.length > 500 ? Colors.redAccent : null,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 0.03.sw,
+                  ),
+                ],
+              )
             ],
           ),
           SizedBox(
@@ -158,19 +189,6 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
                     border: InputBorder.none,
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      "${contentText.length.toString()} / 500",
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        color:
-                            contentText.length > 500 ? Colors.redAccent : null,
-                      ),
-                    ),
-                  ],
-                )
               ],
             ),
           )
