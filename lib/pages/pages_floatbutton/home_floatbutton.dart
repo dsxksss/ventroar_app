@@ -14,6 +14,7 @@ class HomeFloatButton extends StatelessWidget {
         vBottomSheet(
           height: 0.70.sh,
           isEnableDrag: false,
+          isDismissible: false,
           isShowDragWidget: false,
           context: context,
           content: const PostRoarWidget(),

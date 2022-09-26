@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
+import 'package:ventroar_app/functions/vent_dialog.dart';
 import 'package:ventroar_app/global/widgets/avatar_widget.dart';
 
 import '../../schemas/user.dart';
@@ -35,7 +36,49 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
             children: [
               IconButton(
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  if (contentText.isNotEmpty) {
+                    vDialog(
+                      context: context,
+                      title: Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Icon(
+                            Icons.warning_amber_rounded,
+                            color: Colors.amber[800],
+                            size: 32.sp,
+                          ),
+                          Text(
+                            " 注 意",
+                            style: Theme.of(context).textTheme.headline3,
+                          ),
+                        ],
+                      ),
+                      contene: Text(
+                        "已编辑内容还未发布,退出会重新编辑,确定退出嘛?",
+                        style: Theme.of(context).textTheme.headline6,
+                      ),
+                      bottom: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text("确定"),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text("取消"),
+                          ),
+                        ],
+                      ),
+                    );
+                  } else {
+                    Navigator.of(context).pop();
+                  }
                 },
                 //去除按钮水波纹效果
                 splashColor: Colors.transparent,
@@ -94,8 +137,8 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
               children: [
                 TextField(
                   controller: textEditingController,
-                  onChanged: (string) => setState(() {
-                    contentText = string;
+                  onChanged: (text) => setState(() {
+                    contentText = text;
                   }),
                   //自动补全
                   autocorrect: false,
