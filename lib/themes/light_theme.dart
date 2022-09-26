@@ -62,11 +62,11 @@ ThemeData lightTheme(BuildContext context) {
       //景深或阴影深度
       elevation: 0,
       //选中色
-      selectedItemColor: Color.fromARGB(255, 220, 225, 225),
+      selectedItemColor: Color.fromARGB(255, 0, 174, 243),
       //未选中色
       unselectedItemColor: Colors.white,
       //背景色
-      backgroundColor: Colors.white,
+      backgroundColor: Color.fromARGB(255, 0, 174, 243),
       //选中icon样式
       selectedIconTheme: null,
       //未选中icon样式

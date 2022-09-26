@@ -74,10 +74,12 @@ class _DarkAppBarState extends State<DarkAppBar> {
         Icon(
           Icons.home,
           size: widget.index == 0 ? 31 : 27,
+          color: Colors.white,
         ),
         Icon(
           Icons.star_rounded,
           size: widget.index == 1 ? 31 : 27,
+          color: Colors.white,
         ),
         //FIXED:以下代码都是为了修复第三方图标的错误样式
         Padding(
@@ -85,11 +87,13 @@ class _DarkAppBarState extends State<DarkAppBar> {
           child: FaIcon(
             FontAwesomeIcons.solidComments,
             size: widget.index == 2 ? 24 : 20,
+            color: Colors.white,
           ),
         ),
         Icon(
           Icons.person,
           size: widget.index == 3 ? 31 : 27,
+          color: Colors.white,
         ),
       ],
       onTap: (index) {
