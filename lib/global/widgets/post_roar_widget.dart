@@ -140,10 +140,10 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
                       strokeWidth: 3,
                       //计算填充度
                       value: 500 * contentText.length * 4 / 1000000,
-                      backgroundColor: const Color.fromARGB(255, 128, 150, 161),
+                      backgroundColor: const Color.fromARGB(255, 154, 169, 177),
                       color: contentText.length > 500
                           ? Colors.redAccent
-                          : Colors.lightBlue,
+                          : const Color.fromARGB(255, 79, 193, 245),
                     ),
                   ),
                   SizedBox(
