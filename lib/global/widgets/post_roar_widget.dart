@@ -23,32 +23,6 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
     userBox = Hive.box("userbox");
   }
 
-  Future<bool> closePostRoar(BuildContext context) async {
-    bool? exit = await showDialog(
-      context: context,
-      builder: (isCanExit) => AlertDialog(
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(10),
-          ),
-        ),
-        title: const Text("提示"),
-        content: const Text("内容已编辑,但未发布,你确定要离开吗?"),
-        actions: [
-          ElevatedButton(
-            onPressed: () => Navigator.of(isCanExit).pop(true),
-            child: const Text("确定"),
-          ),
-          ElevatedButton(
-            onPressed: () => Navigator.of(isCanExit).pop(false),
-            child: const Text("取消"),
-          ),
-        ],
-      ),
-    );
-    return exit ?? false;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
