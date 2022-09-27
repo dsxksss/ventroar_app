@@ -44,6 +44,8 @@ class DarkAppBar extends StatefulWidget {
 }
 
 class _DarkAppBarState extends State<DarkAppBar> {
+  late int selectedIndex = widget.index;
+
   @override
   Widget build(BuildContext context) {
     return CurvedNavigationBar(
@@ -71,32 +73,41 @@ class _DarkAppBarState extends State<DarkAppBar> {
       },
 
       items: [
-        Icon(
-          Icons.home,
-          size: widget.index == 0 ? 31 : 27,
-          color: Colors.white,
-        ),
-        Icon(
-          Icons.star_rounded,
-          size: widget.index == 1 ? 31 : 27,
-          color: Colors.white,
-        ),
+        Icon(Icons.home,
+            size: widget.index == 0 ? 31 : 27,
+            color: widget.isDark
+                ? null
+                : selectedIndex == 0
+                    ? Colors.white
+                    : Colors.black),
+        Icon(Icons.star_rounded,
+            size: widget.index == 1 ? 31 : 27,
+            color: widget.isDark
+                ? null
+                : selectedIndex == 1
+                    ? Colors.white
+                    : Colors.black),
         //FIXED:以下代码都是为了修复第三方图标的错误样式
         Padding(
           padding: const EdgeInsets.all(4.0),
-          child: FaIcon(
-            FontAwesomeIcons.solidComments,
-            size: widget.index == 2 ? 24 : 20,
-            color: Colors.white,
-          ),
+          child: FaIcon(FontAwesomeIcons.solidComments,
+              size: widget.index == 2 ? 24 : 20,
+              color: widget.isDark
+                  ? null
+                  : selectedIndex == 2
+                      ? Colors.white
+                      : Colors.black),
         ),
-        Icon(
-          Icons.person,
-          size: widget.index == 3 ? 31 : 27,
-          color: Colors.white,
-        ),
+        Icon(Icons.person,
+            size: widget.index == 3 ? 31 : 27,
+            color: widget.isDark
+                ? null
+                : selectedIndex == 3
+                    ? Colors.white
+                    : Colors.black),
       ],
       onTap: (index) {
+        selectedIndex = index;
         widget.onTap(index);
       },
     );

@@ -64,9 +64,9 @@ ThemeData lightTheme(BuildContext context) {
       //选中色
       selectedItemColor: Color.fromARGB(255, 0, 174, 243),
       //未选中色
-      unselectedItemColor: Colors.white,
+      unselectedItemColor: Colors.grey,
       //背景色
-      backgroundColor: Color.fromARGB(255, 0, 174, 243),
+      backgroundColor: Colors.white,
       //选中icon样式
       selectedIconTheme: null,
       //未选中icon样式
