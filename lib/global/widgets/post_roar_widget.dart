@@ -17,6 +17,9 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
   late Box<User> userBox;
   TextEditingController textEditingController = TextEditingController();
   String contentText = "";
+  bool isPublic = true;
+  bool isCanComment = true;
+  bool isShowUserName = true;
 
   @override
   void initState() {
@@ -87,6 +90,29 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
                   size: 30.sp,
                 ),
               ),
+              Row(
+                children: [
+                  SizedBox(
+                    width: 0.1.sw,
+                    height: 0.045.sh,
+                    child: AvatarWidget(
+                      avatarUrl: userBox.get("my")?.avatarUrl ?? "null",
+                      userName: userBox.get("my")?.name ?? "null",
+                    ),
+                  ),
+                  SizedBox(
+                    width: 0.02.sw,
+                  ),
+                  Text(
+                    "发布帖子",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
               ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).pop();
@@ -113,54 +139,126 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
             height: 0.01.sh,
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
                 children: [
                   SizedBox(
-                    width: 0.03.sw,
+                    width: 0.035.sw,
                   ),
-                  SizedBox(
-                    width: 0.1.sw,
-                    height: 0.045.sh,
-                    child: AvatarWidget(
-                      avatarUrl: userBox.get("my")?.avatarUrl ?? "null",
-                      userName: userBox.get("my")?.name ?? "null",
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      SizedBox(
+                        width: 0.052.sw,
+                        height: 0.024.sh,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 3,
+                          //计算填充度
+                          value: 500 * contentText.length * 4 / 1000000,
+                          backgroundColor:
+                              const Color.fromARGB(255, 154, 169, 177),
+                          color: contentText.length > 500
+                              ? Colors.redAccent
+                              : const Color.fromARGB(255, 79, 193, 245),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 0.02.sw,
+                      ),
+                      Text(
+                        "/ 500",
+                        style: TextStyle(
+                          fontSize: 17.sp,
+                          color: contentText.length > 500
+                              ? Colors.redAccent
+                              : null,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 0.03.sw,
+                      ),
+                    ],
                   ),
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  SizedBox(
-                    width: 0.052.sw,
-                    height: 0.024.sh,
-                    child: CircularProgressIndicator(
-                      strokeWidth: 3,
-                      //计算填充度
-                      value: 500 * contentText.length * 4 / 1000000,
-                      backgroundColor: const Color.fromARGB(255, 154, 169, 177),
-                      color: contentText.length > 500
-                          ? Colors.redAccent
-                          : const Color.fromARGB(255, 79, 193, 245),
+              SizedBox(
+                width: 0.67.sw,
+                height: 0.05.sh,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    FilterChip(
+                      selected: isPublic,
+                      showCheckmark: false,
+                      checkmarkColor: Colors.white,
+                      selectedColor: Colors.lightBlue,
+                      backgroundColor: Colors.grey,
+                      label: Text(
+                        isPublic ? "内容公开" : "内容私密",
+                        style: const TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold),
+                      ),
+                      elevation: 1,
+                      pressElevation: 1,
+                      onSelected: (value) {
+                        setState(
+                          () {
+                            isPublic = value;
+                          },
+                        );
+                      },
                     ),
-                  ),
-                  SizedBox(
-                    width: 0.02.sw,
-                  ),
-                  Text(
-                    "/ 500",
-                    style: TextStyle(
-                      fontSize: 17.sp,
-                      color: contentText.length > 500 ? Colors.redAccent : null,
+                    SizedBox(
+                      width: 0.02.sw,
                     ),
-                  ),
-                  SizedBox(
-                    width: 0.03.sw,
-                  ),
-                ],
-              )
+                    FilterChip(
+                      selected: isCanComment,
+                      showCheckmark: false,
+                      checkmarkColor: Colors.white,
+                      selectedColor: Colors.lightBlue,
+                      backgroundColor: Colors.grey,
+                      label: Text(
+                        isCanComment ? "可被评论" : "不被评论",
+                        style: const TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold),
+                      ),
+                      elevation: 1,
+                      pressElevation: 1,
+                      onSelected: (value) {
+                        setState(
+                          () {
+                            isCanComment = value;
+                          },
+                        );
+                      },
+                    ),
+                    SizedBox(
+                      width: 0.02.sw,
+                    ),
+                    FilterChip(
+                      selected: isShowUserName,
+                      showCheckmark: false,
+                      checkmarkColor: Colors.white,
+                      selectedColor: Colors.lightBlue,
+                      backgroundColor: Colors.grey,
+                      label: Text(
+                        isShowUserName ? "显示昵称" : "显示匿名",
+                        style: const TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold),
+                      ),
+                      elevation: 1,
+                      pressElevation: 1,
+                      onSelected: (value) {
+                        setState(
+                          () {
+                            isShowUserName = value;
+                          },
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
           SizedBox(
