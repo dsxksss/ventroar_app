@@ -188,7 +188,7 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
                   children: [
                     FilterChip(
                       selected: isPublic,
-                      showCheckmark: false,
+                      showCheckmark: true,
                       checkmarkColor: Colors.white,
                       selectedColor: Colors.lightBlue,
                       backgroundColor: Colors.grey,
@@ -212,7 +212,7 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
                     ),
                     FilterChip(
                       selected: isCanComment,
-                      showCheckmark: false,
+                      showCheckmark: true,
                       checkmarkColor: Colors.white,
                       selectedColor: Colors.lightBlue,
                       backgroundColor: Colors.grey,
@@ -236,7 +236,7 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
                     ),
                     FilterChip(
                       selected: isShowUserName,
-                      showCheckmark: false,
+                      showCheckmark: true,
                       checkmarkColor: Colors.white,
                       selectedColor: Colors.lightBlue,
                       backgroundColor: Colors.grey,
