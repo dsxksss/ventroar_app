@@ -123,6 +123,7 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
                       borderRadius: BorderRadius.circular(20),
                     ),
                   ),
+                  backgroundColor: MaterialStateProperty.all(Colors.lightBlue),
                   elevation: MaterialStateProperty.all(0),
                 ),
                 child: const Text(
