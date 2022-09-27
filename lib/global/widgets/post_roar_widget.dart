@@ -106,8 +106,7 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
                   Text(
                     "发布帖子",
                     style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18.sp,
+                      fontSize: 16.sp,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
