@@ -15,8 +15,8 @@ class VentRoarButtonBar extends StatefulWidget {
 class _VentRoarButtonBarState extends State<VentRoarButtonBar> {
   @override
   Widget build(BuildContext context) {
-    bool isDark = Provider.of<ThemeProvider>(context).isDark;
-    int selectedIndex = Provider.of<PageDataProvider>(context).selectedIndex;
+    bool isDark = context.watch<ThemeProvider>().isDark;
+    int selectedIndex = context.watch<PageDataProvider>().selectedIndex;
     Function changePageIndex =
         Provider.of<PageDataProvider>(context, listen: false).changePageIndex;
     return DarkAppBar(
@@ -107,7 +107,9 @@ class _DarkAppBarState extends State<DarkAppBar> {
                     : Colors.black),
       ],
       onTap: (index) {
-        selectedIndex = index;
+        setState(() {
+          selectedIndex = index;
+        });
         widget.onTap(index);
       },
     );
