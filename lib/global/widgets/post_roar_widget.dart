@@ -186,6 +186,10 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
                 height: 0.05.sh,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
+                  physics: const AlwaysScrollableScrollPhysics(
+                    //当内容不足时也可以启动反弹刷新
+                    parent: BouncingScrollPhysics(),
+                  ),
                   children: [
                     FilterChip(
                       selected: isPublic,
