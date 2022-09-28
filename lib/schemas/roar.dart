@@ -1,5 +1,4 @@
 import 'package:hive/hive.dart';
-import 'roar_comment.dart';
 //flutter packages pub run build_runner build 记得使用此命令生成文件
 part "roar.g.dart";
 
@@ -30,7 +29,7 @@ class Roar extends HiveObject {
   List<dynamic> textImages;
 
   @HiveField(8)
-  List<RoarComment>? textComments;
+  List<dynamic>? textComments;
 
   @HiveField(9)
   int textCommentCount;

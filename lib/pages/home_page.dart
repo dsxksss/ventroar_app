@@ -75,6 +75,8 @@ class _HomePageState extends State<HomePage> {
           valueListenable: roarsBox.listenable(),
           builder: (context, Box<Roar> box, _) {
             List<Roar> roars = box.values.toList();
+            //按发布时间排序
+            roars.sort((a, b) => b.createDate.compareTo(a.createDate));
             return ListView.builder(
               itemCount: roars.isEmpty ? 1 : roars.length,
               padding: EdgeInsets.fromLTRB(0, 0, 0, 0.2.sh),

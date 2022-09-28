@@ -1,10 +1,14 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
 import 'package:ventroar_app/functions/vent_dialog.dart';
 import 'package:ventroar_app/global/widgets/avatar_widget.dart';
 
+import '../../functions/vent_snack.dart';
+import '../../schemas/roar.dart';
 import '../../schemas/user.dart';
+import '../../services/roar_http_lib.dart';
 
 class PostRoarWidget extends StatefulWidget {
   const PostRoarWidget({Key? key}) : super(key: key);
@@ -15,6 +19,7 @@ class PostRoarWidget extends StatefulWidget {
 
 class _PostRoarWidgetState extends State<PostRoarWidget> {
   late Box<User> userBox;
+  late Box<Roar> roarsBox;
   TextEditingController textEditingController = TextEditingController();
   String contentText = "";
   bool isPublic = true;
@@ -25,6 +30,54 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
   void initState() {
     super.initState();
     userBox = Hive.box("userbox");
+    roarsBox = Hive.box("roarsbox");
+  }
+
+  Future postText() async {
+    try {
+      var response = await RoarHttpLib().postRoarText(
+        box: roarsBox,
+        //清除帖子左右空格后再发送
+        text: textEditingController.text.trim(),
+        isPublic: isPublic,
+        isCanComment: isCanComment,
+        isShowUserName: isShowUserName,
+      );
+      if (response["statusCode"] == 200) {
+        vSnackBar(
+          showTime: const Duration(seconds: 1),
+          dismissDirection: DismissDirection.startToEnd,
+          model: VSnackModel.success,
+          isScroll: false,
+          textWidget: Text(
+            "发帖成功",
+            style: TextStyle(
+                fontSize: 17.sp,
+                color: Colors.white,
+                fontWeight: FontWeight.bold),
+          ),
+        );
+        Navigator.of(context).pop();
+      }
+    } on DioError catch (e) {
+      vSnackBar(
+        showTime: const Duration(seconds: 1),
+        dismissDirection: DismissDirection.startToEnd,
+        model: VSnackModel.error,
+        isScroll: e.type != DioErrorType.connectTimeout && e.response != null
+            ? true
+            : false,
+        textWidget: Text(
+          e.type == DioErrorType.connectTimeout
+              ? "发帖失败网络超时,请检查网络重试!"
+              : e.response?.data["msg"] ?? "未连接网络,请检查后重试!",
+          style: TextStyle(
+              fontSize: 17.sp,
+              color: Colors.white,
+              fontWeight: FontWeight.bold),
+        ),
+      );
+    }
   }
 
   @override
@@ -91,6 +144,7 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
                 ),
               ),
               Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   SizedBox(
                     width: 0.1.sw,
@@ -103,18 +157,25 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
                   SizedBox(
                     width: 0.02.sw,
                   ),
-                  Text(
-                    "发布帖子",
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.bold,
+                  Container(
+                    constraints: BoxConstraints(
+                      minWidth: 0.sw,
+                      maxWidth: 0.35.sw,
+                    ),
+                    child: Text(
+                      userBox.get("my")?.name ?? "null",
+                      style: TextStyle(
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.bold,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
                   ),
                 ],
               ),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  postText();
                 },
                 //设置圆角按钮
                 style: ButtonStyle(
@@ -127,7 +188,7 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
                   elevation: MaterialStateProperty.all(0),
                 ),
                 child: const Text(
-                  "发 帖",
+                  "发 布",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                   ),

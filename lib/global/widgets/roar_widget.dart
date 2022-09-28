@@ -359,6 +359,7 @@ class RoarContent extends StatelessWidget {
         maxWidth: 0.7.sw,
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             text,
@@ -370,9 +371,13 @@ class RoarContent extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
             ),
           ),
-          SizedBox(
-            height: 0.01.sh,
-          ),
+          images.isNotEmpty
+              ? SizedBox(
+                  height: 0.01.sh,
+                )
+              : SizedBox(
+                  height: 0.sh,
+                ),
           Container(
             clipBehavior: Clip.antiAlias,
             decoration: BoxDecoration(

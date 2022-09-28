@@ -14,28 +14,28 @@ class RoarHttpLib {
     if (response.statusCode == 200) {
       //获取新数据前先清理老数据
       box.deleteAll(box.values.map((e) => e.id));
-      int count = response.data["result"].length ?? 0;
-      for (int i = 0; i < count; i++) {
+      List<dynamic> sortData = response.data["result"];
+      for (dynamic s in sortData) {
         box.put(
-          response.data["result"][i]["_id"],
+          s["_id"],
           Roar(
-            id: response.data["result"][i]["_id"],
-            text: response.data["result"][i]["text"],
+            id: s["_id"],
+            text: s["text"],
             isPublic: null,
-            isShowUserName: response.data["result"][i]["isShowUserName"],
-            isCanComment: response.data["result"][i]["isCanComment"],
-            smilLikeUsers: response.data["result"][i]["smilLikeUsers"],
-            heartLikeUsers: response.data["result"][i]["heartLikeUsers"],
-            textImages: response.data["result"][i]["textImages"],
-            textComments: null,
-            textCommentCount: response.data["result"][i]["textCommentCount"],
-            createDate: response.data["result"][i]["createDate"],
-            smil: response.data["result"][i]["smil"],
-            heart: response.data["result"][i]["heart"],
-            userId: response.data["result"][i]["userId"],
-            userName: response.data["result"][i]["userName"],
-            userEmail: response.data["result"][i]["userEmail"],
-            userAvatarUrl: response.data["result"][i]["userAvatarUrl"],
+            isShowUserName: s["isShowUserName"],
+            isCanComment: s["isCanComment"],
+            smilLikeUsers: s["smilLikeUsers"],
+            heartLikeUsers: s["heartLikeUsers"],
+            textImages: s["textImages"],
+            textComments: s["textComments"],
+            textCommentCount: s["textCommentCount"],
+            createDate: s["createDate"],
+            smil: s["smil"],
+            heart: s["heart"],
+            userId: s["userId"],
+            userName: s["userName"],
+            userEmail: s["userEmail"],
+            userAvatarUrl: s["userAvatarUrl"],
           ),
         );
       }
@@ -79,7 +79,6 @@ class RoarHttpLib {
     };
   }
 
-  //TODO:deleteRoarText未测试
   Future<Map> deleteRoarText({
     required deleteId,
   }) async {
@@ -103,5 +102,68 @@ class RoarHttpLib {
       };
     }
     return {"msg": "delete failed!!!", "statusCode": response.statusCode};
+  }
+
+  Future<Map> postRoarText({
+    required Box<Roar> box,
+    required String text,
+    required bool isPublic,
+    required bool isShowUserName,
+    required bool isCanComment,
+  }) async {
+    User? user = Services.instance.my;
+    if (user == null || user.authToken.isEmpty || user.authToken.length < 8) {
+      return {"msg": "error authToken is empty!!!", "statusCode": 400};
+    }
+    Response response;
+    response = await Services.instance.dio.then((value) => value.post(
+          VentUrls.postRoarText,
+          data: {
+            "text": text,
+            "isPublic": isPublic,
+            "isShowUserName": isShowUserName,
+            "isCanComment": isCanComment,
+          },
+          options: Options(
+            headers: {"x-auth-token": user.authToken},
+          ),
+        ));
+    if (response.statusCode == 200) {
+      if (response.data["result"]["isPublic"]) {
+        box.put(
+          response.data["result"]["_id"],
+          Roar(
+            id: response.data["result"]["_id"],
+            text: response.data["result"]["text"],
+            isPublic: null,
+            isShowUserName: response.data["result"]["isShowUserName"],
+            isCanComment: response.data["result"]["isCanComment"],
+            smilLikeUsers: response.data["result"]["smilLikeUsers"],
+            heartLikeUsers: response.data["result"]["heartLikeUsers"],
+            textImages: response.data["result"]["textImages"],
+            textComments: response.data["result"]["textComments"],
+            //刚发布的帖子不存在评论，所以这里填0
+            textCommentCount: 0,
+            createDate: response.data["result"]["createDate"],
+            smil: response.data["result"]["smil"],
+            heart: response.data["result"]["heart"],
+            userId: response.data["result"]["userId"],
+            //以下内容后端未返回，直接使用用户本地数据即可
+            userName:
+                response.data["result"]["isShowUserName"] ? user.name : "匿名者",
+            userEmail:
+                response.data["result"]["isShowUserName"] ? user.email : "匿名邮箱",
+            userAvatarUrl: response.data["result"]["isShowUserName"]
+                ? user.avatarUrl
+                : "null",
+          ),
+        );
+      }
+      return {"data": response.data, "statusCode": response.statusCode};
+    }
+    return {
+      "msg": "post RoarText failed!!!",
+      "statusCode": response.statusCode
+    };
   }
 }

@@ -25,7 +25,7 @@ class RoarAdapter extends TypeAdapter<Roar> {
       smilLikeUsers: (fields[5] as List?)?.cast<dynamic>(),
       heartLikeUsers: (fields[6] as List?)?.cast<dynamic>(),
       textImages: (fields[7] as List).cast<dynamic>(),
-      textComments: (fields[8] as List?)?.cast<RoarComment>(),
+      textComments: (fields[8] as List?)?.cast<dynamic>(),
       textCommentCount: fields[9] as int,
       createDate: fields[10] as int,
       smil: fields[11] as int,
