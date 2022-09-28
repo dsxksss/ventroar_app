@@ -88,6 +88,7 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Row(
+            mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               IconButton(
@@ -173,27 +174,41 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
                   ),
                 ],
               ),
-              ElevatedButton(
-                onPressed: () {
-                  postText();
-                },
-                //设置圆角按钮
-                style: ButtonStyle(
-                  shape: MaterialStateProperty.all(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
+              Visibility(
+                //是否预加载
+                maintainState: true,
+                //是否预加载动画
+                maintainAnimation: true,
+                //是否占位
+                maintainSize: true,
+                visible: textEditingController.text.isNotEmpty ? true : false,
+                child: AnimatedOpacity(
+                  duration: const Duration(milliseconds: 200),
+                  opacity: textEditingController.text.isNotEmpty ? 1 : 0,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      postText();
+                    },
+                    //设置圆角按钮
+                    style: ButtonStyle(
+                      shape: MaterialStateProperty.all(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
+                      backgroundColor:
+                          MaterialStateProperty.all(Colors.lightBlue),
+                      elevation: MaterialStateProperty.all(0),
+                    ),
+                    child: const Text(
+                      "发 布",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                  backgroundColor: MaterialStateProperty.all(Colors.lightBlue),
-                  elevation: MaterialStateProperty.all(0),
                 ),
-                child: const Text(
-                  "发 布",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              )
+              ),
             ],
           ),
           SizedBox(
