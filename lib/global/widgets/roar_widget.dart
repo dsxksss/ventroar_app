@@ -11,6 +11,7 @@ import 'package:ventroar_app/widgets/wait_animation.dart';
 import '../../schemas/roar.dart';
 import '../../functions/vent_snack.dart';
 import '../../services/roar_http_lib.dart';
+import '../global_context.dart';
 import 'photo_widget.dart';
 
 class RoarHeightSize {
@@ -415,6 +416,10 @@ class RoarContent extends StatelessWidget {
                         imageUrl: "https://ventroar.xyz:2548/images/${e.value}",
                       ),
                       onTap: () {
+                        //关闭多余snackbar
+                        ScaffoldMessenger.of(
+                                NavigationService.navigatorKey.currentContext!)
+                            .removeCurrentSnackBar();
                         openPhoto(e.key);
                       },
                     );
