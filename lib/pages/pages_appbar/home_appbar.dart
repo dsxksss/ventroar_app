@@ -34,12 +34,14 @@ class _HomeAppBarState extends State<HomeAppBar> {
     final int selectedIndex =
         Provider.of<PageDataProvider>(context).selectedIndex;
     return SliverAppBar(
-      leading: Padding(
-        padding: const EdgeInsets.fromLTRB(20.0, 12.0, 4.0, 12.0),
+      primary: false,
+      centerTitle: true,
+      leading: Container(
+        margin: EdgeInsets.fromLTRB(0, 0.035.sh, 0, 0),
+        padding: EdgeInsets.fromLTRB(0.06.sw, 0.02.sh, 0.01.sw, 0.01.sh),
         child: AvatarWidget(
           avatarUrl: box.get("my")?.avatarUrl ?? "null",
           userName: box.get("my")?.name ?? "null",
-          fontSize: 20.sp,
           onPressed: () {
             Scaffold.of(context).openDrawer();
           },
@@ -50,23 +52,32 @@ class _HomeAppBarState extends State<HomeAppBar> {
         statusBarIconBrightness: context.watch<ThemeProvider>().isDark
             ? Brightness.light
             : Brightness.dark,
+        statusBarBrightness: context.watch<ThemeProvider>().isDark
+            ? Brightness.dark
+            : Brightness.light,
       ),
       title: GestureDetector(
-        child: Text(
-          "${pageDatas[selectedIndex]}",
-          style: GoogleFonts.ubuntu(fontSize: 25, fontWeight: FontWeight.w500),
+        child: Container(
+          margin: EdgeInsets.fromLTRB(0, 0.04.sh, 0, 0),
+          child: Text(
+            "${pageDatas[selectedIndex]}",
+            style:
+                GoogleFonts.ubuntu(fontSize: 25, fontWeight: FontWeight.w500),
+          ),
         ),
         onTap: widget.onPressed,
       ),
-      expandedHeight: 55.0, //展开高度200
+      toolbarHeight: 0.1.sh,
+      expandedHeight: 0.1.sh, //展开高度200
       floating: true, //不随着滑动隐藏标题
       pinned: false, //不固定在顶部
       flexibleSpace: const FlexibleSpaceBar(
         centerTitle: true,
       ),
       actions: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
+        Container(
+          margin: EdgeInsets.fromLTRB(0, 0.035.sh, 0, 0),
+          padding: EdgeInsets.fromLTRB(0, 0, 0.05.sw, 0),
           child: SearchAnimation(
             height: 35,
             width: 35,

@@ -138,6 +138,8 @@ class _AppPageState extends State<AppPage> {
         return MediaQuery(
           data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
           child: Scaffold(
+            resizeToAvoidBottomInset: false,
+            // extendBodyBehindAppBar: true,
             appBar: _appBars[_selectedIndex],
             //侧边导航栏手势打开宽度
             drawerEdgeDragWidth: _drawerEdgeDragWidth[_selectedIndex],
