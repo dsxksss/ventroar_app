@@ -50,9 +50,9 @@ ThemeData lightTheme(BuildContext context) {
     highlightColor: Colors.white.withOpacity(0),
 
     //侧边导航栏样式
-    drawerTheme: const DrawerThemeData(
+    drawerTheme: DrawerThemeData(
       //背景色
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.grey.shade100,
       //模态幕布颜色
       // scrimColor: Colors.red,
     ),
@@ -106,17 +106,17 @@ ThemeData lightTheme(BuildContext context) {
     ),
 
 //tile样式
-    listTileTheme: const ListTileThemeData(
+    listTileTheme: ListTileThemeData(
       //tile内容背景色
-      tileColor: Colors.white60,
+      tileColor: Colors.grey.shade100,
       //tile图标色
       iconColor: Colors.black,
       //tile文字色
       textColor: Colors.black,
       //tile被选中色
-      selectedColor: Color.fromARGB(255, 56, 128, 255),
+      selectedColor: const Color.fromARGB(255, 56, 128, 255),
       //tile内容被选中色
-      selectedTileColor: Color.fromARGB(79, 56, 129, 255),
+      selectedTileColor: const Color.fromARGB(79, 56, 129, 255),
     ),
   );
 }
