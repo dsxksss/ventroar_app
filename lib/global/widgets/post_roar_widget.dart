@@ -179,7 +179,7 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
                     ),
                   ],
                 ),
-                if (textEditingController.text.isNotEmpty)
+                if (textEditingController.text.trimLeft().length >= 10)
                   ElevatedButton(
                     onPressed: () {
                       postText();
@@ -358,7 +358,7 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
                   decoration: InputDecoration(
                     //提示文字样式
                     hintStyle: TextStyle(fontSize: 18.sp),
-                    hintText: " 随便说些什么吧",
+                    hintText: " 随便说些什么吧 (发帖最少10个字)",
                     //取消下边框线
                     border: InputBorder.none,
                   ),
