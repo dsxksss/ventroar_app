@@ -19,40 +19,11 @@ class _VentRoarButtonBarState extends State<VentRoarButtonBar> {
     int selectedIndex = context.watch<PageDataProvider>().selectedIndex;
     Function changePageIndex =
         Provider.of<PageDataProvider>(context, listen: false).changePageIndex;
-    return DarkAppBar(
-      isDark: isDark,
-      index: selectedIndex,
-      onTap: changePageIndex,
-    );
-  }
-}
-
-class DarkAppBar extends StatefulWidget {
-  final int index;
-  final Function onTap;
-  final bool isDark;
-
-  const DarkAppBar(
-      {Key? key,
-      required this.onTap,
-      required this.index,
-      required this.isDark})
-      : super(key: key);
-
-  @override
-  State<DarkAppBar> createState() => _DarkAppBarState();
-}
-
-class _DarkAppBarState extends State<DarkAppBar> {
-  late int selectedIndex = widget.index;
-
-  @override
-  Widget build(BuildContext context) {
     return CurvedNavigationBar(
       //导航栏高度
       height: 75.0,
       //间隙颜色
-      index: widget.index,
+      index: selectedIndex,
 
       //间隙颜色
       backgroundColor: Theme.of(context).backgroundColor,
@@ -69,48 +40,36 @@ class _DarkAppBarState extends State<DarkAppBar> {
 
       //阻止重复播放动画的判断函数
       letIndexChange: (index) {
-        return index == widget.index ? false : true;
+        return index == selectedIndex ? false : true;
       },
 
       items: [
-        Icon(Icons.home,
-            size: widget.index == 0 ? 31 : 27,
-            color: widget.isDark
-                ? null
-                : selectedIndex == 0
-                    ? Colors.white
-                    : Colors.black),
-        Icon(Icons.star_rounded,
-            size: widget.index == 1 ? 31 : 27,
-            color: widget.isDark
-                ? null
-                : selectedIndex == 1
-                    ? Colors.white
-                    : Colors.black),
+        Icon(
+          Icons.home,
+          size: selectedIndex == 0 ? 31 : 27,
+        ),
+        Icon(
+          Icons.star_rounded,
+          size: selectedIndex == 1 ? 31 : 27,
+        ),
         //FIXED:以下代码都是为了修复第三方图标的错误样式
         Padding(
           padding: const EdgeInsets.all(4.0),
-          child: FaIcon(FontAwesomeIcons.solidComments,
-              size: widget.index == 2 ? 24 : 20,
-              color: widget.isDark
-                  ? null
-                  : selectedIndex == 2
-                      ? Colors.white
-                      : Colors.black),
+          child: FaIcon(
+            FontAwesomeIcons.solidComments,
+            size: selectedIndex == 2 ? 24 : 20,
+          ),
         ),
-        Icon(Icons.person,
-            size: widget.index == 3 ? 31 : 27,
-            color: widget.isDark
-                ? null
-                : selectedIndex == 3
-                    ? Colors.white
-                    : Colors.black),
+        Icon(
+          Icons.person,
+          size: selectedIndex == 3 ? 31 : 27,
+        ),
       ],
       onTap: (index) {
         setState(() {
           selectedIndex = index;
         });
-        widget.onTap(index);
+        changePageIndex(index);
       },
     );
   }

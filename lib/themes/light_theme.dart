@@ -58,11 +58,11 @@ ThemeData lightTheme(BuildContext context) {
     ),
 
     //底部导航栏样式
-    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
       //景深或阴影深度
       elevation: 0,
       //选中色
-      selectedItemColor: Color.fromARGB(255, 0, 174, 243),
+      selectedItemColor: Colors.grey.shade300,
       //未选中色
       unselectedItemColor: Colors.grey,
       //背景色
