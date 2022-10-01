@@ -179,7 +179,7 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
                     ),
                   ],
                 ),
-                if (textEditingController.text.trimLeft().length >= 10)
+                if (textEditingController.text.trim().length >= 10)
                   ElevatedButton(
                     onPressed: () {
                       postText();

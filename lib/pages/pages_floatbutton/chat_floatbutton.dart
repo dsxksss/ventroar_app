@@ -6,6 +6,7 @@ class ChatFloatButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
+      splashColor: Colors.transparent,
       onPressed: () {},
       child: const Icon(Icons.email),
     );

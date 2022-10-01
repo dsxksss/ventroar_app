@@ -10,6 +10,7 @@ class HomeFloatButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
+      splashColor: Colors.transparent,
       onPressed: () {
         vBottomSheet(
           height: 0.70.sh,

@@ -515,6 +515,11 @@ class _RoarLikesState extends State<RoarLikes> {
             onPressed: () {
               clickLike("heart");
             },
+            //去除水波纹效果
+            style: ButtonStyle(
+                overlayColor: MaterialStateProperty.resolveWith((states) {
+              return Colors.transparent;
+            })),
             icon: Icon(
               widget.roar.heart <= 0
                   ? Icons.heart_broken_outlined
@@ -533,6 +538,11 @@ class _RoarLikesState extends State<RoarLikes> {
             onPressed: () {
               clickLike("smil");
             },
+            //去除水波纹效果
+            style: ButtonStyle(
+                overlayColor: MaterialStateProperty.resolveWith((states) {
+              return Colors.transparent;
+            })),
             icon: Icon(
               widget.roar.smil <= 0
                   ? FontAwesomeIcons.faceSadTear
@@ -549,6 +559,11 @@ class _RoarLikesState extends State<RoarLikes> {
           ),
           TextButton.icon(
             onPressed: () {},
+            //去除水波纹效果
+            style: ButtonStyle(
+                overlayColor: MaterialStateProperty.resolveWith((states) {
+              return Colors.transparent;
+            })),
             icon: Icon(
               FontAwesomeIcons.comment,
               size: 20,

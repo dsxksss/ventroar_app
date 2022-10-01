@@ -6,6 +6,7 @@ class StarFloatButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
+      splashColor: Colors.transparent,
       onPressed: () {},
       child: const Icon(Icons.star_border_rounded),
     );
