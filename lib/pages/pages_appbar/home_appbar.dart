@@ -76,7 +76,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
       ),
       actions: [
         Container(
-          margin: EdgeInsets.fromLTRB(0, 0.035.sh, 0, 0),
+          margin: EdgeInsets.fromLTRB(0, 0.04.sh, 0, 0),
           padding: EdgeInsets.fromLTRB(0, 0, 0.05.sw, 0),
           child: SearchAnimation(
             height: 35,
