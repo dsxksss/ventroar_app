@@ -314,7 +314,10 @@ class _RoarTitleState extends State<RoarTitle> {
                       onPressed: () {
                         deleteRoarText();
                       },
-                      icon: const Icon(FontAwesomeIcons.trash),
+                      icon: const Icon(
+                        FontAwesomeIcons.trash,
+                        color: Colors.white,
+                      ),
                     ),
                   );
                 },
