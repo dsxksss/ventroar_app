@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:ventroar_app/functions/vent_dialog.dart';
 import 'package:ventroar_app/global/widgets/avatar_widget.dart';
 
@@ -20,17 +23,32 @@ class PostRoarWidget extends StatefulWidget {
 class _PostRoarWidgetState extends State<PostRoarWidget> {
   late Box<User> userBox;
   late Box<Roar> roarsBox;
-  TextEditingController textEditingController = TextEditingController();
   String contentText = "";
   bool isPublic = true;
   bool isCanComment = true;
   bool isShowUserName = true;
+  List imagePath = [];
+  final ImagePicker _picker = ImagePicker();
+
+  TextEditingController textEditingController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     userBox = Hive.box("userbox");
     roarsBox = Hive.box("roarsbox");
+  }
+
+  Future pickImg() async {
+    var image = await _picker.pickMultiImage(imageQuality: 4);
+
+    if (image != null) {
+      setState(() {
+        for (var element in image) {
+          imagePath.add(element.path);
+        }
+      });
+    }
   }
 
   Future postText() async {
@@ -151,7 +169,7 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
                   children: [
                     SizedBox(
                       width: 0.1.sw,
-                      height: 0.045.sh,
+                      height: 0.05.sh,
                       child: AvatarWidget(
                         avatarUrl: userBox.get("my")?.avatarUrl ?? "null",
                         userName: userBox.get("my")?.name ?? "null",
@@ -262,7 +280,7 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
                   ),
                   children: [
                     FilterChip(
-                      selected: isPublic,
+                      selected: !isPublic,
                       showCheckmark: true,
                       checkmarkColor: Colors.white,
                       selectedColor: Colors.lightBlue,
@@ -277,7 +295,7 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
                       onSelected: (value) {
                         setState(
                           () {
-                            isPublic = value;
+                            isPublic = !value;
                           },
                         );
                       },
@@ -286,7 +304,7 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
                       width: 0.02.sw,
                     ),
                     FilterChip(
-                      selected: isCanComment,
+                      selected: !isCanComment,
                       showCheckmark: true,
                       checkmarkColor: Colors.white,
                       selectedColor: Colors.lightBlue,
@@ -301,7 +319,7 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
                       onSelected: (value) {
                         setState(
                           () {
-                            isCanComment = value;
+                            isCanComment = !value;
                           },
                         );
                       },
@@ -310,7 +328,7 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
                       width: 0.02.sw,
                     ),
                     FilterChip(
-                      selected: isShowUserName,
+                      selected: !isShowUserName,
                       showCheckmark: true,
                       checkmarkColor: Colors.white,
                       selectedColor: Colors.lightBlue,
@@ -325,7 +343,7 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
                       onSelected: (value) {
                         setState(
                           () {
-                            isShowUserName = value;
+                            isShowUserName = !value;
                           },
                         );
                       },
@@ -337,7 +355,7 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
           ),
           SizedBox(
             width: 0.9.sw,
-            height: 0.53.sh,
+            height: 0.55.sh,
             child: Column(
               children: [
                 TextField(
@@ -350,9 +368,9 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
                   //光标高度
                   cursorHeight: 20,
                   //最小字行
-                  minLines: 1,
+                  // minLines: 1,
                   //最大字行
-                  maxLines: 12,
+                  maxLines: 15,
                   scrollPadding: EdgeInsets.zero,
                   style: TextStyle(fontSize: 16.sp),
                   decoration: InputDecoration(
@@ -363,9 +381,55 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
                     border: InputBorder.none,
                   ),
                 ),
+                SizedBox(
+                  height: 0.1.sh,
+                  width: 1.sw,
+                  child: Stack(
+                    children: [
+                      Positioned(
+                          left: 0,
+                          bottom: 0,
+                          child: Row(
+                            children: [
+                              if (imagePath.isNotEmpty)
+                                SizedBox(
+                                  height: 0.1.sh,
+                                  width: imagePath.length == 4 ? 1.sw : 0.75.sw,
+                                  child: ListView(
+                                    scrollDirection: Axis.horizontal,
+                                    physics:
+                                        const AlwaysScrollableScrollPhysics(
+                                      //当内容不足时也可以启动反弹刷新
+                                      parent: BouncingScrollPhysics(),
+                                    ),
+                                    children: [
+                                      ...imagePath.map((e) => SizedBox(
+                                          height: 0.1.sh,
+                                          width: 0.2.sw,
+                                          child: Image.file(File(e)))),
+                                    ],
+                                  ),
+                                ),
+                              if (imagePath.length < 4)
+                                Center(
+                                  child: IconButton(
+                                    onPressed: () {
+                                      pickImg();
+                                    },
+                                    icon: Icon(
+                                      Icons.photo,
+                                      size: 50.sp,
+                                    ),
+                                  ),
+                                ),
+                            ],
+                          ))
+                    ],
+                  ),
+                )
               ],
             ),
-          )
+          ),
         ],
       ),
     );
