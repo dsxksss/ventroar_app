@@ -34,19 +34,20 @@ class _HomeAppBarState extends State<HomeAppBar> {
     final int selectedIndex =
         Provider.of<PageDataProvider>(context).selectedIndex;
     return SliverAppBar(
-      primary: false,
+      snap: true,
+      pinned: false, //不固定在顶部
+      primary: true,
+      floating: true, //不随着滑动隐藏标题
       centerTitle: true,
-      leading: Container(
-        margin: EdgeInsets.fromLTRB(0, 0.035.sh, 0, 0),
-        padding: EdgeInsets.fromLTRB(0.06.sw, 0.02.sh, 0.01.sw, 0.01.sh),
-        child: AvatarWidget(
-          avatarUrl: box.get("my")?.avatarUrl ?? "null",
-          userName: box.get("my")?.name ?? "null",
-          onPressed: () {
-            Scaffold.of(context).openDrawer();
-          },
-        ),
+      leading: AvatarWidget(
+        size: 12,
+        avatarUrl: box.get("my")?.avatarUrl ?? "null",
+        userName: box.get("my")?.name ?? "null",
+        onPressed: () {
+          Scaffold.of(context).openDrawer();
+        },
       ),
+
       systemOverlayStyle: SystemUiOverlayStyle(
         statusBarColor: Theme.of(context).appBarTheme.backgroundColor,
         statusBarIconBrightness: context.watch<ThemeProvider>().isDark
@@ -57,27 +58,19 @@ class _HomeAppBarState extends State<HomeAppBar> {
             : Brightness.light,
       ),
       title: GestureDetector(
-        child: Container(
-          margin: EdgeInsets.fromLTRB(0, 0.04.sh, 0, 0),
-          child: Text(
-            "${pageDatas[selectedIndex]}",
-            style:
-                GoogleFonts.ubuntu(fontSize: 25, fontWeight: FontWeight.w500),
-          ),
+        child: Text(
+          "${pageDatas[selectedIndex]}",
+          style: GoogleFonts.ubuntu(fontSize: 25, fontWeight: FontWeight.w500),
         ),
         onTap: widget.onPressed,
       ),
-      toolbarHeight: 0.1.sh,
-      expandedHeight: 0.1.sh, //展开高度200
-      floating: true, //不随着滑动隐藏标题
-      pinned: false, //不固定在顶部
+
       flexibleSpace: const FlexibleSpaceBar(
         centerTitle: true,
       ),
       actions: [
         Container(
-          margin: EdgeInsets.fromLTRB(0, 0.04.sh, 0, 0),
-          padding: EdgeInsets.fromLTRB(0, 0, 0.05.sw, 0),
+          margin: EdgeInsets.fromLTRB(0, 0, 0.03.sw, 0),
           child: SearchAnimation(
             height: 35,
             width: 35,
@@ -101,7 +94,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
               ));
             },
           ),
-        )
+        ),
       ],
     );
   }

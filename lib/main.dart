@@ -46,12 +46,12 @@ class _MaterialAppState extends State<MaterialApp> {
 }
 
 Future<void> main() async {
+  // init hive localDB
+  await Hive.initFlutter();
   // Register Adapter
   Hive.registerAdapter(UserAdapter());
   Hive.registerAdapter(RoarAdapter());
   Hive.registerAdapter(RoarCommentAdapter());
-  // init hive localDB
-  await Hive.initFlutter();
   // open db box
   await Hive.openBox<User>('userbox');
   await Hive.openBox<Roar>('roarbox');
