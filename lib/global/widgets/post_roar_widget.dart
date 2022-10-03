@@ -164,38 +164,40 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
                     size: 30.sp,
                   ),
                 ),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    SizedBox(
-                      width: 0.1.sw,
-                      height: 0.05.sh,
-                      child: AvatarWidget(
-                        avatarUrl: userBox.get("my")?.avatarUrl ?? "null",
-                        userName: userBox.get("my")?.name ?? "null",
-                      ),
-                    ),
-                    SizedBox(
-                      width: 0.02.sw,
-                    ),
-                    Container(
-                      constraints: BoxConstraints(
-                        minWidth: 0.sw,
-                        maxWidth: 0.35.sw,
-                      ),
-                      child: Text(
-                        userBox.get("my")?.name ?? "null",
-                        style: TextStyle(
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.bold,
-                          overflow: TextOverflow.ellipsis,
+                SizedBox(
+                  height: 0.05.sh,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      SizedBox(
+                        child: AvatarWidget(
+                          size: 3,
+                          avatarUrl: userBox.get("my")?.avatarUrl ?? "null",
+                          userName: userBox.get("my")?.name ?? "null",
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      width: 0.02.sw,
-                    ),
-                  ],
+                      SizedBox(
+                        width: 0.02.sw,
+                      ),
+                      Container(
+                        constraints: BoxConstraints(
+                          minWidth: 0.sw,
+                          maxWidth: 0.35.sw,
+                        ),
+                        child: Text(
+                          userBox.get("my")?.name ?? "null",
+                          style: TextStyle(
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.bold,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 0.02.sw,
+                      ),
+                    ],
+                  ),
                 ),
                 if (textEditingController.text.trim().length >= 10)
                   ElevatedButton(
