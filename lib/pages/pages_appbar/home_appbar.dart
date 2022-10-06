@@ -13,15 +13,16 @@ class HomeAppBar extends StatefulWidget {
   const HomeAppBar({
     Key? key,
     this.onPressed,
+    this.onStretchTrigger,
   }) : super(key: key);
   final VoidCallback? onPressed;
+  final Future<void> Function()? onStretchTrigger;
   @override
   State<HomeAppBar> createState() => _HomeAppBarState();
 }
 
 class _HomeAppBarState extends State<HomeAppBar> {
   late Box<User> box;
-
   @override
   void initState() {
     super.initState();
@@ -34,11 +35,15 @@ class _HomeAppBarState extends State<HomeAppBar> {
     final int selectedIndex =
         Provider.of<PageDataProvider>(context).selectedIndex;
     return SliverAppBar(
-      snap: true,
       pinned: false, //不固定在顶部
-      primary: true,
+      primary: true, //是否跟随父组件布局适配
       floating: true, //不随着滑动隐藏标题
-      centerTitle: true,
+      centerTitle: true, //是否居中标题
+      stretch: true, //是否启用拉伸效果
+      stretchTriggerOffset: 150, //激活onStretchTrigger过渡的偏移量
+      expandedHeight: 0.sh, //扩展高度
+      excludeHeaderSemantics: false,
+      onStretchTrigger: widget.onStretchTrigger,
       leading: AvatarWidget(
         size: 12,
         avatarUrl: box.get("my")?.avatarUrl ?? "null",
@@ -47,6 +52,14 @@ class _HomeAppBarState extends State<HomeAppBar> {
           Scaffold.of(context).openDrawer();
         },
       ),
+
+      //圆角appbar
+      // shape: const RoundedRectangleBorder(
+      //   borderRadius: BorderRadius.only(
+      //     bottomLeft: Radius.circular(20.0),
+      //     bottomRight: Radius.circular(20.0),
+      //   ),
+      // ),
 
       systemOverlayStyle: SystemUiOverlayStyle(
         statusBarColor: Theme.of(context).appBarTheme.backgroundColor,
@@ -65,9 +78,6 @@ class _HomeAppBarState extends State<HomeAppBar> {
         onTap: widget.onPressed,
       ),
 
-      flexibleSpace: const FlexibleSpaceBar(
-        centerTitle: true,
-      ),
       actions: [
         Container(
           margin: EdgeInsets.fromLTRB(0, 0, 0.03.sw, 0),
@@ -83,10 +93,10 @@ class _HomeAppBarState extends State<HomeAppBar> {
                   ),
                   body: Container(
                     color: Theme.of(context).canvasColor,
-                    child: const Center(
+                    child: Center(
                       child: SearchAnimation(
-                        height: 300,
-                        width: 300,
+                        height: 300.w,
+                        width: 300.w,
                       ),
                     ),
                   ),
