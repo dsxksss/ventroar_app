@@ -80,7 +80,7 @@ class RoarHttpLib {
   }
 
   Future<Map> deleteRoarText({
-    required deleteId,
+    required String deleteId,
   }) async {
     User? user = Services.instance.my;
     if (user == null || user.authToken.isEmpty || user.authToken.length < 8) {
@@ -165,5 +165,56 @@ class RoarHttpLib {
       "msg": "post RoarText failed!!!",
       "statusCode": response.statusCode
     };
+  }
+
+  Future<Map> postTextImages({
+    required Box<Roar> box,
+    required String textId,
+    required List<dynamic> files,
+  }) async {
+    User? user = Services.instance.my;
+    if (user == null || user.authToken.isEmpty || user.authToken.length < 8) {
+      return {"msg": "error authToken is empty!!!", "statusCode": 400};
+    }
+    Response response;
+    response = await Services.instance.dio.then((value) => value.post(
+          "${VentUrls.postTextImages}/$textId",
+          data: FormData.fromMap({'images': files}),
+          options: Options(
+            headers: {"x-auth-token": user.authToken},
+          ),
+        ));
+    if (response.statusCode == 200) {
+      box.put(
+        response.data["result"]["_id"],
+        Roar(
+          id: response.data["result"]["_id"],
+          text: response.data["result"]["text"],
+          isPublic: null,
+          isShowUserName: response.data["result"]["isShowUserName"],
+          isCanComment: response.data["result"]["isCanComment"],
+          smilLikeUsers: response.data["result"]["smilLikeUsers"],
+          heartLikeUsers: response.data["result"]["heartLikeUsers"],
+          textImages: response.data["result"]["textImages"],
+          textComments: response.data["result"]["textComments"],
+          //刚发布的帖子不存在评论，所以这里填0
+          textCommentCount: 0,
+          createDate: response.data["result"]["createDate"],
+          smil: response.data["result"]["smil"],
+          heart: response.data["result"]["heart"],
+          userId: response.data["result"]["userId"],
+          //以下内容后端未返回，直接使用用户本地数据即可
+          userName:
+              response.data["result"]["isShowUserName"] ? user.name : "匿名者",
+          userEmail:
+              response.data["result"]["isShowUserName"] ? user.email : "匿名邮箱",
+          userAvatarUrl: response.data["result"]["isShowUserName"]
+              ? user.avatarUrl
+              : "null",
+        ),
+      );
+      return {"data": response.data, "statusCode": response.statusCode};
+    }
+    return {"msg": "post images failed!!!", "statusCode": response.statusCode};
   }
 }

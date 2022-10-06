@@ -46,6 +46,8 @@ class VentUrls {
   static String getUserAllRoarText = "$apiPath/getuserallroartext";
   //POST   用户发布宣泄帖子
   static String postRoarText = "$apiPath/postroartext";
+  //POST   给指定宣泄帖子上传图片
+  static String postTextImages = "$apiPath/posttextimages"; //?id
   //PUT    给指定的宣泄帖点赞
   static String clickTextLikes = "$apiPath/clicktextlikes";
   //PUT    编辑指定的宣泄帖内容
@@ -115,6 +117,8 @@ class VentUrlsTest {
   static String getUserAllRoarText = "$apiPath/getuserallroartext";
   //POST   用户发布宣泄帖子
   static String postRoarText = "$apiPath/postroartext";
+  //POST   给指定宣泄帖子上传图片
+  static String postTextImages = "$apiPath/posttextimages"; //?id
   //PUT    给指定的宣泄帖点赞
   static String clickTextLikes = "$apiPath/clicktextlikes";
   //PUT    编辑指定的宣泄帖内容

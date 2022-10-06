@@ -12,6 +12,7 @@ import '../../functions/vent_snack.dart';
 import '../../schemas/roar.dart';
 import '../../schemas/user.dart';
 import '../../services/roar_http_lib.dart';
+import '../global_context.dart';
 
 class PostRoarWidget extends StatefulWidget {
   const PostRoarWidget({Key? key}) : super(key: key);
@@ -28,6 +29,7 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
   bool isCanComment = true;
   bool isShowUserName = true;
   List imagePath = [];
+  List<dynamic> images = [];
   final ImagePicker _picker = ImagePicker();
 
   TextEditingController textEditingController = TextEditingController();
@@ -40,12 +42,17 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
   }
 
   Future pickImg() async {
-    var image = await _picker.pickMultiImage(imageQuality: 4);
+    //imageQuality 压缩率 0~100
+    var result = await _picker.pickMultiImage(imageQuality: 80);
 
-    if (image != null) {
+    if (result != null) {
       setState(() {
-        for (var element in image) {
-          imagePath.add(element.path);
+        for (var element in result) {
+          if (imagePath.length < 4 && images.length < 4) {
+            imagePath.add(element.path);
+            images.add(MultipartFile.fromFileSync(element.path,
+                filename: element.name));
+          }
         }
       });
     }
@@ -62,20 +69,54 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
         isShowUserName: isShowUserName,
       );
       if (response["statusCode"] == 200) {
-        vSnackBar(
-          showTime: const Duration(seconds: 1),
-          dismissDirection: DismissDirection.startToEnd,
-          model: VSnackModel.success,
-          isScroll: false,
-          textWidget: Text(
-            "发帖成功",
-            style: TextStyle(
-                fontSize: 17.sp,
-                color: Colors.white,
-                fontWeight: FontWeight.bold),
-          ),
-        );
+        if (imagePath.isNotEmpty && images.isNotEmpty) {
+          await postTextImages(response["data"]["result"]["_id"]);
+        }
         Navigator.of(context).pop();
+      }
+    } on DioError catch (e) {
+      vSnackBar(
+        showTime: const Duration(seconds: 1),
+        dismissDirection: DismissDirection.startToEnd,
+        model: VSnackModel.error,
+        isScroll: e.type != DioErrorType.connectTimeout && e.response != null
+            ? true
+            : false,
+        textWidget: Text(
+          e.type == DioErrorType.connectTimeout
+              ? "发帖失败网络超时,请检查网络重试!"
+              : e.response?.data["msg"] ?? "未连接网络,请检查后重试!",
+          style: TextStyle(
+              fontSize: 17.sp,
+              color: Colors.white,
+              fontWeight: FontWeight.bold),
+        ),
+      );
+    }
+  }
+
+  Future postTextImages(String textId) async {
+    try {
+      vSnackBar(
+        showTime: const Duration(seconds: 60),
+        dismissDirection: DismissDirection.startToEnd,
+        model: VSnackModel.success,
+        isScroll: false,
+        textWidget: Text(
+          "上传图片中...",
+          style: TextStyle(
+            fontSize: 17.sp,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        button: const CircularProgressIndicator(),
+      );
+      var response = await RoarHttpLib()
+          .postTextImages(box: roarsBox, textId: textId, files: images);
+      if (response["statusCode"] == 200) {
+        ScaffoldMessenger.of(NavigationService.navigatorKey.currentContext!)
+            .removeCurrentSnackBar();
       }
     } on DioError catch (e) {
       vSnackBar(
