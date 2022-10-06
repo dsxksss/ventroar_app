@@ -4,7 +4,6 @@
 | ----------------------- | -------- | ------------------------ |
 | [provider]              | ^6.0.3   | flutter官方推荐的状态管理插件       |
 | [dio]                   | ^4.0.6   | http请求库                  |
-| [curved_navigation_bar] | ^1.0.1   | 底部导航栏组件                  |
 | [badges]                | ^2.0.2   | 徽标                       |
 | [font_awesome_flutter]  | ^10.1.0  | font_awesome图标库          |
 | [animated_text_kit]     | ^4.2.1   | 字体动画库                    |
@@ -22,10 +21,10 @@
 | [hive]                  | ^2.2.3   | 本地数据库存储插件                |
 | [photo_view]            | ^0.14.0  | 对图片的放大或手势操控等功能插件         |
 | [cached_network_image]  | ^3.2.1   | 缓存网络图片至本地插件(数据超时未使用自动删除) |
+| [image_picker]          | ^0.8.5+3 | 选择图片插件                   |
 
 [provider]: https://pub.dev/packages/provider/
 [dio]: https://pub.dev/packages/dio/
-[curved_navigation_bar]: https://pub.dev/packages/curved_navigation_bar/
 [badges]: https://pub.dev/packages/badges/
 [font_awesome_flutter]: https://pub.dev/packages/font_awesome_flutter/
 [animated_text_kit]: https://pub.dev/packages/animated_text_kit/
@@ -43,3 +42,4 @@
 [hive]: https://pub.dev/packages/hive/
 [photo_view]: https://pub.dev/packages/photo_view/
 [cached_network_image]: https://pub.dev/packages/cached_network_image/
+[image_picker]: https://pub.dev/packages/image_picker/
