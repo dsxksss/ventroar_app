@@ -1,5 +1,5 @@
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import '../../contexts/global_provider.dart';
@@ -15,62 +15,66 @@ class VentRoarButtonBar extends StatefulWidget {
 class _VentRoarButtonBarState extends State<VentRoarButtonBar> {
   @override
   Widget build(BuildContext context) {
-    bool isDark = context.watch<ThemeProvider>().isDark;
     int selectedIndex = context.watch<PageDataProvider>().selectedIndex;
     Function changePageIndex =
         Provider.of<PageDataProvider>(context, listen: false).changePageIndex;
-    return CurvedNavigationBar(
-      //导航栏高度
-      height: 75.0,
-      //间隙颜色
-      index: selectedIndex,
+    return BottomNavigationBar(
+      //init Index
+      currentIndex: selectedIndex,
 
-      //间隙颜色
-      backgroundColor: Theme.of(context).backgroundColor,
+      //阴影
+      elevation: 0,
 
-      //按钮背景颜色
-      buttonBackgroundColor:
+      //改变indexCallBack
+      onTap: (index) => changePageIndex(index),
+
+      //选中时的字体大小
+      selectedFontSize: 20.sp,
+
+      //未选中时的字体大小
+      unselectedFontSize: 20.sp,
+
+      //背景色
+      backgroundColor:
+          Theme.of(context).bottomNavigationBarTheme.backgroundColor!,
+
+      //按钮选中色
+      selectedItemColor:
           Theme.of(context).bottomNavigationBarTheme.selectedItemColor!,
 
-      //背景颜色
-      color: Theme.of(context).bottomNavigationBarTheme.backgroundColor!,
+      //按钮未选中色
+      unselectedItemColor:
+          Theme.of(context).bottomNavigationBarTheme.unselectedItemColor!,
 
-      //动画曲线
-      animationCurve: Curves.easeOutCirc,
+      //显示类型
+      type: BottomNavigationBarType.fixed,
 
-      //阻止重复播放动画的判断函数
-      letIndexChange: (index) {
-        return index == selectedIndex ? false : true;
-      },
+      //是否显示选中时的label
+      showSelectedLabels: false,
 
-      items: [
-        Icon(
-          Icons.home,
-          size: selectedIndex == 0 ? 31 : 27,
+      //是否显示未选中时的label
+      showUnselectedLabels: false,
+
+      items: const [
+        BottomNavigationBarItem(
+          label: "主页",
+          icon: FaIcon(FontAwesomeIcons.solidBell),
+          activeIcon: FaIcon(FontAwesomeIcons.solidHourglass),
         ),
-        Icon(
-          Icons.star_rounded,
-          size: selectedIndex == 1 ? 31 : 27,
+        BottomNavigationBarItem(
+          label: "心墙",
+          icon: FaIcon(FontAwesomeIcons.star),
+          activeIcon: FaIcon(FontAwesomeIcons.solidStar),
         ),
-        //FIXED:以下代码都是为了修复第三方图标的错误样式
-        Padding(
-          padding: const EdgeInsets.all(4.0),
-          child: FaIcon(
-            FontAwesomeIcons.solidComments,
-            size: selectedIndex == 2 ? 24 : 20,
-          ),
+        BottomNavigationBarItem(
+          label: "消息",
+          icon: FaIcon(FontAwesomeIcons.comments),
         ),
-        Icon(
-          Icons.person,
-          size: selectedIndex == 3 ? 31 : 27,
+        BottomNavigationBarItem(
+          label: "个人",
+          icon: FaIcon(FontAwesomeIcons.user),
         ),
       ],
-      onTap: (index) {
-        setState(() {
-          selectedIndex = index;
-        });
-        changePageIndex(index);
-      },
     );
   }
 }

@@ -62,7 +62,7 @@ ThemeData lightTheme(BuildContext context) {
       //景深或阴影深度
       elevation: 0,
       //选中色
-      selectedItemColor: Colors.grey.shade300,
+      selectedItemColor: VColors.black2,
       //未选中色
       unselectedItemColor: Colors.grey,
       //背景色

@@ -62,9 +62,9 @@ ThemeData darkTheme(BuildContext context) {
       //景深或阴影深度
       elevation: 0,
       //选中色
-      selectedItemColor: VColors.black3,
+      selectedItemColor: Colors.white,
       //未选中色
-      unselectedItemColor: Colors.white,
+      unselectedItemColor: VColors.black3,
       //背景色
       backgroundColor: VColors.black1,
       //选中icon样式
