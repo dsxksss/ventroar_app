@@ -419,7 +419,7 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
                   decoration: InputDecoration(
                     //提示文字样式
                     hintStyle: TextStyle(fontSize: 18.sp),
-                    hintText: " 随便说些什么吧 (发帖最少10个字)",
+                    hintText: " 随便说些什么吧 (发帖最少3个字)",
                     //取消下边框线
                     border: InputBorder.none,
                   ),
