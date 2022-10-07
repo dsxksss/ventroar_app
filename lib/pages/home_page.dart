@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
-import '../global/widgets/roar_widget.dart';
 import 'pages_appbar/home_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../schemas/roar.dart';
+import '../widgets/roar_widget.dart';
 import '../functions/vent_snack.dart';
 import '../services/roar_http_lib.dart';
 

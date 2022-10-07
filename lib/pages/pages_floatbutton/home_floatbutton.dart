@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ventroar_app/functions/vent_bottom_sheet.dart';
 
-import '../../global/widgets/post_roar_widget.dart';
+import '../../widgets/post_roar_widget.dart';
 
 class HomeFloatButton extends StatelessWidget {
   const HomeFloatButton({Key? key}) : super(key: key);

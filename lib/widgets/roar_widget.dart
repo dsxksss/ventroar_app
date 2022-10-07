@@ -5,14 +5,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive/hive.dart';
 import 'package:ventroar_app/functions/date_conversion.dart';
-import 'package:ventroar_app/global/widgets/avatar_widget.dart';
 import 'package:ventroar_app/widgets/wait_animation.dart';
 
+import 'photo_widget.dart';
+import 'avatar_widget.dart';
 import '../../schemas/roar.dart';
+import '../global/global_context.dart';
 import '../../functions/vent_snack.dart';
 import '../../services/roar_http_lib.dart';
-import '../global_context.dart';
-import 'photo_widget.dart';
 
 class RoarHeightSize {
   static double minHeight = 0.05.sh;

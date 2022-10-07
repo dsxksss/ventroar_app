@@ -6,13 +6,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ventroar_app/functions/vent_dialog.dart';
-import 'package:ventroar_app/global/widgets/avatar_widget.dart';
 
-import '../../functions/vent_snack.dart';
+import 'avatar_widget.dart';
 import '../../schemas/roar.dart';
 import '../../schemas/user.dart';
+import '../global/global_context.dart';
+import '../../functions/vent_snack.dart';
 import '../../services/roar_http_lib.dart';
-import '../global_context.dart';
 
 class PostRoarWidget extends StatefulWidget {
   const PostRoarWidget({Key? key}) : super(key: key);

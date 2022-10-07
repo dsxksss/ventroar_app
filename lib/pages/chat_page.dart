@@ -3,8 +3,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ventroar_app/pages/user_detail_page.dart';
 import 'package:ventroar_app/schemas/message.dart';
-import '../global/widgets/input_message_widget.dart';
-import '../global/widgets/message_bubble.dart';
+
+import '../widgets/input_message_widget.dart';
+import '../widgets/message_bubble.dart';
 
 class ChatPage extends StatefulWidget {
   final BuildContext context;

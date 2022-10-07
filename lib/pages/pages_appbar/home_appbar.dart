@@ -4,9 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
-import '../../contexts/global_provider.dart';
-import '../../global/widgets/avatar_widget.dart';
+
 import '../../schemas/user.dart';
+import '../../widgets/avatar_widget.dart';
+import '../../contexts/global_provider.dart';
 import '../../widgets/search_animation.dart';
 
 class HomeAppBar extends StatefulWidget {

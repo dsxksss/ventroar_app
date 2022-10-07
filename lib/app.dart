@@ -1,31 +1,31 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:provider/provider.dart';
-import 'package:ventroar_app/contexts/global_provider.dart';
-import 'package:ventroar_app/page_routers.dart';
-import 'package:ventroar_app/pages/pages_appbar/star_appbar.dart';
-import 'package:ventroar_app/pages/pages_appbar/user_appbar.dart';
-import 'package:ventroar_app/pages/user_page.dart';
 import 'functions/vent_snack.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:ventroar_app/page_routers.dart';
+import 'package:ventroar_app/drawer.dart';
+import 'package:ventroar_app/pages/user_page.dart';
 import 'pages/pages_floatbutton/chat_floatbutton.dart';
 import 'pages/pages_floatbutton/home_floatbutton.dart';
 import 'pages/pages_floatbutton/star_floatbutton.dart';
 import 'pages/pages_floatbutton/user_floatbutton.dart';
+import 'package:ventroar_app/contexts/global_provider.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ventroar_app/ventroar_bottom_bar.dart';
+import 'package:ventroar_app/pages/pages_appbar/star_appbar.dart';
+import 'package:ventroar_app/pages/pages_appbar/user_appbar.dart';
 
+import './schemas/roar.dart';
+import './schemas/user.dart';
+import './pages/star_page.dart';
+import './pages/home_page.dart';
 import './themes/dark_theme.dart';
 import './themes/light_theme.dart';
-import './pages/home_page.dart';
-import './pages/star_page.dart';
 import './pages/chatlist_page.dart';
 import './global/global_context.dart';
-import './global/widgets/drawer.dart';
-import './global/widgets/ventroar_bottom_bar.dart';
-import './pages/pages_appbar/chat_appbar.dart';
-import './schemas/user.dart';
-import './schemas/roar.dart';
 import './services/roar_http_lib.dart';
+import './pages/pages_appbar/chat_appbar.dart';
 
 class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
