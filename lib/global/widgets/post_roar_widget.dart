@@ -240,7 +240,7 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
                     ],
                   ),
                 ),
-                if (textEditingController.text.trim().length >= 10)
+                if (textEditingController.text.trim().length >= 3)
                   ElevatedButton(
                     onPressed: () {
                       postText();
@@ -323,7 +323,7 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
                   ),
                   children: [
                     FilterChip(
-                      selected: !isPublic,
+                      selected: isPublic,
                       showCheckmark: true,
                       checkmarkColor: Colors.white,
                       selectedColor: Colors.lightBlue,
@@ -338,7 +338,7 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
                       onSelected: (value) {
                         setState(
                           () {
-                            isPublic = !value;
+                            isPublic = value;
                           },
                         );
                       },
@@ -347,7 +347,7 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
                       width: 0.02.sw,
                     ),
                     FilterChip(
-                      selected: !isCanComment,
+                      selected: isCanComment,
                       showCheckmark: true,
                       checkmarkColor: Colors.white,
                       selectedColor: Colors.lightBlue,
@@ -362,7 +362,7 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
                       onSelected: (value) {
                         setState(
                           () {
-                            isCanComment = !value;
+                            isCanComment = value;
                           },
                         );
                       },
@@ -371,7 +371,7 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
                       width: 0.02.sw,
                     ),
                     FilterChip(
-                      selected: !isShowUserName,
+                      selected: isShowUserName,
                       showCheckmark: true,
                       checkmarkColor: Colors.white,
                       selectedColor: Colors.lightBlue,
@@ -386,7 +386,7 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
                       onSelected: (value) {
                         setState(
                           () {
-                            isShowUserName = !value;
+                            isShowUserName = value;
                           },
                         );
                       },
