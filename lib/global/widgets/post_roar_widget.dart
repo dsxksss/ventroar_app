@@ -211,8 +211,9 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       SizedBox(
+                        width: 28.w,
+                        height: 28.w,
                         child: AvatarWidget(
-                          size: 3,
                           avatarUrl: userBox.get("my")?.avatarUrl ?? "null",
                           userName: userBox.get("my")?.name ?? "null",
                         ),

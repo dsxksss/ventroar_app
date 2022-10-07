@@ -1,10 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
+import 'package:ventroar_app/pages/pages_appbar/photo_widget_appbar.dart';
 
 class PhotoWidget extends StatefulWidget {
   PhotoWidget({Key? key, required this.images, required this.selectIndex})
@@ -38,6 +37,7 @@ class _PhotoWidgetState extends State<PhotoWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      primary: false,
       body: Stack(
         children: [
           PhotoViewGallery.builder(
@@ -56,41 +56,10 @@ class _PhotoWidgetState extends State<PhotoWidget> {
               );
             },
           ),
-          Positioned(
-            top: 0.06.sh,
-            child: Container(
-              width: 1.sw,
-              padding: EdgeInsets.fromLTRB(0.02.sw, 0, 0.02.sw, 0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    icon: const Icon(
-                      FontAwesomeIcons.arrowLeft,
-                      color: Colors.white,
-                    ),
-                  ),
-                  Text(
-                    "${selectIndex + 1} - ${widget.images.length}",
-                    style: TextStyle(
-                      fontSize: 20.sp,
-                      color: Colors.white,
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      FontAwesomeIcons.ellipsisVertical,
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          )
+          PhotoWidgetAppBar(
+            selectIndex: selectIndex,
+            itemCount: widget.images.length,
+          ),
         ],
       ),
     );

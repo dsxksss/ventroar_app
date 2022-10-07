@@ -4,10 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:ventroar_app/widgets/search_animation.dart';
 import '../../contexts/global_provider.dart';
 import '../../global/widgets/avatar_widget.dart';
 import '../../schemas/user.dart';
+import '../../widgets/search_animation.dart';
 
 class HomeAppBar extends StatefulWidget {
   const HomeAppBar({
@@ -36,23 +36,17 @@ class _HomeAppBarState extends State<HomeAppBar> {
         Provider.of<PageDataProvider>(context).selectedIndex;
     return SliverAppBar(
       pinned: false, //不固定在顶部
-      primary: true, //是否跟随父组件布局适配
+      primary: false, //是否跟随父组件布局适配
       floating: true, //不随着滑动隐藏标题
-      centerTitle: true, //是否居中标题
+      centerTitle: false, //是否居中标题
       stretch: true, //是否启用拉伸效果
       stretchTriggerOffset: 150, //激活onStretchTrigger过渡的偏移量
       expandedHeight: 0.sh, //扩展高度
+      toolbarHeight: 0.1.sh, //appBar高度
       excludeHeaderSemantics: false,
+      titleSpacing: 0.0, //title widget两边不留间隙
       onStretchTrigger: widget.onStretchTrigger,
-      leading: AvatarWidget(
-        size: 12,
-        avatarUrl: box.get("my")?.avatarUrl ?? "null",
-        userName: box.get("my")?.name ?? "null",
-        onPressed: () {
-          Scaffold.of(context).openDrawer();
-        },
-      ),
-
+      automaticallyImplyLeading: false,
       //圆角appbar
       // shape: const RoundedRectangleBorder(
       //   borderRadius: BorderRadius.only(
@@ -70,42 +64,59 @@ class _HomeAppBarState extends State<HomeAppBar> {
             ? Brightness.dark
             : Brightness.light,
       ),
-      title: GestureDetector(
-        child: Text(
-          "${pageDatas[selectedIndex]}",
-          style: GoogleFonts.ubuntu(fontSize: 25, fontWeight: FontWeight.w500),
-        ),
-        onTap: widget.onPressed,
-      ),
-
-      actions: [
-        Container(
-          margin: EdgeInsets.fromLTRB(0, 0, 0.03.sw, 0),
-          child: SearchAnimation(
-            height: 35,
-            width: 35,
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => Scaffold(
-                  appBar: AppBar(
-                    centerTitle: true,
-                    title: const Text("搜索"),
-                  ),
-                  body: Container(
-                    color: Theme.of(context).canvasColor,
-                    child: Center(
-                      child: SearchAnimation(
-                        height: 300.w,
-                        width: 300.w,
+      title: Container(
+        width: 1.sw,
+        height: 0.1.sh,
+        padding: EdgeInsets.fromLTRB(15.w, 20.h, 15.w, 0),
+        child: GestureDetector(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: 30.w,
+                height: 30.w,
+                child: AvatarWidget(
+                  avatarUrl: box.get("my")?.avatarUrl ?? "null",
+                  userName: box.get("my")?.name ?? "null",
+                  onPressed: () {
+                    Scaffold.of(context).openDrawer();
+                  },
+                ),
+              ),
+              Text(
+                "${pageDatas[selectedIndex]}",
+                style: GoogleFonts.ubuntu(
+                    fontSize: 25, fontWeight: FontWeight.w500),
+              ),
+              SearchAnimation(
+                height: 35.w,
+                width: 35.w,
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => Scaffold(
+                      appBar: AppBar(
+                        centerTitle: true,
+                        title: const Text("搜索"),
+                      ),
+                      body: Container(
+                        color: Theme.of(context).canvasColor,
+                        child: Center(
+                          child: SearchAnimation(
+                            height: 300.w,
+                            width: 300.w,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
-              ));
-            },
+                  ));
+                },
+              )
+            ],
           ),
+          onTap: widget.onPressed,
         ),
-      ],
+      ),
     );
   }
 }
