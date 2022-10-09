@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:dio/dio.dart';
 import 'functions/vent_snack.dart';
 import 'package:flutter/material.dart';
@@ -133,10 +135,21 @@ class _AppPageState extends State<AppPage> {
       const UserFloatButton(),
     ];
 
+    //这里能获取到padding
+    MediaQueryData data = MediaQueryData.fromWindow(window);
     return Builder(
       builder: (context) {
         return MediaQuery(
-          data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+          data: MediaQuery.of(context).copyWith(
+            //固定字号防止后续系统设置影响
+            textScaleFactor: 1.0,
+            //固定原屏幕的padding
+            //防止后续关闭顶部导航了
+            //或者底部导航栏导致的画面抖动
+            padding: data.padding,
+            viewPadding: data.viewPadding,
+            viewInsets: data.viewInsets,
+          ),
           child: Scaffold(
             resizeToAvoidBottomInset: false,
             // extendBodyBehindAppBar: true,

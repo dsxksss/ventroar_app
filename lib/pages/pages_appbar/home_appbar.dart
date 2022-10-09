@@ -37,17 +37,17 @@ class _HomeAppBarState extends State<HomeAppBar> {
         Provider.of<PageDataProvider>(context).selectedIndex;
     return SliverAppBar(
       pinned: false, //不固定在顶部
-      primary: false, //是否跟随父组件布局适配
+      primary: true, //是否跟随父组件布局适配
       floating: true, //不随着滑动隐藏标题
       centerTitle: false, //是否居中标题
       stretch: true, //是否启用拉伸效果
       stretchTriggerOffset: 150, //激活onStretchTrigger过渡的偏移量
       expandedHeight: 0.sh, //扩展高度
-      toolbarHeight: 0.1.sh, //appBar高度
-      excludeHeaderSemantics: false,
+
       titleSpacing: 0.0, //title widget两边不留间隙
       onStretchTrigger: widget.onStretchTrigger,
       automaticallyImplyLeading: false,
+
       //圆角appbar
       // shape: const RoundedRectangleBorder(
       //   borderRadius: BorderRadius.only(
@@ -68,7 +68,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
       title: Container(
         width: 1.sw,
         height: 0.1.sh,
-        padding: EdgeInsets.fromLTRB(15.w, 20.h, 15.w, 0),
+        padding: EdgeInsets.fromLTRB(15.w, 0, 15.w, 0),
         child: GestureDetector(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
