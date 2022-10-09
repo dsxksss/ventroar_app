@@ -190,8 +190,8 @@ class _VDrawerState extends State<VDrawer> {
               fit: StackFit.expand,
               children: [
                 Positioned(
-                  bottom: 25,
-                  left: 10,
+                  bottom: 29.h,
+                  left: 10.w,
                   child: TextButton.icon(
                       onPressed: () {
                         Navigator.of(context).pushNamedAndRemoveUntil(
@@ -211,8 +211,8 @@ class _VDrawerState extends State<VDrawer> {
                       )),
                 ),
                 Positioned(
-                  bottom: 26,
-                  right: 22,
+                  bottom: 30.h,
+                  right: 22.w,
                   child: IconButton(
                     onPressed: () {
                       Provider.of<ThemeProvider>(context, listen: false)
