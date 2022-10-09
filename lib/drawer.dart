@@ -34,16 +34,17 @@ class _DHeaderState extends State<DHeader> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              width: 85,
-              height: 85,
+              width: 80.w,
+              height: 80.w,
               child: AvatarWidget(
                 fontSize: 30.sp,
                 avatarUrl: box.get("my")?.avatarUrl ?? "null",
                 userName: box.get("my")?.name ?? "null",
               ),
             ),
-            Padding(
+            Container(
               padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+              width: 0.45.sw,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,14 +52,20 @@ class _DHeaderState extends State<DHeader> {
                   SizedBox(height: 0.015.sh),
                   Text(
                     box.get("my")?.name ?? "null",
-                    style:
-                        TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500),
+                    style: TextStyle(
+                      fontSize: 20.sp,
+                      fontWeight: FontWeight.w500,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                   SizedBox(height: 0.01.sh),
                   Text(
                     box.get("my")?.email ?? "null",
-                    style:
-                        TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w500,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                 ],
               ),
@@ -173,6 +180,7 @@ class _VDrawerState extends State<VDrawer> {
     ];
 
     return Drawer(
+      width: 0.75.sw,
       child: Column(
         children: [
           const DHeader(),
