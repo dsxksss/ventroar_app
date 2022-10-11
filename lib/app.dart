@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/services.dart';
 import 'functions/vent_snack.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -72,8 +73,14 @@ class AppPage extends StatefulWidget {
 
 class _AppPageState extends State<AppPage> {
   late Box<Roar> roarsBox;
+  //这里能获取到padding
+  final MediaQueryData data = MediaQueryData.fromWindow(window);
+
   @override
   void initState() {
+    //显示状态栏、底部按钮栏
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: SystemUiOverlay.values);
     super.initState();
     roarsBox = Hive.box("roarsbox");
     getAllRoar();
@@ -135,12 +142,11 @@ class _AppPageState extends State<AppPage> {
       const UserFloatButton(),
     ];
 
-    //这里能获取到padding
-    MediaQueryData data = MediaQueryData.fromWindow(window);
     return Builder(
       builder: (context) {
         return MediaQuery(
           data: MediaQuery.of(context).copyWith(
+            size: data.size,
             //固定字号防止后续系统设置影响
             textScaleFactor: 1.0,
             //固定原屏幕的padding
@@ -151,8 +157,7 @@ class _AppPageState extends State<AppPage> {
             viewInsets: data.viewInsets,
           ),
           child: Scaffold(
-            resizeToAvoidBottomInset: false,
-            // extendBodyBehindAppBar: true,
+            extendBodyBehindAppBar: true,
             appBar: _appBars[_selectedIndex],
             //侧边导航栏手势打开宽度
             drawerEdgeDragWidth: _drawerEdgeDragWidth[_selectedIndex],
@@ -163,6 +168,7 @@ class _AppPageState extends State<AppPage> {
             floatingActionButton: _floatingButtons[_selectedIndex],
             floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
             drawer: const VDrawer(),
+
             bottomNavigationBar: const VentRoarButtonBar(),
           ),
         );

@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive/hive.dart';
 import 'package:ventroar_app/functions/date_conversion.dart';
-import 'package:ventroar_app/widgets/wait_animation.dart';
 
 import 'photo_widget.dart';
 import 'avatar_widget.dart';
@@ -398,13 +397,14 @@ class RoarContent extends StatelessWidget {
                   (e) {
                     return GestureDetector(
                       child: CachedNetworkImage(
+                        cacheKey: "https://ventroar.xyz:2548/images/${e.value}",
                         placeholderFadeInDuration:
                             const Duration(milliseconds: 100),
-                        fadeInDuration: const Duration(milliseconds: 100),
-                        fadeOutDuration: const Duration(milliseconds: 300),
+                        fadeInDuration: const Duration(milliseconds: 400),
+                        fadeOutDuration: const Duration(milliseconds: 600),
                         //载入widget
-                        placeholder: (context, url) =>
-                            const WaitAnimation(height: 60, width: 60),
+                        // placeholder: (context, url) =>
+                        //     const WaitAnimation(height: 60, width: 60),
                         //出错widget
                         errorWidget: (context, url, error) =>
                             const Icon(Icons.error_outline_outlined),

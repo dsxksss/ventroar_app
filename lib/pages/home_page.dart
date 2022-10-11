@@ -54,48 +54,50 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      controller: _scrollController,
-      physics: const AlwaysScrollableScrollPhysics(
-        //当内容不足时也可以启动反弹刷新
-        parent: BouncingScrollPhysics(),
-      ),
-      slivers: <Widget>[
-        //头部appbar
-        HomeAppBar(
-          onPressed: () {
-            _scrollController.animateTo(
-              _scrollController.position.minScrollExtent,
-              duration: const Duration(milliseconds: 800),
-              curve: Curves.easeInOut,
-            ); //匀速;
-          },
-          onStretchTrigger: getAllRoar,
+    return SafeArea(
+      child: CustomScrollView(
+        controller: _scrollController,
+        physics: const AlwaysScrollableScrollPhysics(
+          //当内容不足时也可以启动反弹刷新
+          parent: BouncingScrollPhysics(),
         ),
+        slivers: <Widget>[
+          //头部appbar
+          HomeAppBar(
+            onPressed: () {
+              _scrollController.animateTo(
+                _scrollController.position.minScrollExtent,
+                duration: const Duration(milliseconds: 800),
+                curve: Curves.easeInOut,
+              ); //匀速;
+            },
+            onStretchTrigger: getAllRoar,
+          ),
 
-        //帖子
-        ValueListenableBuilder(
-          valueListenable: roarsBox.listenable(),
-          builder: (BuildContext context, Box<Roar> box, Widget? child) {
-            List<Roar> roars = roarsBox.values.toList();
-            roars.sort((a, b) => b.createDate.compareTo(a.createDate));
-            return SliverList(
-              delegate: SliverChildBuilderDelegate(
-                ((context, index) => roars.isEmpty
-                    ? SizedBox(
-                        width: 1.sw,
-                        height: 0.7.sh,
-                        child: const Center(
-                          child: Text("尝试下拉屏幕获取内容"),
-                        ),
-                      )
-                    : RoarWidget(roar: roars[index], roarsBox: roarsBox)),
-                childCount: roars.isEmpty ? 1 : roars.length,
-              ),
-            );
-          },
-        ),
-      ],
+          //帖子
+          ValueListenableBuilder(
+            valueListenable: roarsBox.listenable(),
+            builder: (BuildContext context, Box<Roar> box, Widget? child) {
+              List<Roar> roars = roarsBox.values.toList();
+              roars.sort((a, b) => b.createDate.compareTo(a.createDate));
+              return SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  ((context, index) => roars.isEmpty
+                      ? SizedBox(
+                          width: 1.sw,
+                          height: 0.7.sh,
+                          child: const Center(
+                            child: Text("尝试下拉屏幕获取内容"),
+                          ),
+                        )
+                      : RoarWidget(roar: roars[index], roarsBox: roarsBox)),
+                  childCount: roars.isEmpty ? 1 : roars.length,
+                ),
+              );
+            },
+          ),
+        ],
+      ),
     );
   }
 }
