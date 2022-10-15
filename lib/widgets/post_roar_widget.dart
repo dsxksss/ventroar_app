@@ -60,6 +60,7 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
 
   Future postText() async {
     try {
+      Navigator.of(context).pop();
       var response = await RoarHttpLib().postRoarText(
         box: roarsBox,
         //清除帖子左右空格后再发送
@@ -72,7 +73,6 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
         if (imagePath.isNotEmpty && images.isNotEmpty) {
           await postTextImages(response["data"]["result"]["_id"]);
         }
-        Navigator.of(context).pop();
       }
     } on DioError catch (e) {
       vSnackBar(
