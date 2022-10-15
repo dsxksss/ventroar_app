@@ -314,7 +314,7 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
                 ],
               ),
               SizedBox(
-                width: 0.7.sw,
+                width: 0.68.sw,
                 height: 0.05.sh,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
