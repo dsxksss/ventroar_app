@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:provider/provider.dart';
+import '../contexts/global_provider.dart';
 import 'pages_appbar/home_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -72,6 +74,17 @@ class _HomePageState extends State<HomePage> {
               ); //匀速;
             },
             onStretchTrigger: getAllRoar,
+          ),
+
+          // 检查上下文是否有加载事件
+
+          SliverToBoxAdapter(
+            child: Visibility(
+              visible: context.watch<PageDataProvider>().haveLoading,
+              child: LinearProgressIndicator(
+                value: context.watch<PageDataProvider>().loadingProgress,
+              ),
+            ),
           ),
 
           //帖子

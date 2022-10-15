@@ -8,8 +8,8 @@ import 'package:hive_flutter/hive_flutter.dart';
 //自定配置信息类
 class DioOptions {
   static String BASIC_URL = VentUrls.apiPath; //基础url地址
-  static const int CONNECT_TIMEOUT = 2 * 1000; //连接超时时间
-  static const int RECEIVE_TIMEOUT = 2 * 1000; //响应超时时间
+  static const int CONNECT_TIMEOUT = 30 * 1000; //连接超时时间
+  static const int RECEIVE_TIMEOUT = 30 * 1000; //响应超时时间
   static const bool CACHE_ENABLE = false; //是否开启网络缓存,默认false
   static int MAX_CACHE_AGE = 7 * 24 * 60 * 60; //最大缓存存在期限(按秒),默认缓存七天,可看情况自定
   static int MAX_CACHE_COUNT = 100; //最大缓存条数,默认100条
@@ -47,6 +47,7 @@ class CustomInterceptors extends Interceptor {
   //发生异常时
   void onError(DioError err, ErrorInterceptorHandler handler) {
     print('发生异常');
+    print(err);
     print(
         'ERROR[${err.response?.statusCode}] => PATH: ${err.requestOptions.path}');
     // print('ERROR-MESSAGE => [${err.response?.data["msg"]}]');

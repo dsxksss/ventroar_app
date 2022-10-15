@@ -168,6 +168,7 @@ class RoarHttpLib {
   }
 
   Future<Map> postTextImages({
+    Function(int count, int total)? onSendProgress,
     required Box<Roar> box,
     required String textId,
     required List<dynamic> files,
@@ -177,13 +178,16 @@ class RoarHttpLib {
       return {"msg": "error authToken is empty!!!", "statusCode": 400};
     }
     Response response;
-    response = await Services.instance.dio.then((value) => value.post(
-          "${VentUrls.postTextImages}/$textId",
-          data: FormData.fromMap({'images': files}),
-          options: Options(
-            headers: {"x-auth-token": user.authToken},
-          ),
-        ));
+    response = await Services.instance.dio.then(
+      (value) => value.post(
+        "${VentUrls.postTextImages}/$textId",
+        data: FormData.fromMap({'images': files}),
+        options: Options(
+          headers: {"x-auth-token": user.authToken},
+        ),
+        onSendProgress: onSendProgress,
+      ),
+    );
     if (response.statusCode == 200) {
       box.put(
         response.data["result"]["_id"],

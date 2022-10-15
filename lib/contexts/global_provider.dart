@@ -30,7 +30,10 @@ class ThemeProvider extends ChangeNotifier {
 //页面基本信息提供者
 class PageDataProvider extends ChangeNotifier {
   Map<int, String> pageDatas;
+  bool haveLoading;
+  double loadingProgress;
   int selectedIndex;
+
   PageDataProvider({
     this.pageDatas = const {
       0: "Vent Roar",
@@ -39,10 +42,22 @@ class PageDataProvider extends ChangeNotifier {
       3: "用户个人",
     },
     this.selectedIndex = 0,
-  });
+    this.haveLoading = false,
+    this.loadingProgress = 0,
+  }) : assert(loadingProgress <= 1);
 
   void changePageIndex(int index) {
     selectedIndex = index;
+    notifyListeners();
+  }
+
+  void changeHaveLoading(bool isLoading) {
+    haveLoading = isLoading;
+    notifyListeners();
+  }
+
+  void changeLoadingProgress(double progress) {
+    loadingProgress = progress;
     notifyListeners();
   }
 }

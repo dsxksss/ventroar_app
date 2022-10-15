@@ -1,16 +1,16 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 import 'package:ventroar_app/functions/vent_dialog.dart';
+import 'package:ventroar_app/widgets/pick_img_widget.dart';
 
+import '../contexts/global_provider.dart';
 import 'avatar_widget.dart';
 import '../../schemas/roar.dart';
 import '../../schemas/user.dart';
-import '../global/global_context.dart';
 import '../../functions/vent_snack.dart';
 import '../../services/roar_http_lib.dart';
 
@@ -31,14 +31,25 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
   List imagePath = [];
   List<dynamic> images = [];
   final ImagePicker _picker = ImagePicker();
-
+  late Function changeHaveLoading;
+  late Function changeLoadingProgress;
   TextEditingController textEditingController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
+    changeHaveLoading =
+        Provider.of<PageDataProvider>(context, listen: false).changeHaveLoading;
     userBox = Hive.box("userbox");
+    changeLoadingProgress =
+        Provider.of<PageDataProvider>(context, listen: false)
+            .changeLoadingProgress;
     roarsBox = Hive.box("roarsbox");
+  }
+
+  @override
+  void dispose() {
+    if (mounted) super.dispose();
   }
 
   Future pickImg() async {
@@ -97,26 +108,18 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
 
   Future postTextImages(String textId) async {
     try {
-      vSnackBar(
-        showTime: const Duration(seconds: 60),
-        dismissDirection: DismissDirection.startToEnd,
-        model: VSnackModel.success,
-        isScroll: false,
-        textWidget: Text(
-          "上传图片中...",
-          style: TextStyle(
-            fontSize: 17.sp,
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        button: const CircularProgressIndicator(),
+      changeHaveLoading(true);
+      var response = await RoarHttpLib().postTextImages(
+        box: roarsBox,
+        textId: textId,
+        files: images,
+        onSendProgress: (count, total) {
+          changeLoadingProgress((count / total) + 0.0);
+        },
       );
-      var response = await RoarHttpLib()
-          .postTextImages(box: roarsBox, textId: textId, files: images);
       if (response["statusCode"] == 200) {
-        ScaffoldMessenger.of(NavigationService.navigatorKey.currentContext!)
-            .removeCurrentSnackBar();
+        changeHaveLoading(false);
+        changeLoadingProgress(0.0);
       }
     } on DioError catch (e) {
       vSnackBar(
@@ -425,51 +428,9 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
                     border: InputBorder.none,
                   ),
                 ),
-                SizedBox(
-                  height: 0.1.sh,
-                  width: 1.sw,
-                  child: Stack(
-                    children: [
-                      Positioned(
-                          left: 0,
-                          bottom: 0,
-                          child: Row(
-                            children: [
-                              if (imagePath.isNotEmpty)
-                                SizedBox(
-                                  height: 0.1.sh,
-                                  width: imagePath.length == 4 ? 1.sw : 0.75.sw,
-                                  child: ListView(
-                                    scrollDirection: Axis.horizontal,
-                                    physics:
-                                        const AlwaysScrollableScrollPhysics(
-                                      //当内容不足时也可以启动反弹刷新
-                                      parent: BouncingScrollPhysics(),
-                                    ),
-                                    children: [
-                                      ...imagePath.map((e) => SizedBox(
-                                          height: 0.1.sh,
-                                          width: 0.2.sw,
-                                          child: Image.file(File(e)))),
-                                    ],
-                                  ),
-                                ),
-                              if (imagePath.length < 4)
-                                Center(
-                                  child: IconButton(
-                                    onPressed: () {
-                                      pickImg();
-                                    },
-                                    icon: Icon(
-                                      Icons.photo,
-                                      size: 50.sp,
-                                    ),
-                                  ),
-                                ),
-                            ],
-                          ))
-                    ],
-                  ),
+                PickImgWidget(
+                  imagePaths: imagePath,
+                  onPick: pickImg,
                 )
               ],
             ),
