@@ -82,6 +82,8 @@ class _HomePageState extends State<HomePage> {
             child: Visibility(
               visible: context.watch<PageDataProvider>().haveLoading,
               child: LinearProgressIndicator(
+                color: Colors.lightBlue,
+                backgroundColor: Colors.transparent,
                 value: context.watch<PageDataProvider>().loadingProgress,
               ),
             ),
