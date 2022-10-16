@@ -392,7 +392,7 @@ class RoarContent extends StatelessWidget {
             maxLines: images.length <= 2 ? 5 : 8,
             textAlign: TextAlign.start,
             style: TextStyle(
-              fontSize: 15.sp,
+              fontSize: 13.5.sp,
               overflow: TextOverflow.ellipsis,
             ),
           ),
@@ -427,9 +427,12 @@ class RoarContent extends StatelessWidget {
                             const Duration(milliseconds: 100),
                         fadeInDuration: const Duration(milliseconds: 400),
                         fadeOutDuration: const Duration(milliseconds: 600),
-                        //载入widget
-                        // placeholder: (context, url) =>
-                        //     const WaitAnimation(height: 60, width: 60),
+                        // 载入widget
+                        placeholder: (context, url) => Container(
+                          height: 60,
+                          width: 60,
+                          color: Colors.grey,
+                        ),
                         //出错widget
                         errorWidget: (context, url, error) =>
                             const Icon(Icons.error_outline_outlined),
