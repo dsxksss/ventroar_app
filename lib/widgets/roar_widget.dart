@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive/hive.dart';
 import 'package:ventroar_app/functions/date_conversion.dart';
 
+import '../schemas/user.dart';
 import 'photo_widget.dart';
 import 'avatar_widget.dart';
 import '../../schemas/roar.dart';
@@ -33,6 +34,14 @@ class RoarWidget extends StatefulWidget {
 }
 
 class _RoarWidgetState extends State<RoarWidget> {
+  late Box<User> userBox;
+
+  @override
+  void initState() {
+    super.initState();
+    userBox = Hive.box("userbox");
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -117,6 +126,7 @@ class _RoarWidgetState extends State<RoarWidget> {
 
                   RoarLikes(
                     roar: widget.roar,
+                    userId: userBox.get("my")?.id ?? "null",
                     roarsBox: widget.roarsBox,
                   ),
                 ],
@@ -370,7 +380,7 @@ class RoarContent extends StatelessWidget {
             maxLines: images.length <= 2 ? 5 : 8,
             textAlign: TextAlign.start,
             style: TextStyle(
-              fontSize: 13.sp,
+              fontSize: 15.sp,
               overflow: TextOverflow.ellipsis,
             ),
           ),
@@ -441,10 +451,12 @@ class RoarLikes extends StatefulWidget {
   const RoarLikes({
     Key? key,
     required this.roar,
+    required this.userId,
     required this.roarsBox,
   }) : super(key: key);
 
   final Roar roar;
+  final String userId;
   final Box<Roar> roarsBox;
 
   @override
@@ -463,7 +475,9 @@ class _RoarLikesState extends State<RoarLikes> {
         if (response["statusCode"] == 200) {
           Roar newRoar = widget.roar;
           newRoar.smil = response["data"]["result"]["smil"];
+          newRoar.smilLikeUsers = response["data"]["result"]["smilLikeUsers"];
           newRoar.heart = response["data"]["result"]["heart"];
+          newRoar.heartLikeUsers = response["data"]["result"]["heartLikeUsers"];
           setState(() {
             widget.roarsBox.put(widget.roar.id, newRoar);
           });
@@ -528,7 +542,10 @@ class _RoarLikesState extends State<RoarLikes> {
                   ? Icons.heart_broken_outlined
                   : FontAwesomeIcons.heart,
               size: widget.roar.heart <= 0 ? 26 : 21,
-              color: widget.roar.heart <= 0 ? Colors.grey : Colors.redAccent,
+              color: widget.roar.heart > 0 &&
+                      widget.roar.heartLikeUsers!.contains(widget.userId)
+                  ? Colors.redAccent
+                  : Colors.grey,
             ),
             label: Text(
               widget.roar.heart <= 99 ? widget.roar.heart.toString() : "99+",
@@ -550,7 +567,10 @@ class _RoarLikesState extends State<RoarLikes> {
               widget.roar.smil <= 0
                   ? FontAwesomeIcons.faceSadTear
                   : FontAwesomeIcons.faceSmileBeam,
-              color: widget.roar.smil <= 0 ? Colors.grey : Colors.amberAccent,
+              color: widget.roar.smil > 0 &&
+                      widget.roar.smilLikeUsers!.contains(widget.userId)
+                  ? Colors.amberAccent
+                  : Colors.grey,
               size: 20,
             ),
             label: Text(
