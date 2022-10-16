@@ -380,7 +380,7 @@ class RoarContent extends StatelessWidget {
             maxLines: images.length <= 2 ? 5 : 8,
             textAlign: TextAlign.start,
             style: TextStyle(
-              fontSize: 13.sp,
+              fontSize: 15.sp,
               overflow: TextOverflow.ellipsis,
             ),
           ),

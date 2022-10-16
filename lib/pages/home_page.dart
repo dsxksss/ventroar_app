@@ -77,7 +77,6 @@ class _HomePageState extends State<HomePage> {
           ),
 
           // 检查上下文是否有加载事件
-
           SliverToBoxAdapter(
             child: Visibility(
               visible: context.watch<PageDataProvider>().haveLoading,
