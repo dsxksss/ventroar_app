@@ -72,6 +72,7 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
   Future postText() async {
     try {
       Navigator.of(context).pop();
+      changeHaveLoading(true);
       var response = await RoarHttpLib().postRoarText(
         box: roarsBox,
         //清除帖子左右空格后再发送
@@ -82,7 +83,10 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
       );
       if (response["statusCode"] == 200) {
         if (imagePath.isNotEmpty && images.isNotEmpty) {
+          changeHaveLoading(true);
           await postTextImages(response["data"]["result"]["_id"]);
+        } else {
+          changeHaveLoading(false);
         }
       }
     } on DioError catch (e) {
@@ -108,7 +112,6 @@ class _PostRoarWidgetState extends State<PostRoarWidget> {
 
   Future postTextImages(String textId) async {
     try {
-      changeHaveLoading(true);
       var response = await RoarHttpLib().postTextImages(
         box: roarsBox,
         textId: textId,

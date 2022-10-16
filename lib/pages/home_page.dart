@@ -56,6 +56,13 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    if (context.watch<PageDataProvider>().haveLoading) {
+      _scrollController.animateTo(
+        _scrollController.position.minScrollExtent,
+        duration: const Duration(milliseconds: 430),
+        curve: Curves.easeInOut,
+      );
+    } //匀速;
     return RawScrollbar(
       //是否一直可见滚动条
       // thumbVisibility: true,
