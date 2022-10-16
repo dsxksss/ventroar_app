@@ -428,11 +428,11 @@ class RoarContent extends StatelessWidget {
                         fadeInDuration: const Duration(milliseconds: 400),
                         fadeOutDuration: const Duration(milliseconds: 600),
                         // 载入widget
-                        placeholder: (context, url) => Container(
-                          height: 60,
-                          width: 60,
-                          color: Colors.grey,
-                        ),
+                        // placeholder: (context, url) => Container(
+                        //   height: 60,
+                        //   width: 60,
+                        //   color: Colors.grey,
+                        // ),
                         //出错widget
                         errorWidget: (context, url, error) =>
                             const Icon(Icons.error_outline_outlined),

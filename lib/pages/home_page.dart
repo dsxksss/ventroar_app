@@ -57,9 +57,12 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return RawScrollbar(
-      thumbColor: Colors.grey,
       //是否一直可见滚动条
-      thumbVisibility: true,
+      // thumbVisibility: true,
+      //滚动条颜色
+      thumbColor: Colors.grey,
+      //滚动条垂直内边距
+      mainAxisMargin: ScreenUtil().statusBarHeight,
       //滚动条圆角
       radius: const Radius.circular(999),
       //滚动条宽度
