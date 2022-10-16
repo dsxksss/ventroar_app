@@ -56,7 +56,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scrollbar(
+    return RawScrollbar(
+      thumbColor: Colors.grey,
       //是否一直可见滚动条
       thumbVisibility: true,
       //滚动条圆角
