@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive/hive.dart';
@@ -352,6 +353,17 @@ class RoarContent extends StatelessWidget {
 
   final String text;
   final List images;
+  static final cacheManager = CacheManager(
+    Config(
+      "cacheManagerKey",
+      //缓存图片数据超过五天自动删除
+      stalePeriod: const Duration(days: 5),
+      //缓存图片的最大限度
+      //超过这个数值会删除老缓存数据
+      //只缓存新的内容
+      maxNrOfCacheObjects: 200,
+    ),
+  );
   @override
   Widget build(BuildContext context) {
     void openPhoto(int selectIndex) {
@@ -407,7 +419,10 @@ class RoarContent extends StatelessWidget {
                   (e) {
                     return GestureDetector(
                       child: CachedNetworkImage(
+                        key: Key(e.value),
                         cacheKey: "https://ventroar.xyz:2548/images/${e.value}",
+                        //数据控制器
+                        cacheManager: cacheManager,
                         placeholderFadeInDuration:
                             const Duration(milliseconds: 100),
                         fadeInDuration: const Duration(milliseconds: 400),
