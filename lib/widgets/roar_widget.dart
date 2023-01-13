@@ -445,7 +445,7 @@ class RoarContent extends StatelessWidget {
                                 ? 0.3.sh //只有一张图片显示高度
                                 : 0.18.sh //只有两张图片显示高度
                             : 0.12.sh,
-                        imageUrl: "${VentUrlsTest.imagesUrl}${e.value}",
+                        imageUrl: "${VentUrlsTest.imagesUrl}/${e.value}",
                       ),
                       onTap: () {
                         //关闭多余snackbar
