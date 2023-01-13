@@ -313,7 +313,7 @@ class _RoarTitleState extends State<RoarTitle> {
                 constraints: BoxConstraints(minHeight: 0.02.sh),
                 onPressed: () {
                   vSnackBar(
-                    model: VSnackModel.success,
+                    model: VSnackModel.error,
                     textWidget: Text(
                       "确定要删除此条宣泄吗?",
                       style: TextStyle(
