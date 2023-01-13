@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive/hive.dart';
 import 'package:ventroar_app/functions/date_conversion.dart';
+import 'package:ventroar_app/services/vent_apis.dart';
 
 import '../schemas/user.dart';
 import 'photo_widget.dart';
@@ -312,7 +313,7 @@ class _RoarTitleState extends State<RoarTitle> {
                 constraints: BoxConstraints(minHeight: 0.02.sh),
                 onPressed: () {
                   vSnackBar(
-                    model: VSnackModel.error,
+                    model: VSnackModel.success,
                     textWidget: Text(
                       "确定要删除此条宣泄吗?",
                       style: TextStyle(
@@ -420,7 +421,7 @@ class RoarContent extends StatelessWidget {
                     return GestureDetector(
                       child: CachedNetworkImage(
                         key: Key(e.value),
-                        cacheKey: "https://ventroar.xyz:2548/images/${e.value}",
+                        cacheKey: "${VentUrlsTest.imagesUrl}/${e.value}",
                         //数据控制器
                         cacheManager: cacheManager,
                         placeholderFadeInDuration:
@@ -444,7 +445,7 @@ class RoarContent extends StatelessWidget {
                                 ? 0.3.sh //只有一张图片显示高度
                                 : 0.18.sh //只有两张图片显示高度
                             : 0.12.sh,
-                        imageUrl: "https://ventroar.xyz:2548/images/${e.value}",
+                        imageUrl: "${VentUrlsTest.imagesUrl}${e.value}",
                       ),
                       onTap: () {
                         //关闭多余snackbar
