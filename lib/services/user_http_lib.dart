@@ -12,7 +12,7 @@ class UserHttpLib {
   }) async {
     Response response;
     response = await Services.instance.dio
-        .then((value) => value.post(VentUrls.signIn, data: {
+        .then((value) => value.post(VentUrlsTest.signIn, data: {
               "account": account,
               "password": password,
             }));
@@ -51,7 +51,7 @@ class UserHttpLib {
 
     Response response;
     response = await Services.instance.dio.then((value) => value.post(
-          VentUrls.tokenLogin,
+          VentUrlsTest.tokenLogin,
           options: Options(
             headers: {"x-auth-token": user.authToken},
           ),
@@ -83,7 +83,7 @@ class UserHttpLib {
   Future<Map> signUp({required Map<String, dynamic> data}) async {
     Response response;
     response = await Services.instance.dio
-        .then((value) => value.post(VentUrls.signUp, data: data));
+        .then((value) => value.post(VentUrlsTest.signUp, data: data));
     if (response.statusCode == 202) {
       return {"data": response.data, "statusCode": response.statusCode};
     }
@@ -98,7 +98,7 @@ class UserHttpLib {
     Response response;
     response = await Services.instance.dio.then(
       (value) => value.post(
-        VentUrls.signOut,
+        VentUrlsTest.signOut,
         options: Options(
           headers: {"x-auth-token": token},
         ),

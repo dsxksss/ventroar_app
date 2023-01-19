@@ -1,6 +1,8 @@
 //自定url地址配置类
 class VentUrls {
   static String apiPath = "https://ventroar.xyz:2548";
+  static String avatarsUrl = "$apiPath/avatars";
+  static String imagesUrl = "$apiPath/images";
 
   ///-----------------User基本操作api---------------------
   //POST   登录账号(返回该登录用户基本数据)	account,password
@@ -71,7 +73,9 @@ class VentUrls {
 }
 
 class VentUrlsTest {
-  static String apiPath = "http://localhost:2547";
+  static String apiPath = "http://192.168.0.113:2547";
+  static String avatarsUrl = "$apiPath/avatars";
+  static String imagesUrl = "$apiPath/images";
 
   ///-----------------User基本操作api---------------------
   //POST   登录账号(返回该登录用户基本数据)	account,password

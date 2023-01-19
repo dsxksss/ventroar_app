@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ventroar_app/services/vent_apis.dart';
 
 class PhotoWidget extends StatefulWidget {
   PhotoWidget({Key? key, required this.images, required this.selectIndex})
@@ -73,7 +74,7 @@ class _PhotoWidgetState extends State<PhotoWidget> {
                 basePosition: Alignment.center,
 
                 imageProvider: CachedNetworkImageProvider(
-                  "https://ventroar.xyz:2548/images/${widget.images[index]}",
+                  "${VentUrlsTest.imagesUrl}/${widget.images[index]}",
                 ),
               );
             },

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../services/vent_apis.dart';
 
 class AvatarWidget extends StatelessWidget {
   const AvatarWidget({
@@ -43,7 +44,7 @@ class AvatarWidget extends StatelessWidget {
           : CircleAvatar(
               radius: _borderRadius,
               backgroundImage: Image.network(
-                "https://ventroar.xyz:2548/avatars/$avatarUrl",
+                "${VentUrlsTest.avatarsUrl}/$avatarUrl",
                 fit: BoxFit.cover,
               ).image,
             ),

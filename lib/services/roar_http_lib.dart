@@ -10,7 +10,7 @@ class RoarHttpLib {
   Future<Map> getAllRoarText({required Box<Roar> box}) async {
     Response response;
     response = await Services.instance.dio
-        .then((value) => value.get(VentUrls.getAllRoarText));
+        .then((value) => value.get(VentUrlsTest.getAllRoarText));
     if (response.statusCode == 200) {
       //获取新数据前先清理老数据
       box.deleteAll(box.values.map((e) => e.id));
@@ -57,7 +57,7 @@ class RoarHttpLib {
     }
     Response response;
     response = await Services.instance.dio.then((value) => value.put(
-          VentUrls.clickTextLikes,
+          VentUrlsTest.clickTextLikes,
           data: {
             "textId": likeId,
             "likeWho": likeWho,
@@ -88,7 +88,7 @@ class RoarHttpLib {
     }
     Response response;
     response = await Services.instance.dio.then((value) => value.delete(
-          VentUrls.deleteRoarText,
+          VentUrlsTest.deleteRoarText,
           data: {"id": deleteId},
           options: Options(
             headers: {"x-auth-token": user.authToken},
@@ -117,7 +117,7 @@ class RoarHttpLib {
     }
     Response response;
     response = await Services.instance.dio.then((value) => value.post(
-          VentUrls.postRoarText,
+          VentUrlsTest.postRoarText,
           data: {
             "text": text,
             "isPublic": isPublic,
@@ -180,7 +180,7 @@ class RoarHttpLib {
     Response response;
     response = await Services.instance.dio.then(
       (value) => value.post(
-        "${VentUrls.postTextImages}/$textId",
+        "${VentUrlsTest.postTextImages}/$textId",
         data: FormData.fromMap({'images': files}),
         options: Options(
           headers: {"x-auth-token": user.authToken},
